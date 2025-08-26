@@ -1,0 +1,49 @@
+project:
+  type: website
+
+website:
+  title: "Ryan J O'Loughlin"
+  description: "Philosophy of science • climate models • uncertainty & decision-making"
+  site-url: https://Ryan-J-OLoughlin.github.io/
+  favicon: assets/favicon.png
+  navbar:
+    left:
+      - text: Home
+        href: index.qmd
+      - text: About
+        href: about.qmd
+      - text: Research
+        href: research.qmd
+      - text: Talks & Collaboration
+        href: talks.qmd
+      - text: Teaching
+        href: teaching.qmd
+      - text: Media / Press
+        href: media.qmd
+      - text: Contact
+        href: contact.qmd
+    right:
+      - text: CV
+        href: files/cv.pdf
+      - icon: github
+        href: https://github.com/Ryan-J-OLoughlin/
+  page-footer:
+    left: "© {{ 2025 }} Ryan J O'Loughlin"
+    right:
+      - text: Email
+        href: mailto:Ryan.Oloughlin@qc.cuny.edu 
+  search: true
+  repo-url: https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io
+  repo-actions: [edit, issue]
+
+format:
+  html:
+    theme: 
+      - cosmo
+      - brand
+    style: styles.css
+    toc: true
+    page-navigation: true
+    smooth-scroll: true
+    open-graph: true
+    twitter-card: true
