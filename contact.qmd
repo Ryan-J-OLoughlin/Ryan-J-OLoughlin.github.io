@@ -1,0 +1,8 @@
+---
+title: "Contact"
+---
+
+- **Email:** <mailto:Ryan.Oloughlin@qc.cuny.edu>  
+- **Affiliation:** Department / Institution (update)  
+- **Office / Mailing Address:** (optional)  
+- **Optional contact form:** (embed or link if you add one later)

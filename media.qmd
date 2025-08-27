@@ -1,0 +1,21 @@
+---
+title: "Media / Press"
+---
+
+### 100-word Bio {#bio-100}
+Plain-language 100-word media bio focused on expertise and relevance.
+
+### Download Headshot {#headshot}
+- High-res headshot: [assets/headshot.jpg](assets/headshot.jpg)
+
+### Expertise Topics {#expertise}
+- Climate models & uncertainty
+- Robustness and decision-making
+- Risk communication
+- (Add 2–3 more)
+
+### Selected Highlights {#highlights}
+- Affiliation, notable invited talks, interviews, op-eds.
+
+### Media Contact {#media-contact}
+- Email for media inquiries: <mailto:Ryan.Oloughlin@qc.cuny.edu>

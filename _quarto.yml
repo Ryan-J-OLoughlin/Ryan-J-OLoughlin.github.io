@@ -1,12 +1,16 @@
 project:
   type: website
+  output-dir: _site
+  preview: 
+    watch-inputs: true
 
 website:
   title: "Ryan J O'Loughlin"
   description: "Philosophy of science • climate models • uncertainty & decision-making"
   site-url: https://Ryan-J-OLoughlin.github.io/
-  favicon: assets/favicon.png
+  twitter-card: true
   navbar:
+    collapse-below: lg
     left:
       - text: Home
         href: index.qmd
@@ -14,35 +18,69 @@ website:
         href: about.qmd
       - text: Research
         href: research.qmd
-      - text: Talks & Collaboration
-        href: talks.qmd
+      - text: "Talks & Collaboration"
+        #href: talks.qmd
+        menu:
+          - text: For Philosophers
+            href: for-philosophers.qmd
+          - text: For Scientists
+            href: for-scientists.qmd
       - text: Teaching
-        href: teaching.qmd
-      - text: Media / Press
+        #href: teaching.qmd
+        menu:
+          - text: Teaching Effectiveness
+            href: teaching-effectiveness.qmd
+          - text: Resources for Students
+            href: teaching-students.qmd
+      - text: "Media / Press"
         href: media.qmd
-      - text: Contact
-        href: contact.qmd
-    right:
-      - text: CV
-        href: files/cv.pdf
-      - icon: github
-        href: https://github.com/Ryan-J-OLoughlin/
+    tools:
+      - icon: envelope
+        href: "mailto:Ryan.Oloughlin@qc.cuny.edu"
+      - icon: linkedin
+        href: https://www.linkedin.com/in/ryan-o-loughlin-885256300
+      - icon: file-earmark-text   # optional: direct CV download
+        href: /files/Ryan-CV.pdf
   page-footer:
-    left: "© {{ 2025 }} Ryan J O'Loughlin"
+    left: 
+      - text: "© 2025 Ryan J O'Loughlin"
+      #- text: "Updated: {{< meta date-modified >}}"
+      - text: "CC BY 4.0"
+        href: https://creativecommons.org/licenses/by/4.0/
+      - text: "Back to top ↑"
+        href: "#"
     right:
-      - text: Email
-        href: mailto:Ryan.Oloughlin@qc.cuny.edu 
+      - icon: envelope
+        text: Email
+        href: "mailto:Ryan.Oloughlin@qc.cuny.edu"
+      - icon: google
+        text: Scholar
+        href: https://scholar.google.com/citations?user=FVgAseQAAAAJ&hl=en
+      - icon: mortarboard 
+        text: PhilPeople  
+        href: https://philpeople.org/profiles/ryan-o-loughlin
+      - icon: orcid
+        text: ORCID
+        href: https://orcid.org/YOUR_ID
+      - icon: github
+        #text: GitHub
+        href: https://github.com/Ryan-J-OLoughlin/
+      - icon: linkedin
+        #text: LinkedIn
+        href: https://www.linkedin.com/in/ryan-o-loughlin-885256300/
   search: true
   repo-url: https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io
   repo-actions: [edit, issue]
 
 format:
   html:
+    page-layout: article
     theme: 
-      - cosmo
-      - brand
-    style: styles.css
+      light: cosmo
+      dark: darkly
+    css: styles.css
     toc: true
+    toc-location: right
     page-navigation: true
     smooth-scroll: true
     open-graph: true

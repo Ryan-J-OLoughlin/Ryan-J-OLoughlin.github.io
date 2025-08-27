@@ -1,0 +1,12 @@
+---
+title: "Talks & Collaboration"
+---
+
+## For Philosophers {#for-philosophers}
+Opportunities for coauthoring, joint workshops, reading groups, and sharing WIPs; emphasis on methodological and normative contributions.
+
+## For Scientists {#for-scientists}
+Seminar/colloquium topics, prior invitations (science departments), and how philosophy clarifies uncertainty, model evaluation, and decision support.
+
+## Collaboration Ideas {#collaboration-ideas}
+Bullet or short-blurb ideas framed in plain language (e.g., uncertainty communication, model diagnostics, robust inference under deep uncertainty).

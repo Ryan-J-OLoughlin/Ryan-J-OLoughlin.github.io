@@ -1,5 +1,14 @@
 ---
-title: "About"
+title: "About Ryan"
 ---
 
-About this site
+## Short Bio {#short-bio}
+I am a philosopher of science. My research focuses on climate models, robustness, and uncertainty. I am currently Assistant Professor at Queens College, City University of New York, and have published in leading philosophy and science journals. 
+
+## Narrative Bio {#narrative-bio}
+My research explores how climate models inform our understanding of uncertainty and how scientists and policymakers should interpret results under uncertainty. I came to this field with training in philosophy of science and close collaborations with climate scientists. I have published in journals such as *Synthese* and *Geoscientific Model Development* and have been invited to speak at philosophy and climate science departments. 
+
+My current projects investigate robustness and pursuitworthiness in climate modeling, as well as the epistemic role of uncertainty quantification.
+
+## CV
+- **Download CV (PDF):** [files/cv.pdf](files/cv.pdf)

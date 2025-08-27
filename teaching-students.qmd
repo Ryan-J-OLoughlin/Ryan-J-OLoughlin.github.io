@@ -1,0 +1,13 @@
+---
+title: "Teaching — For Students"
+---
+
+## Current Courses & Syllabi
+- Course A — Syllabus (PDF), course site/repo
+- Course B — Syllabus (PDF), course site/repo
+
+## Office Hours
+Times, location/Zoom, booking link if any.
+
+## Course Repos & Resources
+Links to GitHub/Classroom/Canvas as needed.

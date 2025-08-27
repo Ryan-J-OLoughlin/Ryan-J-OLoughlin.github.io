@@ -1,7 +1,120 @@
 ---
-title: "Ryan-J-OLoughlin.github.io"
+title: "Homepage | Ryan O'Loughlin | Philosopher of Science"
+page-layout: full
+toc: false
+date-modified: 2025-08-30
 ---
 
-This is a Quarto website.
+:::{.grid .gap-4 .items-center .mt-lg-5}
+::: {.g-col-12 .g-col-lg-5 .text-center}
+![Professional headshot](assets/headshot.jpg){fig-alt="Ryan O'Loughlin headshot" width="80%"}
+:::
+::: {.g-col-12 .g-col-lg-7 .mt-lg-4}
+# Ryan O’Loughlin
+### Philosopher of Science
+#### climate models • uncertainty • decision-making
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+I study how climate scientists generate **trustworthy knowledge** with imperfect models, and how that knowledge should inform **real-world decisions**.
+
+:::{.mt-3}
+[See Research](research.qmd){.btn .btn-primary .me-2}
+[For Collaborators](talks.qmd){.btn .btn-outline-primary .me-2}
+[For Students](teaching/teaching-students.qmd){.btn .btn-outline-secondary}
+:::
+:::
+:::
+
+## Recent Highlights {#highlights}
+
+:::{.grid .gap-3}
+::: {.g-col-12 .g-col-md-4}
+::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+#### Talk
+“Uncertainty and Climate Models,” *Yale Climate Science Seminar* (Feb 2025) 
+
+[Details →](talks.qmd)
+:::
+:::
+::: {.g-col-12 .g-col-md-4}
+::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+#### Publication
+“Robustness and Pursuitworthiness in Climate Science,” *BJPS* (2025)  
+
+[Read →](research.qmd#selected-publications)
+:::
+:::
+::: {.g-col-12 .g-col-md-4}
+::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+#### Workshop
+Co-organizer, “Philosophy of Climate Models,” *PSA 2024*  
+
+[Program →](talks.qmd)
+:::
+:::
+:::
+
+## What I Work On {#what-i-do}
+
+:::{.grid .gap-4}
+::: {.g-col-12 .g-col-lg-6}
+### Big Questions
+1. How do models represent **uncertainty** in climate science?  
+2. What makes results **robust** and **trustworthy**?  
+3. How should policymakers interpret model **uncertainty**?  
+
+[Explore Philosophy →](research.qmd#why-trust-science)
+:::
+::: {.g-col-12 .g-col-lg-6}
+### Bridge to Science
+1. Clarifying **model evaluation** and ensemble reasoning  
+2. Making uncertainty **actionable** for decision support  
+
+[For scientists →](research.qmd#bridging-science-and-philosophy)
+:::
+:::
+
+
+## Who’s This For? {#audiences}
+
+:::{.grid .gap-3}
+::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
+::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+#### 🧑‍🎓 Students
+Syllabi, office hours, course resources  
+[Start here →](teaching-students.qmd)
+:::
+:::
+::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
+::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+#### 📚 Philosophers
+Works-in-progress & workshops  
+[Start here →](for-philosophers.qmd)
+:::
+:::
+::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
+::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+#### ⚗️ Scientists
+Talks & collaboration ideas in plain language  
+[Start here →](for-scientists.qmd)
+:::
+:::
+::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
+::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+#### 🎙️ Media
+100-word bio, topics, headshot, contact  
+[Start here →](media.qmd)
+:::
+:::
+:::
+
+## Contact Information
+
+{{< fa envelope >}} [ryan.oloughlin@qc.cuny.edu](mailto:ryan.oloughlin@qc.cuny.edu)
+<br>
+{{< fa phone >}} [718-997-5270](tel:7189975270)
+<br>
+{{< fa location-dot >}} Powdermaker Hall 350-V, Queens College, CUNY
+
+[More ways to reach me →](contact.qmd){.btn .btn-outline-primary}
+
+*Updated: {{< meta date-modified >}}*
