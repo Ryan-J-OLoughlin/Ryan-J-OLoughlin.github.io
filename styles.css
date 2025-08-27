@@ -68,6 +68,13 @@ h4, h5, h6 { margin: var(--space-3) 0 var(--space-1); }
 p, ul, ol { margin: 0.6rem 0 0.9rem; }
 small { color: var(--brand-muted); }
 
+h4 {
+  font-size: 1.1rem;   /* smaller than h3, bigger than body */
+  font-weight: 600;    /* optional: keeps them visually distinct */
+  margin: var(--space-3) 0 var(--space-1);
+}
+
+
 a { color: var(--brand-link); }
 a:hover { text-decoration: underline; }
 body.quarto-dark a { color: var(--brand-brightblue); }
@@ -76,11 +83,39 @@ code, pre { font-family: var(--font-mono); }
 hr { margin: var(--space-4) 0; }
 
 .section-card {
-  background: var(--brand-ivory);
-  border: 1px solid var(--brand-lightgray);
-  border-radius: 12px;
-  padding: var(--space-3);
-  margin: var(--space-3) 0;
+  border: 0 !important;
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important; /* shadow-sm */
+  border-radius: 1rem !important; /* rounded-3 */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem; /* p-3 */
+}
+
+/* Title row: clamp to 2 lines, fixed visual height so rows align */
+.talk-title {
+  margin: 0;                     /* headings often add default margin */
+  line-height: 1.25;             /* set a known line-height */
+  min-height: calc(1.25em * 2);  /* 2 lines worth of space */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;         /* gracefully truncate long titles */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Meta row (venue + month/year): one-line height */
+.talk-meta {
+  line-height: 1.2;
+  min-height: 1.2em;
+  color: var(--brand-muted);
+  font-size: 0.95rem;            /* keep compact */
+}
+
+/* Make the image occupy the first grid row */
+.section-card img.talk-thumb {
+  width: 100%;
+  grid-row: 1 / 2;
+  border-radius: 0.75rem;
 }
 
 /* ---------- Navbar ---------- */
@@ -119,7 +154,7 @@ hr { margin: var(--space-4) 0; }
 /* ---------- Accessibility ---------- */
 :focus-visible { outline: 2px dashed var(--brand-accent); outline-offset: 2px; }
 
-/* ---------- Mask homepage title ---------- */
+/* ---------- Mask qaruto page title, metadata ---------- */
 .quarto-title-block {
   display: none;
 }
