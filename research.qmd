@@ -1,5 +1,6 @@
 ---
 title: "Research"
+date-modified: 2025-08-30
 ---
 
 ## Why Trust Science? {#overview}
@@ -34,8 +35,11 @@ In addition to publications and conference work, I collaborate directly with cli
 
 - O’Loughlin, R. (2021). Robustness reasoning in climate model comparisons. Studies in History and Philosophy of Science: Part A, 85, 35–43. link
 
-(Full publication list available in CV.)
+[Full list in CV →](about.qmd)
 
 ## Current Projects {#works-in-progress}
-- **WIP 1:** 2–3 sentence blurb, inviting feedback/collaboration.  
-- **WIP 2:** 2–3 sentence blurb, inviting feedback/collaboration.
+#### Does Model Weighting Reduce Uncertainty? A Bayesian Clarification
+
+Climate scientists often weight climate models that best fit past data, claiming this reduces uncertainty in projections. My current work shows that if weighting is understood as Bayesian updating, this interpretation is misleading: normalization narrows ensemble spread but does not increase epistemic confidence. This project clarifies when weighting genuinely improves knowledge and when it risks creating an illusion of certainty—an issue with direct implications for scientific communication and policy.
+
+*Updated: {{< meta date-modified >}}*

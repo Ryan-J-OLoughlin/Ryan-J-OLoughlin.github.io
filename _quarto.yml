@@ -5,7 +5,7 @@ project:
     watch-inputs: true
 
 website:
-  title: "Ryan J O'Loughlin"
+  title: "Ryan O'Loughlin"
   description: "Philosophy of science • climate models • uncertainty & decision-making"
   site-url: https://Ryan-J-OLoughlin.github.io/
   twitter-card: true
