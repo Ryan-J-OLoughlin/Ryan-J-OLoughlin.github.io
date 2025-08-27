@@ -1,0 +1,20 @@
+---
+title: "Collaboration"
+date-modified: 2025-08-30
+toc: false
+---
+
+## For Philosophers
+I am always open to coauthoring, organizing workshops, and sharing works-in-progress on topics such as uncertainty, epistemic values, and model evaluation.  
+
+[Learn more →](for-philosophers.qmd)
+
+## For Scientists
+My talks and collaborations focus on clarifying uncertainty, model evaluation, and decision support in plain language. I regularly give seminars and colloquia in science departments.  
+
+[Learn more →](for-scientists.qmd)
+
+## Collaboration Ideas
+- Communicating uncertainty responsibly  
+- Diagnosing error in climate model ensembles  
+- Robust inference under deep uncertainty  
