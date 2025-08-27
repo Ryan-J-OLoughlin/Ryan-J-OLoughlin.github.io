@@ -7,7 +7,7 @@ date-modified: 2025-08-30
 
 :::{.grid .gap-4 .items-center .mt-lg-5}
 ::: {.g-col-12 .g-col-lg-5 .text-center}
-![Professional headshot](assets/headshot.jpg){fig-alt="Ryan O'Loughlin headshot" width="80%"}
+![](assets/headshot.jpg){fig-alt="Ryan O'Loughlin headshot" width="80%"}
 :::
 ::: {.g-col-12 .g-col-lg-7 .mt-lg-4}
 # Ryan O’Loughlin
@@ -18,8 +18,8 @@ I study how climate scientists generate **trustworthy knowledge** with imperfect
 
 :::{.mt-3}
 [See Research](research.qmd){.btn .btn-primary .me-2}
-[For Collaborators](talks.qmd){.btn .btn-outline-primary .me-2}
-[For Students](teaching/teaching-students.qmd){.btn .btn-outline-secondary}
+[For Collaborators](collaboration.qmd){.btn .btn-outline-primary .me-2}
+[For Students](teaching-students.qmd){.btn .btn-outline-secondary}
 :::
 :::
 :::
@@ -28,15 +28,15 @@ I study how climate scientists generate **trustworthy knowledge** with imperfect
 
 :::{.grid .gap-3}
 ::: {.g-col-12 .g-col-md-4}
-::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+::: {.section-card}
 #### Talk
-“Uncertainty and Climate Models,” *Yale Climate Science Seminar* (Feb 2025) 
+“Uncertainty and Climate Models,” *Brown Climate Science Seminar* (Sept 2025) 
 
-[Details →](talks.qmd)
+[Details →](for-scientists.qmd)
 :::
 :::
 ::: {.g-col-12 .g-col-md-4}
-::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+::: {.section-card}
 #### Publication
 “Robustness and Pursuitworthiness in Climate Science,” *BJPS* (2025)  
 
@@ -44,7 +44,7 @@ I study how climate scientists generate **trustworthy knowledge** with imperfect
 :::
 :::
 ::: {.g-col-12 .g-col-md-4}
-::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+::: {.section-card}
 #### Workshop
 Co-organizer, “Philosophy of Climate Models,” *PSA 2024*  
 
@@ -62,14 +62,14 @@ Co-organizer, “Philosophy of Climate Models,” *PSA 2024*
 2. What makes results **robust** and **trustworthy**?  
 3. How should policymakers interpret model **uncertainty**?  
 
-[Explore Philosophy →](research.qmd#why-trust-science)
+[Explore Philosophy →](research.qmd)
 :::
 ::: {.g-col-12 .g-col-lg-6}
 ### Bridge to Science
 1. Clarifying **model evaluation** and ensemble reasoning  
 2. Making uncertainty **actionable** for decision support  
 
-[For scientists →](research.qmd#bridging-science-and-philosophy)
+[For scientists →](talks.qmd#for-scientists)
 :::
 :::
 
@@ -78,26 +78,27 @@ Co-organizer, “Philosophy of Climate Models,” *PSA 2024*
 
 :::{.grid .gap-3}
 ::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
-::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+::: {.section-card}
 #### 🧑‍🎓 Students
 Syllabi, office hours, course resources  
 [Start here →](teaching-students.qmd)
 :::
 :::
 ::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
-::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+::: {.section-card}
 #### 📚 Philosophers
 Works-in-progress & workshops  
 [Start here →](for-philosophers.qmd)
 :::
 :::
 ::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
-::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+::: {.section-card}
 #### ⚗️ Scientists
 Talks & collaboration ideas in plain language  
 [Start here →](for-scientists.qmd)
 :::
 :::
+<!--
 ::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
 ::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
 #### 🎙️ Media
@@ -105,6 +106,7 @@ Talks & collaboration ideas in plain language
 [Start here →](media.qmd)
 :::
 :::
+-->
 :::
 
 ## Contact Information

@@ -32,8 +32,8 @@ website:
             href: teaching-effectiveness.qmd
           - text: Resources for Students
             href: teaching-students.qmd
-      - text: "Media / Press"
-        href: media.qmd
+      #- text: "Media / Press"
+      #  href: media.qmd
     tools:
       - icon: envelope
         href: "mailto:Ryan.Oloughlin@qc.cuny.edu"
