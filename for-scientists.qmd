@@ -1,0 +1,102 @@
+---
+title: "For Scientists"
+date-modified: 2025-08-30
+---
+
+## Featured Talks
+
+:::{.grid .gap-4}
+
+::: {.g-col-12 .g-col-md-4 .section-card .text-reset}
+[![Convergence, Divergence, and Trust in Climate Models](assets/talks/cuny-esi-thumb.jpg){.talk-thumb}](talks/cuny-esi-convergence-trust-2025.qmd)
+
+#### [Convergence, Divergence, and Trust in Climate Models](talks/cuny-esi-convergence-trust-2025.qmd){.talk-title}
+::: {.talk-meta}
+{{< fa university >}} CUNY ASRC · Mar 2025
+:::
+:::
+
+::: {.g-col-12 .g-col-md-4 .section-card .text-reset}
+[![Why We Should Want Models to Disagree](assets/talks/nasa-giss-thumb.jpg){.talk-thumb}](talks/nasa-giss-disagreement-2023.qmd)
+
+#### [Why We Should Want Models to Disagree](talks/nasa-giss-disagreement-2023.qmd){.talk-title}
+::: {.talk-meta}
+{{< fa university >}} NASA GISS · May 2023
+:::
+:::
+
+::: {.g-col-12 .g-col-md-4 .section-card .text-reset}
+[![Error Diagnosis & Low-Skill Models](assets/talks/ncar-cgd-thumb.jpg){.talk-thumb}](talks/ncar-cgd-error-taxonomy-2022.qmd)
+
+#### [Error Diagnosis & Low-Skill Models](talks/ncar-cgd-error-taxonomy-2022.qmd){.talk-title}
+::: {.talk-meta}
+{{< fa university >}} NCAR CGD · Oct 2022
+:::
+:::
+
+:::
+
+<div class="mt-3 text-muted small text-end">
+Full list in my [CV →](about.qmd)
+</div>
+
+## What I Offer to Scientific Collaborators
+
+- **Clarifying uncertainty**: Distinguishing between statistical spread and genuine epistemic confidence.  
+- **Robustness reasoning**: Explaining why model disagreement can strengthen, rather than weaken, scientific conclusions.  
+- **Model evaluation**: Developing conceptual tools for understanding lower-skill models, error diagnosis, and ensemble practices.  
+- **Decision support**: Showing how philosophical analysis makes uncertainty actionable for policymakers.  
+
+::: {.callout .callout-note .mb-5 .mt-5}
+If you’re a climate scientist, data scientist, or modeler interested in uncertainty, robustness, or model evaluation, I’d love to talk.
+
+[Email me](mailto:ryan.oloughlin@qc.cuny.edu){.btn .btn-primary .me-2}
+[Propose a talk](contact.qmd#speaking){.btn .btn-outline-primary .me-2}
+[Start a project](contact.qmd#collaboration){.btn .btn-outline-secondary}
+:::
+
+## Ongoing Collaborations
+
+I have worked with scientists at **NASA GISS**, **NCAR**, **Cornell University**, and **Indiana University**, helping refine how models are evaluated and how uncertainty is communicated. 
+
+:::{.grid .gap-2}
+
+::: {.g-col-12 .g-col-md-6}
+::: {.section-card }
+#### Error Taxonomy for Model Evaluation
+Classifying productive vs. misleading “errors” to guide targeted experiments and diagnostics.  
+[Read more →](projects/error-taxonomy.qmd)
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.section-card }
+#### Value of Lower-Skill Models
+When deliberately simpler or lower-skill configurations surface mechanisms that improve complex runs.  
+[Read more →](projects/lower-skill-models.qmd)
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.section-card }
+#### Weighting, Spread, and Confidence
+Separating spread-narrowing from genuine epistemic confidence; implications for ensemble practice & comms.  
+[Read more →](projects/weighting-and-uncertainty.qmd)
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.section-card }
+#### Decision Support Under Uncertainty
+Mapping uncertainty to decisions: robust conclusions, risk framing, and communication for stakeholders.  
+[Read more →](projects/decision-support.qmd)
+:::
+:::
+
+::: 
+
+# Let’s collaborate
+
+[Contact me →](contact.qmd){.btn .btn-primary}
+
+*Updated: {{< meta date-modified >}}*
