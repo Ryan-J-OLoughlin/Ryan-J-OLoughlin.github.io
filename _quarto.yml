@@ -3,6 +3,12 @@ project:
   output-dir: _site
   preview: 
     watch-inputs: true
+  resources: 
+    - assets/**
+    - partials/**
+
+filters:
+  - filters/extract-cv.lua
 
 website:
   title: "Ryan O'Loughlin"
@@ -14,7 +20,7 @@ website:
     left:
       - text: Home
         href: index.qmd
-      - text: CV
+      - text: About
         href: about.qmd
       - text: Research
         href: research.qmd

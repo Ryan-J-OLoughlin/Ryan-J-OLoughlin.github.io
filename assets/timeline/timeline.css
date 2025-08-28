@@ -1,0 +1,290 @@
+:root {
+  --brand: #003459;
+  --spine: color-mix(in oklab, var(--brand) 60%, white);
+  --tick: var(--brand);
+
+  /* Design sizes (at scale = 1) */
+  --img-size-base: 72px;
+  --img-size-active-base: 116px;
+  --gap-base: 3rem;
+  --slide-step-base: 20px;
+
+  /* JS sets this so the whole timeline fits without inner scrollbars */
+  --scale: 1;
+
+  /* Effective sizes used below */
+  --img-size: calc(var(--img-size-base) * var(--scale));
+  --img-size-active: calc(var(--img-size-active-base) * var(--scale));
+  --gap: calc(var(--gap-base) * var(--scale));
+  --slide-step: calc(var(--slide-step-base) * var(--scale));
+}
+
+* { box-sizing: border-box; }
+
+
+/* FIXED: Ensure full viewport usage 
+html, body { 
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden; 
+  overflow-y: auto; 
+} */
+
+/* Visually hidden but screen-reader readable */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* --- Component root -------------------------------------------------------- */
+.timeline {
+  --axis-height: 4px;
+  position: relative;
+  max-width: 100%;  /* FIXED: Use full viewport width */
+  /*height: 100vh;  FIXED: Use full viewport height */
+  height: auto;
+  margin: 0;
+  padding: 2rem 0rem;
+  color: inherit;
+  font-family: system-ui, -apple-system, sans-serif;
+  overflow: visible; 
+}
+
+/* REMOVED: .timeline-host wrapper styles that were causing issues */
+
+/* Decorative spine (horizontal mode) */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: var(--axis-height);
+  background: linear-gradient(90deg, transparent, var(--spine), transparent);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* --- Track: the row of items ---------------------------------------------- */
+.timeline__track {
+  display: flex; /* CHANGED: Use flexbox for proportional spacing */
+  align-items: center;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  padding: calc(4.5rem * var(--scale)) calc(8rem * var(--scale)); /* FIXED: Increased horizontal padding */
+  justify-content: flex-start;
+}
+
+/* Each timeline item as a focusable button for accessibility */
+.timeline__item {
+  position: relative;
+  text-align: center;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  scroll-snap-align: center;
+  outline: none;
+  color: inherit;
+  font: inherit;
+  transform: translateX(-50%) translateY(-50%);
+  transition: transform .25s ease;
+}
+
+.timeline__item:focus-visible {
+  outline: 3px solid color-mix(in oklab, var(--brand) 55%, white);
+  outline-offset: 6px;
+  border-radius: 12px;
+}
+
+/* Year pill near the spine */
+.timeline__year {
+  position: relative;
+  display: inline-block;
+  padding: .25rem .5rem;
+  background: color-mix(in oklab, var(--brand) 8%, white);
+  border-radius: 999px;
+  font-weight: 600;
+  color: inherit;
+  user-select: none;
+  z-index: 2;
+  --year-offset: 0px;                 /* default (on-axis) */
+  transform: translateY(var(--year-offset));
+  transition: transform .2s ease;     /* gentle wiggle */
+  will-change: transform;
+}
+
+/* Dot on the spine */
+.timeline__dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(50% - var(--axis-height)/2 - 8px);
+  width: 10px; height: 10px;
+  background: var(--tick);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--tick) 25%, white);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Image puck */
+.timeline__imgwrap {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--img-size);
+  height: var(--img-size);
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+  transition: transform .25s ease, box-shadow .25s ease, width .25s ease, height .25s ease;
+  z-index: 3;
+}
+.timeline__imgwrap img {
+  width: 100%; height: 100%;
+  display: block; object-fit: cover;
+}
+
+
+/* Position puck above/below the spine */
+.timeline__imgwrap[data-side="up"]   { top: calc(50% - var(--img-size) - 24px); }
+.timeline__imgwrap[data-side="down"] { top: calc(50% + 24px); }
+
+/* Current size switches on active; anchor growth at the spine side */
+.timeline__imgwrap { 
+  --img-current-size: var(--img-size);
+  transform-origin: 50% 50%;
+}
+.timeline__item.is-active .timeline__imgwrap {
+  --img-current-size: var(--img-size-active);
+}
+
+/* Grow upward if it's on top; downward if it's on bottom */
+.timeline__imgwrap[data-side="up"]   { transform-origin: 50% 100%; }
+.timeline__imgwrap[data-side="down"] { transform-origin: 50%   0%; }
+
+
+/* Caption bubble (hidden until active) */
+.timeline__line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(420px, 80vw);
+  font-size: clamp(.85rem, .95rem * var(--scale), 1rem);
+  line-height: 1.35;
+  padding: .55rem .75rem;
+  border-radius: 10px;
+  background: color-mix(in oklab, white 88%, var(--brand));
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  opacity: 0; 
+  translate: 0 6px;
+  pointer-events: none;
+  transition: opacity .2s ease, translate .2s ease;
+  color: inherit;
+  z-index: 4;
+}
+.timeline__line[data-side="up"]   { top: calc(50% - var(--img-size) - 24px - 10px - 2.25rem); }
+.timeline__line[data-side="down"] { top: calc(50% + var(--img-size) + 24px + 10px); }
+
+/* Active (hover/focus) */
+.timeline__item.is-active .timeline__imgwrap {
+  width: var(--img-size-active);
+  height: var(--img-size-active);
+  transform: translateX(-50%) translateZ(0);
+  box-shadow: 0 10px 26px rgba(0,0,0,.18);
+}
+.timeline__item.is-active .timeline__line {
+  opacity: 1; 
+  translate: 0 0;
+}
+
+/* Slide-away effect for non-active items - updated for proportional positioning */
+.timeline__track div[data-active-index] .timeline__item {
+  transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1), opacity .3s ease, filter .3s ease;
+}
+.timeline__track div[data-active-index] .timeline__item:not(.is-active) {
+  transform: translateX(calc(-50% + var(--slide-offset, 0) * 3px)) translateY(-50%);
+  opacity: var(--slide-opacity, 0.7);
+  filter: saturate(.6) brightness(.8);
+}
+
+/* --- Vertical mode --------------------------------------------------------- */
+  @media (max-width: 720px) {
+    .timeline {
+      height: auto; /* FIXED: Allow height to grow on mobile */
+      min-height: 100vh;
+    }
+    
+    /* Vertical spine */
+    .timeline::before {
+      left: 28px; right: auto; top: 0; bottom: 0;
+      width: 4px; height: auto; transform: none;
+      background: linear-gradient(180deg, transparent, var(--spine), transparent);
+    }
+
+    .timeline__track {
+      display: grid;
+      grid-auto-flow: row;
+      grid-auto-rows: minmax(calc(120px * var(--scale)), auto);
+      gap: calc(2.25rem * var(--scale));
+      height: auto; /* FIXED: Allow height to grow */
+      overflow: visible;
+      padding: 2rem 1rem 2rem 1rem; /* FIXED: Reset padding for mobile */
+      justify-content: start;
+    }
+
+    .timeline__item {
+      text-align: left;
+      padding-left: 72px;
+      position: relative !important; /* Override absolute positioning */
+      left: auto !important;
+      top: auto !important;
+      transform: none !important;
+    }
+
+    .timeline__dot {
+      left: 28px; top: 1.1rem; transform: none;
+    }
+
+    .timeline__year { display: inline-block; }
+
+    .timeline__imgwrap,
+    .timeline__line {
+      position: relative; left: auto; transform: none;
+    }
+
+    .timeline__imgwrap {
+      width: var(--img-size);
+      height: var(--img-size);
+      margin-top: .5rem;
+      border-radius: 12px;
+      top: auto !important;
+    }
+
+    .timeline__line {
+      width: auto; margin-top: .5rem;
+      opacity: 1; translate: 0 0; pointer-events: auto;
+      background: color-mix(in oklab, white 92%, var(--brand));
+    }
+    
+    /* Reset container positioning for mobile */
+    .timeline__track > div {
+      position: static !important;
+      width: 100% !important;
+      left: 0 !important;
+    }
+  }
+
+/* Reduced motion: keep it calm */
+@media (prefers-reduced-motion: reduce) {
+  .timeline__item,
+  .timeline__imgwrap,
+  .timeline__line {
+    transition: none !important;
+  }
+}

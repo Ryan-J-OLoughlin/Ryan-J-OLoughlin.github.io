@@ -1,10 +1,22 @@
 ---
 title: "About Ryan"
-date-modified: 2025-08-30
+date-modified: 2025-08-30 
+layout: full
+toc: false
 ---
 
 ## Short Bio {#short-bio}
 I am a philosopher of science. My research focuses on climate models, robustness, and uncertainty. I am currently Assistant Professor at Queens College, City University of New York, and have published in leading philosophy and science journals. 
+
+:::{.column-page}
+::: {=html}
+<link rel="stylesheet" href="/assets/timeline/timeline.css">
+<div id="timeline" class="timeline" aria-label="Ryan's story"></div>
+<script src="/assets/timeline/timeline.js" defer></script>
+:::
+:::
+
+## Professional Highlights
 
 [Download CV as PDF](O'Loughlin-CV.pdf){.btn .btn-primary}
 
