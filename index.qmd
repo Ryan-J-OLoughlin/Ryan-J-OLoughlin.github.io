@@ -11,7 +11,7 @@ date-modified: 2025-08-30
 :::
 ::: {.g-col-12 .g-col-lg-7 .mt-lg-4}
 # Ryan O’Loughlin
-### Philosopher of Science
+### Philosopher of Science | [Trust without Truth](research.qmd#trust-without-truth){ .link-muted }
 #### climate models • uncertainty • decision-making
 
 I study how climate scientists generate **trustworthy knowledge** with imperfect models, and how that knowledge should inform **real-world decisions**.

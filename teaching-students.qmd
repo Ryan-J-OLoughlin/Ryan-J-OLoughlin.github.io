@@ -1,13 +1,128 @@
 ---
-title: "Teaching — For Students"
+title: "Student Dashboard"
+page-layout: full
+toc: false
+date-modified: 2025-08-30
 ---
 
-## Current Courses & Syllabi
-- Course A — Syllabus (PDF), course site/repo
-- Course B — Syllabus (PDF), course site/repo
+## Quick Actions
 
-## Office Hours
-Times, location/Zoom, booking link if any.
+:::{.grid .gap-3}
+::: {.g-col-12 .g-col-md-3}
+[📄 PHIL 101 Syllabus](files/syllabi/phil101-fa25.pdf){.btn .btn-primary .w-100}
+:::
+::: {.g-col-12 .g-col-md-3}
+[🏢 Office Hours / Contact](teaching-students.qmd#office-hours--contact){.btn .btn-outline-primary .w-100}
+:::
+::: {.g-col-12 .g-col-md-3}
+[📚 Academic Help ](teaching-students.qmd#academic-help-resources){.btn .btn-outline-secondary .w-100}
+:::
+::: {.g-col-12 .g-col-md-3}
+[📬 Letter of Recomm ](teaching-students.qmd#requesting-letters-of-recommendation){.btn .btn-outline-secondary .w-100}
+:::
+:::
 
-## Course Repos & Resources
-Links to GitHub/Classroom/Canvas as needed.
+## Current Courses
+
+:::{.grid .gap-3}
+::: {.g-col-12 .g-col-md-6}
+::: {.section-card}
+#### PHIL 101 — Intro to Philosophy (Fall 2025){.text-truncate .d-block .w-100}
+
+-  Tues/Thurs 9:15am – 10:30am in Powdermaker Hall 152 
+
+[📄 Syllabus](files/syllabi/phil101-fa25.pdf){.btn .btn-outline-primary .w-50 }
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.section-card}
+#### PHIL 125 — Philosophy of the Environment (Fall 2025){.text-truncate .d-block .w-100}
+
+-  Tues/Thurs 10:45 – 12:00pm in Powdermaker Hall 152  
+
+[📄 Syllabus](files/syllabi/phil125-fa25.pdf){.btn .btn-outline-primary .w-50}
+:::
+:::
+:::
+
+## Office Hours & Contact
+
+::: {.section-card}
+**Tuesdays 1–2 pm**, Powdermaker Hall 350V · or by appointment  
+{{< fa envelope >}} [ryan.oloughlin@qc.cuny.edu](mailto:ryan.oloughlin@qc.cuny.edu)
+:::
+
+## Professional Development {#professional-development}
+
+:::{.grid .gap-3}
+::: {.g-col-12 .g-col-lg-6}
+::: {.section-card}
+#### Requesting Letters of Recommendation
+Send **one email** with:  
+1) Name + CUNY ID + course(s)/term(s) + final grade(s)  
+2) **Deadline(s)** & submission method (portal/email)  
+3) **CV/Resume** + **unofficial transcript**  
+4) What you’re applying for & what to emphasize  
+5) Required forms (PDF) & **FERPA waiver** status, if needed  
+6) ≥ **3 weeks’ notice** before first deadline
+
+:::{.mt-2}
+[Email template](mailto:ryan.oloughlin@qc.cuny.edu?subject=Letter%20Request%3A%20%5BYour%20Name%5D%20%E2%80%94%20Deadline%20YYYY-MM-DD&body=Dear%20Prof.%20O%E2%80%99Loughlin%2C%0A%0AI%27m%20requesting%20a%20letter%20of%20recommendation%20for%20%5Bprogram%2Fjob%5D.%20Details%20below%3A%0A%0A%E2%80%A2%20Name%20%2F%20CUNY%20ID%3A%20%0A%E2%80%A2%20Course(s)%20with%20you%20%2B%20term(s)%20%2B%20final%20grade(s)%3A%20%0A%E2%80%A2%20Deadline(s)%20%26%20submission%20method(s)%3A%20%0A%E2%80%A2%20Why%20I%E2%80%99m%20applying%20%26%20what%20to%20emphasize%3A%20%0A%E2%80%A2%20Attachments%3A%20CV%2C%20unofficial%20transcript%2C%20forms%20(PDF)%0A%E2%80%A2%20FERPA%20waiver%3A%20Yes%2FNo%0A%0AThank%20you!%0A){.btn .btn-outline-primary}
+:::
+:::
+:::
+
+::: {.g-col-12 .g-col-lg-6}
+::: {.section-card}
+#### Research, Mentorship & Assistantships 
+- I supervise undergraduate research/theses and independent studies.  
+- To express interest, email a **1–2 paragraph** note with topic interests & prior coursework.  
+- **Assistantships / openings:** *None currently posted (last updated {{< meta date-modified >}}).* Check back here for announcements.
+:::
+:::
+:::
+
+## Academic Help Resources {#academic-help}
+:::{.grid .gap-3}
+::: {.g-col-12 .g-col-lg-6}
+::: {.section-card}
+#### Campus resources 
+- **Writing Center**: [schedule an appointment for personalized help](https://www.qc.cuny.edu/academics/wc/)
+- **Library Research Help** — [consult with a librarian](https://www.qc.cuny.edu/library/research/)  
+- **Accessibility/Disability Services** — [accommodations & support](https://www.qc.cuny.edu/sp/)
+- **Counseling Services** — [mental health support](https://www.qc.cuny.edu/cs/)  
+- **Computer Labs / Printing** — [laptops, printers, software access](https://www.qc.cuny.edu/its/computer-labs/)
+- **Career Center** — [resumes, internships, grad school advising](https://www.qc.cuny.edu/academics/cei/)
+::: 
+:::
+::: {.g-col-12 .g-col-lg-6} 
+::: {.section-card}
+#### Off-campus / general resources
+
+**Writing & citation**
+- [Purdue OWL](https://owl.purdue.edu/) — citation + academic writing guides  
+- [UNC Writing Center Handouts](https://writingcenter.unc.edu/tips-and-tools/) — quick how-to sheets  
+**Philosophy references**
+- [Stanford Encyclopedia of Philosophy (SEP)](https://plato.stanford.edu/) — peer-reviewed entries  
+- [Internet Encyclopedia of Philosophy (IEP)](https://iep.utm.edu/) — accessible overviews  
+- [PhilPapers](https://philpapers.org/) — database of philosophy articles & books
+**Research & tools**
+- [Google Scholar](https://scholar.google.com/) — literature search  
+- [Zotero](https://www.zotero.org/) + [ZoteroBib](https://zbib.org/) — free reference manager & instant bibliographies  
+:::
+:::
+:::
+
+## Course Archive
+
+<details class="mt-2">
+<summary><strong>View past courses & syllabi</strong></summary>
+
+- **PHIL 101 — Intro to Philosophy** (SP/SU/FA 2022–2025)
+
+</details>
+
+---
+
+*Updated: {{< meta date-modified >}}*
