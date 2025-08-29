@@ -1,0 +1,59 @@
+---
+title: "Teaching Why Trust Science"
+date-modified: 2025-08-30
+---
+
+## Teaching Resources for Philosophy Instructors
+
+I design courses that link philosophy to urgent issues like climate change, scientific modeling, and environmental justice. This page collects syllabi, assignments, and teaching strategies that colleagues may find useful for adapting in their own classrooms.
+
+## Adaptable Syllabi
+
+Download and adapt syllabi from courses I’ve designed and taught:
+
+Environmental Philosophy
+
+Philosophy of Science
+
+Philosophy of Climate Modeling
+
+Each syllabus includes suggested readings, discussion structures, and sample assessments.
+
+## Assignments & Activities
+
+A collection of modular assignments and in-class activities:
+
+### Data & Values Exercise###
+Using parallel data sets (neutral vs politicized), students see how values influence inference.
+
+### Structured Debates### 
+Format for student-led debates on topics like free will, climate engineering, or scientific realism.
+
+### Maker Lab Activity###
+Build a thermometer with basic materials to explore error, measurement, and concept formation.
+
+## Mentorship Models
+
+I treat students as junior colleagues rather than passive recipients.
+
+Examples of thesis topics supervised (with permission).
+
+Reflections on how I scaffold research independence (short essay or PDF).
+
+Link to leadership/mentorship philosophy.
+
+## Pedagogical Reflections
+
+Short write-ups for other instructors:
+
+Teaching Uncertainty Through Failure: why I foreground error and iteration in both philosophy and science teaching.
+
+Inclusive Discussion Strategies: techniques for balancing debates with quieter voices (peer reflection, low-stakes writing).
+
+## Share & Collaborate
+
+If you adapt these materials, I’d love to hear how they work in your classroom. I welcome exchanges of syllabi, assignments, and teaching approaches. Contact me at ryan.oloughlin@qc.cuny.edu
+
+[More ways to reach me →](contact.qmd){.btn .btn-outline-primary}
+
+*Updated: {{< meta date-modified >}}*
