@@ -1,28 +1,41 @@
 ---
-title: "Homepage | Ryan O'Loughlin | Philosopher of Science"
+title: "Homepage | Ryan O'Loughlin | Philosopher of Science" 
 page-layout: full
 toc: false
 date-modified: 2025-08-30
+description: "Ryan O’Loughlin — philosopher of science focused on climate models, uncertainty, and decision-making | Trust without Truth"
 ---
 
-:::{.grid .gap-4 .items-center .mt-lg-5}
-::: {.g-col-12 .g-col-lg-5 .text-center}
-![](assets/headshot.jpg){fig-alt="Ryan O'Loughlin headshot" width="80%"}
+:::{.grid .gap-4 .items-center .mt-lg-5 }
+::: {.g-col-12 .g-col-lg-5 .text-center .d-flex .align-items-center .justify-content-center .p-4}
+![](assets/headshot.jpg){fig-alt="Ryan O'Loughlin headshot" width="auto"}
 :::
 ::: {.g-col-12 .g-col-lg-7 .mt-lg-4}
-# Ryan O’Loughlin
-### Philosopher of Science | [Trust without Truth](research.qmd#trust-without-truth){ .link-muted }
-#### climate models • uncertainty • decision-making
+# Ryan O’Loughlin | [Trust without Truth](research.qmd){ .link-muted }
+#### Philosopher of Science
 
-I study how climate scientists generate **trustworthy knowledge** with imperfect models, and how that knowledge should inform **real-world decisions**.
+***All models are wrong—yet their agreements build confidence for action and disagreements spark insight. That’s why we can trust science.***
 
-:::{.mt-3}
+I study how climate models earn trust despite being imperfect—and how that understanding should guide real-world decisions.  
+
+:::{.mt-auto}
 [See Research](research.qmd){.btn .btn-primary .me-2}
 [For Collaborators](collaboration.qmd){.btn .btn-outline-primary .me-2}
 [For Students](teaching-students.qmd){.btn .btn-outline-secondary}
+
+<small> climate models • uncertainty • robustness • AI in climate science </small>
 :::
 :::
 :::
+
+<!-- Logo strip -->
+<div class="logo-strip d-flex flex-wrap gap-4 align-items-center justify-content-center my-3 gap-6">
+  <img src="assets/logos/cuny.svg" alt="CUNY">
+  <img src="assets/logos/qc.svg" alt="Queens College">
+  <img src="assets/logos/nasa-giss.svg" alt="NASA GISS">
+  <img src="assets/logos/ncar.svg" alt="NCAR" height="26">
+  <img src="assets/logos/psa.png" alt="Philosophy of Science Association">
+</div>
 
 ## Recent Highlights {#highlights}
 
@@ -38,43 +51,46 @@ I study how climate scientists generate **trustworthy knowledge** with imperfect
 ::: {.g-col-12 .g-col-md-4}
 ::: {.section-card}
 #### Publication
-“Robustness and Pursuitworthiness in Climate Science,” *BJPS* (2025)  
+"Moving beyond post hoc eXplainable Artificial Intelligence (XAI),” *GMD* (2025)  
 
 [Read →](research.qmd#selected-publications)
 :::
 :::
 ::: {.g-col-12 .g-col-md-4}
 ::: {.section-card}
-#### Workshop
-Co-organizer, “Philosophy of Climate Models,” *PSA 2024*  
+#### Appointment
+I'm appointed as CUNY Grad Center Doctoral Faculty.  
 
-[Program →](talks.qmd)
+[Detail →](https://www.gc.cuny.edu/people/ryan-j-oloughlin)
 :::
 :::
 :::
 
 ## What I Work On {#what-i-do}
 
+**All models are wrong—so why trust them?** Too often we equate trustworthiness with truth. Yet when models agree, they build confidence for action; when they disagree, they often teach us the most. Uncertainty and error aren’t failures—they’re how science moves forward. *My work shows how we can trust science not by mitigating its limits, but by embracing them.*
+
 :::{.grid .gap-4}
 ::: {.g-col-12 .g-col-lg-6}
 ### Big Questions
-1. How do models represent **uncertainty** in climate science?  
-2. What makes results **robust** and **trustworthy**?  
-3. How should policymakers interpret model **uncertainty**?  
+1. **How can flawed models still generate knowledge?**  
+2. **When do agreement and disagreement strengthen trust in science?**  
+3. **How should we make decisions under uncertainty?**  
 
 [Explore Philosophy →](research.qmd)
 :::
 ::: {.g-col-12 .g-col-lg-6}
 ### Bridge to Science
-1. Clarifying **model evaluation** and ensemble reasoning  
-2. Making uncertainty **actionable** for decision support  
+1. **Diagnosing errors** to learn from failure rather than hide it  
+2. **Clarifying model evaluation** so that convergence and divergence both build insight  
+3. **Translating uncertainty into action**  
 
 [For scientists →](talks.qmd#for-scientists)
 :::
 :::
 
-
 ## Who’s This For? {#audiences}
+My work speaks to philosophers (robustness, error, fruitfulness), scientists (model evaluation, uncertainty, pursuitworthiness), and the media (clear, plain-language analysis of climate modeling). And for students, it provides resources, mentorship, and guidance to think critically about science in a complex world.
 
 :::{.grid .gap-3}
 ::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
@@ -98,15 +114,13 @@ Talks & collaboration ideas in plain language
 [Start here →](for-scientists.qmd)
 :::
 :::
-<!--
 ::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
-::: {.card .border-0 .shadow-sm .rounded-3 .h-100 .d-flex .flex-column .p-3}
+::: {.section-card}
 #### 🎙️ Media
 100-word bio, topics, headshot, contact  
 [Start here →](media.qmd)
 :::
 :::
--->
 :::
 
 ## Contact Information
