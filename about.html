@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – Ryan J O’Loughlin</title>
+<title>About Ryan – Ryan O’Loughlin</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,17 +30,20 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./assets/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-cabf14546cdf8e4428f4aea2098a25e9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cabf14546cdf8e4428f4aea2098a25e9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b5185a30e6e8093d5516afcea4ca59bb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-cabf14546cdf8e4428f4aea2098a25e9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,15 +74,178 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="About – Ryan J O’Loughlin">
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="About Ryan – Ryan O’Loughlin">
 <meta property="og:description" content="Philosophy of science • climate models • uncertainty &amp; decision-making">
-<meta property="og:site_name" content="Ryan J O'Loughlin">
-<meta name="twitter:title" content="About – Ryan J O’Loughlin">
+<meta property="og:site_name" content="Ryan O'Loughlin">
+<meta name="twitter:title" content="About Ryan – Ryan O’Loughlin">
 <meta name="twitter:description" content="Philosophy of science • climate models • uncertainty &amp; decision-making">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -87,7 +253,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Ryan J O’Loughlin</span>
+    <span class="navbar-title">Ryan O’Loughlin</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -108,36 +274,51 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./research.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./talks.html"> 
-<span class="menu-text">Talks &amp; Collaboration</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-talks--collaboration" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Talks &amp; Collaboration</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-talks--collaboration">    
+        <li>
+    <a class="dropdown-item" href="./for-philosophers.html">
+ <span class="dropdown-text">For Philosophers</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./teaching.html"> 
-<span class="menu-text">Teaching</span></a>
+        <li>
+    <a class="dropdown-item" href="./for-scientists.html">
+ <span class="dropdown-text">For Scientists</span></a>
   </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Teaching</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching">    
+        <li>
+    <a class="dropdown-item" href="./teaching-instructors.html">
+ <span class="dropdown-text">Teaching Trust without Truth</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./teaching-students.html">
+ <span class="dropdown-text">Resources for Students</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./media.html"> 
-<span class="menu-text">Media / Press</span></a>
+<span class="menu-text">Media</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./contact.html"> 
 <span class="menu-text">Contact</span></a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./files/cv.pdf"> 
-<span class="menu-text">CV</span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/Ryan-J-OLoughlin/"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-</ul>
           </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="mailto:Ryan.Oloughlin@qc.cuny.edu" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-envelope"></i></a>
+    <a href="https://www.linkedin.com/in/ryan-o-loughlin-885256300" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
+    <a href="./files/Ryan_OLoughlin_CV.pdf" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-file-earmark-text"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -146,15 +327,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
+
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">About Ryan</h1>
 </div>
 
 
@@ -163,6 +343,12 @@ ul.task-list li input[type="checkbox"] {
 
     
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">August 30, 2025</p>
+    </div>
+  </div>
     
   </div>
   
@@ -171,13 +357,63 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>About this site</p>
+<section id="short-bio" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="short-bio">About Me</h2>
+<p>As a working-class kid from a small town, I never imagined becoming a philosopher. I stumbled into philosophy—and eventually into climate science—driven by curiosity and a need for reason. My work is devoted to a simple but unsettling question: <em>if all models are wrong, why trust them?</em> I’ve come to see that error, disagreement, and even failure are not flaws but the very forces that move science forward. Along the way I’ve worked closely with scientists and published in leading journals to explore how uncertainty can be clarified and made useful, trustworthy even. My path has never been a straight line, but a series of lessons learned—much like the sciences I study.</p>
+<div class="column-page">
+<div class="{=html}">
+<link rel="stylesheet" href="./assets/timeline/timeline.css">
+<div id="timeline" class="timeline" aria-label="Ryan's story">
+
+</div>
+<script src="./assets/timeline/timeline.js" defer=""></script>
+</div>
+</div>
+</section>
+<section id="professional-highlights" class="level2">
+<h2 class="anchored" data-anchor-id="professional-highlights">Professional Highlights</h2>
+<section id="publications" class="level3">
+<h3 class="anchored" data-anchor-id="publications">Publications</h3>
+<p>Lead author on “Moving beyond post hoc explainable AI: lessons from dynamical climate modeling” (<em>Geoscientific Model Development</em>, 2025), selected as a highlight paper</p>
+</section>
+<section id="public-engagement" class="level3">
+<h3 class="anchored" data-anchor-id="public-engagement">Public Engagement</h3>
+<p>Wrote “Why imperfect climate models are more helpful than you think” for <em>Yale Climate Connections</em> (2025), introducing philosophy of science insights to the general public</p>
+</section>
+<section id="invited-talks" class="level3">
+<h3 class="anchored" data-anchor-id="invited-talks">Invited Talks</h3>
+<p>Speaker at NASA Goddard Institute for Space Studies (2023-24), NCAR Climate &amp; Global Dynamics Lab (2022), and CUNY Advanced Science Research Center (2025)</p>
+</section>
+<section id="leadership-collaboration" class="level3">
+<h3 class="anchored" data-anchor-id="leadership-collaboration">Leadership &amp; Collaboration</h3>
+<p>Co-organized “Philosophy of Climate Models” workshop at PSA 2024; principal organizer of interdisciplinary grant proposals bridging philosophy and climate science</p>
+</section>
+</section>
+<section id="curriculum-vitae" class="level2">
+<h2 class="anchored" data-anchor-id="curriculum-vitae">Curriculum Vitae</h2>
+<p><a href="files/Ryan_OLoughlin_CV.pdf" class="btn btn-primary">Download CV as PDF</a></p>
+<!--{{< include files/cv-content.md >}} -->
+<p><em>Updated: August 30, 2025</em></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -579,16 +815,65 @@ ul.task-list li input[type="checkbox"] {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© {{ 2025 }} Ryan J O’Loughlin</p>
-</div>   
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:Ryan.Oloughlin@qc.cuny.edu">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=FVgAseQAAAAJ&amp;hl=en">
+      <i class="bi bi-google" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://philpeople.org/profiles/ryan-o-loughlin">
+<p>PhilPeople</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://orcid.org/YOUR_ID">
+<p>ORCID</p>
+</a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Ryan-J-OLoughlin/">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/ryan-o-loughlin-885256300/">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>   
     <div class="nav-footer-center">
-      &nbsp;
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ © 2025 Ryan J O'Loughlin
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://creativecommons.org/licenses/by/4.0/">
+<p>CC BY 4.0</p>
+</a>
+  </li>  
+</ul>
     <div class="toc-actions"><ul><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="mailto:Ryan.Oloughlin@qc.cuny.edu">
-<p>Email</p>
+    <a class="nav-link" href="./#">
+<p>Back to top ↑</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/dan-li-o">
+<p>Built by DL with 🩶</p>
 </a>
   </li>  
 </ul>

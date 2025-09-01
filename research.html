@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>research – Ryan J O'Loughlin</title>
+<title>Research – Ryan O’Loughlin</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,17 +30,20 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./assets/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-cabf14546cdf8e4428f4aea2098a25e9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cabf14546cdf8e4428f4aea2098a25e9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b5185a30e6e8093d5516afcea4ca59bb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-cabf14546cdf8e4428f4aea2098a25e9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,13 +74,178 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="Ryan J O’Loughlin">
-<meta property="og:site_name" content="Ryan J O'Loughlin">
-<meta name="twitter:title" content="Ryan J O’Loughlin">
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Research – Ryan O’Loughlin">
+<meta property="og:description" content="Philosophy of science • climate models • uncertainty &amp; decision-making">
+<meta property="og:site_name" content="Ryan O'Loughlin">
+<meta name="twitter:title" content="Research – Ryan O’Loughlin">
+<meta name="twitter:description" content="Philosophy of science • climate models • uncertainty &amp; decision-making">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -85,7 +253,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Ryan J O’Loughlin</span>
+    <span class="navbar-title">Ryan O’Loughlin</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -106,36 +274,51 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link active" href="./research.html" aria-current="page"> 
 <span class="menu-text">Research</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./talks.html"> 
-<span class="menu-text">Talks &amp; Collaboration</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-talks--collaboration" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Talks &amp; Collaboration</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-talks--collaboration">    
+        <li>
+    <a class="dropdown-item" href="./for-philosophers.html">
+ <span class="dropdown-text">For Philosophers</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./teaching.html"> 
-<span class="menu-text">Teaching</span></a>
+        <li>
+    <a class="dropdown-item" href="./for-scientists.html">
+ <span class="dropdown-text">For Scientists</span></a>
   </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Teaching</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching">    
+        <li>
+    <a class="dropdown-item" href="./teaching-instructors.html">
+ <span class="dropdown-text">Teaching Trust without Truth</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./teaching-students.html">
+ <span class="dropdown-text">Resources for Students</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./media.html"> 
-<span class="menu-text">Media / Press</span></a>
+<span class="menu-text">Media</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./contact.html"> 
 <span class="menu-text">Contact</span></a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./files/cv.pdf"> 
-<span class="menu-text">CV</span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/Ryan-J-OLoughlin/"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-</ul>
           </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="mailto:Ryan.Oloughlin@qc.cuny.edu" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-envelope"></i></a>
+    <a href="https://www.linkedin.com/in/ryan-o-loughlin-885256300" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
+    <a href="./files/Ryan_OLoughlin_CV.pdf" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-file-earmark-text"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -144,21 +327,106 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Trust without Truth</a></li>
+  <li><a href="#bridging-science" id="toc-bridging-science" class="nav-link" data-scroll-target="#bridging-science">Bridging Science and Philosophy</a></li>
+  <li><a href="#research-agenda" id="toc-research-agenda" class="nav-link" data-scroll-target="#research-agenda">Research Agenda</a></li>
+  <li><a href="#selected-publications" id="toc-selected-publications" class="nav-link" data-scroll-target="#selected-publications">Selected Publications</a></li>
+  <li><a href="#works-in-progress" id="toc-works-in-progress" class="nav-link" data-scroll-target="#works-in-progress">Current Projects</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/edit/main/research.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Research</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">August 30, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
 
 
+</header>
 
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Trust without Truth</h2>
+<p>We make billion-dollar decisions based on climate models, even though every model is false, strictly speaking. My research asks: <em>what does it mean to trust science when its tools are false?</em>&nbsp;More specifically, how do climate scientists use computer models to generate knowledge? Why are their models “wrong but useful”?</p>
+<p>By focusing on robustness, error, and how we explain modeling results, I show why imperfect models can still yield trustworthy insights. My work shows how philosophy can help make sense of scientific uncertainty and strengthen trust in climate research.&nbsp;</p>
+</section>
+<section id="bridging-science" class="level2">
+<h2 class="anchored" data-anchor-id="bridging-science">Bridging Science and Philosophy</h2>
+<p>Both philosophers and scientists care about knowledge—what it is, how we get it, and whether we can trust it. My work brings these communities into dialogue by asking how the credibility of knowledge is established and shared.</p>
+<p>I have published in both leading philosophy journals and interdisciplinary science venues, including <em>Synthese</em>, <em>Climatic Change</em>, and <em>Geoscientific Model Development</em>. In these publications I introduce philosophical tools—such as robustness reasoning and the analysis of error—to scientific audiences, helping them reflect on how models generate and justify knowledge. I also present regularly at conferences and workshops that bring philosophers and scientists together, where my work has influenced how climate researchers discuss uncertainty and how philosophers ground their theories in real modeling practice.</p>
+<p>In addition to publications and conference work, I collaborate directly with climate scientists at NASA Goddard Institute of Space Studies, the National Center for Atmospheric Research, Cornell University, and Indiana University. These collaborations have refined how scientists evaluate their models, encouraged open discussions about the limits of prediction, and given philosophers concrete insights into modeling practices. Together, these activities show how philosophy can clarify scientific debates and how scientific practice can enrich philosophical theory.</p>
+</section>
+<section id="research-agenda" class="level2">
+<h2 class="anchored" data-anchor-id="research-agenda">Research Agenda</h2>
+<ol type="1">
+<li><p><strong>Uncertainty and Representation</strong> – How do climate models represent uncertainty, and what kinds of knowledge do they provide about the future?</p></li>
+<li><p><strong>Robustness and Trustworthiness</strong> – What makes scientific results robust, and how should robustness guide research agendas?</p></li>
+<li><p><strong>Error, Failure, and Pluralism</strong> – Why should we value disagreement and low-skill models in science, and how can they advance collective knowledge?</p></li>
+<li><p><strong>AI and Climate Modeling</strong> – How can philosophy shape debates about explainable AI in climate science and beyond?</p></li>
+</ol>
+</section>
+<section id="selected-publications" class="level2">
+<h2 class="anchored" data-anchor-id="selected-publications">Selected Publications</h2>
+<ul>
+<li><p>O’Loughlin, R., Li, D., Neale, R., &amp; O’Brien, T.A. (2025). Moving beyond post hoc explainable artificial intelligence: lessons from dynamical climate modeling. <em>Geoscientific Model Development</em>, 18, 787–802. <a href="https://doi.org/10.5194/gmd-18-787-2025">https://doi.org/10.5194/gmd-18-787-2025</a></p></li>
+<li><p>O’Loughlin, R. (2024). Why we need lower-performance climate models. <em>Climatic Change</em>, 177(2), 1–21. <a href="https://doi.org/10.1007/s10584-023-03661-7">https://doi.org/10.1007/s10584-023-03661-7</a></p></li>
+<li><p>O’Loughlin, R. (2023). Diagnosing errors in climate model intercomparisons. <em>European Journal for Philosophy of Science</em>, 13(2), 1–29. <a href="https://doi.org/10.1007/s13194-023-00522-z">https://doi.org/10.1007/s13194-023-00522-z</a></p></li>
+<li><p>O’Loughlin, R. &amp; Li, D. (2022). Model robustness in economics: the admissibility and evaluation of tractability assumptions. <em>Synthese</em>, 200, 1–23. <a href="https://doi.org/10.1007/s11229-022-03608-y">https://doi.org/10.1007/s11229-022-03608-y</a></p></li>
+<li><p>O’Loughlin, R. (2021). Robustness reasoning in climate model comparisons. <em>Studies in History and Philosophy of Science: Part A</em>, 85, 35–43. <a href="https://doi.org/10.1016/j.shpsa.2020.12.005">https://doi.org/10.1016/j.shpsa.2020.12.005</a></p></li>
+</ul>
+<p><a href="./about.html">Full list in CV →</a></p>
+</section>
+<section id="works-in-progress" class="level2">
+<h2 class="anchored" data-anchor-id="works-in-progress">Current Projects</h2>
+<section id="does-model-weighting-reduce-uncertainty-a-bayesian-clarification" class="level4">
+<h4 class="anchored" data-anchor-id="does-model-weighting-reduce-uncertainty-a-bayesian-clarification">Does Model Weighting Reduce Uncertainty? A Bayesian Clarification</h4>
+<p>Climate scientists often weight climate models that best fit past data, claiming this reduces uncertainty in projections. My current work shows that if weighting is understood as Bayesian updating, this interpretation is misleading: normalization narrows ensemble spread but does not increase epistemic confidence. This project clarifies when weighting genuinely improves knowledge and when it risks creating an illusion of certainty—an issue with direct implications for scientific communication and policy.</p>
+<p><em>Updated: August 30, 2025</em></p>
+
+
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -560,16 +828,65 @@ ul.task-list li input[type="checkbox"] {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© {{ 2025 }} Ryan J O’Loughlin</p>
-</div>   
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:Ryan.Oloughlin@qc.cuny.edu">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=FVgAseQAAAAJ&amp;hl=en">
+      <i class="bi bi-google" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://philpeople.org/profiles/ryan-o-loughlin">
+<p>PhilPeople</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://orcid.org/YOUR_ID">
+<p>ORCID</p>
+</a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Ryan-J-OLoughlin/">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/ryan-o-loughlin-885256300/">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>   
     <div class="nav-footer-center">
-      &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/edit/main/research.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ © 2025 Ryan J O'Loughlin
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://creativecommons.org/licenses/by/4.0/">
+<p>CC BY 4.0</p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/edit/main/research.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="mailto:Ryan.Oloughlin@qc.cuny.edu">
-<p>Email</p>
+    <a class="nav-link" href="./#">
+<p>Back to top ↑</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/dan-li-o">
+<p>Built by DL with 🩶</p>
 </a>
   </li>  
 </ul>
