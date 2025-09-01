@@ -1,7 +1,14 @@
 :root {
-  --brand: #003459;
-  --spine: color-mix(in oklab, var(--brand) 60%, white);
-  --tick: var(--brand);
+  /* Inherit brand colors from main stylesheet for dark mode compatibility */
+  --timeline-brand: var(--brand-primary, #003459);
+  --timeline-spine: color-mix(in oklab, var(--timeline-brand) 60%, var(--brand-bg, white));
+  --timeline-tick: var(--timeline-brand);
+  
+  /* Background colors that adapt to theme */
+  --timeline-year-bg: color-mix(in oklab, var(--timeline-brand) 8%, var(--brand-bg, white));
+  --timeline-dot-shadow: color-mix(in oklab, var(--timeline-tick) 25%, var(--brand-bg, white));
+  --timeline-focus-outline: color-mix(in oklab, var(--timeline-brand) 55%, var(--brand-bg, white));
+  --timeline-bubble-bg: color-mix(in oklab, var(--brand-bg, white) 88%, var(--timeline-brand));
 
   /* Design sizes (at scale = 1) */
   --img-size-base: 72px;
@@ -62,7 +69,7 @@ html, body {
   top: 50%;
   transform: translateY(-50%);
   height: var(--axis-height);
-  background: linear-gradient(90deg, transparent, var(--spine), transparent);
+  background: linear-gradient(90deg, transparent, var(--timeline-spine), transparent);
   border-radius: 2px;
   pointer-events: none;
 }
@@ -96,7 +103,7 @@ html, body {
 }
 
 .timeline__item:focus-visible {
-  outline: 3px solid color-mix(in oklab, var(--brand) 55%, white);
+  outline: 3px solid var(--timeline-focus-outline);
   outline-offset: 6px;
   border-radius: 12px;
 }
@@ -106,7 +113,7 @@ html, body {
   position: relative;
   display: inline-block;
   padding: .25rem .5rem;
-  background: color-mix(in oklab, var(--brand) 8%, white);
+  background: var(--timeline-year-bg);
   border-radius: 999px;
   font-weight: 600;
   color: inherit;
@@ -125,9 +132,9 @@ html, body {
   transform: translateX(-50%);
   top: calc(50% - var(--axis-height)/2 - 8px);
   width: 10px; height: 10px;
-  background: var(--tick);
+  background: var(--timeline-tick);
   border-radius: 50%;
-  box-shadow: 0 0 0 4px color-mix(in oklab, var(--tick) 25%, white);
+  box-shadow: 0 0 0 4px var(--timeline-dot-shadow);
   pointer-events: none;
   z-index: 1;
 }
@@ -179,7 +186,7 @@ html, body {
   line-height: 1.35;
   padding: .55rem .75rem;
   border-radius: 10px;
-  background: color-mix(in oklab, white 88%, var(--brand));
+  background: var(--timeline-bubble-bg);
   box-shadow: 0 8px 24px rgba(0,0,0,.08);
   opacity: 0; 
   translate: 0 6px;
@@ -224,7 +231,7 @@ html, body {
     .timeline::before {
       left: 28px; right: auto; top: 0; bottom: 0;
       width: 4px; height: auto; transform: none;
-      background: linear-gradient(180deg, transparent, var(--spine), transparent);
+      background: linear-gradient(180deg, transparent, var(--timeline-spine), transparent);
     }
 
     .timeline__track {
@@ -269,7 +276,7 @@ html, body {
     .timeline__line {
       width: auto; margin-top: .5rem;
       opacity: 1; translate: 0 0; pointer-events: auto;
-      background: color-mix(in oklab, white 92%, var(--brand));
+      background: var(--timeline-bubble-bg);
     }
     
     /* Reset container positioning for mobile */

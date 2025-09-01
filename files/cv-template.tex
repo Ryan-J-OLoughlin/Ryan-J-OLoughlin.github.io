@@ -1,0 +1,53 @@
+% files/cv-template.tex
+\documentclass[11pt]{article}
+
+% Page + fonts
+\usepackage[margin=1in]{geometry}
+\usepackage{fontspec} % XeLaTeX/LuaLaTeX
+\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+$if(mainfont)$\setmainfont{$mainfont$}$endif$
+$if(sansfont)$\setsansfont{$sansfont$}$endif$
+$if(monofont)$\setmonofont{$monofont$}$endif$
+
+% Lists & spacing
+\usepackage{enumitem}
+\setlist[itemize]{left=0pt,itemsep=2pt,topsep=2pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+
+% Section heads (compact)
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries}{\thesection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.0ex}{0.4ex}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titlespacing*{\subsection}{0pt}{0.8ex}{0.3ex}
+
+% Header / footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Ryan O’Loughlin — CV}
+\rhead{\today}
+\cfoot{\thepage}
+
+% LINKS — this fixes the \href undefined error
+\usepackage[hidelinks]{hyperref}
+
+% Big title style used by cv-header.tex
+\usepackage{titling}
+\pretitle{\vspace*{-3ex}\begin{flushleft}\LARGE\bfseries}
+\posttitle{\par\end{flushleft}\vspace{-1.0ex}\hrule\vspace{1.0ex}}
+
+\begin{document}
+
+$for(include-before)$
+$include-before$
+$endfor$
+
+$body$
+
+$for(include-after)$
+$include-after$
+$endfor$
+
+\end{document}
