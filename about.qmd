@@ -5,8 +5,8 @@ layout: full
 toc: false
 ---
 
-## Short Bio {#short-bio}
-I am a philosopher of science. My research focuses on climate models, robustness, and uncertainty. I am currently Assistant Professor at Queens College, City University of New York, and have published in leading philosophy and science journals. 
+## About Me {#short-bio}
+As a working-class kid from a small town, I never imagined becoming a philosopher. I stumbled into philosophy—and eventually into climate science—driven by curiosity and a need for reason. My work is devoted to a simple but unsettling question: *if all models are wrong, why trust them?* I’ve come to see that error, disagreement, and even failure are not flaws but the very forces that move science forward. Along the way I’ve worked closely with scientists and published in leading journals to explore how uncertainty can be clarified and made useful, trustworthy even. My path has never been a straight line, but a series of lessons learned—much like the sciences I study.
 
 :::{.column-page}
 ::: {=html}
@@ -18,8 +18,22 @@ I am a philosopher of science. My research focuses on climate models, robustness
 
 ## Professional Highlights
 
-[Download CV as PDF](O'Loughlin-CV.pdf){.btn .btn-primary}
+### Publications
+Lead author on “Moving beyond post hoc explainable AI: lessons from dynamical climate modeling” (*Geoscientific Model Development*, 2025), selected as a highlight paper
+
+### Public Engagement
+Wrote “Why imperfect climate models are more helpful than you think” for *Yale Climate Connections* (2025), introducing philosophy of science insights to the general public
+
+### Invited Talks
+Speaker at NASA Goddard Institute for Space Studies (2023-24), NCAR Climate & Global Dynamics Lab (2022), and CUNY Advanced Science Research Center (2025)
+
+### Leadership & Collaboration
+Co-organized “Philosophy of Climate Models” workshop at PSA 2024; principal organizer of interdisciplinary grant proposals bridging philosophy and climate science
 
 ## Curriculum Vitae
 
-{{< include files/cv-content.md >}}
+[Download CV as PDF](files/Ryan_OLoughlin_CV.pdf){.btn .btn-primary}
+
+<!--{{< include files/cv-content.md >}} -->
+
+*Updated: {{< meta date-modified >}}*

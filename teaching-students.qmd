@@ -53,6 +53,14 @@ date-modified: 2025-08-30
 {{< fa envelope >}} [ryan.oloughlin@qc.cuny.edu](mailto:ryan.oloughlin@qc.cuny.edu)
 :::
 
+## Mentorship & Student Achievements
+
+I am proud to support students in their academic and professional growth. Here are a few examples of supervised projects and where they’ve led:
+
+- *“Weighting the Many-Sided Die of Pascal's Wager”* — Jonathan Baruch  
+  → Admitted to **UPenn Law School** with a **Dean's Scholarship**
+
+
 ## Professional Development {#professional-development}
 
 :::{.grid .gap-3}

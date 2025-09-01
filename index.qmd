@@ -14,9 +14,11 @@ description: "Ryan O’Loughlin — philosopher of science focused on climate mo
 # Ryan O’Loughlin | [Trust without Truth](research.qmd){ .link-muted }
 #### Philosopher of Science
 
-***All models are wrong—yet their agreements build confidence for action and disagreements spark insight. That’s why we can trust science.***
+### All models are wrong. Why trust them? 
 
-I study how climate models earn trust despite being imperfect—and how that understanding should guide real-world decisions.  
+#### *Because their agreements build confidence for action and disagreements spark insight.* 
+
+I study how climate models earn trust despite being "wrong," strictly speaking—and how that understanding should guide real-world decisions.  
 
 :::{.mt-auto}
 [See Research](research.qmd){.btn .btn-primary .me-2}
@@ -68,7 +70,7 @@ I'm appointed as CUNY Grad Center Doctoral Faculty.
 
 ## What I Work On {#what-i-do}
 
-**All models are wrong—so why trust them?** Too often we equate trustworthiness with truth. Yet when models agree, they build confidence for action; when they disagree, they often teach us the most. Uncertainty and error aren’t failures—they’re how science moves forward. *My work shows how we can trust science not by mitigating its limits, but by embracing them.*
+**All models are wrong—so why trust them?** Too often we equate trustworthiness with truthfulness. Yet when models agree, they build confidence for action; when they disagree, they often teach us the most. Uncertainty and error aren’t failures—they’re how science moves forward. *My work shows how we can trust science not by mitigating its limits, but by embracing them.*
 
 :::{.grid .gap-4}
 ::: {.g-col-12 .g-col-lg-6}

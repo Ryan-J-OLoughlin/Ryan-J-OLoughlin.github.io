@@ -3,8 +3,8 @@ title: "Research"
 date-modified: 2025-08-30
 ---
 
-## Why Trust Science? {#overview}
-We make billion-dollar decisions based on climate models, even though every model is flawed, strictly speaking. My research asks: *what does it mean to trust science when its tools are limited?* More specifically, how do climate scientists use computer models to generate knowledge? Why are their models "wrong but useful"?
+## Trust without Truth {#overview}
+We make billion-dollar decisions based on climate models, even though every model is false, strictly speaking. My research asks: *what does it mean to trust science when its tools are false?* More specifically, how do climate scientists use computer models to generate knowledge? Why are their models "wrong but useful"?
 
 By focusing on robustness, error, and how we explain modeling results, I show why imperfect models can still yield trustworthy insights. My work shows how philosophy can help make sense of scientific uncertainty and strengthen trust in climate research. 
 
@@ -25,15 +25,17 @@ In addition to publications and conference work, I collaborate directly with cli
 4. **AI and Climate Modeling** – How can philosophy shape debates about explainable AI in climate science and beyond?
 
 ## Selected Publications {#selected-publications}
-- O’Loughlin, R., Li, D., Neale, R., & O’Brien, T.A. (2025). Moving beyond post hoc explainable artificial intelligence: lessons from dynamical climate modeling. Geoscientific Model Development, 18, 787–802. [link](https://doi.org/10.5194/gmd-18-787-2025)
 
-- O’Loughlin, R. (2024). Why we need lower-performance climate models. Climatic Change, 177(2), 1–21. link
+- O’Loughlin, R., Li, D., Neale, R., & O’Brien, T.A. (2025). Moving beyond post hoc explainable artificial intelligence: lessons from dynamical climate modeling. *Geoscientific Model Development*, 18, 787–802. [https://doi.org/10.5194/gmd-18-787-2025](https://doi.org/10.5194/gmd-18-787-2025)
 
-- O’Loughlin, R. (2023). Diagnosing errors in climate model intercomparisons. European Journal for Philosophy of Science, 13(2), 1–29. link
+- O’Loughlin, R. (2024). Why we need lower-performance climate models. *Climatic Change*, 177(2), 1–21. [https://doi.org/10.1007/s10584-023-03661-7](https://doi.org/10.1007/s10584-023-03661-7)
 
-- O’Loughlin, R. & Li, D. (2022). Model robustness in economics: the admissibility and evaluation of tractability assumptions. Synthese, 200, 1–23. link
+- O’Loughlin, R. (2023). Diagnosing errors in climate model intercomparisons. *European Journal for Philosophy of Science*, 13(2), 1–29. [https://doi.org/10.1007/s13194-023-00522-z](https://doi.org/10.1007/s13194-023-00522-z)
 
-- O’Loughlin, R. (2021). Robustness reasoning in climate model comparisons. Studies in History and Philosophy of Science: Part A, 85, 35–43. link
+- O’Loughlin, R. & Li, D. (2022). Model robustness in economics: the admissibility and evaluation of tractability assumptions. *Synthese*, 200, 1–23. [https://doi.org/10.1007/s11229-022-03608-y](https://doi.org/10.1007/s11229-022-03608-y)
+
+- O’Loughlin, R. (2021). Robustness reasoning in climate model comparisons. *Studies in History and Philosophy of Science: Part A*, 85, 35–43. [https://doi.org/10.1016/j.shpsa.2020.12.005](https://doi.org/10.1016/j.shpsa.2020.12.005)
+
 
 [Full list in CV →](about.qmd)
 

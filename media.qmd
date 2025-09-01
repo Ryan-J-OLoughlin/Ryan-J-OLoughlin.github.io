@@ -1,22 +1,47 @@
 ---
 title: "Media / Press"
-draft: true
+date-modified: 2025-08-30
 ---
 
-### 100-word Bio {#bio-100}
-Plain-language 100-word media bio focused on expertise and relevance.
+## Bios {#bios}
 
-### Download Headshot {#headshot}
-- High-res headshot: [assets/headshot.jpg](assets/headshot.jpg)
+#### 50-word Bio
+Ryan O’Loughlin is a philosopher of science at Queens College, CUNY. He studies how climate scientists generate trustworthy knowledge with imperfect models, focusing on uncertainty, robustness, and error. His work bridges philosophy and climate research, with publications in leading journals and collaborations with scientists at NASA and NCAR.  
 
-### Expertise Topics {#expertise}
-- Climate models & uncertainty
-- Robustness and decision-making
-- Risk communication
-- (Add 2–3 more)
+#### 100-word Bio
+<details>
+<summary>Click to expand</summary>
+Ryan O’Loughlin is a philosopher of science whose work explains how scientists generate trustworthy knowledge with imperfect models. He is an Assistant Professor of Philosophy at Queens College, CUNY and doctoral faculty in Earth & Environmental Sciences at the CUNY Graduate Center. His research focuses on climate models, robustness, and uncertainty, and he collaborates with scientists at NASA GISS, NCAR, and Cornell. Ryan has published in leading journals including *Synthese*, and *Climatic Change*, and written for *Yale Climate Connections*. He is a clear and accessible voice on science, uncertainty, and decision-making.  
+</details>
 
-### Selected Highlights {#highlights}
-- Affiliation, notable invited talks, interviews, op-eds.
+#### 200-word Bio
+<details>
+<summary>Click to expand</summary>
+Ryan O’Loughlin is a philosopher of science specializing in climate models, uncertainty, and decision-making. He is an Assistant Professor of Philosophy at Queens College, CUNY, and serves as doctoral faculty in Earth and Environmental Sciences at the CUNY Graduate Center. His research investigates how scientists trust and learn from imperfect models, and why error and failure can be epistemically productive. He has published in *Synthese*, *Climatic Change*, and *Geoscientific Model Development*, and co-authored interdisciplinary work with climate scientists at NASA GISS, NCAR, and Cornell. In addition to academic writing, Ryan engages broader audiences through public-facing essays, including contributions to *Yale Climate Connections*, where he explains the value of imperfect models for climate policy. He has been invited to speak at Brown University, NASA, and NCAR, and co-organized the “Philosophy of Climate Models” workshop at the Philosophy of Science Association. Ryan is committed to making philosophy relevant beyond academia, clarifying how uncertainty and robustness matter for science, policy, and public trust.  
+</detials>
 
-### Media Contact {#media-contact}
-- Email for media inquiries: <mailto:Ryan.Oloughlin@qc.cuny.edu>
+## Download Headshot {#headshot}
+- [High-resolution headshot](assets/headshot.jpg)
+
+## Expertise Topics {#expertise}
+- Climate models & uncertainty  
+- Robustness and decision-making  
+- Risk communication & scientific credibility  
+- Philosophy of failure and error in science  
+- Explanations in climate modeling  
+- Geoengineering and ethics of climate interventions  
+
+## Selected Highlights {#highlights}
+- **Affiliations:** Assistant Professor of Philosophy, Queens College CUNY; Doctoral Faculty, CUNY Graduate Center.  
+- **Invited Talks:** Brown University Climate Science Seminar (2025); NASA Goddard Institute for Space Studies (2023); NCAR Climate & Global Dynamics Lab (2022).  
+- **Public Writing:** “Why imperfect climate models are more helpful than you think” (*Yale Climate Connections*, 2025).  
+- **Research Highlights:** Lead author on “Moving beyond post hoc explainable artificial intelligence” (*Geoscientific Model Development*, 2025).  
+- **Workshop Leadership:** Co-organizer, *Philosophy of Climate Models* (PSA 2024).  
+
+## Media Contact {#media-contact}
+📧 [ryan.oloughlin@qc.cuny.edu](mailto:ryan.oloughlin@qc.cuny.edu)  
+📞 [718-997-5270](tel:7189975270)  
+Office: Powdermaker Hall 350-V, Queens College, CUNY  
+
+
+*Updated: {{< meta date-modified >}}*

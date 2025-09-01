@@ -7,9 +7,6 @@ project:
     - assets/**
     - partials/**
 
-filters:
-  - filters/extract-cv.lua
-
 website:
   title: "Ryan O'Loughlin"
   description: "Philosophy of science • climate models • uncertainty & decision-making"
@@ -25,7 +22,6 @@ website:
       - text: Research
         href: research.qmd
       - text: "Talks & Collaboration"
-        #href: talks.qmd
         menu:
           - text: For Philosophers
             href: for-philosophers.qmd
@@ -34,12 +30,14 @@ website:
       - text: Teaching
         #href: teaching.qmd
         menu:
-          - text: Teaching Effectiveness
-            href: teaching-effectiveness.qmd
+          - text: Teaching Trust without Truth
+            href: teaching-instructors.qmd
           - text: Resources for Students
             href: teaching-students.qmd
-      #- text: "Media / Press"
-      #  href: media.qmd
+      - text: "Media" 
+        href: media.qmd
+      - text: Contact
+        href: contact.qmd
     tools:
       - icon: envelope
         href: "mailto:Ryan.Oloughlin@qc.cuny.edu"
@@ -48,19 +46,17 @@ website:
       - icon: file-earmark-text   # optional: direct CV download
         href: /files/Ryan_OLoughlin_CV.pdf
   page-footer:
-    left: 
+    center: 
       - text: "© 2025 Ryan J O'Loughlin"
       #- text: "Updated: {{< meta date-modified >}}"
       - text: "CC BY 4.0"
         href: https://creativecommons.org/licenses/by/4.0/
-      - text: "Back to top ↑"
-        href: "#"
-    right:
+    left:
       - icon: envelope
-        text: Email
+        #text: Email
         href: "mailto:Ryan.Oloughlin@qc.cuny.edu"
       - icon: google
-        text: Scholar
+        #text: Scholar
         href: https://scholar.google.com/citations?user=FVgAseQAAAAJ&hl=en
       - icon: mortarboard 
         text: PhilPeople  
@@ -74,6 +70,11 @@ website:
       - icon: linkedin
         #text: LinkedIn
         href: https://www.linkedin.com/in/ryan-o-loughlin-885256300/
+    right:
+      - text: "Back to top ↑"
+        href: "#"
+      - text: "Built by DL with 🩶"
+        href: https://github.com/dan-li-o
   search: true
   repo-url: https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io
   repo-actions: [edit, issue]

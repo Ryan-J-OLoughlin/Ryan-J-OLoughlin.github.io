@@ -1,3 +1,26 @@
 ---
 title: "For Philosophers"
+date-modified: 2025-08-30
 ---
+
+## Collaboration Opportunities {#collaboration}
+I welcome collaboration with philosophers interested in climate science, modeling, and uncertainty—**coauthoring papers, organizing workshops, reading groups**, and sharing works-in-progress for feedback.
+
+- Topics: robustness reasoning, error & failure in modeling, epistemic values, and AI in science.  
+- I’m especially keen on projects that connect normative/methodological questions to modeling practice.
+
+## Works-in-Progress {#wip}
+- **Epistemic Virtues in Ensemble Modeling** — How epistemic values shape evaluation in multi-model ensembles.  
+- **Error and Disagreement as Epistemic Resources** — Why “bad” models and disagreement can advance knowledge.
+
+## Recent Invited Talks {#invited-talks}
+::: {#AUTO_INVITED_TALKS}
+<!-- Filled automatically from files/cv-content.md -->
+:::
+
+## Workshops & Reading Groups {#workshops}
+::: {#AUTO_WORKSHOPS}
+<!-- Filled automatically from files/cv-content.md -->
+:::
+
+*Updated: {{< meta date-modified >}}*

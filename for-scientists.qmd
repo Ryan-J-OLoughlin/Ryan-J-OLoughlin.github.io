@@ -97,6 +97,6 @@ Mapping uncertainty to decisions: robust conclusions, risk framing, and communic
 
 # Let’s collaborate
 
-[Contact me →](contact.qmd){.btn .btn-primary}
+[More ways to reach me →](contact.qmd){.btn .btn-outline-primary}
 
 *Updated: {{< meta date-modified >}}*

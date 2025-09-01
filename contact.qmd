@@ -1,11 +1,11 @@
 ---
 title: "Contact"
-page-layout: full
+layout: full
 toc: false
 date-modified: 2025-08-30
 ---
 ## Email
-📧 ryan.oloughlin@qc.cuny.edu  
+📧 [ryan.oloughlin@qc.cuny.edu](mailto: ryan.oloughlin@qc.cuny.edu) 
 
 ## Phone
 📞 718-997-5270 (Dept. Office)
@@ -21,17 +21,17 @@ Flushing, NY 11367
 
 :::{.grid .gap-3}
 ::: {.g-col-12 .g-col-md-6}
-- [📄 Curriculum Vitae](files/Ryan_OLoughlin_CV.pdf)
-- [🔎 Google Scholar](https://scholar.google.com/citations?user=FVgAseQAAAAJ&hl=en)
-- [🌐 PhilPeople](https://philpeople.org/profiles/ryan-o-loughlin)
-- [🆔 ORCID](https://orcid.org/0000-0000-0000-0000)
+- 📄 [Curriculum Vitae](files/Ryan_OLoughlin_CV.pdf)
+- 🔎 [Google Scholar](https://scholar.google.com/citations?user=FVgAseQAAAAJ&hl=en)
+- 🌐 [PhilPeople](https://philpeople.org/profiles/ryan-o-loughlin)
+<!-- - 🆔 [ORCID](https://orcid.org/0000-0000-0000-0000)-->
 :::
 
 ::: {.g-col-12 .g-col-md-6}
-- [🏫 Department Profile](https://www.qc.cuny.edu/academics/philosophy/ryan-oloughlin/)  
-- [📂 PhilSci Archive](https://philsci-archive.pitt.edu/view/creators/O'Loughlin=3ARyan=3A=3A.html)
-- [💼 LinkedIn](https://www.linkedin.com/in/ryan-o-loughlin-885256300/)
-- [🌐 Personal Site](https://www.ryanoloughlin.org)
+- 🏫 [Department Profile](https://www.qc.cuny.edu/academics/philosophy/ryan-oloughlin/)  
+- 📂 [PhilSci Archive](https://philsci-archive.pitt.edu/view/creators/O'Loughlin=3ARyan=3A=3A.html)
+- 💼 [LinkedIn](https://www.linkedin.com/in/ryan-o-loughlin-885256300/)
+- 🌐 [Personal Site](https://www.ryanoloughlin.org)
 :::
 :::
 
@@ -41,6 +41,8 @@ Please use the [Student Dashboard](teaching-students.qmd) for office hours, syll
 
 ## For Media
 See [Media page](media.qmd) for headshot, short bio, and topics Ryan can comment on.
+
+---
 
 *Updated: {{< meta date-modified >}}*
 

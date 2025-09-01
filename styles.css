@@ -160,3 +160,30 @@ hr { margin: var(--space-4) 0; }
 }
 .quarto-title-meta { display: none; }
 
+/* ---------- link muted ----------  */
+.link-muted {
+  color: inherit;            /* same color as text */
+  font: inherit;             /* same font as text */
+  size: inherit;           /* same size as text */
+  text-decoration: none;     /* no underline */
+}
+.link-muted:hover {
+  color: var(--brand-link);  /* brighten on hover */
+}
+
+.logo-strip img {
+  height: 26px;   /* all logos same height */
+  width: auto;    /* width adjusts, keeps aspect ratio */
+  object-fit: contain;
+  filter: grayscale(100%);
+  margin: 0 8px;
+  opacity: .72;
+  transition: opacity .2s ease, filter .2s ease, transform .2s ease;
+}
+.logo-strip img:hover{
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+

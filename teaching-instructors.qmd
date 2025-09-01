@@ -5,54 +5,49 @@ date-modified: 2025-08-30
 
 ## Teaching Resources for Philosophy Instructors
 
-I design courses that link philosophy to urgent issues like climate change, scientific modeling, and environmental justice. This page collects syllabi, assignments, and teaching strategies that colleagues may find useful for adapting in their own classrooms.
+I design courses that link philosophy to urgent issues like climate change, scientific modeling, and environmental justice. This page collects syllabi, assignments, and teaching strategies that colleagues may find useful for adapting in their own classrooms, particularly for **non-science students**.
 
-## Adaptable Syllabi
+### Teaching Philosophy
+I see teaching as a collaborative process where students learn by questioning, experimenting, and even failing. In my classes, I design **hands-on activities**—like building instruments in the makerspace—that let students experience the challenges of measurement and error firsthand. By connecting these activities to philosophical texts and Indigenous epistemologies, I help students see how knowledge is constructed and why uncertainty and failure are essential to learning.
+
+### Adaptable Syllabi
 
 Download and adapt syllabi from courses I’ve designed and taught:
 
-Environmental Philosophy
+#### Environmental Philosophy 
+This course uses logic, conceptual analysis, and scientific research to explore climate change as an ethical and justice issue. We examine questions of responsibility, extreme weather, and climate justice in the context of environmental philosophy.
 
-Philosophy of Science
+[Download](files/syllabi/phil125-fa25.pdf){.btn .btn-primary}
 
-Philosophy of Climate Modeling
+#### Scientific Reasoning
+This course introduces fundamentals of logic and their role in scientific reasoning, including deduction, induction, probability, and causality. More broadly, we examine how science justifies knowledge through evidence and explanation rather than absolute proof.
+
+[Download](files/syllabi/phil108.pdf){.btn .btn-primary}
+
+#### Philosophy of Natural Sciences 
+This course examines core issues in philosophy of science and then turns to Indigenous ways of knowing, highlighting how their worldviews offer unique insights into stewardship, sustainability, and resilience.
+
+[Download](files/syllabi/phil225-sp25.pdf){.btn .btn-primary}
 
 Each syllabus includes suggested readings, discussion structures, and sample assessments.
 
-## Assignments & Activities
+### Assignments & Activities
 
 A collection of modular assignments and in-class activities:
 
-### Data & Values Exercise###
-Using parallel data sets (neutral vs politicized), students see how values influence inference.
-
-### Structured Debates### 
-Format for student-led debates on topics like free will, climate engineering, or scientific realism.
-
-### Maker Lab Activity###
+#### Maker Lab Activity
 Build a thermometer with basic materials to explore error, measurement, and concept formation.
 
-## Mentorship Models
+[Download](files/syllabi/thermo.pdf){.btn .btn-primary}
 
-I treat students as junior colleagues rather than passive recipients.
+#### Structured Debates
+Format for student-led debates on topics like free will, climate engineering, or scientific realism.
 
-Examples of thesis topics supervised (with permission).
-
-Reflections on how I scaffold research independence (short essay or PDF).
-
-Link to leadership/mentorship philosophy.
-
-## Pedagogical Reflections
-
-Short write-ups for other instructors:
-
-Teaching Uncertainty Through Failure: why I foreground error and iteration in both philosophy and science teaching.
-
-Inclusive Discussion Strategies: techniques for balancing debates with quieter voices (peer reflection, low-stakes writing).
+[Download](files/syllabi/debate.pdf){.btn .btn-primary}
 
 ## Share & Collaborate
 
-If you adapt these materials, I’d love to hear how they work in your classroom. I welcome exchanges of syllabi, assignments, and teaching approaches. Contact me at ryan.oloughlin@qc.cuny.edu
+If you adapt these materials, I’d love to hear how they work in your classroom. I welcome exchanges of syllabi, assignments, and teaching approaches. Contact me at 📧 [ryan.oloughlin@qc.cuny.edu](mailto:ryan.oloughlin@qc.cuny.edu)
 
 [More ways to reach me →](contact.qmd){.btn .btn-outline-primary}
 
