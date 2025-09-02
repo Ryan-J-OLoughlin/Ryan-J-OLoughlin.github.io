@@ -32,12 +32,15 @@ I study how climate models earn trust despite being "wrong," strictly speakingâ€
 
 <!-- Logo strip -->
 <div class="logo-strip d-flex flex-wrap gap-4 align-items-center justify-content-center my-3 gap-6">
-  <img src="assets/logos/cuny.svg" alt="CUNY">
   <img src="assets/logos/qc.svg" alt="Queens College">
-  <img src="assets/logos/nasa-giss.svg" alt="NASA GISS">
-  <img src="assets/logos/ncar.svg" alt="NCAR" height="26">
+  <img src="assets/logos/cuny.svg" alt="CUNY">
   <img src="assets/logos/psa.png" alt="Philosophy of Science Association">
-</div>
+</div>  
+<!-- Logo strip 
+  <img src="assets/logos/nasa-giss.svg" alt="NASA GISS">
+  <img src="assets/logos/ncar.svg" alt="NCAR">
+   -->
+
 
 ## Recent Highlights {#highlights}
 
