@@ -1,0 +1,23 @@
+---
+title: "Climate Invariant Machine Learning: Insights from Philosophy of Induction"
+date-modified: 2025-08-30
+---
+
+# Climate Invariant Machine Learning: Lessons from Philosophy of Induction
+
+## Abstract
+When climate scientists use supervised machine learning (ML), one challenge is that the trained ML model can only work on the training dataset and cannot generalize beyond the training data, particularly when simulating a warmer climate. This is expected because data of a warmer climate are not i.i.d. to those of the control climate. However, this challenge can be resolved by paying attention to the invariant relationships that help make the inductive leap between control climate and warmer climate. In this talk, I’ll explain the rationale behind “climate-invariant ML” using the philosophy of induction and offer two examples. 
+
+## Venue
+NASA Goddard Institute for Space Studies (GISS), Feb 7, 2024
+
+## Recording
+
+{{< video <iframe width="560" height="315" src="https://www.youtube.com/embed/2zprUqHkCus?si=W28ctIl2EXhfikYn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> >}}
+
+## Slides / Handouts
+
+coming soon.
+
+*Updated: {{< meta date-modified >}}*
+

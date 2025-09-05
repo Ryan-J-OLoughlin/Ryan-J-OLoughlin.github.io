@@ -1,6 +1,6 @@
 ---
 title: "For Scientists"
-date-modified: 2025-08-30
+date-modified: 2025-09-05
 ---
 
 ## Featured Talks
@@ -8,7 +8,7 @@ date-modified: 2025-08-30
 :::{.grid .gap-4}
 
 ::: {.g-col-12 .g-col-md-4 .section-card .text-reset}
-[![Convergence, Divergence, and Trust in Climate Models](assets/talks/cuny-esi-thumb.jpg){.talk-thumb}](talks/cuny-esi-convergence-trust-2025.qmd)
+[![](talks/cuny-esi-convergence-trust-2025.jpg){.talk-thumb}](talks/cuny-esi-convergence-trust-2025.qmd)
 
 #### [Convergence, Divergence, and Trust in Climate Models](talks/cuny-esi-convergence-trust-2025.qmd){.talk-title}
 ::: {.talk-meta}
@@ -17,7 +17,7 @@ date-modified: 2025-08-30
 :::
 
 ::: {.g-col-12 .g-col-md-4 .section-card .text-reset}
-[![Why We Should Want Models to Disagree](assets/talks/nasa-giss-thumb.jpg){.talk-thumb}](talks/nasa-giss-disagreement-2023.qmd)
+[![](talks/nasa-giss-disagreement-2023.jpg){.talk-thumb}](talks/nasa-giss-disagreement-2023.qmd)
 
 #### [Why We Should Want Models to Disagree](talks/nasa-giss-disagreement-2023.qmd){.talk-title}
 ::: {.talk-meta}
@@ -26,7 +26,7 @@ date-modified: 2025-08-30
 :::
 
 ::: {.g-col-12 .g-col-md-4 .section-card .text-reset}
-[![Error Diagnosis & Low-Skill Models](assets/talks/ncar-cgd-thumb.jpg){.talk-thumb}](talks/ncar-cgd-error-taxonomy-2022.qmd)
+[![](talks/ncar-cgd-error-taxonomy-2022.png){.talk-thumb}](talks/ncar-cgd-error-taxonomy-2022.qmd)
 
 #### [Error Diagnosis & Low-Skill Models](talks/ncar-cgd-error-taxonomy-2022.qmd){.talk-title}
 ::: {.talk-meta}
@@ -39,6 +39,10 @@ date-modified: 2025-08-30
 <div class="mt-3 text-muted small text-end">
 Full list in my [CV →](about.qmd)
 </div>
+
+## Archived Talks
+
+**Climate Invariant Machine Learning** with Dan Li, NASA GISS, Feb 2024     [Read More →](talks/nasa-giss-ml-2024.qmd)
 
 ## What I Offer to Scientific Collaborators
 

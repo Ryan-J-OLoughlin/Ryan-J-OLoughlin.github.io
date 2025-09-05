@@ -1,0 +1,22 @@
+---
+title: "Convergence, divergence, and trust in climate models"
+date-modified: 2025-08-30
+---
+
+# Convergence, divergence, and trust in climate models
+
+## Abstract
+
+Our knowledge of future climate change is largely dependent on complex computer simulation models. These models are huge – they are made up of more than 1 million lines of computer code representing knowledge from dozens of scientific subfields – and no individual scientist fully understands all of the model's inner workings. What’s more, climate scientists regularly proclaim that “all models are wrong, but some are useful.”
+In this talk, I will explain some of the philosophical challenges of climate modeling. Climate models are often evaluated in so-called model inter-comparison projects. Distinct models from distinct institutions simulate the same potential scenario and results are compared. When results converge, should this increase our confidence in the models? Conversely, when results diverge—when the models disagree—should this decrease our confidence in the models? I argue that model convergence can be confirmatory under certain conditions, particularly when the models are well supported by evidence and share a plausible causal core. At the same time, model divergence is not necessarily a failure; instead, it provides opportunities for understanding causes of errant model behavior and yielding new knowledge (e.g., constraining the estimates of climate variables). Such insights help refine our understanding and support wiser decision-making.
+
+## Venue
+
+CUNY Advanced Science Research Center (ASRC), March 12, 2025 [See Flyer →](cuny-esi-convergence-trust-2025.pdf)
+
+## Slides / Handouts
+
+Coming soon.
+
+*Updated: {{< meta date-modified >}}*
+

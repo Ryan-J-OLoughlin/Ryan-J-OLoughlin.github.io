@@ -9,7 +9,7 @@ project:
 
 website:
   title: "Ryan O'Loughlin"
-  description: "Philosophy of science • climate models • uncertainty & decision-making"
+  description: "philosophy of science • climate models • trust without truth • uncertainty"
   site-url: https://Ryan-J-OLoughlin.github.io/
   twitter-card: true
   navbar:
@@ -90,5 +90,9 @@ format:
     toc-location: right
     page-navigation: true
     smooth-scroll: true
-    open-graph: true
-    twitter-card: true
+    open-graph:
+      image: assets/og-card.jpeg
+      image-alt: "Ryan O'Loughlin — Philosophy of Science (climate models, uncertainty)"
+    twitter-card:
+      image: assets/og-card.jpeg
+      card: summary_large_image

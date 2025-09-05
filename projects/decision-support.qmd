@@ -1,0 +1,9 @@
+---
+title: "Decision Support Under Uncertainty"
+date-modified: 2025-08-30
+---
+
+Details coming soon. Maps uncertainty to decisions: robust conclusions, risk framing, and communication for stakeholders.
+
+*Updated: {{< meta date-modified >}}*
+

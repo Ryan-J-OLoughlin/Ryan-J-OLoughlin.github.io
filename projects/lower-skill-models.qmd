@@ -1,0 +1,9 @@
+---
+title: "Value of Lower-Skill Models"
+date-modified: 2025-08-30
+---
+
+Details coming soon. When deliberately simpler or lower-skill configurations surface mechanisms that improve complex runs.
+
+*Updated: {{< meta date-modified >}}*
+

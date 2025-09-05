@@ -1,0 +1,9 @@
+---
+title: "Weighting, Spread, and Confidence"
+date-modified: 2025-08-30
+---
+
+Details coming soon. Separates spread-narrowing from genuine epistemic confidence; implications for ensemble practice & communication.
+
+*Updated: {{< meta date-modified >}}*
+
