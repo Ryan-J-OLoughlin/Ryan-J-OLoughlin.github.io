@@ -25,11 +25,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Uncomment to also check external links (may be flaky)
-      # - name: Link Checker (external)
-      #   uses: lycheeverse/lychee-action@v1.10.0
-      #   with:
-      #     args: --verbose --no-progress --retry-wait-time 2s --max-retries 2 --accept 200..399,429 "_site/**/*.html"
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Link Checker (external)
+        uses: lycheeverse/lychee-action@v1.10.0
+        with:
+          args: --no-progress --config .lychee.toml "_site/**/*.html"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

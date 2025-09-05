@@ -1,0 +1,18 @@
+# Lychee link checker configuration
+verbose = true
+max_retries = 2
+retry_wait_time = "2s"
+timeout = "20s"
+user_agent = "Mozilla/5.0 (compatible; Lychee/0.14; +https://github.com/lycheeverse/lychee)"
+
+# Accept typical success + redirects + common rate-limit/forbidden for walled gardens
+accept = [200, 203, 204, 301, 302, 303, 307, 308, 403, 429]
+
+# Exclude problematic or bot-blocked hosts
+exclude = [
+  "^https://www.linkedin.com/",
+  "^https://scholar.google.com/"
+]
+
+# Only check links found in built site (paths in HTML are resolved relative to this)
+base = "_site"
