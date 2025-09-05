@@ -1,0 +1,44 @@
+---
+title: "Page Not Found (404)"
+description: "Sorry, we can’t find that page. Try the links below or use search."
+toc: false
+page-layout: full
+sitemap: false
+---
+
+::: {.d-flex .flex-column .align-items-center .justify-content-center .py-5}
+
+# Oops — page not found
+
+The page you’re looking for doesn’t exist, moved, or the link is broken.  
+Route disagreement can be illuminating—just not here. Let’s find something more robust.
+
+:::{.grid .gap-3 .mt-4}
+::: {.g-col-12 .g-col-md-4}
+[🏠 Home](index.qmd){.btn .btn-primary .w-100}
+:::
+::: {.g-col-12 .g-col-md-4}
+[🔬 Research](research.qmd){.btn .btn-outline-primary .w-100}
+:::
+::: {.g-col-12 .g-col-md-4}
+[⚗️ For Scientists](for-scientists.qmd){.btn .btn-outline-secondary .w-100}
+:::
+::: {.g-col-12 .g-col-md-4}
+[📚 For Philosophers](for-philosophers.qmd){.btn .btn-outline-secondary .w-100}
+:::
+::: {.g-col-12 .g-col-md-4}
+[🧑‍🎓 Students](teaching-students.qmd){.btn .btn-outline-secondary .w-100}
+:::
+::: {.g-col-12 .g-col-md-4}
+[🎙️ Media](media.qmd){.btn .btn-outline-secondary .w-100}
+:::
+::: {.g-col-12 .g-col-md-4}
+[✉️ Contact](contact.qmd){.btn .btn-outline-secondary .w-100}
+:::
+::: {.g-col-12 .g-col-md-4}
+[🐞 Report a broken link](mailto:ryan.oloughlin@qc.cuny.edu?subject=Broken%20link%20on%20site%20(404)&body=Hi%20Ryan%2C%0A%0AI%20hit%20a%20404%20on%20this%20URL%3A%20%5Bpaste%20link%5D.%0A%0AContext%2Fwhere%20I%20clicked%3A%20%5Boptional%5D%0A){.btn .btn-outline-danger .w-100}
+:::
+:::
+
+:::
+
