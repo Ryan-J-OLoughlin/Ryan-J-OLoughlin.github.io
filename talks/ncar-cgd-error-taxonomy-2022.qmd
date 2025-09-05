@@ -1,0 +1,24 @@
+---
+title: "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science"
+date-modified: 2025-08-30
+---
+
+# Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science
+
+## Abstract
+Although scientists have been conducting relatively systematic climate model intercomparisons for decades, error diagnosis (i.e., identifying and attributing sources of model-model disagreement) has been far less systematized. In this talk, I analyze the strategies used to diagnose model errors based on what is reported in the scientific literature, going back to the first Atmospheric Model Intercomparison Project (AMIP). These strategies include, e.g., dimension reduction techniques, multi-model sensitivity analysis, physical reasoning about the radiative effects of clouds, and testing hypotheses about sources of potential model error. Based on the case studies considered, I suggest that a systematic model error repertoire can benefit climate modelers and other climate scientists alike. These benefits include proactively identifying which part(s) of a model are most in need of revision (and why) and demonstrating a deeper understanding of climate model behavior. Finally, I suggest that attending to error diagnosis in climate modeling invites us to ask new questions about the scientific value of model intercomparisons, e.g., concerning the knowledge gained from worse-performing models in model weighting analyses.
+
+## Venue
+
+NCAR Climate & Global Dynamics Laboratory, October 25, 2022 [Read More →](https://www.cgd.ucar.edu/events/seminar/2022/ryan-oloughlin-132905)
+
+## Recording
+
+{{< video <iframe width="560" height="315" src="https://www.youtube.com/embed/Udfvh2jhGaU?si=0ge2z7FFrj-WaPlk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> >}}
+
+## Slides / Handouts
+
+coming soon.
+
+*Updated: {{< meta date-modified >}}*
+

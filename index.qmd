@@ -90,7 +90,7 @@ I'm appointed as CUNY Grad Center Doctoral Faculty.
 2. **Clarifying model evaluation** so that convergence and divergence both build insight  
 3. **Translating uncertainty into action**  
 
-[For scientists →](talks.qmd#for-scientists)
+[For scientists →](for-scientists.qmd)
 :::
 :::
 

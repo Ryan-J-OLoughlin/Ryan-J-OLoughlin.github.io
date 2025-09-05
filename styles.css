@@ -114,6 +114,9 @@ hr { margin: var(--space-4) 0; }
 /* Make the image occupy the first grid row */
 .section-card img.talk-thumb {
   width: 100%;
+  height: clamp(140px, 22vw, 200px); /* consistent thumbnail height */
+  object-fit: cover;                 /* crop to fill without distortion */
+  display: block;
   grid-row: 1 / 2;
   border-radius: 0.75rem;
 }
@@ -185,5 +188,4 @@ hr { margin: var(--space-4) 0; }
   opacity: 1;
   transform: translateY(-1px);
 }
-
 

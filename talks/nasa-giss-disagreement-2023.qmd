@@ -1,0 +1,23 @@
+---
+title: "Why we should want models to disagree: The value of 'bad' models in climate science"
+date-modified: 2025-08-30
+---
+
+# Why we should want models to disagree: The value of "bad" models in climate science
+
+## Abstract
+All models are wrong, but some are useful. Iâ€™d wager that most, if not all, climate scientists would accept this oft-quoted aphorism from statistician George Box. However, models are not all equally wrong. In this talk I will discuss the idea of "bad" climate models, i.e., models which give results that are worse than the results of other models. Based on evidence from the scientific literature, I show that some "bad" models are scientifically useful for discovering the importance of climate processes, for constraining estimates of climate variables, and for testing model weighting schemes to project future climate more accurately. Even in cases where all models in an ensemble perform poorly relative to our expectations, the very practice of diagnosing model errors demonstrates that scientists have a tacit-yet-working understanding of their models. I conclude that having a plurality of competing models is scientifically beneficial for reasons that have been under-appreciated by many.
+
+## Venue
+NASA Goddard Institute for Space Studies (GISS), May 3, 2023
+
+## Recording
+
+{{< video <iframe width="560" height="315" src="https://www.youtube.com/embed/5XzoL6K8qBg?si=VeHJOqFr7ZQ4d0So" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> >}}
+
+## Slides / Handouts
+
+coming soon.
+
+*Updated: {{< meta date-modified >}}*
+

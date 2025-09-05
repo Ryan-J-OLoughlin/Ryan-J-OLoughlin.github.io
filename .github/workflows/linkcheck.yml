@@ -1,0 +1,35 @@
+name: Link Check
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render site
+        run: quarto render
+
+      - name: Link Checker (internal, offline)
+        uses: lycheeverse/lychee-action@v1.10.0
+        with:
+          args: --verbose --no-progress --offline "_site/**/*.html"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Uncomment to also check external links (may be flaky)
+      # - name: Link Checker (external)
+      #   uses: lycheeverse/lychee-action@v1.10.0
+      #   with:
+      #     args: --verbose --no-progress --retry-wait-time 2s --max-retries 2 --accept 200..399,429 "_site/**/*.html"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

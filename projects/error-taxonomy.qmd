@@ -1,0 +1,9 @@
+---
+title: "Error Taxonomy for Model Evaluation"
+date-modified: 2025-08-30
+---
+
+Details coming soon. Classifies productive vs. misleading “errors” to guide targeted experiments and diagnostics.
+
+*Updated: {{< meta date-modified >}}*
+
