@@ -1,6 +1,6 @@
 ---
 title: "About Ryan"
-date-modified: 2025-08-30 
+date-modified: last-modified
 layout: full
 toc: false
 ---
@@ -19,13 +19,13 @@ As a working-class kid from a small town, I never imagined becoming a philosophe
 ## Professional Highlights
 
 ### Publications
-Lead author on “Moving beyond post hoc explainable AI: lessons from dynamical climate modeling” (*Geoscientific Model Development*, 2025), selected as a highlight paper
+Lead author on [“Moving beyond post hoc explainable AI: lessons from dynamical climate modeling” (*Geoscientific Model Development*, 2025)](https://doi.org/10.5194/gmd-18-787-2025), selected as a highlight paper
 
 ### Public Engagement
-Wrote “Why imperfect climate models are more helpful than you think” for *Yale Climate Connections* (2025), introducing philosophy of science insights to the general public
+Wrote [“Why imperfect climate models are more helpful than you think” for *Yale Climate Connections* (2025)](https://yaleclimateconnections.org/2025/06/why-imperfect-climate-models-are-more-helpful-than-you-think/), introducing philosophy of science insights to the general public
 
 ### Invited Talks
-Speaker at NASA Goddard Institute for Space Studies (2023-24), NCAR Climate & Global Dynamics Lab (2022), and CUNY Advanced Science Research Center (2025)
+Speaker at NASA Goddard Institute for Space Studies ([2023](talks/nasa-giss-disagreement-2023.qmd), [2024](talks/nasa-giss-ml-2024.qmd)), NCAR Climate & Global Dynamics Lab ([2022](talks/ncar-cgd-error-taxonomy-2022.qmd)), and CUNY Advanced Science Research Center ([2025](talks/cuny-esi-convergence-trust-2025.qmd))
 
 ### Leadership & Collaboration
 Co-organized “Philosophy of Climate Models” workshop at PSA 2024; principal organizer of interdisciplinary grant proposals bridging philosophy and climate science
