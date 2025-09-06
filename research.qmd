@@ -1,12 +1,25 @@
 ---
 title: "Research"
 date-modified: 2025-08-30
+format:
+    html:
+        css:
+            - assets/game/css/game.css
+        include-after-body: 
+            - assets/game/js/game.js
 ---
 
 ## Trust without Truth {#overview}
 We make billion-dollar decisions based on climate models, even though every model is false, strictly speaking. My research asks: *what does it mean to trust science when its tools are false?* More specifically, how do climate scientists use computer models to generate knowledge? Why are their models "wrong but useful"?
 
 By focusing on robustness, error, and how we explain modeling results, I show why imperfect models can still yield trustworthy insights. My work shows how philosophy can help make sense of scientific uncertainty and strengthen trust in climate research. 
+
+<div id="cyoa"></div>
+
+<script>
+  window.CYOA_CONFIG = { mount: "#cyoa" };
+</script>
+
 
 ## Bridging Science and Philosophy {#bridging-science}
 Both philosophers and scientists care about knowledge—what it is, how we get it, and whether we can trust it. My work brings these communities into dialogue by asking how the credibility of knowledge is established and shared.
