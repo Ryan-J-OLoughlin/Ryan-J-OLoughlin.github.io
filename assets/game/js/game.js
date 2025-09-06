@@ -19,6 +19,15 @@ async function loadJSON(url){
     muted: false
   };
 
+  // --- read-more index (lazy loaded)
+  let READMORE = null;
+  async function getReadmore(){
+    if(READMORE) return READMORE;
+    try { READMORE = await loadJSON('assets/game/readmore.json'); }
+    catch(e){ READMORE = { defaults: [] }; }
+    return READMORE;
+  }
+
   // --- storage
   const persist = () => sessionStorage.setItem("cyoa", JSON.stringify({
     avatarId: state.avatarId, stepIndex: state.stepIndex, chosen: state.chosen, muted: state.muted
@@ -211,10 +220,10 @@ async function loadJSON(url){
     state.chosen[step.id] = key;
     persist();
     const obj = step.choices.find(c=>c.key===key);
-    showFeedback(obj.feedback, step.next, step.id);
+    showFeedback(step, obj.feedback, step.next);
   }
 
-  function showFeedback(text, nextId, stepId){
+  function showFeedback(step, text, nextId){
     const fb = root.querySelector("#fb");
     fb.classList.remove("hidden");
     const card = root.querySelector('.cyoa-card');
@@ -247,13 +256,13 @@ async function loadJSON(url){
       }
     });
     const rm = fb.querySelector(".cyoa-readmore");
-    rm.addEventListener("click", ()=> openReadMore());
+    rm.addEventListener("click", ()=> openReadMore(step));
 
     // close button returns user to choices on same screen
     const close = fb.querySelector('.cyoa-close');
     close.addEventListener('click', ()=>{
       // clear stored choice so we don't auto-rehydrate
-      if(stepId){ delete state.chosen[stepId]; persist(); }
+      if(step && step.id){ delete state.chosen[step.id]; persist(); }
       fb.classList.add('hidden');
       const card = root.querySelector('.cyoa-card');
       if(card) card.classList.remove('has-fb');
@@ -264,9 +273,13 @@ async function loadJSON(url){
   }
 
   // Simple read-more: overlay with related links
-  function openReadMore(){
+  async function openReadMore(step){
     let overlay = root.querySelector('#cyoa-rm');
     if(overlay) return; // one at a time
+    const idx = await getReadmore();
+    const key = `${state.avatarId}/${step.id}`;
+    const links = (step.readmore && step.readmore.length) ? step.readmore
+                 : idx[key] || idx[`${step.id}`] || idx.defaults || [];
     overlay = document.createElement('div');
     overlay.id = 'cyoa-rm';
     overlay.style.position = 'absolute';
@@ -284,12 +297,12 @@ async function loadJSON(url){
     box.style.background = 'color-mix(in oklab, var(--paper) 85%, black 15%)';
     box.style.border = '1px solid var(--brand-border, #d8dbe0)';
     box.style.borderRadius = '4px';
+    const list = links.length ? links.map(l=>`<a href="${l.href}" target="_blank" rel="noopener" class="link-muted">${l.label}</a>`).join("")
+                              : `<span>No links yet.</span>`;
     box.innerHTML = `
       <div style="font-size:12px; text-transform:uppercase; color:var(--muted); margin-bottom:.4rem;">Further reading</div>
       <div style="display:grid; gap:.35rem; font-size:13px;">
-        <a href="for-scientists.qmd" class="link-muted">For Scientists — why spreads matter</a>
-        <a href="for-philosophers.qmd" class="link-muted">For Philosophers — robustness and error</a>
-        <a href="media.qmd" class="link-muted">Media — communicating uncertainty</a>
+        ${list}
       </div>
       <div style="margin-top:.6rem; text-align:right;">
         <button type="button" id="rmClose" class="cyoa-next">Close</button>

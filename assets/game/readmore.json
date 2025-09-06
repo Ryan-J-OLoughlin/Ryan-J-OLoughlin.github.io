@@ -1,0 +1,64 @@
+{
+  "defaults": [
+    { "label": "Why spreads matter (For Scientists)", "href": "for-scientists.qmd" },
+    { "label": "Diagnosing errors (EJPS, 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" }
+  ],
+
+  "city-planner/spread": [
+    { "label": "Robustness reasoning (SHPS A, 2021)", "href": "https://doi.org/10.1016/j.shpsa.2020.12.005" },
+    { "label": "Communicating model spreads (For Scientists)", "href": "for-scientists.qmd" }
+  ],
+  "city-planner/disagree": [
+    { "label": "Diagnosing errors (EJPS, 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" },
+    { "label": "Why disagreement helps (For Philosophers)", "href": "for-philosophers.qmd" }
+  ],
+  "city-planner/weak": [
+    { "label": "Lower-performance models (Climatic Change, 2024)", "href": "https://doi.org/10.1007/s10584-023-03661-7" },
+    { "label": "What ‘wrong but useful’ means (For Scientists)", "href": "for-scientists.qmd" }
+  ],
+  "city-planner/geo": [
+    { "label": "Geoengineering: cautious experiments (Media)", "href": "media.qmd" }
+  ],
+
+  "policymaker/briefing": [
+    { "label": "Robust policy under uncertainty (For Scientists)", "href": "for-scientists.qmd" },
+    { "label": "Robustness reasoning (SHPS A, 2021)", "href": "https://doi.org/10.1016/j.shpsa.2020.12.005" }
+  ],
+  "policymaker/conflict": [
+    { "label": "Diagnosing errors (EJPS, 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" }
+  ],
+  "policymaker/imperfect": [
+    { "label": "Lower-performance models (Climatic Change, 2024)", "href": "https://doi.org/10.1007/s10584-023-03661-7" }
+  ],
+  "policymaker/geo": [
+    { "label": "Geoengineering: cautious experiments (Media)", "href": "media.qmd" }
+  ],
+
+  "student/classroom": [
+    { "label": "Why uncertainty is information (For Scientists)", "href": "for-scientists.qmd" }
+  ],
+  "student/lab": [
+    { "label": "Diagnosing errors (EJPS, 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" },
+    { "label": "Wrong but useful (For Philosophers)", "href": "for-philosophers.qmd" }
+  ],
+  "student/geo": [
+    { "label": "Geoengineering: cautious experiments (Media)", "href": "media.qmd" }
+  ],
+  "student/final": [
+    { "label": "Trust without truth (About)", "href": "about.qmd" }
+  ],
+
+  "journalist/breaking": [
+    { "label": "Spreads show knowledge limits (For Scientists)", "href": "for-scientists.qmd" }
+  ],
+  "journalist/public": [
+    { "label": "Agreement and disagreement (For Philosophers)", "href": "for-philosophers.qmd" }
+  ],
+  "journalist/geo": [
+    { "label": "Geoengineering: cautious experiments (Media)", "href": "media.qmd" }
+  ],
+  "journalist/imperfect": [
+    { "label": "Lower-performance models (Climatic Change, 2024)", "href": "https://doi.org/10.1007/s10584-023-03661-7" }
+  ]
+}
+
