@@ -82,14 +82,21 @@ body.quarto-dark a { color: var(--brand-brightblue); }
 code, pre { font-family: var(--font-mono); }
 hr { margin: var(--space-4) 0; }
 
+/* ---------- Utility: brand accent text color ---------- */
+/* Target only headings with this class (Quarto also adds class to the section wrapper) */
+h1.brand-bright, h2.brand-bright, h3.brand-bright, h4.brand-bright {
+  color: var(--brand-brightblue);
+}
+
 .section-card {
-  border: 0 !important;
-  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important; /* shadow-sm */
-  border-radius: 1rem !important; /* rounded-3 */
+  background: var(--brand-bg);
+  border: 1px solid var(--brand-border) !important;
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.06) !important; /* subtle */
+  border-radius: 1rem !important;
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 1rem; /* p-3 */
+  padding: 1rem;
 }
 
 /* Title row: clamp to 2 lines, fixed visual height so rows align */
@@ -180,7 +187,7 @@ hr { margin: var(--space-4) 0; }
   object-fit: contain;
   filter: grayscale(100%);
   margin: 0 8px;
-  opacity: .72;
+  opacity: .8;
   transition: opacity .2s ease, filter .2s ease, transform .2s ease;
 }
 .logo-strip img:hover{
@@ -189,3 +196,25 @@ hr { margin: var(--space-4) 0; }
   transform: translateY(-1px);
 }
 
+/* Dark mode refinements */
+body.quarto-dark .section-card {
+  background: var(--brand-surface);
+  border-color: var(--brand-border) !important;
+  /* add a faint inner outline for separation on very dark BGs */
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 .125rem .25rem rgba(0,0,0,.35) !important;
+}
+
+body.quarto-dark .logo-strip {
+  background: var(--brand-surface);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+body.quarto-dark .logo-strip img {
+  /* Invert + desaturate so marks become light on dark */
+  filter: invert(1) grayscale(100%) brightness(1.05) contrast(0.95);
+  opacity: 1;
+}
+body.quarto-dark .logo-strip img:hover{
+  filter: grayscale(0%) brightness(1.2) contrast(1.0);
+}

@@ -59,6 +59,19 @@ html, body {
   overflow: visible; 
 }
 
+/* Dark mode variable tweaks for stronger contrast using site brand colors */
+body.quarto-dark .timeline {
+  /* Use the bright brand blue for accents on dark */
+  --timeline-brand: var(--brand-brightblue, #00A8E8);
+  --timeline-tick: var(--timeline-brand);
+  /* Mix with brand-surface (not full background) to keep pills readable */
+  --timeline-spine: color-mix(in oklab, var(--timeline-brand) 52%, var(--brand-surface, #032634));
+  --timeline-year-bg: color-mix(in oklab, var(--timeline-brand) 22%, var(--brand-surface, #032634));
+  --timeline-bubble-bg: color-mix(in oklab, var(--brand-surface, #032634) 92%, var(--timeline-brand));
+  --timeline-dot-shadow: color-mix(in oklab, var(--timeline-tick) 35%, var(--brand-surface, #032634));
+  --timeline-focus-outline: color-mix(in oklab, var(--timeline-brand) 65%, var(--brand-surface, #032634));
+}
+
 /* REMOVED: .timeline-host wrapper styles that were causing issues */
 
 /* Decorative spine (horizontal mode) */

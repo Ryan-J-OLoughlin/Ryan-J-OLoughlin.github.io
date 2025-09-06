@@ -11,12 +11,12 @@ description: "Ryan O’Loughlin — philosopher of science focused on climate mo
 ![](assets/headshot.jpg){fig-alt="Ryan O'Loughlin headshot" width="auto"}
 :::
 ::: {.g-col-12 .g-col-lg-7 .mt-lg-4}
-# Ryan O’Loughlin | [Trust without Truth](research.qmd){ .link-muted }
+# Ryan O’Loughlin | [Trust without Truth](research.qmd){.link-muted}
 #### Philosopher of Science
 
-### All models are wrong. Why trust them? 
+## All  models are wrong. Why trust them?{.brand-bright}
 
-#### *Because their agreements build confidence for action and disagreements spark insight.* 
+#### *Because their agreements build confidence for action and disagreements spark insights.*
 
 I study how climate models earn trust despite being "wrong," strictly speaking—and how that understanding should guide real-world decisions.  
 
