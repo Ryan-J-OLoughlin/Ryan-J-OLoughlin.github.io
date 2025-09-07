@@ -7,7 +7,7 @@ date-modified: last-modified
 
 *Every model is wrong — so why trust them?*
 
-Climate models are the backbone of our understanding of Earth’s future. They guide decisions about infrastructure, energy, and adaptation that involve billions of dollars and countless lives. Yet every model is imperfect. Each one simplifies reality, leaving scientists, policymakers, and the public unsure whether to act on their results. The stakes could not be higher: how do we plan responsibly when the very tools we rely on are flawed?
+Climate models are the backbone of our understanding of Earth’s future. They guide decisions about infrastructure, energy, and adaptation that involve billions of dollars and countless lives. Yet every model is imperfect. This isn't a dig at climate science; it's a fact about the very nature of scientific models. Each one simplifies reality, leaving scientists, policymakers, and the public unsure whether to act on their results. The stakes could not be higher: how do we plan responsibly when the very tools we rely on are flawed?
 
 ## My Work
 
@@ -15,7 +15,7 @@ Climate models are the backbone of our understanding of Earth’s future. They g
 
 I investigate how climate scientists learn from imperfect tools — and how philosophy can make those practices clearer and more credible. My approach is **naturalistic**: I study real scientific practice through case studies, interviews, and collaborations with modeling teams. I highlight not only how models succeed, but also how scientists diagnose mistakes, refine methods, and sometimes even learn more from failure than from success.
 
-Philosophy, in this sense, is not abstract wordplay: it is a critical companion to science, clarifying what scientists already do and probing its limits.
+Philosophy, in this sense, is not abstract wordplay: it is a critical companion to science, clarifying what scientists already do and probing its limits. For a deeper dive, check out the game below.
 
 ::: {.callout-note title="Choose Your Own Adventure: Trust Without Truth"}
 Step into the shoes of a city planner, policymaker, student, or journalist. Explore how error, disagreement, and uncertainty shape real-world decisions.
@@ -35,7 +35,7 @@ Step into the shoes of a city planner, policymaker, student, or journalist. Expl
 
 *Agreement builds confidence. Disagreement sparks discovery. Error drives progress.*
 
-My work calls for a change in mindset: trustworthiness does not require truth. Since all models are false in detail, credibility must come from elsewhere — from patterns of agreement, from productive disagreement, and from the ability to learn through error.
+My work calls for a change in mindset: trustworthiness does not require truth. Since all models are false in some respects, credibility must come from elsewhere — from patterns of agreement, from productive disagreement, and from the ability to learn through error.
 
 ::: {.callout-note title="Quote"}
 All models are wrong. Some are useful --- Stastician George Box (1976)
@@ -49,7 +49,7 @@ This shifts us away from a binary view — “perfect or useless” — and towa
 ::: {.g-col-12 .g-col-md-6}
 ::: {.section-card}
 #### Robustness and Evaluation
-Why does convergence across models matter for trust?  
+Why (and when) does convergence across models matter for trust?  
 [Read more →](https://doi.org/10.1016/j.shpsa.2020.12.005)
 :::
 :::
@@ -63,7 +63,7 @@ How do scientists make progress by diagnosing mistakes?
 ::: {.g-col-12 .g-col-md-6}
 ::: {.section-card}
 #### Imperfect Models
-Why are weaker models still useful?  
+Why are weaker models nonetheless useful?  
 [Read more →](https://doi.org/10.1007/s10584-023-03661-7)
 :::
 :::
@@ -82,41 +82,34 @@ How can philosophy guide trustworthy AI for science?
 ::: {.g-col-12 .g-col-md-4}
 ::: {.section-card}
 #### Does Model Weighting Reduce Uncertainty?
-Bayesian clarification: narrows spread but doesn’t increase epistemic confidence.
+Bayesian clarification: the risks of narrowing spread without increasing epistemic confidence.
 :::
 :::
 ::: {.g-col-12 .g-col-md-4}
 ::: {.section-card}
 #### Failure in Science
-How scientists learn from failure, from climate modeling to experiments.
+How scientists learn from failure, from climate modeling, AI, experiments, and beyond.
 :::
 :::
 ::: {.g-col-12 .g-col-md-4}
 ::: {.section-card}
 #### Geoengineering and Pursuitworthiness
-When small-scale intervention experiments are worth pursuing.
+Determing when small-scale intervention experiments are worth pursuing.
 :::
 :::
-:::
-
-::: {.callout-note title="Impact at a Glance"}
-
-Published in leading venues in philosophy (*Synthese*, *EJPS*) and science (*Climatic Change*, *Geoscientific Modeling Development*).
-
-Collaborated with scientists at NCAR and NASA.
-
-Public-facing writing in Yale Climate Connections on why imperfect models are more helpful than they seem.
 :::
 
 ## Selected Publications
-
-A few key works — full list in [CV →](files/Ryan_OLoughlin_CV.pdf).
 
 O’Loughlin, R. (2024). Why We Need Lower-Performance Climate Models. *Climatic Change*. [https://doi.org/10.1007/s10584-023-03661-7](https://doi.org/10.1007/s10584-023-03661-7)
 
 O’Loughlin, R. (2023). Diagnosing Errors in Climate Model Intercomparisons. *European Journal for Philosophy of Science*. [https://doi.org/10.1007/s13194-023-00522-z](https://doi.org/10.1007/s13194-023-00522-z)
 
 O’Loughlin, R. (2021). Robustness Reasoning in Climate Model Comparisons. *Studies in History and Philosophy of Science.* [https://doi.org/10.1016/j.shpsa.2020.12.005](https://doi.org/10.1016/j.shpsa.2020.12.005)
+
+::: {.text-end}
+Full list in [CV →](files/Ryan_OLoughlin_CV.pdf)
+:::
 
 ## What’s Next
 
@@ -129,7 +122,7 @@ New projects on failure, uncertainty, and the future of modeling.
 
 [For scientists →](for-scientists.qmd) Collaboration on uncertainty, robustness, and decision support.
 
-[For philosophers →](for-philosophers.qmd) Dialogue on error, pluralism, and the philosophy of modeling.
+[For philosophers →](for-philosophers.qmd) Dialogue on error & scientific discovery, pluralism, and the philosophy of modeling.
 
 [For students →](teaching-students.qmd) Courses and resources on how philosophy clarifies science.
 
