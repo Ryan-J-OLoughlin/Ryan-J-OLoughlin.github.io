@@ -218,3 +218,200 @@ body.quarto-dark .logo-strip img {
 body.quarto-dark .logo-strip img:hover{
   filter: grayscale(0%) brightness(1.2) contrast(1.0);
 }
+
+/* ================= Hero (full-bleed photo) ================= */
+.hero-photo{
+  position: relative;
+  /* Full-bleed: span entire viewport width, ignoring content container */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  /* Cover full screen height */
+  /* Use dynamic viewport units where supported for correct mobile sizing */
+  min-height: 100vh;   /* fallback */
+  min-height: 100dvh;  /* dynamic viewport (Chrome/Safari) */
+  min-height: 100svh;  /* small viewport height (iOS Safari) */
+  background-image: url('assets/portrait.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.hero-photo::after{
+  content: "";
+  position: absolute; inset: 0;
+  /* top subtle, bottom darker to enhance bottom text legibility */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0.6) 100%);
+}
+.hero-overlay{
+  position: absolute; inset: 0; z-index: 1;
+  display: grid;
+  grid-template-rows: 1fr auto; /* id block floats, bottom block pinned */
+}
+.hero-id{
+  align-self: start;
+  justify-self: end; /* move to top-right */
+  margin: clamp(16px, 5vw, 40px);
+  padding: clamp(8px, 1.6vw, 14px) clamp(10px, 2vw, 18px);
+  /* remove background chrome for a clean overlay */
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  backdrop-filter: none;
+  color: #fff;
+  max-width: min(92vw, 520px);
+  text-shadow: 0 1px 2px rgba(0,0,0,.35);
+}
+.hero-name{
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+.hero-role{
+  font-size: clamp(1rem, 2.1vw, 1.25rem);
+  opacity: .95;
+}
+.hero-tag{
+  font-size: clamp(0.95rem, 1.9vw, 1.15rem);
+  opacity: .95;
+}
+
+/* Mobile-only line break helper: hidden by default */
+.mobile-br{ display: none; }
+.ghost-link{
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+  cursor: pointer;
+}
+.ghost-link:hover, .ghost-link:focus{
+  border-bottom-color: currentColor;
+  outline: none;
+}
+.ghost-hint{
+  display: inline-block;
+  margin-left: .6rem;
+  font-size: .9em;
+  opacity: 0;
+  transform: translateY(-2px);
+  transition: opacity .18s ease, transform .18s ease;
+}
+.hero-tag:hover .ghost-hint,
+.ghost-link:focus + .ghost-hint{
+  opacity: .9;
+  transform: translateY(0);
+}
+@media (max-width: 576px){
+  .ghost-hint{ opacity: .6; display: block; margin-left: 0; margin-top: .25rem; }
+}
+.hero-bottom{
+  align-self: end;
+  padding: clamp(14px, 2vw, 22px) clamp(16px, 4vw, 40px);
+  color: #fff;
+}
+.hero-headline{
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  font-size: clamp(1.4rem, 4.8vw, 2.6rem);
+  line-height: 1.15;
+  text-shadow: 0 2px 10px rgba(0,0,0,.35);
+  margin-bottom: clamp(10px, 2.2vw, 16px);
+}
+.hero-cta{
+  font-weight: 700;
+  padding: .6rem 1rem;
+}
+
+/* Scroll cue at bottom of hero */
+.hero-scroll{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  /* Nudge higher so it’s visible immediately on load */
+  bottom: clamp(48px, 8vh, 96px);
+  color: rgba(255,255,255,.95);
+  text-decoration: none;
+  opacity: 1;
+  transition: opacity .15s ease;
+}
+.hero-scroll:hover{ opacity: 1; }
+.hero-scroll .bi{ font-size: 1.75rem; filter: drop-shadow(0 1px 2px rgba(0,0,0,.35)); }
+@keyframes heroFloat { 0%,100%{ transform: translate(-50%, 0); } 50%{ transform: translate(-50%, -6px); } }
+.hero-scroll{ animation: heroFloat 2.2s ease-in-out infinite; }
+
+
+/* Mobile refinements */
+@media (max-width: 576px){
+  .hero-id{
+    margin: 12px;
+    border-radius: 10px;
+  }
+  .hero-bottom{ padding: 12px 14px 16px; }
+}
+
+/* On smaller screens, move identity block to lower-right to avoid overlapping the face */
+@media (max-width: 768px){
+  .hero-id{
+    align-self: end;     /* push towards bottom of hero */
+    justify-self: end;   /* keep to the right */
+    text-align: right;   /* align text to right edge */
+    margin: 12px;        /* tighter spacing */
+  }
+}
+
+/* On large screens, use a 3x3 grid and bias placement within cells */
+@media (min-width: 1200px){
+  .hero-overlay{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 4vw; /* gentle inset from edges */
+  }
+  /* Top-right cell, place near its lower-left corner */
+  .hero-id{
+    grid-column: 3; /* right column */
+    grid-row: 1;    /* top row */
+    justify-self: start; /* left within the cell */
+    align-self: end;     /* bottom within the cell */
+    text-align: left;
+    margin: 0.5vw 0.75vw; /* slight breathing room */
+  }
+  /* Bottom-left cell, place near its upper-right corner */
+  .hero-bottom{
+    grid-column: 1; /* left column */
+    grid-row: 3;    /* bottom row */
+    justify-self: end;  /* right within the cell */
+    align-self: start;  /* top within the cell */
+    text-align: right;
+    padding: 0.5vw 0.75vw;
+  }
+}
+
+/* Tighter focal crop for smaller screens so the subject stays centered */
+@media (max-width: 992px){
+  .hero-photo{ background-position: center center; }
+}
+@media (max-width: 768px){
+  .hero-photo{ background-size: 250% auto; background-position: center center; }
+}
+@media (max-width: 600px){
+  .hero-photo{ background-size: 300% auto; background-position: center center; }
+}
+@media (max-width: 480px){
+  .hero-photo{ background-size: 380% auto; background-position: top center; }
+}
+
+/* Show mobile line break on small phones */
+@media (max-width: 480px){
+  .mobile-br{ display: inline !important; }
+}
+
+/* On small screens explicitly set height to the dynamic viewport to avoid extra scroll */
+@media (max-width: 768px){
+  .hero-photo{
+    height: 100vh;   /* fallback */
+    height: 100dvh;  /* dynamic viewport */
+    height: 100svh;  /* iOS Safari small viewport */
+  }
+}
