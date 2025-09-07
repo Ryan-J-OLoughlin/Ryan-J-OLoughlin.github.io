@@ -4,61 +4,90 @@
     { "label": "Diagnosing errors (EJPS, 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" }
   ],
 
-  "city-planner/spread": [
-    { "label": "Robustness reasoning (SHPS A, 2021)", "href": "https://doi.org/10.1016/j.shpsa.2020.12.005" },
-    { "label": "Communicating model spreads (For Scientists)", "href": "for-scientists.qmd" }
+  "city-planner/spread/A": {
+    "blurb": "No single best model. Robustness compares multiple models to find stable insights.",
+    "links": [
+      { "label": "Robustness paper (SHPS A, 2021)", "href": "https://doi.org/10.1016/j.shpsa.2020.12.005" }
+    ]
+  },
+  "city-planner/spread/B": [
+    { "label": "Agreement across models builds confidence", "href": "for-scientists.qmd" }
   ],
-  "city-planner/disagree": [
-    { "label": "Diagnosing errors (EJPS, 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" },
-    { "label": "Why disagreement helps (For Philosophers)", "href": "for-philosophers.qmd" }
-  ],
-  "city-planner/weak": [
-    { "label": "Lower-performance models (Climatic Change, 2024)", "href": "https://doi.org/10.1007/s10584-023-03661-7" },
-    { "label": "What ‘wrong but useful’ means (For Scientists)", "href": "for-scientists.qmd" }
-  ],
-  "city-planner/geo": [
-    { "label": "Geoengineering: cautious experiments (Media)", "href": "media.qmd" }
-  ],
-
-  "policymaker/briefing": [
-    { "label": "Robust policy under uncertainty (For Scientists)", "href": "for-scientists.qmd" },
-    { "label": "Robustness reasoning (SHPS A, 2021)", "href": "https://doi.org/10.1016/j.shpsa.2020.12.005" }
-  ],
-  "policymaker/conflict": [
-    { "label": "Diagnosing errors (EJPS, 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" }
-  ],
-  "policymaker/imperfect": [
-    { "label": "Lower-performance models (Climatic Change, 2024)", "href": "https://doi.org/10.1007/s10584-023-03661-7" }
-  ],
-  "policymaker/geo": [
-    { "label": "Geoengineering: cautious experiments (Media)", "href": "media.qmd" }
+  "city-planner/spread/C": {
+    "blurb": "Treat the spread as information: it bounds plausible futures and guides robust plans.",
+    "links": [
+      { "label": "Using ranges in planning (For Scientists)", "href": "for-scientists.qmd" }
+    ]
+  },
+  "city-planner/spread/D": [
+    { "label": "Averages vs. uncertainty — cautionary note", "href": "for-philosophers.qmd" }
   ],
 
-  "student/classroom": [
-    { "label": "Why uncertainty is information (For Scientists)", "href": "for-scientists.qmd" }
+  "city-planner/disagree/A": [
+    { "label": "Disagreement as a clue, not a failure", "href": "for-philosophers.qmd" }
   ],
-  "student/lab": [
-    { "label": "Diagnosing errors (EJPS, 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" },
-    { "label": "Wrong but useful (For Philosophers)", "href": "for-philosophers.qmd" }
+  "city-planner/disagree/B": [
+    { "label": "Why averaging can hide sign changes", "href": "for-scientists.qmd" }
   ],
-  "student/geo": [
-    { "label": "Geoengineering: cautious experiments (Media)", "href": "media.qmd" }
-  ],
-  "student/final": [
-    { "label": "Trust without truth (About)", "href": "about.qmd" }
+  "city-planner/disagree/C": {
+    "blurb": "Modelers know their tools’ biases; asking them is key to credible decisions.",
+    "links": [
+      { "label": "Diagnosing errors (EJPS, 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" }
+    ]
+  },
+  "city-planner/disagree/D": [
+    { "label": "Precaution and resource tradeoffs", "href": "for-philosophers.qmd" }
   ],
 
-  "journalist/breaking": [
-    { "label": "Spreads show knowledge limits (For Scientists)", "href": "for-scientists.qmd" }
+  "city-planner/weak/A": [
+    { "label": "Don’t discard too fast — why", "href": "for-philosophers.qmd" }
   ],
-  "journalist/public": [
-    { "label": "Agreement and disagreement (For Philosophers)", "href": "for-philosophers.qmd" }
+  "city-planner/weak/B": {
+    "blurb": "Even weaker models can reveal mechanisms, constrain estimates, and spur progress.",
+    "links": [
+      { "label": "Lower-performance models (Climatic Change, 2024)", "href": "https://doi.org/10.1007/s10584-023-03661-7" }
+    ]
+  },
+  "city-planner/weak/C": [
+    { "label": "Independent checks and constraints", "href": "for-scientists.qmd" }
   ],
-  "journalist/geo": [
-    { "label": "Geoengineering: cautious experiments (Media)", "href": "media.qmd" }
+  "city-planner/weak/D": [
+    { "label": "Averaging risks burying signals", "href": "for-scientists.qmd" }
   ],
-  "journalist/imperfect": [
-    { "label": "Lower-performance models (Climatic Change, 2024)", "href": "https://doi.org/10.1007/s10584-023-03661-7" }
-  ]
+
+  "city-planner/geo/A": [
+    { "label": "Risks of large-scale deployment", "href": "media.qmd" }
+  ],
+  "city-planner/geo/B": {
+    "blurb": "Small, transparent experiments can build knowledge without full commitment.",
+    "links": [
+      { "label": "Media: Geoengineering coverage", "href": "media.qmd" }
+    ]
+  },
+  "city-planner/geo/C": [
+    { "label": "Precaution vs preparedness", "href": "for-philosophers.qmd" }
+  ],
+  "city-planner/geo/D": [
+    { "label": "The costs of delay", "href": "for-philosophers.qmd" }
+  ],
+
+  "policymaker/briefing/A": [ { "label": "Spreads are information, not indecision", "href": "for-scientists.qmd" } ],
+  "policymaker/briefing/B": [ { "label": "Robust policies across ranges", "href": "for-scientists.qmd" } ],
+  "policymaker/briefing/C": [ { "label": "Dangers of narrowing too fast", "href": "for-philosophers.qmd" } ],
+  "policymaker/briefing/D": [ { "label": "Evidence vs pressure", "href": "for-philosophers.qmd" } ],
+
+  "policymaker/conflict/A": [ { "label": "Disagreement → learning", "href": "for-philosophers.qmd" } ],
+  "policymaker/conflict/B": [ { "label": "Consult model teams (EJPS 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" } ],
+  "policymaker/conflict/C": [ { "label": "Averaging hides sign changes", "href": "for-scientists.qmd" } ],
+  "policymaker/conflict/D": [ { "label": "Stress-test policies", "href": "for-scientists.qmd" } ],
+
+  "student/classroom/A": [ { "label": "Imperfection ≠ uselessness", "href": "for-philosophers.qmd" } ],
+  "student/classroom/B": [ { "label": "Ensembles build confidence", "href": "for-scientists.qmd" } ],
+  "student/classroom/C": [ { "label": "Value in weaker models", "href": "https://doi.org/10.1007/s10584-023-03661-7" } ],
+  "student/classroom/D": [ { "label": "Uncertainty as evidence", "href": "for-scientists.qmd" } ],
+
+  "journalist/breaking/A": [ { "label": "Disagreement is normal", "href": "for-philosophers.qmd" } ],
+  "journalist/breaking/B": [ { "label": "Report the range", "href": "for-scientists.qmd" } ],
+  "journalist/breaking/C": [ { "label": "No single best model", "href": "https://doi.org/10.1016/j.shpsa.2020.12.005" } ],
+  "journalist/breaking/D": [ { "label": "Explain disagreements (EJPS 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" } ]
 }
-

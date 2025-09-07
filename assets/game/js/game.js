@@ -56,8 +56,12 @@ async function loadJSON(url){
   // Background scene resolver: try PNG/SVG and hyphen/underscore variants
   const BG_CANDIDATES = (id)=> [
     `assets/game/pixel/scene-${id}.png`,
+    `assets/game/pixel/scene-${id}.jpg`,
+    `assets/game/pixel/scene-${id}.jpeg`,
     `assets/game/pixel/scene-${id}.svg`,
     `assets/game/pixel/scene_${id}.png`,
+    `assets/game/pixel/scene_${id}.jpg`,
+    `assets/game/pixel/scene_${id}.jpeg`,
     `assets/game/pixel/scene_${id}.svg`
   ];
   function setWindowBackground(container, id){
@@ -86,7 +90,7 @@ async function loadJSON(url){
 
   function renderIntro(){
     root.innerHTML = `
-      <div class="cyoa-window">
+      <div class="cyoa-window is-intro">
         <div class="cyoa-titlebar">
           <div>Trust without Truth — Choose Your Own Adventure</div>
           <div class="cyoa-winbuttons"><div class="cyoa-winbtn"></div><div class="cyoa-winbtn"></div><div class="cyoa-winbtn"></div></div>
@@ -277,9 +281,33 @@ async function loadJSON(url){
     let overlay = root.querySelector('#cyoa-rm');
     if(overlay) return; // one at a time
     const idx = await getReadmore();
-    const key = `${state.avatarId}/${step.id}`;
-    const links = (step.readmore && step.readmore.length) ? step.readmore
-                 : idx[key] || idx[`${step.id}`] || idx.defaults || [];
+    const answerKey = state.chosen && step ? state.chosen[step.id] : undefined;
+    const paths = [
+      `${state.avatarId}/${step.id}/${answerKey}`,
+      `${state.avatarId}/${step.id}`,
+      `${step.id}/${answerKey}`,
+      `${step.id}`,
+      `defaults`
+    ];
+    let blurb = "";
+    let links = [];
+    // Step-level override can be array or { blurb, links }
+    if(step.readmore){
+      if(Array.isArray(step.readmore)){
+        links = step.readmore;
+      }else if(typeof step.readmore === 'object'){
+        blurb = step.readmore.blurb || "";
+        links = Array.isArray(step.readmore.links) ? step.readmore.links : [];
+      }
+    }
+    if(!links.length){
+      for(const p of paths){
+        const v = idx[p];
+        if(!v) continue;
+        if(Array.isArray(v)) { links = v; blurb = blurb || ""; break; }
+        if(typeof v === 'object'){ blurb = v.blurb || blurb || ""; links = Array.isArray(v.links) ? v.links : []; break; }
+      }
+    }
     overlay = document.createElement('div');
     overlay.id = 'cyoa-rm';
     overlay.style.position = 'absolute';
@@ -297,10 +325,12 @@ async function loadJSON(url){
     box.style.background = 'color-mix(in oklab, var(--paper) 85%, black 15%)';
     box.style.border = '1px solid var(--brand-border, #d8dbe0)';
     box.style.borderRadius = '4px';
+    const blurbHtml = blurb ? `<div style=\"margin:.25rem 0 .45rem;\">${blurb}</div>` : "";
     const list = links.length ? links.map(l=>`<a href="${l.href}" target="_blank" rel="noopener" class="link-muted">${l.label}</a>`).join("")
                               : `<span>No links yet.</span>`;
     box.innerHTML = `
       <div style="font-size:12px; text-transform:uppercase; color:var(--muted); margin-bottom:.4rem;">Further reading</div>
+      ${blurbHtml}
       <div style="display:grid; gap:.35rem; font-size:13px;">
         ${list}
       </div>
