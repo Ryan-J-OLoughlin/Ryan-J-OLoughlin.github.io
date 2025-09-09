@@ -63,40 +63,6 @@ If you’re a climate scientist, data scientist, or modeler interested in uncert
 
 I have worked with scientists at **NASA GISS**, **NCAR**, **Cornell University**, and **Indiana University**, helping refine how models are evaluated and how uncertainty is communicated. 
 
-:::{.grid .gap-2}
-
-::: {.g-col-12 .g-col-md-6}
-::: {.section-card }
-#### Error Taxonomy for Model Evaluation
-Classifying productive vs. misleading “errors” to guide targeted experiments and diagnostics.  
-[Read more →](projects/error-taxonomy.qmd)
-:::
-:::
-
-::: {.g-col-12 .g-col-md-6}
-::: {.section-card }
-#### Value of Lower-Skill Models
-When deliberately simpler or lower-skill configurations surface mechanisms that improve complex runs.  
-[Read more →](projects/lower-skill-models.qmd)
-:::
-:::
-
-::: {.g-col-12 .g-col-md-6}
-::: {.section-card }
-#### Weighting, Spread, and Confidence
-Separating spread-narrowing from genuine epistemic confidence; implications for ensemble practice & comms.  
-[Read more →](projects/weighting-and-uncertainty.qmd)
-:::
-:::
-
-::: {.g-col-12 .g-col-md-6}
-::: {.section-card }
-#### Decision Support Under Uncertainty
-Mapping uncertainty to decisions: robust conclusions, risk framing, and communication for stakeholders.  
-[Read more →](projects/decision-support.qmd)
-:::
-:::
-
 ::: 
 
 # Let’s collaborate
