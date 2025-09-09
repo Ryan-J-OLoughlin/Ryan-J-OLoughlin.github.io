@@ -6,7 +6,7 @@ toc: false
 ---
 
 ## About Me {#short-bio}
-As a working-class kid from a small town, I never imagined becoming a philosopher. I stumbled into philosophy—and eventually into climate science—driven by curiosity and a need for reason. My work is devoted to a simple but unsettling question: *if all models are wrong, why trust them?* I’ve come to see that error, disagreement, and even failure are not flaws but the very forces that move science forward. Along the way I’ve worked closely with scientists and published in leading journals to explore how uncertainty can be clarified and made useful, trustworthy even. My path has never been a straight line, but a series of lessons learned—much like the sciences I study.
+As a working-class kid from a small town, I never imagined becoming a philosopher. I stumbled into philosophy—and eventually into climate science—driven by curiosity and a love for logic. My work is devoted to a simple but unsettling question: *if all models are wrong, why trust them?* I’ve come to see that error, disagreement, and even failure are not flaws but the very forces that move science forward. Along the way I’ve worked closely with scientists and published in leading journals to explore how uncertainty can be clarified and made useful, trustworthy even. My path has never been a straight line, but a series of lessons learned—much like the sciences I study.
 
 :::{.column-page}
 ::: {=html}
@@ -25,10 +25,10 @@ Lead author on [“Moving beyond post hoc explainable AI: lessons from dynamical
 Wrote [“Why imperfect climate models are more helpful than you think” for *Yale Climate Connections* (2025)](https://yaleclimateconnections.org/2025/06/why-imperfect-climate-models-are-more-helpful-than-you-think/), introducing philosophy of science insights to the general public
 
 ### Invited Talks
-Speaker at NASA Goddard Institute for Space Studies ([2023](talks/nasa-giss-disagreement-2023.qmd), [2024](talks/nasa-giss-ml-2024.qmd)), NCAR Climate & Global Dynamics Lab ([2022](talks/ncar-cgd-error-taxonomy-2022.qmd)), and CUNY Advanced Science Research Center ([2025](talks/cuny-esi-convergence-trust-2025.qmd))
+Speaker at NCAR Climate & Global Dynamics Lab ([2022](talks/ncar-cgd-error-taxonomy-2022.qmd)), NASA Goddard Institute for Space Studies ([2023](talks/nasa-giss-disagreement-2023.qmd), [2024](talks/nasa-giss-ml-2024.qmd)), and CUNY Advanced Science Research Center ([2025](talks/cuny-esi-convergence-trust-2025.qmd))
 
 ### Leadership & Collaboration
-Co-organized “Philosophy of Climate Models” workshop at PSA 2024; principal organizer of interdisciplinary grant proposals bridging philosophy and climate science
+Co-organized and convened “Making Climate Models & Data Actionable” workshop at AGU 2022; principal organizer of interdisciplinary grant proposals bridging philosophy and climate science
 
 ## Curriculum Vitae
 
