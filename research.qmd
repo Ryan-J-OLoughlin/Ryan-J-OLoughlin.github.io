@@ -1,6 +1,12 @@
 ---
 title: "Research"
 date-modified: last-modified
+format:
+    html:
+        css:
+            - assets/game/css/game.css
+        include-after-body: 
+            - assets/game/js/game.js
 ---
 
 ## The Challenge
@@ -21,6 +27,12 @@ Philosophy, in this sense, is not abstract wordplay: it is a critical companion 
 Step into the shoes of a city planner, policymaker, student, or journalist. Explore how error, disagreement, and uncertainty shape real-world decisions.
 
 [Play the game]{.btn .btn-primary data-game-url="/assets/game/index.html"}
+
+<div id="cyoa"></div>
+
+<script>
+  window.CYOA_CONFIG = { mount: "#cyoa" };
+</script>
 
 <noscript>
   <p>
