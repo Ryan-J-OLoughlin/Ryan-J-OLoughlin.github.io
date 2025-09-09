@@ -1,4 +1,4 @@
-<script>
+// This file intentionally contains no <script> tag; it is loaded via an HTML include wrapper.
 // --- tiny helper: fetch JSON safely
 async function loadJSON(url){
   const res = await fetch(url, {cache:"no-store"});
@@ -163,7 +163,7 @@ async function loadJSON(url){
           </div>
           <div class="cyoa-card crt">
             <div class="cyoa-top">
-              ${renderScene(step.scene, step.id)}
+              ${renderScene(step.scene)}
               <div class="cyoa-toptext">
                 <div class="cyoa-title">${state.story.title}</div>
                 <div class="cyoa-prompt">${step.prompt}</div>
@@ -201,7 +201,7 @@ async function loadJSON(url){
     }
   }
 
-  function renderScene(sceneKey, stepId){
+  function renderScene(sceneKey){
     // Render container; we'll resolve the best-matching prompt image after mount
     const fallback = SCENES[sceneKey] || "";
     return `
@@ -211,7 +211,6 @@ async function loadJSON(url){
   }
 
   function renderChoice(stepId, choice){
-    const selected = state.chosen[stepId] === choice.key;
     return `
       <button class="cyoa-choice" data-choice="${choice.key}" data-step="${stepId}">
         <span class="label">[${choice.key}]</span>${choice.label}
@@ -379,8 +378,12 @@ async function loadJSON(url){
 
   function renderLink(l){ return `<a href="${l.href}" target="_blank" rel="noopener">${l.label}</a>`; }
 
+  // bind global handlers at most once to avoid duplicates after restarts
+  let __keysBound = false;
+
   function enableKeys(){
-    window.onkeydown = (e)=>{
+    if(!__keysBound){
+      window.addEventListener('keydown', (e)=>{
       const step = state.story.steps[state.stepIndex];
       // number keys 1-4 map to A-D
       const map = { "1":"A", "2":"B", "3":"C", "4":"D" };
@@ -407,17 +410,24 @@ async function loadJSON(url){
         const back = root.querySelector("#actBack");
         if(back && !back.disabled){ back.click(); return; }
       }
-    };
+      });
+      __keysBound = true;
+    }
 
     // delegate choice clicks
-    root.addEventListener("click", (ev)=>{
-      const el = ev.target.closest(".cyoa-choice");
+    if(!root.__cyoaClickBound){
+      root.addEventListener("click", (ev)=>{
+        const t = ev.target;
+        if(!(t instanceof Element)) return;
+        const el = t.closest(".cyoa-choice");
       if(!el) return;
       const stepId = el.dataset.step;
       const step = state.story.steps[state.stepIndex];
       if(step.id !== stepId) return; // stale
       handleChoice(step, el.dataset.choice);
-    });
+      });
+      root.__cyoaClickBound = true;
+    }
     // Prompt image resolution handled in renderAll
   }
 
@@ -446,4 +456,3 @@ async function loadJSON(url){
     tryNext();
   }
 })();
-</script>

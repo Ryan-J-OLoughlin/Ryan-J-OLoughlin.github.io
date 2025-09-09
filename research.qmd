@@ -6,7 +6,7 @@ format:
         css:
             - assets/game/css/game.css
         include-after-body: 
-            - assets/game/js/game.js
+            - assets/game/js/game-include.html
 ---
 
 ## The Challenge
