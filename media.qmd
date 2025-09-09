@@ -1,23 +1,23 @@
 ---
 title: "Media / Press"
-date-modified: 2025-08-30
+date-modified: last-modified
 ---
 
 ## Bios {#bios}
 
 #### 50-word Bio
-Ryan O’Loughlin is a philosopher of science at Queens College, CUNY. He studies how climate scientists generate trustworthy knowledge with imperfect models, focusing on uncertainty, robustness, and error. His work bridges philosophy and climate research, with publications in leading journals and collaborations with scientists at NASA and NCAR.  
+Ryan O’Loughlin is a philosopher of science at Queens College, CUNY. He studies how climate scientists generate trustworthy knowledge with imperfect models, focusing on uncertainty, robustness, and error. His work bridges philosophy and climate research, with publications in leading journals and collaborations with scientists.  
 
 #### 100-word Bio
 <details>
 <summary>Click to expand</summary>
-Ryan O’Loughlin is a philosopher of science whose work explains how scientists generate trustworthy knowledge with imperfect models. He is an Assistant Professor of Philosophy at Queens College, CUNY and doctoral faculty in Earth & Environmental Sciences at the CUNY Graduate Center. His research focuses on climate models, robustness, and uncertainty, and he collaborates with scientists at NASA GISS, NCAR, and Cornell. Ryan has published in leading journals including *Synthese*, and *Climatic Change*, and written for *Yale Climate Connections*. He is a clear and accessible voice on science, uncertainty, and decision-making.  
+Ryan O’Loughlin is a philosopher of science whose work explains how scientists generate trustworthy knowledge with imperfect models. He is an Assistant Professor of Philosophy at Queens College, CUNY and doctoral faculty member in Earth & Environmental Sciences at the CUNY Graduate Center. His research focuses on climate models, robustness, and uncertainty, and he collaborates with scientists at Indiana University, NCAR, and Cornell. Ryan has published in leading journals including *Synthese*, and *Climatic Change*, and written for *Yale Climate Connections*. He is a clear and accessible voice on science, uncertainty, and decision-making.  
 </details>
 
 #### 200-word Bio
 <details>
 <summary>Click to expand</summary>
-Ryan O’Loughlin is a philosopher of science specializing in climate models, uncertainty, and decision-making. He is an Assistant Professor of Philosophy at Queens College, CUNY, and serves as doctoral faculty in Earth and Environmental Sciences at the CUNY Graduate Center. His research investigates how scientists trust and learn from imperfect models, and why error and failure can be epistemically productive. He has published in *Synthese*, *Climatic Change*, and *Geoscientific Model Development*, and co-authored interdisciplinary work with climate scientists at NASA GISS, NCAR, and Cornell. In addition to academic writing, Ryan engages broader audiences through public-facing essays, including contributions to *Yale Climate Connections*, where he explains the value of imperfect models for climate policy. He has been invited to speak at Brown University, NASA, and NCAR, and co-organized the “Philosophy of Climate Models” workshop at the Philosophy of Science Association. Ryan is committed to making philosophy relevant beyond academia, clarifying how uncertainty and robustness matter for science, policy, and public trust.  
+Ryan O’Loughlin is a philosopher of science specializing in climate models, uncertainty, and decision-making. He is an Assistant Professor of Philosophy at Queens College, CUNY, and serves as doctoral faculty member in Earth and Environmental Sciences at the CUNY Graduate Center. His research investigates how scientists trust and learn from imperfect models, and why error and failure can be epistemically productive. He has published in *Synthese*, *Climatic Change*, and *Geoscientific Model Development*, and co-authored interdisciplinary work with climate scientists at Indiana University, NCAR, and Cornell. In addition to academic writing, Ryan engages broader audiences through public-facing essays, including contributions to *Yale Climate Connections*, where he explains the value of imperfect models for climate policy. He has been invited to speak at Brown University, NASA GISS, and NCAR. Ryan is committed to making philosophy relevant beyond academia, clarifying how uncertainty and robustness matter for science, policy, and public trust.  
 </details>
 
 ## Download Headshot {#headshot}
@@ -32,11 +32,10 @@ Ryan O’Loughlin is a philosopher of science specializing in climate models, un
 - Geoengineering and ethics of climate interventions  
 
 ## Selected Highlights {#highlights}
-- **Affiliations:** Assistant Professor of Philosophy, Queens College CUNY; Doctoral Faculty, CUNY Graduate Center.  
+- **Affiliations:** Assistant Professor of Philosophy, Queens College CUNY; Doctoral Faculty member, CUNY Graduate Center.  
 - **Invited Talks:** Brown University Climate Science Seminar (2025); NASA Goddard Institute for Space Studies (2023); NCAR Climate & Global Dynamics Lab (2022).  
 - **Public Writing:** “Why imperfect climate models are more helpful than you think” (*Yale Climate Connections*, 2025).  
 - **Research Highlights:** Lead author on “Moving beyond post hoc explainable artificial intelligence” (*Geoscientific Model Development*, 2025).  
-- **Workshop Leadership:** Co-organizer, *Philosophy of Climate Models* (PSA 2024).  
 
 ## Media Contact {#media-contact}
 📧 [ryan.oloughlin@qc.cuny.edu](mailto:ryan.oloughlin@qc.cuny.edu)  
