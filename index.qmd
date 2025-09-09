@@ -2,31 +2,35 @@
 title: "Homepage | Ryan O'Loughlin | Philosopher of Science" 
 page-layout: full
 toc: false
-date-modified: 2025-08-30
+date-modified: last-modified
 description: "Ryan O’Loughlin — philosopher of science focused on climate models, uncertainty, and decision-making | Trust without Truth"
 ---
 
-:::{.grid .gap-4 .items-center .mt-lg-5 }
-::: {.g-col-12 .g-col-lg-5 .text-center .d-flex .align-items-center .justify-content-center .p-4}
-![](assets/headshot.jpg){fig-alt="Ryan O'Loughlin headshot" width="auto"}
+<style>
+/* Remove default top gap between navbar and first section on homepage */
+#quarto-content, main.content { padding-top: 0 !important; margin-top: 0 !important; }
+</style>
+
+<!-- Full-bleed hero with photo and overlayed text -->
+:::{.hero-photo}
+:::{.hero-overlay}
+
+:::{.hero-id}
+<div class="hero-name">Ryan <br class="mobile-br">O’Loughlin</div>
+<div class="hero-role">Philosopher of Science</div>
+<div class="hero-tag">
+  <a class="ghost-link" data-game-url="/assets/game/index.html" aria-label="Play a 2-minute interactive scenario" title="Play a 2-minute interactive scenario"><em>Trust without Truth</em></a>
+  <span class="ghost-hint">Play a 2‑minute scenario →</span>
+</div>
 :::
-::: {.g-col-12 .g-col-lg-7 .mt-lg-4}
-# Ryan O’Loughlin | [Trust without Truth](research.qmd){.link-muted}
-#### Philosopher of Science
 
-## All  models are wrong. Why trust them?{.brand-bright}
-
-#### *Because their agreements build confidence for action and disagreements spark insights.*
-
-I study how climate models earn trust despite being "wrong," strictly speaking—and how that understanding should guide real-world decisions.  
-
-:::{.mt-auto}
-[See Research](research.qmd){.btn .btn-primary .me-2}
-[For Collaborators](collaboration.qmd){.btn .btn-outline-primary .me-2}
-[For Students](teaching-students.qmd){.btn .btn-outline-secondary}
-
-<small> climate models • uncertainty • robustness • AI in climate science </small>
+:::{.hero-bottom}
+<div class="hero-headline">All models are wrong. Why trust them?</div>
+<a href="research.qmd" class="btn btn-primary hero-cta">See Research</a>
 :::
+
+<a href="#highlights" class="hero-scroll" aria-label="Scroll to highlights"><i class="bi bi-chevron-down"></i></a>
+
 :::
 :::
 
@@ -66,20 +70,20 @@ I study how climate models earn trust despite being "wrong," strictly speaking�
 #### Appointment
 I'm appointed as CUNY Grad Center Doctoral Faculty.  
 
-[Detail →](https://www.gc.cuny.edu/people/ryan-j-oloughlin)
+[Details →](https://www.gc.cuny.edu/people/ryan-j-oloughlin)
 :::
 :::
 :::
 
 ## What I Work On {#what-i-do}
 
-**All models are wrong—so why trust them?** Too often we equate trustworthiness with truthfulness. Yet when models agree, they build confidence for action; when they disagree, they often teach us the most. Uncertainty and error aren’t failures—they’re how science moves forward. *My work shows how we can trust science not by mitigating its limits, but by embracing them.*
+All models are wrong—so why trust them? Too often we equate trustworthiness with truthfulness. Yet when models agree, they build confidence for action; when they disagree, they often teach us the most. Uncertainty and error aren’t failures---they’re how science moves forward. *My work shows how we can trust science not just by mitigating its limits, but by embracing them.*
 
 :::{.grid .gap-4}
 ::: {.g-col-12 .g-col-lg-6}
 ### Big Questions
-1. **How can flawed models still generate knowledge?**  
-2. **When do agreement and disagreement strengthen trust in science?**  
+1. **How can flawed models generate knowledge?**  
+2. **When and why do agreement and disagreement strengthen trust in science?**  
 3. **How should we make decisions under uncertainty?**  
 
 [Explore Philosophy →](research.qmd)
@@ -100,13 +104,6 @@ My work speaks to philosophers (robustness, error, fruitfulness), scientists (mo
 :::{.grid .gap-3}
 ::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
 ::: {.section-card}
-#### 🧑‍🎓 Students
-Syllabi, office hours, course resources  
-[Start here →](teaching-students.qmd)
-:::
-:::
-::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
-::: {.section-card}
 #### 📚 Philosophers
 Works-in-progress & workshops  
 [Start here →](for-philosophers.qmd)
@@ -122,8 +119,15 @@ Talks & collaboration ideas in plain language
 ::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
 ::: {.section-card}
 #### 🎙️ Media
-100-word bio, topics, headshot, contact  
+Bio, topics, headshot, contact  
 [Start here →](media.qmd)
+:::
+:::
+::: {.g-col-12 .g-col-md-6 .g-col-xl-3}
+::: {.section-card}
+#### 🧑‍🎓 Students
+Syllabi, office hours, course resources  
+[Start here →](teaching-students.qmd)
 :::
 :::
 :::
@@ -134,7 +138,7 @@ Talks & collaboration ideas in plain language
 <br>
 {{< fa phone >}} [718-997-5270](tel:7189975270)
 <br>
-{{< fa location-dot >}} Powdermaker Hall 350-V, Queens College, CUNY
+{{< fa location-dot >}} [Powdermaker Hall 350-V, Queens College, CUNY](https://www.qc.cuny.edu/academics/philosophy/)
 
 [More ways to reach me →](contact.qmd){.btn .btn-outline-primary}
 

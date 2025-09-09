@@ -86,6 +86,8 @@ format:
       light: cosmo
       dark: darkly
     css: styles.css
+    include-after-body:
+      - partials/game-modal.html
     toc: true
     toc-location: right
     page-navigation: true
