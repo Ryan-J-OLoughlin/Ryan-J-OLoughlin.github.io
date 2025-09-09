@@ -11,24 +11,23 @@
     ]
   },
   "city-planner/spread/B": [
-    { "label": "Agreement across models builds confidence", "href": "for-scientists.qmd" }
+    { "label": "Why imperfect climate models are more helpful than you think", "href": "https://yaleclimateconnections.org/2025/06/why-imperfect-climate-models-are-more-helpful-than-you-think/" }
   ],
   "city-planner/spread/C": {
-    "blurb": "Treat the spread as information: it bounds plausible futures and guides robust plans.",
+    "blurb": "Treat the spread as information: it bounds plausible futures and guides robust plans."
+  },
+  "city-planner/spread/D": {
+    "blurb": "Averages may not be meaningful",
     "links": [
-      { "label": "Using ranges in planning (For Scientists)", "href": "for-scientists.qmd" }
+      { "label": "Ensembles of opportunity", "href": "https://doi.org/10.1098/rsta.2007.2076" }
     ]
   },
-  "city-planner/spread/D": [
-    { "label": "Averages vs. uncertainty — cautionary note", "href": "for-philosophers.qmd" }
-  ],
-
   "city-planner/disagree/A": [
-    { "label": "Disagreement as a clue, not a failure", "href": "for-philosophers.qmd" }
+    { "label": "Diagnosing errors (EJPS, 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" }
   ],
-  "city-planner/disagree/B": [
-    { "label": "Why averaging can hide sign changes", "href": "for-scientists.qmd" }
-  ],
+  "city-planner/disagree/B": {
+    "blurb": "Coming soon."
+  },
   "city-planner/disagree/C": {
     "blurb": "Modelers know their tools’ biases; asking them is key to credible decisions.",
     "links": [
@@ -36,50 +35,85 @@
     ]
   },
   "city-planner/disagree/D": [
-    { "label": "Precaution and resource tradeoffs", "href": "for-philosophers.qmd" }
+    { "label": "Precaution and resource tradeoffs", "href": "https://en.wikipedia.org/wiki/Antifragile_(book)" }
   ],
 
   "city-planner/weak/A": [
-    { "label": "Don’t discard too fast — why", "href": "for-philosophers.qmd" }
+    { "label": "Reason why not to discard too fast", "href": "https://doi.org/10.1007/s10584-023-03661-7" },
+    { "label": "Reason why to discard (Link forthcoming)", "href": "" }
   ],
   "city-planner/weak/B": {
     "blurb": "Even weaker models can reveal mechanisms, constrain estimates, and spur progress.",
     "links": [
-      { "label": "Lower-performance models (Climatic Change, 2024)", "href": "https://doi.org/10.1007/s10584-023-03661-7" }
+      { "label": "Lower-performance models (Climatic Change, 2024)", "href": "https://doi.org/10.1007/s10584-023-03661-7" }, 
+      { "label": "Disagreement can reveal mechanism", "href": "https://doi.org/10.1002/wcc.799" }
     ]
   },
   "city-planner/weak/C": [
-    { "label": "Independent checks and constraints", "href": "for-scientists.qmd" }
+    { "label": "Independent checks and constraints", "href": "https://doi.org/10.1016/j.shpsa.2014.12.002" }
   ],
-  "city-planner/weak/D": [
-    { "label": "Averaging risks burying signals", "href": "for-scientists.qmd" }
-  ],
-
+  "city-planner/weak/D": {
+    "blurb": "Averaging risks burying signals."
+  },
   "city-planner/geo/A": [
-    { "label": "Risks of large-scale deployment", "href": "media.qmd" }
+    
   ],
   "city-planner/geo/B": {
     "blurb": "Small, transparent experiments can build knowledge without full commitment.",
     "links": [
-      { "label": "Media: Geoengineering coverage", "href": "media.qmd" }
+      { "label": "When Are Small-Scale Field Experiments in Solar Geoengineering Worth Pursuing? (preprint)", "href": "https://philsci-archive.pitt.edu/25840/" }
     ]
   },
   "city-planner/geo/C": [
-    { "label": "Precaution vs preparedness", "href": "for-philosophers.qmd" }
+    { "label": "How to Argue about Solar Geoengineering", "href": "https://doi.org/10.1111/japp.12643" }
   ],
   "city-planner/geo/D": [
-    { "label": "The costs of delay", "href": "for-philosophers.qmd" }
+    { "label": "How to Argue about Solar Geoengineering", "href": "https://doi.org/10.1111/japp.12643" }
   ],
 
-  "policymaker/briefing/A": [ { "label": "Spreads are information, not indecision", "href": "for-scientists.qmd" } ],
-  "policymaker/briefing/B": [ { "label": "Robust policies across ranges", "href": "for-scientists.qmd" } ],
-  "policymaker/briefing/C": [ { "label": "Dangers of narrowing too fast", "href": "for-philosophers.qmd" } ],
-  "policymaker/briefing/D": [ { "label": "Evidence vs pressure", "href": "for-philosophers.qmd" } ],
+  "policymaker/briefing/A": [ { "label": "Spreads are information, not indecision", "href": "https://doi.org/10.1007/s10584-023-03661-7"  } ],
+  "policymaker/briefing/B": {
+    "blurb": "Science is necessarily uncertain. Robust policies account for this."
+  },
+  "policymaker/briefing/C": [ { "label": "What is the best model anyway?", "href": "https://doi.org/10.1029/2007JD008972" } ],
+  "policymaker/briefing/D": {
+    "blurb": "See: Nazis-era German science; see also: where the U.S. might be going"
+  },
+  "policymaker/conflict/A": [ { "label": "Metrics as tools for bridging climate science and applications", "href": "https://doi.org/10.1002/wcc.799" } ],
+  "policymaker/conflict/B": [ { "label": "Narrowing the climate information usability gap", "href": "https://doi.org/10.1038/nclimate1614" } ],
+  "policymaker/conflict/C": {
+    "blurb": "Consider this: an average person has one testicle."
+  },
+  "policymaker/conflict/D": [
+    { "label": "Ideally we want to be antifragile to future changes.", "href": "https://en.wikipedia.org/wiki/Antifragile_(book)" }
+  ],
+  "policymaker/imperfect/A": [
+    { "label": "Why imperfect climate models are more helpful than you think", "href": "https://yaleclimateconnections.org/2025/06/why-imperfect-climate-models-are-more-helpful-than-you-think/" }
+  ],
+  "policymaker/imperfect/B": [ { "label": "Scientists' credibility is strengthened by regularly diagnosing and fixing model errors", "href": "https://doi.org/10.5194/gmd-18-787-2025" } ],
+  "policymaker/imperfect/C": [ { "label": "The climate model research program improves over time through iterative testing", "href": "https://doi.org/10.1017/psa.2023.62" } ],
+  "policymaker/imperfect/D": {
+    "blurb": "Averages may not be meaningful",
+    "links": [
+      { "label": "Ensembles of opportunity", "href": "https://doi.org/10.1098/rsta.2007.2076" }
+    ]
+  },
+  "policymaker/geo/A": [
 
-  "policymaker/conflict/A": [ { "label": "Disagreement → learning", "href": "for-philosophers.qmd" } ],
-  "policymaker/conflict/B": [ { "label": "Consult model teams (EJPS 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" } ],
-  "policymaker/conflict/C": [ { "label": "Averaging hides sign changes", "href": "for-scientists.qmd" } ],
-  "policymaker/conflict/D": [ { "label": "Stress-test policies", "href": "for-scientists.qmd" } ],
+     ],
+  "policymaker/geo/B": {
+    "blurb": "Small, transparent experiments can build knowledge without full commitment.",
+    "links": [
+      { "label": "When Are Small-Scale Field Experiments in Solar Geoengineering Worth Pursuing? (preprint)", "href": "https://philsci-archive.pitt.edu/25840/" }
+    ]
+  },
+  "policymaker/geo/C": [
+    { "label": "How to Argue about Solar Geoengineering", "href": "https://doi.org/10.1111/japp.12643" }
+  ],
+  "policymaker/geo/D": [
+    { "label": "How to Argue about Solar Geoengineering", "href": "https://doi.org/10.1111/japp.12643" }
+  ],  
+
 
   "student/classroom/A": [ { "label": "Imperfection ≠ uselessness", "href": "for-philosophers.qmd" } ],
   "student/classroom/B": [ { "label": "Ensembles build confidence", "href": "for-scientists.qmd" } ],

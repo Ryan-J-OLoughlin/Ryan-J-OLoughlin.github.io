@@ -99,7 +99,7 @@ async function loadJSON(url){
           <div class="cyoa-card crt">
             <div class="cyoa-title">Choose Your Avatar</div>
             <div class="cyoa-prompt">
-              Everyone wants trustworthy guidance for decisions about the future. But every model is wrong, leaving us unsure whether to trust science. Choose your role to explore how science earns trust through uncertainty, disagreement, and even failure.
+              Everyone wants trustworthy guidance for decisions about the future. But every model is wrong, leaving us unsure whether to trust science. Choose your role to explore how science earns trust in the face of uncertainty, disagreement, and even failure.
             </div>
             <div class="cyoa-avatars" role="list">
               ${AVATARS.map(a=>`
@@ -193,7 +193,8 @@ async function loadJSON(url){
     const prevKey = state.chosen[step.id];
     if(prevKey){
       const prev = step.choices.find(x=>x.key===prevKey);
-      showFeedback(prev.feedback, step.next, step.id);
+      // Pass correct argument order: (step, text, nextId)
+      showFeedback(step, prev.feedback, step.next);
       // focus Next for accessibility
       const nextBtn = root.querySelector(".cyoa-next");
       if(nextBtn) nextBtn.focus();
@@ -327,7 +328,7 @@ async function loadJSON(url){
     box.style.borderRadius = '4px';
     const blurbHtml = blurb ? `<div style=\"margin:.25rem 0 .45rem;\">${blurb}</div>` : "";
     const list = links.length ? links.map(l=>`<a href="${l.href}" target="_blank" rel="noopener" class="link-muted">${l.label}</a>`).join("")
-                              : `<span>No links yet.</span>`;
+                              : `<span>Link coming soon.</span>`;
     box.innerHTML = `
       <div style="font-size:12px; text-transform:uppercase; color:var(--muted); margin-bottom:.4rem;">Further reading</div>
       ${blurbHtml}

@@ -19,7 +19,7 @@
       "scene": "briefing",
       "prompt": "One model predicts extreme drought; another heavy rainfall in the same region. What guides your decision?",
       "choices": [
-        { "key":"A", "label":"Ignore both — too unreliable.", "feedback":"Disagreement can spotlight errors and spur learning." },
+        { "key":"A", "label":"Ignore both — too unreliable.", "feedback":"Too risky. Both model outcomes are possible and consequential" },
         { "key":"B", "label":"Seek expert diagnosis from modeling teams.", "feedback":"Scientists know their models’ biases — consultation builds credibility." },
         { "key":"C", "label":"Split the difference; average outcomes.", "feedback":"Averages can hide crucial sign disagreements." },
         { "key":"D", "label":"Use disagreement to stress-test policies.", "feedback":"Exactly: robust decisions anticipate multiple plausible futures." }
@@ -43,9 +43,9 @@
       "scene": "geoengineering",
       "prompt": "Colleagues suggest funding geoengineering trials. What do you decide?",
       "choices": [
-        { "key":"A", "label":"Launch large-scale deployment.", "feedback":"Too high-risk without prior testing." },
-        { "key":"B", "label":"Fund small-scale, carefully monitored experiments.", "feedback":"Pursuitworthy option: generates knowledge without full commitment." },
-        { "key":"C", "label":"Ban geoengineering research outright.", "feedback":"Precaution avoids risks but may limit preparedness." },
+        { "key":"A", "label":"Launch large-scale deployment.", "feedback":"Even geoengineering proponents don't want this." },
+        { "key":"B", "label":"Fund small-scale, carefully monitored experiments.", "feedback":"Some may be premature; some may be worth pursuing to improve models." },
+        { "key":"C", "label":"Ban geoengineering research outright.", "feedback":"Precaution avoids some risks but creates others." },
         { "key":"D", "label":"Delay decisions until more is known.", "feedback":"Waiting postpones action and can waste preparation time." }
       ]
     }

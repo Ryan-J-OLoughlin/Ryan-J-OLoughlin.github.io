@@ -5,10 +5,10 @@
     {
       "id": "spread",
       "scene": "models_spread",
-      "prompt": "You’re a city planner in 2040. Model projections spread apart. What do you make of this spread?",
+      "prompt": "You’re a city planner. Model projections of floods spread apart. What do you make of this spread?",
       "choices": [
         { "key":"A", "label":"I want the best single model.", "feedback":"No single best model. Each has strengths/weaknesses; trust comes from comparing many." },
-        { "key":"B", "label":"If scientists can’t agree, I can’t trust this.", "feedback":"Spread ≠ ignorance. Agreement across different models builds confidence." },
+        { "key":"B", "label":"If models don't agree, I can’t trust this.", "feedback":"Too quick. Model spread does not mean ignorance." },
         { "key":"C", "label":"The spread is our best estimate.", "feedback":"Exactly — the spread captures uncertainty we can plan around." },
         { "key":"D", "label":"I’ll take the average.", "feedback":"Beware false precision — averages can hide risks." }
       ],
@@ -43,8 +43,8 @@
       "scene":"geoengineering",
       "prompt":"Geoengineering is on the table. What should the city support?",
       "choices":[
-        {"key":"A","label":"Large-scale deployment now.","feedback":"Too risky — large-scale interventions without testing could backfire."},
-        {"key":"B","label":"Small-scale field experiments.","feedback":"Pursuitworthy: generate knowledge without full commitment."},
+        {"key":"A","label":"Large-scale deployment now.","feedback":"Even geoengineering proponents don't want this."},
+        {"key":"B","label":"Small-scale field experiments.","feedback":"Some may be premature; some may be worth pursuing to improve models."},
         {"key":"C","label":"Ban geoengineering.","feedback":"Precaution avoids risks but may leave us unprepared."},
         {"key":"D","label":"Delay — watch and wait.","feedback":"Delay feels safe, but can lock in untested decisions later."}
       ]
