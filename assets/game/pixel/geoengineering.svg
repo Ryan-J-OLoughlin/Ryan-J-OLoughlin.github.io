@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 144" width="256" height="144">
+  <rect width="256" height="144" fill="#0b1b2a"/>
+  <!-- Sky bands from limited palette -->
+  <rect x="0" y="0" width="256" height="48" fill="#11273a"/>
+  <rect x="0" y="48" width="256" height="48" fill="#142432"/>
+  <rect x="0" y="96" width="256" height="48" fill="#0f1c28"/>
+  <!-- Sun -->
+  <rect x="208" y="12" width="16" height="16" fill="#ffd55a"/>
+  <!-- Balloon/aircraft spraying particles (small-scale) -->
+  <rect x="40" y="36" width="24" height="10" fill="#b4d7ff" stroke="#2a4d6f"/>
+  <rect x="50" y="30" width="6" height="6" fill="#b4d7ff"/>
+  <!-- Particle plume -->
+  <rect x="68" y="44" width="3" height="2" fill="#a9e6ff"/>
+  <rect x="72" y="46" width="3" height="2" fill="#a9e6ff"/>
+  <rect x="76" y="48" width="3" height="2" fill="#a9e6ff"/>
+  <rect x="80" y="50" width="3" height="2" fill="#a9e6ff"/>
+  <rect x="84" y="52" width="3" height="2" fill="#a9e6ff"/>
+  <rect x="88" y="54" width="3" height="2" fill="#a9e6ff"/>
+  <!-- Ground / horizon -->
+  <rect x="0" y="120" width="256" height="10" fill="#223b57"/>
+  <rect x="0" y="130" width="256" height="6" fill="#1a2f45"/>
+</svg>

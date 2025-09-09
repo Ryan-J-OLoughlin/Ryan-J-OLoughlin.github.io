@@ -28,263 +28,46 @@
     "text": "Collaboration Ideas\n\nCommunicating uncertainty responsibly\n\nDiagnosing error in climate model ensembles\n\nRobust inference under deep uncertainty"
   },
   {
-    "objectID": "media.html",
-    "href": "media.html",
-    "title": "Media / Press",
+    "objectID": "projects/error-taxonomy.html",
+    "href": "projects/error-taxonomy.html",
+    "title": "Error Taxonomy for Model Evaluation",
     "section": "",
-    "text": "Ryan O’Loughlin is a philosopher of science at Queens College, CUNY. He studies how climate scientists generate trustworthy knowledge with imperfect models, focusing on uncertainty, robustness, and error. His work bridges philosophy and climate research, with publications in leading journals and collaborations with scientists at NASA and NCAR.\n\n\n\n\n\nClick to expand\n\nRyan O’Loughlin is a philosopher of science whose work explains how scientists generate trustworthy knowledge with imperfect models. He is an Assistant Professor of Philosophy at Queens College, CUNY and doctoral faculty in Earth & Environmental Sciences at the CUNY Graduate Center. His research focuses on climate models, robustness, and uncertainty, and he collaborates with scientists at NASA GISS, NCAR, and Cornell. Ryan has published in leading journals including Synthese, and Climatic Change, and written for Yale Climate Connections. He is a clear and accessible voice on science, uncertainty, and decision-making.\n\n\n\n\n\n\nClick to expand\n\nRyan O’Loughlin is a philosopher of science specializing in climate models, uncertainty, and decision-making. He is an Assistant Professor of Philosophy at Queens College, CUNY, and serves as doctoral faculty in Earth and Environmental Sciences at the CUNY Graduate Center. His research investigates how scientists trust and learn from imperfect models, and why error and failure can be epistemically productive. He has published in Synthese, Climatic Change, and Geoscientific Model Development, and co-authored interdisciplinary work with climate scientists at NASA GISS, NCAR, and Cornell. In addition to academic writing, Ryan engages broader audiences through public-facing essays, including contributions to Yale Climate Connections, where he explains the value of imperfect models for climate policy. He has been invited to speak at Brown University, NASA, and NCAR, and co-organized the “Philosophy of Climate Models” workshop at the Philosophy of Science Association. Ryan is committed to making philosophy relevant beyond academia, clarifying how uncertainty and robustness matter for science, policy, and public trust."
+    "text": "Details coming soon. Classifies productive vs. misleading “errors” to guide targeted experiments and diagnostics.\nUpdated: August 30, 2025"
   },
   {
-    "objectID": "media.html#bios",
-    "href": "media.html#bios",
-    "title": "Media / Press",
+    "objectID": "projects/lower-skill-models.html",
+    "href": "projects/lower-skill-models.html",
+    "title": "Value of Lower-Skill Models",
     "section": "",
-    "text": "Ryan O’Loughlin is a philosopher of science at Queens College, CUNY. He studies how climate scientists generate trustworthy knowledge with imperfect models, focusing on uncertainty, robustness, and error. His work bridges philosophy and climate research, with publications in leading journals and collaborations with scientists at NASA and NCAR.\n\n\n\n\n\nClick to expand\n\nRyan O’Loughlin is a philosopher of science whose work explains how scientists generate trustworthy knowledge with imperfect models. He is an Assistant Professor of Philosophy at Queens College, CUNY and doctoral faculty in Earth & Environmental Sciences at the CUNY Graduate Center. His research focuses on climate models, robustness, and uncertainty, and he collaborates with scientists at NASA GISS, NCAR, and Cornell. Ryan has published in leading journals including Synthese, and Climatic Change, and written for Yale Climate Connections. He is a clear and accessible voice on science, uncertainty, and decision-making.\n\n\n\n\n\n\nClick to expand\n\nRyan O’Loughlin is a philosopher of science specializing in climate models, uncertainty, and decision-making. He is an Assistant Professor of Philosophy at Queens College, CUNY, and serves as doctoral faculty in Earth and Environmental Sciences at the CUNY Graduate Center. His research investigates how scientists trust and learn from imperfect models, and why error and failure can be epistemically productive. He has published in Synthese, Climatic Change, and Geoscientific Model Development, and co-authored interdisciplinary work with climate scientists at NASA GISS, NCAR, and Cornell. In addition to academic writing, Ryan engages broader audiences through public-facing essays, including contributions to Yale Climate Connections, where he explains the value of imperfect models for climate policy. He has been invited to speak at Brown University, NASA, and NCAR, and co-organized the “Philosophy of Climate Models” workshop at the Philosophy of Science Association. Ryan is committed to making philosophy relevant beyond academia, clarifying how uncertainty and robustness matter for science, policy, and public trust."
+    "text": "Details coming soon. When deliberately simpler or lower-skill configurations surface mechanisms that improve complex runs.\nUpdated: August 30, 2025"
   },
   {
-    "objectID": "media.html#headshot",
-    "href": "media.html#headshot",
-    "title": "Media / Press",
-    "section": "Download Headshot",
-    "text": "Download Headshot\n\nHigh-resolution headshot"
-  },
-  {
-    "objectID": "media.html#expertise",
-    "href": "media.html#expertise",
-    "title": "Media / Press",
-    "section": "Expertise Topics",
-    "text": "Expertise Topics\n\nClimate models & uncertainty\n\nRobustness and decision-making\n\nRisk communication & scientific credibility\n\nPhilosophy of failure and error in science\n\nExplanations in climate modeling\n\nGeoengineering and ethics of climate interventions"
-  },
-  {
-    "objectID": "media.html#highlights",
-    "href": "media.html#highlights",
-    "title": "Media / Press",
-    "section": "Selected Highlights",
-    "text": "Selected Highlights\n\nAffiliations: Assistant Professor of Philosophy, Queens College CUNY; Doctoral Faculty, CUNY Graduate Center.\n\nInvited Talks: Brown University Climate Science Seminar (2025); NASA Goddard Institute for Space Studies (2023); NCAR Climate & Global Dynamics Lab (2022).\n\nPublic Writing: “Why imperfect climate models are more helpful than you think” (Yale Climate Connections, 2025).\n\nResearch Highlights: Lead author on “Moving beyond post hoc explainable artificial intelligence” (Geoscientific Model Development, 2025).\n\nWorkshop Leadership: Co-organizer, Philosophy of Climate Models (PSA 2024)."
-  },
-  {
-    "objectID": "media.html#media-contact",
-    "href": "media.html#media-contact",
-    "title": "Media / Press",
-    "section": "Media Contact",
-    "text": "Media Contact\n📧 ryan.oloughlin@qc.cuny.edu\n📞 718-997-5270\nOffice: Powdermaker Hall 350-V, Queens College, CUNY\nUpdated: August 30, 2025"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Homepage | Ryan O’Loughlin | Philosopher of Science",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Ryan",
     "section": "",
-    "text": "I study how climate models earn trust despite being “wrong,” strictly speaking—and how that understanding should guide real-world decisions.\n\nSee Research For Collaborators For Students\n climate models • uncertainty • robustness • AI in climate science"
+    "text": "As a working-class kid from a small town, I never imagined becoming a philosopher. I stumbled into philosophy—and eventually into climate science—driven by curiosity and a love for logic. My work is devoted to a simple but unsettling question: if all models are wrong, why trust them? I’ve come to see that error, disagreement, and even failure are not flaws but the very forces that move science forward. Along the way I’ve worked closely with scientists and published in leading journals to explore how uncertainty can be clarified and made useful, trustworthy even. My path has never been a straight line, but a series of lessons learned—much like the sciences I study."
   },
   {
-    "objectID": "index.html#highlights",
-    "href": "index.html#highlights",
-    "title": "Homepage | Ryan O’Loughlin | Philosopher of Science",
-    "section": "Recent Highlights",
-    "text": "Recent Highlights\n\n\n\nTalk\n“Uncertainty and Climate Models,” Brown Climate Science Seminar (Sept 2025)\nDetails →\n\n\n\n\nPublication\n“Moving beyond post hoc eXplainable Artificial Intelligence (XAI),” GMD (2025)\nRead →\n\n\n\n\nAppointment\nI’m appointed as CUNY Grad Center Doctoral Faculty.\nDetail →"
-  },
-  {
-    "objectID": "index.html#what-i-do",
-    "href": "index.html#what-i-do",
-    "title": "Homepage | Ryan O’Loughlin | Philosopher of Science",
-    "section": "What I Work On",
-    "text": "What I Work On\nAll models are wrong—so why trust them? Too often we equate trustworthiness with truthfulness. Yet when models agree, they build confidence for action; when they disagree, they often teach us the most. Uncertainty and error aren’t failures—they’re how science moves forward. My work shows how we can trust science not by mitigating its limits, but by embracing them.\n\n\nBig Questions\n\nHow can flawed models still generate knowledge?\n\nWhen do agreement and disagreement strengthen trust in science?\n\nHow should we make decisions under uncertainty?\n\nExplore Philosophy →\n\n\nBridge to Science\n\nDiagnosing errors to learn from failure rather than hide it\n\nClarifying model evaluation so that convergence and divergence both build insight\n\nTranslating uncertainty into action\n\nFor scientists →"
-  },
-  {
-    "objectID": "index.html#audiences",
-    "href": "index.html#audiences",
-    "title": "Homepage | Ryan O’Loughlin | Philosopher of Science",
-    "section": "Who’s This For?",
-    "text": "Who’s This For?\nMy work speaks to philosophers (robustness, error, fruitfulness), scientists (model evaluation, uncertainty, pursuitworthiness), and the media (clear, plain-language analysis of climate modeling). And for students, it provides resources, mentorship, and guidance to think critically about science in a complex world.\n\n\n\n🧑‍🎓 Students\nSyllabi, office hours, course resources\nStart here →\n\n\n\n\n📚 Philosophers\nWorks-in-progress & workshops\nStart here →\n\n\n\n\n⚗️ Scientists\nTalks & collaboration ideas in plain language\nStart here →\n\n\n\n\n🎙️ Media\n100-word bio, topics, headshot, contact\nStart here →"
-  },
-  {
-    "objectID": "index.html#contact-information",
-    "href": "index.html#contact-information",
-    "title": "Homepage | Ryan O’Loughlin | Philosopher of Science",
-    "section": "Contact Information",
-    "text": "Contact Information\n ryan.oloughlin@qc.cuny.edu   718-997-5270   Powdermaker Hall 350-V, Queens College, CUNY\nMore ways to reach me →\nUpdated: August 30, 2025"
-  },
-  {
-    "objectID": "teaching-students.html",
-    "href": "teaching-students.html",
-    "title": "Student Dashboard",
+    "objectID": "about.html#short-bio",
+    "href": "about.html#short-bio",
+    "title": "About Ryan",
     "section": "",
-    "text": "📄 PHIL 101 Syllabus\n\n\n🏢 Office Hours / Contact\n\n\n📚 Academic Help\n\n\n📬 Letter of Recomm"
+    "text": "As a working-class kid from a small town, I never imagined becoming a philosopher. I stumbled into philosophy—and eventually into climate science—driven by curiosity and a love for logic. My work is devoted to a simple but unsettling question: if all models are wrong, why trust them? I’ve come to see that error, disagreement, and even failure are not flaws but the very forces that move science forward. Along the way I’ve worked closely with scientists and published in leading journals to explore how uncertainty can be clarified and made useful, trustworthy even. My path has never been a straight line, but a series of lessons learned—much like the sciences I study."
   },
   {
-    "objectID": "teaching-students.html#quick-actions",
-    "href": "teaching-students.html#quick-actions",
-    "title": "Student Dashboard",
-    "section": "",
-    "text": "📄 PHIL 101 Syllabus\n\n\n🏢 Office Hours / Contact\n\n\n📚 Academic Help\n\n\n📬 Letter of Recomm"
+    "objectID": "about.html#professional-highlights",
+    "href": "about.html#professional-highlights",
+    "title": "About Ryan",
+    "section": "Professional Highlights",
+    "text": "Professional Highlights\n\nPublications\nLead author on “Moving beyond post hoc explainable AI: lessons from dynamical climate modeling” (Geoscientific Model Development, 2025), selected as a highlight paper\n\n\nPublic Engagement\nWrote “Why imperfect climate models are more helpful than you think” for Yale Climate Connections (2025), introducing philosophy of science insights to the general public\n\n\nInvited Talks\nSpeaker at NCAR Climate & Global Dynamics Lab (2022), NASA Goddard Institute for Space Studies (2023, 2024), and CUNY Advanced Science Research Center (2025)\n\n\nLeadership & Collaboration\nCo-organized and convened “Making Climate Models & Data Actionable” workshop at AGU 2022; principal organizer of interdisciplinary grant proposals bridging philosophy and climate science"
   },
   {
-    "objectID": "teaching-students.html#current-courses",
-    "href": "teaching-students.html#current-courses",
-    "title": "Student Dashboard",
-    "section": "Current Courses",
-    "text": "Current Courses\n\n\n\nPHIL 101 — Intro to Philosophy (Fall 2025)\n\nTues/Thurs 9:15am – 10:30am in Powdermaker Hall 152\n\n📄 Syllabus\n\n\n\n\nPHIL 125 — Philosophy of the Environment (Fall 2025)\n\nTues/Thurs 10:45 – 12:00pm in Powdermaker Hall 152\n\n📄 Syllabus"
-  },
-  {
-    "objectID": "teaching-students.html#office-hours-contact",
-    "href": "teaching-students.html#office-hours-contact",
-    "title": "Student Dashboard",
-    "section": "Office Hours & Contact",
-    "text": "Office Hours & Contact\n\nTuesdays 1–2 pm, Powdermaker Hall 350V · or by appointment\n ryan.oloughlin@qc.cuny.edu"
-  },
-  {
-    "objectID": "teaching-students.html#mentorship-student-achievements",
-    "href": "teaching-students.html#mentorship-student-achievements",
-    "title": "Student Dashboard",
-    "section": "Mentorship & Student Achievements",
-    "text": "Mentorship & Student Achievements\nI am proud to support students in their academic and professional growth. Here are a few examples of supervised projects and where they’ve led:\n\n“Weighting the Many-Sided Die of Pascal’s Wager” — Jonathan Baruch\n→ Admitted to UPenn Law School with a Dean’s Scholarship"
-  },
-  {
-    "objectID": "teaching-students.html#professional-development",
-    "href": "teaching-students.html#professional-development",
-    "title": "Student Dashboard",
-    "section": "Professional Development",
-    "text": "Professional Development\n\n\n\nRequesting Letters of Recommendation\nSend one email with:\n1) Name + CUNY ID + course(s)/term(s) + final grade(s)\n2) Deadline(s) & submission method (portal/email)\n3) CV/Resume + unofficial transcript\n4) What you’re applying for & what to emphasize\n5) Required forms (PDF) & FERPA waiver status, if needed\n6) ≥ 3 weeks’ notice before first deadline\n\nEmail template\n\n\n\n\n\nResearch, Mentorship & Assistantships\n\nI supervise undergraduate research/theses and independent studies.\n\nTo express interest, email a 1–2 paragraph note with topic interests & prior coursework.\n\nAssistantships / openings: None currently posted (last updated August 30, 2025). Check back here for announcements."
-  },
-  {
-    "objectID": "teaching-students.html#academic-help",
-    "href": "teaching-students.html#academic-help",
-    "title": "Student Dashboard",
-    "section": "Academic Help Resources",
-    "text": "Academic Help Resources\n\n\n\nCampus resources\n\nWriting Center: schedule an appointment for personalized help\nLibrary Research Help — consult with a librarian\n\nAccessibility/Disability Services — accommodations & support\nCounseling Services — mental health support\n\nComputer Labs / Printing — laptops, printers, software access\nCareer Center — resumes, internships, grad school advising\n\n\n\n\n\nOff-campus / general resources\nWriting & citation - Purdue OWL — citation + academic writing guides\n- UNC Writing Center Handouts — quick how-to sheets\nPhilosophy references - Stanford Encyclopedia of Philosophy (SEP) — peer-reviewed entries\n- Internet Encyclopedia of Philosophy (IEP) — accessible overviews\n- PhilPapers — database of philosophy articles & books Research & tools - Google Scholar — literature search\n- Zotero + ZoteroBib — free reference manager & instant bibliographies"
-  },
-  {
-    "objectID": "teaching-students.html#course-archive",
-    "href": "teaching-students.html#course-archive",
-    "title": "Student Dashboard",
-    "section": "Course Archive",
-    "text": "Course Archive\n\n\nView past courses & syllabi\n\n\nPHIL 101 — Intro to Philosophy (SP/SU/FA 2022–2025)\n\n\n\nUpdated: August 30, 2025"
-  },
-  {
-    "objectID": "for-scientists.html",
-    "href": "for-scientists.html",
-    "title": "For Scientists",
-    "section": "",
-    "text": "Convergence, Divergence, and Trust in Climate Models\n\n\n\n\n\n CUNY ASRC · Mar 2025\n\n\n\n\n\n\n\nWhy We Should Want Models to Disagree\n\n\n\n\n\n NASA GISS · May 2023\n\n\n\n\n\n\n\nError Diagnosis & Low-Skill Models\n\n\n\n\n\n NCAR CGD · Oct 2022\n\n\n\n\n\nFull list in my CV →"
-  },
-  {
-    "objectID": "for-scientists.html#featured-talks",
-    "href": "for-scientists.html#featured-talks",
-    "title": "For Scientists",
-    "section": "",
-    "text": "Convergence, Divergence, and Trust in Climate Models\n\n\n\n\n\n CUNY ASRC · Mar 2025\n\n\n\n\n\n\n\nWhy We Should Want Models to Disagree\n\n\n\n\n\n NASA GISS · May 2023\n\n\n\n\n\n\n\nError Diagnosis & Low-Skill Models\n\n\n\n\n\n NCAR CGD · Oct 2022\n\n\n\n\n\nFull list in my CV →"
-  },
-  {
-    "objectID": "for-scientists.html#what-i-offer-to-scientific-collaborators",
-    "href": "for-scientists.html#what-i-offer-to-scientific-collaborators",
-    "title": "For Scientists",
-    "section": "What I Offer to Scientific Collaborators",
-    "text": "What I Offer to Scientific Collaborators\n\nClarifying uncertainty: Distinguishing between statistical spread and genuine epistemic confidence.\n\nRobustness reasoning: Explaining why model disagreement can strengthen, rather than weaken, scientific conclusions.\n\nModel evaluation: Developing conceptual tools for understanding lower-skill models, error diagnosis, and ensemble practices.\n\nDecision support: Showing how philosophical analysis makes uncertainty actionable for policymakers.\n\n\n\n\n\n\n\nIf you’re a climate scientist, data scientist, or modeler interested in uncertainty, robustness, or model evaluation, I’d love to talk.\nEmail me Propose a talk Start a project"
-  },
-  {
-    "objectID": "for-scientists.html#ongoing-collaborations",
-    "href": "for-scientists.html#ongoing-collaborations",
-    "title": "For Scientists",
-    "section": "Ongoing Collaborations",
-    "text": "Ongoing Collaborations\nI have worked with scientists at NASA GISS, NCAR, Cornell University, and Indiana University, helping refine how models are evaluated and how uncertainty is communicated.\n\n\n\nError Taxonomy for Model Evaluation\nClassifying productive vs. misleading “errors” to guide targeted experiments and diagnostics.\nRead more →\n\n\n\n\nValue of Lower-Skill Models\nWhen deliberately simpler or lower-skill configurations surface mechanisms that improve complex runs.\nRead more →\n\n\n\n\nWeighting, Spread, and Confidence\nSeparating spread-narrowing from genuine epistemic confidence; implications for ensemble practice & comms.\nRead more →\n\n\n\n\nDecision Support Under Uncertainty\nMapping uncertainty to decisions: robust conclusions, risk framing, and communication for stakeholders.\nRead more →"
-  },
-  {
-    "objectID": "teaching-instructors.html",
-    "href": "teaching-instructors.html",
-    "title": "Teaching Why Trust Science",
-    "section": "",
-    "text": "I design courses that link philosophy to urgent issues like climate change, scientific modeling, and environmental justice. This page collects syllabi, assignments, and teaching strategies that colleagues may find useful for adapting in their own classrooms, particularly for non-science students.\n\n\nI see teaching as a collaborative process where students learn by questioning, experimenting, and even failing. In my classes, I design hands-on activities—like building instruments in the makerspace—that let students experience the challenges of measurement and error firsthand. By connecting these activities to philosophical texts and Indigenous epistemologies, I help students see how knowledge is constructed and why uncertainty and failure are essential to learning.\n\n\n\nDownload and adapt syllabi from courses I’ve designed and taught:\n\n\nThis course uses logic, conceptual analysis, and scientific research to explore climate change as an ethical and justice issue. We examine questions of responsibility, extreme weather, and climate justice in the context of environmental philosophy.\nDownload\n\n\n\nThis course introduces fundamentals of logic and their role in scientific reasoning, including deduction, induction, probability, and causality. More broadly, we examine how science justifies knowledge through evidence and explanation rather than absolute proof.\nDownload\n\n\n\nThis course examines core issues in philosophy of science and then turns to Indigenous ways of knowing, highlighting how their worldviews offer unique insights into stewardship, sustainability, and resilience.\nDownload\nEach syllabus includes suggested readings, discussion structures, and sample assessments.\n\n\n\n\nA collection of modular assignments and in-class activities:\n\n\nBuild a thermometer with basic materials to explore error, measurement, and concept formation.\nDownload\n\n\n\nFormat for student-led debates on topics like free will, climate engineering, or scientific realism.\nDownload"
-  },
-  {
-    "objectID": "teaching-instructors.html#teaching-resources-for-philosophy-instructors",
-    "href": "teaching-instructors.html#teaching-resources-for-philosophy-instructors",
-    "title": "Teaching Why Trust Science",
-    "section": "",
-    "text": "I design courses that link philosophy to urgent issues like climate change, scientific modeling, and environmental justice. This page collects syllabi, assignments, and teaching strategies that colleagues may find useful for adapting in their own classrooms, particularly for non-science students.\n\n\nI see teaching as a collaborative process where students learn by questioning, experimenting, and even failing. In my classes, I design hands-on activities—like building instruments in the makerspace—that let students experience the challenges of measurement and error firsthand. By connecting these activities to philosophical texts and Indigenous epistemologies, I help students see how knowledge is constructed and why uncertainty and failure are essential to learning.\n\n\n\nDownload and adapt syllabi from courses I’ve designed and taught:\n\n\nThis course uses logic, conceptual analysis, and scientific research to explore climate change as an ethical and justice issue. We examine questions of responsibility, extreme weather, and climate justice in the context of environmental philosophy.\nDownload\n\n\n\nThis course introduces fundamentals of logic and their role in scientific reasoning, including deduction, induction, probability, and causality. More broadly, we examine how science justifies knowledge through evidence and explanation rather than absolute proof.\nDownload\n\n\n\nThis course examines core issues in philosophy of science and then turns to Indigenous ways of knowing, highlighting how their worldviews offer unique insights into stewardship, sustainability, and resilience.\nDownload\nEach syllabus includes suggested readings, discussion structures, and sample assessments.\n\n\n\n\nA collection of modular assignments and in-class activities:\n\n\nBuild a thermometer with basic materials to explore error, measurement, and concept formation.\nDownload\n\n\n\nFormat for student-led debates on topics like free will, climate engineering, or scientific realism.\nDownload"
-  },
-  {
-    "objectID": "teaching-instructors.html#share-collaborate",
-    "href": "teaching-instructors.html#share-collaborate",
-    "title": "Teaching Why Trust Science",
-    "section": "Share & Collaborate",
-    "text": "Share & Collaborate\nIf you adapt these materials, I’d love to hear how they work in your classroom. I welcome exchanges of syllabi, assignments, and teaching approaches. Contact me at 📧 ryan.oloughlin@qc.cuny.edu\nMore ways to reach me →\nUpdated: August 30, 2025"
-  },
-  {
-    "objectID": "for-philosophers.html",
-    "href": "for-philosophers.html",
-    "title": "For Philosophers",
-    "section": "",
-    "text": "I welcome collaboration with philosophers interested in climate science, modeling, and uncertainty—coauthoring papers, organizing workshops, reading groups, and sharing works-in-progress for feedback.\n\nTopics: robustness reasoning, error & failure in modeling, epistemic values, and AI in science.\n\nI’m especially keen on projects that connect normative/methodological questions to modeling practice."
-  },
-  {
-    "objectID": "for-philosophers.html#collaboration",
-    "href": "for-philosophers.html#collaboration",
-    "title": "For Philosophers",
-    "section": "",
-    "text": "I welcome collaboration with philosophers interested in climate science, modeling, and uncertainty—coauthoring papers, organizing workshops, reading groups, and sharing works-in-progress for feedback.\n\nTopics: robustness reasoning, error & failure in modeling, epistemic values, and AI in science.\n\nI’m especially keen on projects that connect normative/methodological questions to modeling practice."
-  },
-  {
-    "objectID": "for-philosophers.html#wip",
-    "href": "for-philosophers.html#wip",
-    "title": "For Philosophers",
-    "section": "Works-in-Progress",
-    "text": "Works-in-Progress\n\nEpistemic Virtues in Ensemble Modeling — How epistemic values shape evaluation in multi-model ensembles.\n\nError and Disagreement as Epistemic Resources — Why “bad” models and disagreement can advance knowledge."
-  },
-  {
-    "objectID": "for-philosophers.html#invited-talks",
-    "href": "for-philosophers.html#invited-talks",
-    "title": "For Philosophers",
-    "section": "Recent Invited Talks",
-    "text": "Recent Invited Talks"
-  },
-  {
-    "objectID": "for-philosophers.html#workshops",
-    "href": "for-philosophers.html#workshops",
-    "title": "For Philosophers",
-    "section": "Workshops & Reading Groups",
-    "text": "Workshops & Reading Groups\n\n\n\nUpdated: August 30, 2025"
-  },
-  {
-    "objectID": "research.html",
-    "href": "research.html",
-    "title": "Research",
-    "section": "",
-    "text": "We make billion-dollar decisions based on climate models, even though every model is false, strictly speaking. My research asks: what does it mean to trust science when its tools are false? More specifically, how do climate scientists use computer models to generate knowledge? Why are their models “wrong but useful”?\nBy focusing on robustness, error, and how we explain modeling results, I show why imperfect models can still yield trustworthy insights. My work shows how philosophy can help make sense of scientific uncertainty and strengthen trust in climate research."
-  },
-  {
-    "objectID": "research.html#overview",
-    "href": "research.html#overview",
-    "title": "Research",
-    "section": "",
-    "text": "We make billion-dollar decisions based on climate models, even though every model is false, strictly speaking. My research asks: what does it mean to trust science when its tools are false? More specifically, how do climate scientists use computer models to generate knowledge? Why are their models “wrong but useful”?\nBy focusing on robustness, error, and how we explain modeling results, I show why imperfect models can still yield trustworthy insights. My work shows how philosophy can help make sense of scientific uncertainty and strengthen trust in climate research."
-  },
-  {
-    "objectID": "research.html#bridging-science",
-    "href": "research.html#bridging-science",
-    "title": "Research",
-    "section": "Bridging Science and Philosophy",
-    "text": "Bridging Science and Philosophy\nBoth philosophers and scientists care about knowledge—what it is, how we get it, and whether we can trust it. My work brings these communities into dialogue by asking how the credibility of knowledge is established and shared.\nI have published in both leading philosophy journals and interdisciplinary science venues, including Synthese, Climatic Change, and Geoscientific Model Development. In these publications I introduce philosophical tools—such as robustness reasoning and the analysis of error—to scientific audiences, helping them reflect on how models generate and justify knowledge. I also present regularly at conferences and workshops that bring philosophers and scientists together, where my work has influenced how climate researchers discuss uncertainty and how philosophers ground their theories in real modeling practice.\nIn addition to publications and conference work, I collaborate directly with climate scientists at NASA Goddard Institute of Space Studies, the National Center for Atmospheric Research, Cornell University, and Indiana University. These collaborations have refined how scientists evaluate their models, encouraged open discussions about the limits of prediction, and given philosophers concrete insights into modeling practices. Together, these activities show how philosophy can clarify scientific debates and how scientific practice can enrich philosophical theory."
-  },
-  {
-    "objectID": "research.html#research-agenda",
-    "href": "research.html#research-agenda",
-    "title": "Research",
-    "section": "Research Agenda",
-    "text": "Research Agenda\n\nUncertainty and Representation – How do climate models represent uncertainty, and what kinds of knowledge do they provide about the future?\nRobustness and Trustworthiness – What makes scientific results robust, and how should robustness guide research agendas?\nError, Failure, and Pluralism – Why should we value disagreement and low-skill models in science, and how can they advance collective knowledge?\nAI and Climate Modeling – How can philosophy shape debates about explainable AI in climate science and beyond?"
-  },
-  {
-    "objectID": "research.html#selected-publications",
-    "href": "research.html#selected-publications",
-    "title": "Research",
-    "section": "Selected Publications",
-    "text": "Selected Publications\n\nO’Loughlin, R., Li, D., Neale, R., & O’Brien, T.A. (2025). Moving beyond post hoc explainable artificial intelligence: lessons from dynamical climate modeling. Geoscientific Model Development, 18, 787–802. https://doi.org/10.5194/gmd-18-787-2025\nO’Loughlin, R. (2024). Why we need lower-performance climate models. Climatic Change, 177(2), 1–21. https://doi.org/10.1007/s10584-023-03661-7\nO’Loughlin, R. (2023). Diagnosing errors in climate model intercomparisons. European Journal for Philosophy of Science, 13(2), 1–29. https://doi.org/10.1007/s13194-023-00522-z\nO’Loughlin, R. & Li, D. (2022). Model robustness in economics: the admissibility and evaluation of tractability assumptions. Synthese, 200, 1–23. https://doi.org/10.1007/s11229-022-03608-y\nO’Loughlin, R. (2021). Robustness reasoning in climate model comparisons. Studies in History and Philosophy of Science: Part A, 85, 35–43. https://doi.org/10.1016/j.shpsa.2020.12.005\n\nFull list in CV →"
-  },
-  {
-    "objectID": "research.html#works-in-progress",
-    "href": "research.html#works-in-progress",
-    "title": "Research",
-    "section": "Current Projects",
-    "text": "Current Projects\n\nDoes Model Weighting Reduce Uncertainty? A Bayesian Clarification\nClimate scientists often weight climate models that best fit past data, claiming this reduces uncertainty in projections. My current work shows that if weighting is understood as Bayesian updating, this interpretation is misleading: normalization narrows ensemble spread but does not increase epistemic confidence. This project clarifies when weighting genuinely improves knowledge and when it risks creating an illusion of certainty—an issue with direct implications for scientific communication and policy.\nUpdated: August 30, 2025"
+    "objectID": "about.html#curriculum-vitae",
+    "href": "about.html#curriculum-vitae",
+    "title": "About Ryan",
+    "section": "Curriculum Vitae",
+    "text": "Curriculum Vitae\nDownload CV as PDF\n\nUpdated: September 9, 2025"
   },
   {
     "objectID": "files/cv-content.html",
@@ -378,32 +161,410 @@
     "text": "Languages\n\nEnglish (native)\n\nMandarin Chinese (intermediate proficiency, speaking & reading)\n\n\nUpdated: ?meta:date-modified"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About Ryan",
+    "objectID": "research.html",
+    "href": "research.html",
+    "title": "Research",
     "section": "",
-    "text": "As a working-class kid from a small town, I never imagined becoming a philosopher. I stumbled into philosophy—and eventually into climate science—driven by curiosity and a need for reason. My work is devoted to a simple but unsettling question: if all models are wrong, why trust them? I’ve come to see that error, disagreement, and even failure are not flaws but the very forces that move science forward. Along the way I’ve worked closely with scientists and published in leading journals to explore how uncertainty can be clarified and made useful, trustworthy even. My path has never been a straight line, but a series of lessons learned—much like the sciences I study."
+    "text": "Every model is wrong — so why trust them?\nClimate models are the backbone of our understanding of Earth’s future. They guide decisions about infrastructure, energy, and adaptation that involve billions of dollars and countless lives. Yet every model is imperfect. This isn’t a dig at climate science; it’s a fact about the very nature of scientific models. Each one simplifies reality, leaving scientists, policymakers, and the public unsure whether to act on their results. The stakes could not be higher: how do we plan responsibly when the very tools we rely on are flawed?"
   },
   {
-    "objectID": "about.html#short-bio",
-    "href": "about.html#short-bio",
-    "title": "About Ryan",
+    "objectID": "research.html#the-challenge",
+    "href": "research.html#the-challenge",
+    "title": "Research",
     "section": "",
-    "text": "As a working-class kid from a small town, I never imagined becoming a philosopher. I stumbled into philosophy—and eventually into climate science—driven by curiosity and a need for reason. My work is devoted to a simple but unsettling question: if all models are wrong, why trust them? I’ve come to see that error, disagreement, and even failure are not flaws but the very forces that move science forward. Along the way I’ve worked closely with scientists and published in leading journals to explore how uncertainty can be clarified and made useful, trustworthy even. My path has never been a straight line, but a series of lessons learned—much like the sciences I study."
+    "text": "Every model is wrong — so why trust them?\nClimate models are the backbone of our understanding of Earth’s future. They guide decisions about infrastructure, energy, and adaptation that involve billions of dollars and countless lives. Yet every model is imperfect. This isn’t a dig at climate science; it’s a fact about the very nature of scientific models. Each one simplifies reality, leaving scientists, policymakers, and the public unsure whether to act on their results. The stakes could not be higher: how do we plan responsibly when the very tools we rely on are flawed?"
   },
   {
-    "objectID": "about.html#professional-highlights",
-    "href": "about.html#professional-highlights",
-    "title": "About Ryan",
-    "section": "Professional Highlights",
-    "text": "Professional Highlights\n\nPublications\nLead author on “Moving beyond post hoc explainable AI: lessons from dynamical climate modeling” (Geoscientific Model Development, 2025), selected as a highlight paper\n\n\nPublic Engagement\nWrote “Why imperfect climate models are more helpful than you think” for Yale Climate Connections (2025), introducing philosophy of science insights to the general public\n\n\nInvited Talks\nSpeaker at NASA Goddard Institute for Space Studies (2023-24), NCAR Climate & Global Dynamics Lab (2022), and CUNY Advanced Science Research Center (2025)\n\n\nLeadership & Collaboration\nCo-organized “Philosophy of Climate Models” workshop at PSA 2024; principal organizer of interdisciplinary grant proposals bridging philosophy and climate science"
+    "objectID": "research.html#my-work",
+    "href": "research.html#my-work",
+    "title": "Research",
+    "section": "My Work",
+    "text": "My Work\nTurning error and disagreement into engines of trust.\nI investigate how climate scientists learn from imperfect tools — and how philosophy can make those practices clearer and more credible. My approach is naturalistic: I study real scientific practice through case studies, interviews, and collaborations with modeling teams. I highlight not only how models succeed, but also how scientists diagnose mistakes, refine methods, and sometimes even learn more from failure than from success.\nPhilosophy, in this sense, is not abstract wordplay: it is a critical companion to science, clarifying what scientists already do and probing its limits. For a deeper dive, check out the game below.\n\n\n\n\n\n\nChoose Your Own Adventure: Trust Without Truth\n\n\n\nStep into the shoes of a city planner, policymaker, student, or journalist. Explore how error, disagreement, and uncertainty shape real-world decisions.\nPlay the game\n\n\nJavaScript is required for the popup. Open the interactive in a new tab."
   },
   {
-    "objectID": "about.html#curriculum-vitae",
-    "href": "about.html#curriculum-vitae",
-    "title": "About Ryan",
-    "section": "Curriculum Vitae",
-    "text": "Curriculum Vitae\nDownload CV as PDF\n\nUpdated: August 30, 2025"
+    "objectID": "research.html#the-insight",
+    "href": "research.html#the-insight",
+    "title": "Research",
+    "section": "The Insight",
+    "text": "The Insight\nAgreement builds confidence. Disagreement sparks discovery. Error drives progress.\nMy work calls for a change in mindset: trustworthiness does not require truth. Since all models are false in some respects, credibility must come from elsewhere — from patterns of agreement, from productive disagreement, and from the ability to learn through error.\n\n\n\n\n\n\nQuote\n\n\n\nAll models are wrong. Some are useful — Stastician George Box (1976)\n\n\nThis shifts us away from a binary view — “perfect or useless” — and toward a more practical stance: models can be wrong and yet useful, flawed but still trustworthy."
+  },
+  {
+    "objectID": "research.html#research-themes",
+    "href": "research.html#research-themes",
+    "title": "Research",
+    "section": "Research Themes",
+    "text": "Research Themes\n\n\n\nRobustness and Evaluation\nWhy (and when) does convergence across models matter for trust?\nRead more →\n\n\n\n\nError and Failure\nHow do scientists make progress by diagnosing mistakes?\nRead more →\n\n\n\n\nImperfect Models\nWhy are weaker models nonetheless useful?\nRead more →\n\n\n\n\nAI for Climate Science\nHow can philosophy guide trustworthy AI for science?\nRead more →"
+  },
+  {
+    "objectID": "research.html#current-projects",
+    "href": "research.html#current-projects",
+    "title": "Research",
+    "section": "Current Projects",
+    "text": "Current Projects\n\n\n\nDoes Model Weighting Reduce Uncertainty?\nBayesian clarification: the risks of narrowing spread without increasing epistemic confidence.\n\n\n\n\nFailure in Science\nHow scientists learn from failure, from climate modeling, AI, experiments, and beyond.\n\n\n\n\nGeoengineering and Pursuitworthiness\nDeterming when small-scale intervention experiments are worth pursuing."
+  },
+  {
+    "objectID": "research.html#selected-publications",
+    "href": "research.html#selected-publications",
+    "title": "Research",
+    "section": "Selected Publications",
+    "text": "Selected Publications\nO’Loughlin, R. (2024). Why We Need Lower-Performance Climate Models. Climatic Change. https://doi.org/10.1007/s10584-023-03661-7\nO’Loughlin, R. (2023). Diagnosing Errors in Climate Model Intercomparisons. European Journal for Philosophy of Science. https://doi.org/10.1007/s13194-023-00522-z\nO’Loughlin, R. (2021). Robustness Reasoning in Climate Model Comparisons. Studies in History and Philosophy of Science. https://doi.org/10.1016/j.shpsa.2020.12.005\n\nFull list in CV →"
+  },
+  {
+    "objectID": "research.html#whats-next",
+    "href": "research.html#whats-next",
+    "title": "Research",
+    "section": "What’s Next",
+    "text": "What’s Next\nNew projects on failure, uncertainty, and the future of modeling.\n\nExpanding my account of failure as a source of scientific progress.\nApplying lessons from climate modeling to the design of trustworthy AI systems.\n\n\n\n\n\n\n\nLet’s Connect\n\n\n\nFor scientists → Collaboration on uncertainty, robustness, and decision support.\nFor philosophers → Dialogue on error & scientific discovery, pluralism, and the philosophy of modeling.\nFor students → Courses and resources on how philosophy clarifies science.\nFor media → Expert commentary on climate models, uncertainty, and trust in science.\n\n\nUpdated: September 9, 2025"
+  },
+  {
+    "objectID": "for-philosophers.html",
+    "href": "for-philosophers.html",
+    "title": "For Philosophers",
+    "section": "",
+    "text": "I welcome collaboration with philosophers interested in climate science, modeling, and uncertainty—coauthoring papers, organizing workshops, reading groups, and sharing works-in-progress for feedback.\n\nTopics: robustness reasoning, error & failure in modeling, epistemic values, and AI in science.\n\nI’m especially keen on projects that connect normative/methodological questions to modeling practice."
+  },
+  {
+    "objectID": "for-philosophers.html#collaboration",
+    "href": "for-philosophers.html#collaboration",
+    "title": "For Philosophers",
+    "section": "",
+    "text": "I welcome collaboration with philosophers interested in climate science, modeling, and uncertainty—coauthoring papers, organizing workshops, reading groups, and sharing works-in-progress for feedback.\n\nTopics: robustness reasoning, error & failure in modeling, epistemic values, and AI in science.\n\nI’m especially keen on projects that connect normative/methodological questions to modeling practice."
+  },
+  {
+    "objectID": "for-philosophers.html#wip",
+    "href": "for-philosophers.html#wip",
+    "title": "For Philosophers",
+    "section": "Works-in-Progress",
+    "text": "Works-in-Progress\n\nEpistemic Virtues in Ensemble Modeling — How epistemic values shape evaluation in multi-model ensembles.\n\nError and Disagreement as Epistemic Resources — Why “bad” models and disagreement can advance knowledge."
+  },
+  {
+    "objectID": "for-philosophers.html#invited-talks",
+    "href": "for-philosophers.html#invited-talks",
+    "title": "For Philosophers",
+    "section": "Recent Invited Talks",
+    "text": "Recent Invited Talks"
+  },
+  {
+    "objectID": "for-philosophers.html#workshops",
+    "href": "for-philosophers.html#workshops",
+    "title": "For Philosophers",
+    "section": "Workshops & Reading Groups",
+    "text": "Workshops & Reading Groups\n\n\n\nUpdated: August 30, 2025"
+  },
+  {
+    "objectID": "talks/nasa-giss-ml-2024.html",
+    "href": "talks/nasa-giss-ml-2024.html",
+    "title": "Climate Invariant Machine Learning: Insights from Philosophy of Induction",
+    "section": "",
+    "text": "When climate scientists use supervised machine learning (ML), one challenge is that the trained ML model can only work on the training dataset and cannot generalize beyond the training data, particularly when simulating a warmer climate. This is expected because data of a warmer climate are not i.i.d. to those of the control climate. However, this challenge can be resolved by paying attention to the invariant relationships that help make the inductive leap between control climate and warmer climate. In this talk, I’ll explain the rationale behind “climate-invariant ML” using the philosophy of induction and offer two examples.\n\n\n\nNASA Goddard Institute for Space Studies (GISS), Feb 7, 2024\n\n\n\n\n\n\n\ncoming soon.\nUpdated: August 30, 2025"
+  },
+  {
+    "objectID": "talks/nasa-giss-ml-2024.html#abstract",
+    "href": "talks/nasa-giss-ml-2024.html#abstract",
+    "title": "Climate Invariant Machine Learning: Insights from Philosophy of Induction",
+    "section": "",
+    "text": "When climate scientists use supervised machine learning (ML), one challenge is that the trained ML model can only work on the training dataset and cannot generalize beyond the training data, particularly when simulating a warmer climate. This is expected because data of a warmer climate are not i.i.d. to those of the control climate. However, this challenge can be resolved by paying attention to the invariant relationships that help make the inductive leap between control climate and warmer climate. In this talk, I’ll explain the rationale behind “climate-invariant ML” using the philosophy of induction and offer two examples."
+  },
+  {
+    "objectID": "talks/nasa-giss-ml-2024.html#venue",
+    "href": "talks/nasa-giss-ml-2024.html#venue",
+    "title": "Climate Invariant Machine Learning: Insights from Philosophy of Induction",
+    "section": "",
+    "text": "NASA Goddard Institute for Space Studies (GISS), Feb 7, 2024"
+  },
+  {
+    "objectID": "talks/nasa-giss-ml-2024.html#slides-handouts",
+    "href": "talks/nasa-giss-ml-2024.html#slides-handouts",
+    "title": "Climate Invariant Machine Learning: Insights from Philosophy of Induction",
+    "section": "",
+    "text": "coming soon.\nUpdated: August 30, 2025"
+  },
+  {
+    "objectID": "talks/nasa-giss-disagreement-2023.html",
+    "href": "talks/nasa-giss-disagreement-2023.html",
+    "title": "Why we should want models to disagree: The value of ‘bad’ models in climate science",
+    "section": "",
+    "text": "All models are wrong, but some are useful. Iâ€™d wager that most, if not all, climate scientists would accept this oft-quoted aphorism from statistician George Box. However, models are not all equally wrong. In this talk I will discuss the idea of “bad” climate models, i.e., models which give results that are worse than the results of other models. Based on evidence from the scientific literature, I show that some “bad” models are scientifically useful for discovering the importance of climate processes, for constraining estimates of climate variables, and for testing model weighting schemes to project future climate more accurately. Even in cases where all models in an ensemble perform poorly relative to our expectations, the very practice of diagnosing model errors demonstrates that scientists have a tacit-yet-working understanding of their models. I conclude that having a plurality of competing models is scientifically beneficial for reasons that have been under-appreciated by many.\n\n\n\nNASA Goddard Institute for Space Studies (GISS), May 3, 2023\n\n\n\n\n\n\n\ncoming soon.\nUpdated: August 30, 2025"
+  },
+  {
+    "objectID": "talks/nasa-giss-disagreement-2023.html#abstract",
+    "href": "talks/nasa-giss-disagreement-2023.html#abstract",
+    "title": "Why we should want models to disagree: The value of ‘bad’ models in climate science",
+    "section": "",
+    "text": "All models are wrong, but some are useful. Iâ€™d wager that most, if not all, climate scientists would accept this oft-quoted aphorism from statistician George Box. However, models are not all equally wrong. In this talk I will discuss the idea of “bad” climate models, i.e., models which give results that are worse than the results of other models. Based on evidence from the scientific literature, I show that some “bad” models are scientifically useful for discovering the importance of climate processes, for constraining estimates of climate variables, and for testing model weighting schemes to project future climate more accurately. Even in cases where all models in an ensemble perform poorly relative to our expectations, the very practice of diagnosing model errors demonstrates that scientists have a tacit-yet-working understanding of their models. I conclude that having a plurality of competing models is scientifically beneficial for reasons that have been under-appreciated by many."
+  },
+  {
+    "objectID": "talks/nasa-giss-disagreement-2023.html#venue",
+    "href": "talks/nasa-giss-disagreement-2023.html#venue",
+    "title": "Why we should want models to disagree: The value of ‘bad’ models in climate science",
+    "section": "",
+    "text": "NASA Goddard Institute for Space Studies (GISS), May 3, 2023"
+  },
+  {
+    "objectID": "talks/nasa-giss-disagreement-2023.html#slides-handouts",
+    "href": "talks/nasa-giss-disagreement-2023.html#slides-handouts",
+    "title": "Why we should want models to disagree: The value of ‘bad’ models in climate science",
+    "section": "",
+    "text": "coming soon.\nUpdated: August 30, 2025"
+  },
+  {
+    "objectID": "teaching-instructors.html",
+    "href": "teaching-instructors.html",
+    "title": "Teaching Why Trust Science",
+    "section": "",
+    "text": "I design courses that link philosophy to urgent issues like climate change, scientific modeling, environmental justice, energy transition, and biodiversity. Below are syllabi, assignments, and teaching strategies that colleagues may find useful for adapting in their own classrooms, particularly for non-science students.\n\n\nI see teaching as a collaborative process where students learn by questioning, experimenting, and even failing. In my classes, I design hands-on activities—like building instruments in the university makerspace—that let students experience the challenges of measurement and error firsthand. By connecting these activities to philosophical texts, I help students see how knowledge is constructed and why uncertainty and failure are essential to learning.\n\n\n\nDownload and adapt syllabi from courses I’ve designed and taught:\n\n\nThis course uses logic, conceptual analysis, and scientific research to explore climate change as an ethical and justice issue. We examine questions of responsibility, extreme weather, and climate justice in the context of environmental philosophy.\nDownload\n\n\n\nThis course introduces fundamentals of logic and their role in scientific reasoning, including deduction, induction, probability, and causality. More broadly, we examine how science justifies knowledge through evidence and explanation rather than absolute proof.\nDownload\n\n\n\nThis course examines core issues in philosophy of science and then turns to Indigenous ways of knowing, highlighting how their worldviews offer unique insights into stewardship, sustainability, and resilience.\nDownload\nEach syllabus includes suggested readings, discussion structures, and sample assessments.\n\n\n\n\nA collection of modular assignments and in-class activities:\n\n\nBuild a thermometer with basic materials to explore error, measurement, and concept formation.\nDownload\n\n\n\nFormat for student-led debates on topics like free will, climate engineering, or scientific realism.\nDownload"
+  },
+  {
+    "objectID": "teaching-instructors.html#teaching-resources-for-philosophy-instructors",
+    "href": "teaching-instructors.html#teaching-resources-for-philosophy-instructors",
+    "title": "Teaching Why Trust Science",
+    "section": "",
+    "text": "I design courses that link philosophy to urgent issues like climate change, scientific modeling, environmental justice, energy transition, and biodiversity. Below are syllabi, assignments, and teaching strategies that colleagues may find useful for adapting in their own classrooms, particularly for non-science students.\n\n\nI see teaching as a collaborative process where students learn by questioning, experimenting, and even failing. In my classes, I design hands-on activities—like building instruments in the university makerspace—that let students experience the challenges of measurement and error firsthand. By connecting these activities to philosophical texts, I help students see how knowledge is constructed and why uncertainty and failure are essential to learning.\n\n\n\nDownload and adapt syllabi from courses I’ve designed and taught:\n\n\nThis course uses logic, conceptual analysis, and scientific research to explore climate change as an ethical and justice issue. We examine questions of responsibility, extreme weather, and climate justice in the context of environmental philosophy.\nDownload\n\n\n\nThis course introduces fundamentals of logic and their role in scientific reasoning, including deduction, induction, probability, and causality. More broadly, we examine how science justifies knowledge through evidence and explanation rather than absolute proof.\nDownload\n\n\n\nThis course examines core issues in philosophy of science and then turns to Indigenous ways of knowing, highlighting how their worldviews offer unique insights into stewardship, sustainability, and resilience.\nDownload\nEach syllabus includes suggested readings, discussion structures, and sample assessments.\n\n\n\n\nA collection of modular assignments and in-class activities:\n\n\nBuild a thermometer with basic materials to explore error, measurement, and concept formation.\nDownload\n\n\n\nFormat for student-led debates on topics like free will, climate engineering, or scientific realism.\nDownload"
+  },
+  {
+    "objectID": "teaching-instructors.html#share-collaborate",
+    "href": "teaching-instructors.html#share-collaborate",
+    "title": "Teaching Why Trust Science",
+    "section": "Share & Collaborate",
+    "text": "Share & Collaborate\nIf you adapt these materials, I’d love to hear how they work in your classroom. I welcome exchanges of syllabi, assignments, and teaching approaches. Contact me at 📧 ryan.oloughlin@qc.cuny.edu\nMore ways to reach me →\nUpdated: September 9, 2025"
+  },
+  {
+    "objectID": "for-scientists.html",
+    "href": "for-scientists.html",
+    "title": "For Scientists",
+    "section": "",
+    "text": "CUNY ASRC · Mar 2025\n\n\n\n\n\n\n\n\n NASA GISS · May 2023\n\n\n\n\n\n\n\n\n NCAR CGD · Oct 2022\n\n\n\n\n\nFull list in my CV →"
+  },
+  {
+    "objectID": "for-scientists.html#featured-talks",
+    "href": "for-scientists.html#featured-talks",
+    "title": "For Scientists",
+    "section": "",
+    "text": "CUNY ASRC · Mar 2025\n\n\n\n\n\n\n\n\n NASA GISS · May 2023\n\n\n\n\n\n\n\n\n NCAR CGD · Oct 2022\n\n\n\n\n\nFull list in my CV →"
+  },
+  {
+    "objectID": "for-scientists.html#archived-talks",
+    "href": "for-scientists.html#archived-talks",
+    "title": "For Scientists",
+    "section": "Archived Talks",
+    "text": "Archived Talks\nClimate Invariant Machine Learning with Dan Li, NASA GISS, Feb 2024 Read More →"
+  },
+  {
+    "objectID": "for-scientists.html#what-i-offer-to-scientific-collaborators",
+    "href": "for-scientists.html#what-i-offer-to-scientific-collaborators",
+    "title": "For Scientists",
+    "section": "What I Offer to Scientific Collaborators",
+    "text": "What I Offer to Scientific Collaborators\n\nClarifying uncertainty: Distinguishing between statistical spread and genuine epistemic confidence.\n\nRobustness reasoning: Explaining why model disagreement can strengthen, rather than weaken, scientific conclusions.\n\nModel evaluation: Developing conceptual tools for understanding lower-skill models, error diagnosis, and ensemble practices.\n\nDecision support: Showing how philosophical analysis makes uncertainty actionable for policymakers.\n\n\n\n\n\n\n\nIf you’re a climate scientist, data scientist, or modeler interested in uncertainty, robustness, or model evaluation, I’d love to talk.\nEmail me Propose a talk Start a project"
+  },
+  {
+    "objectID": "for-scientists.html#ongoing-collaborations",
+    "href": "for-scientists.html#ongoing-collaborations",
+    "title": "For Scientists",
+    "section": "Ongoing Collaborations",
+    "text": "Ongoing Collaborations\nI have worked with scientists at NASA GISS, NCAR, Cornell University, and Indiana University, helping refine how models are evaluated and how uncertainty is communicated.\n:::"
+  },
+  {
+    "objectID": "talks/ncar-cgd-error-taxonomy-2022.html",
+    "href": "talks/ncar-cgd-error-taxonomy-2022.html",
+    "title": "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science",
+    "section": "",
+    "text": "Although scientists have been conducting relatively systematic climate model intercomparisons for decades, error diagnosis (i.e., identifying and attributing sources of model-model disagreement) has been far less systematized. In this talk, I analyze the strategies used to diagnose model errors based on what is reported in the scientific literature, going back to the first Atmospheric Model Intercomparison Project (AMIP). These strategies include, e.g., dimension reduction techniques, multi-model sensitivity analysis, physical reasoning about the radiative effects of clouds, and testing hypotheses about sources of potential model error. Based on the case studies considered, I suggest that a systematic model error repertoire can benefit climate modelers and other climate scientists alike. These benefits include proactively identifying which part(s) of a model are most in need of revision (and why) and demonstrating a deeper understanding of climate model behavior. Finally, I suggest that attending to error diagnosis in climate modeling invites us to ask new questions about the scientific value of model intercomparisons, e.g., concerning the knowledge gained from worse-performing models in model weighting analyses.\n\n\n\nNCAR Climate & Global Dynamics Laboratory, October 25, 2022 Read More →\n\n\n\n\n\n\n\ncoming soon.\nUpdated: August 30, 2025"
+  },
+  {
+    "objectID": "talks/ncar-cgd-error-taxonomy-2022.html#abstract",
+    "href": "talks/ncar-cgd-error-taxonomy-2022.html#abstract",
+    "title": "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science",
+    "section": "",
+    "text": "Although scientists have been conducting relatively systematic climate model intercomparisons for decades, error diagnosis (i.e., identifying and attributing sources of model-model disagreement) has been far less systematized. In this talk, I analyze the strategies used to diagnose model errors based on what is reported in the scientific literature, going back to the first Atmospheric Model Intercomparison Project (AMIP). These strategies include, e.g., dimension reduction techniques, multi-model sensitivity analysis, physical reasoning about the radiative effects of clouds, and testing hypotheses about sources of potential model error. Based on the case studies considered, I suggest that a systematic model error repertoire can benefit climate modelers and other climate scientists alike. These benefits include proactively identifying which part(s) of a model are most in need of revision (and why) and demonstrating a deeper understanding of climate model behavior. Finally, I suggest that attending to error diagnosis in climate modeling invites us to ask new questions about the scientific value of model intercomparisons, e.g., concerning the knowledge gained from worse-performing models in model weighting analyses."
+  },
+  {
+    "objectID": "talks/ncar-cgd-error-taxonomy-2022.html#venue",
+    "href": "talks/ncar-cgd-error-taxonomy-2022.html#venue",
+    "title": "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science",
+    "section": "",
+    "text": "NCAR Climate & Global Dynamics Laboratory, October 25, 2022 Read More →"
+  },
+  {
+    "objectID": "talks/ncar-cgd-error-taxonomy-2022.html#slides-handouts",
+    "href": "talks/ncar-cgd-error-taxonomy-2022.html#slides-handouts",
+    "title": "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science",
+    "section": "",
+    "text": "coming soon.\nUpdated: August 30, 2025"
+  },
+  {
+    "objectID": "talks/cuny-esi-convergence-trust-2025.html",
+    "href": "talks/cuny-esi-convergence-trust-2025.html",
+    "title": "Convergence, divergence, and trust in climate models",
+    "section": "",
+    "text": "Our knowledge of future climate change is largely dependent on complex computer simulation models. These models are huge – they are made up of more than 1 million lines of computer code representing knowledge from dozens of scientific subfields – and no individual scientist fully understands all of the model’s inner workings. What’s more, climate scientists regularly proclaim that “all models are wrong, but some are useful.” In this talk, I will explain some of the philosophical challenges of climate modeling. Climate models are often evaluated in so-called model inter-comparison projects. Distinct models from distinct institutions simulate the same potential scenario and results are compared. When results converge, should this increase our confidence in the models? Conversely, when results diverge—when the models disagree—should this decrease our confidence in the models? I argue that model convergence can be confirmatory under certain conditions, particularly when the models are well supported by evidence and share a plausible causal core. At the same time, model divergence is not necessarily a failure; instead, it provides opportunities for understanding causes of errant model behavior and yielding new knowledge (e.g., constraining the estimates of climate variables). Such insights help refine our understanding and support wiser decision-making.\n\n\n\nCUNY Advanced Science Research Center (ASRC), March 12, 2025 See Flyer →\n\n\n\nComing soon.\nUpdated: August 30, 2025"
+  },
+  {
+    "objectID": "talks/cuny-esi-convergence-trust-2025.html#abstract",
+    "href": "talks/cuny-esi-convergence-trust-2025.html#abstract",
+    "title": "Convergence, divergence, and trust in climate models",
+    "section": "",
+    "text": "Our knowledge of future climate change is largely dependent on complex computer simulation models. These models are huge – they are made up of more than 1 million lines of computer code representing knowledge from dozens of scientific subfields – and no individual scientist fully understands all of the model’s inner workings. What’s more, climate scientists regularly proclaim that “all models are wrong, but some are useful.” In this talk, I will explain some of the philosophical challenges of climate modeling. Climate models are often evaluated in so-called model inter-comparison projects. Distinct models from distinct institutions simulate the same potential scenario and results are compared. When results converge, should this increase our confidence in the models? Conversely, when results diverge—when the models disagree—should this decrease our confidence in the models? I argue that model convergence can be confirmatory under certain conditions, particularly when the models are well supported by evidence and share a plausible causal core. At the same time, model divergence is not necessarily a failure; instead, it provides opportunities for understanding causes of errant model behavior and yielding new knowledge (e.g., constraining the estimates of climate variables). Such insights help refine our understanding and support wiser decision-making."
+  },
+  {
+    "objectID": "talks/cuny-esi-convergence-trust-2025.html#venue",
+    "href": "talks/cuny-esi-convergence-trust-2025.html#venue",
+    "title": "Convergence, divergence, and trust in climate models",
+    "section": "",
+    "text": "CUNY Advanced Science Research Center (ASRC), March 12, 2025 See Flyer →"
+  },
+  {
+    "objectID": "talks/cuny-esi-convergence-trust-2025.html#slides-handouts",
+    "href": "talks/cuny-esi-convergence-trust-2025.html#slides-handouts",
+    "title": "Convergence, divergence, and trust in climate models",
+    "section": "",
+    "text": "Coming soon.\nUpdated: August 30, 2025"
+  },
+  {
+    "objectID": "teaching-students.html",
+    "href": "teaching-students.html",
+    "title": "Student Dashboard",
+    "section": "",
+    "text": "📄 PHIL 101 Syllabus\n\n\n🏢 Office Hours / Contact\n\n\n📚 Academic Help\n\n\n📬 Letter of Recomm"
+  },
+  {
+    "objectID": "teaching-students.html#quick-actions",
+    "href": "teaching-students.html#quick-actions",
+    "title": "Student Dashboard",
+    "section": "",
+    "text": "📄 PHIL 101 Syllabus\n\n\n🏢 Office Hours / Contact\n\n\n📚 Academic Help\n\n\n📬 Letter of Recomm"
+  },
+  {
+    "objectID": "teaching-students.html#current-courses",
+    "href": "teaching-students.html#current-courses",
+    "title": "Student Dashboard",
+    "section": "Current Courses",
+    "text": "Current Courses\n\n\n\nPHIL 101 — Intro to Philosophy (Fall 2025)\n\nTues/Thurs 9:15am – 10:30am in Powdermaker Hall 152\n\n📄 Syllabus\n\n\n\n\nPHIL 125 — Philosophy of the Environment (Fall 2025)\n\nTues/Thurs 10:45 – 12:00pm in Powdermaker Hall 152\n\n📄 Syllabus"
+  },
+  {
+    "objectID": "teaching-students.html#office-hours--contact",
+    "href": "teaching-students.html#office-hours--contact",
+    "title": "Student Dashboard",
+    "section": "Office Hours & Contact",
+    "text": "Office Hours & Contact\n\nTuesdays 1–2 pm, Powdermaker Hall 350V · or by appointment\n ryan.oloughlin@qc.cuny.edu"
+  },
+  {
+    "objectID": "teaching-students.html#mentorship-student-achievements",
+    "href": "teaching-students.html#mentorship-student-achievements",
+    "title": "Student Dashboard",
+    "section": "Mentorship & Student Achievements",
+    "text": "Mentorship & Student Achievements\nI am proud to support students in their academic and professional growth. Here are a few examples of supervised projects and where they’ve led:\n\n“Weighting the Many-Sided Die of Pascal’s Wager” (master’s thesis) — Jonathan Baruch\n→ Admitted to UPenn Law School with a Dean’s Scholarship"
+  },
+  {
+    "objectID": "teaching-students.html#professional-development",
+    "href": "teaching-students.html#professional-development",
+    "title": "Student Dashboard",
+    "section": "Professional Development",
+    "text": "Professional Development\n\n\n\nRequesting Letters of Recommendation\nSend one email with:\n1) Name + CUNY ID + course(s)/term(s) + final grade(s)\n2) Deadline(s) & submission method (portal/email)\n3) CV/Resume + unofficial transcript\n4) What you’re applying for & what you want me to emphasize in my letter\n5) Required forms (PDF) & FERPA waiver status, if needed\n6) ≥ 3 weeks’ notice before first deadline\n\nEmail template\n\n\n\n\n\nResearch, Mentorship & Assistantships\n\nI supervise undergraduate research/theses and independent studies.\n\nTo express interest, email a 1–2 paragraph note with topic interests & prior coursework.\n\nAssistantships / openings: None currently posted (last updated September 9, 2025). Check back here for announcements."
+  },
+  {
+    "objectID": "teaching-students.html#academic-help",
+    "href": "teaching-students.html#academic-help",
+    "title": "Student Dashboard",
+    "section": "Academic Help Resources",
+    "text": "Academic Help Resources\n\n\n\nCampus resources\n\nWriting Center: schedule an appointment for personalized help\nLibrary Research Help — consult with a librarian\n\nAccessibility/Disability Services — accommodations & support\nCounseling Services — mental health support\n\nComputer Labs / Printing — laptops, printers, software access\nCareer Center — resumes, internships, grad school advising\n\n\n\n\n\nOff-campus / general resources\nWriting & citation - Purdue OWL — citation + academic writing guides\n- UNC Writing Center Handouts — quick how-to sheets\nPhilosophy references - Stanford Encyclopedia of Philosophy (SEP) — peer-reviewed entries\n- Internet Encyclopedia of Philosophy (IEP) — accessible overviews\n- PhilPapers — database of philosophy articles & books Research & tools - Google Scholar — literature search\n- Zotero + ZoteroBib — free reference manager & instant bibliographies"
+  },
+  {
+    "objectID": "teaching-students.html#course-archive",
+    "href": "teaching-students.html#course-archive",
+    "title": "Student Dashboard",
+    "section": "Course Archive",
+    "text": "Course Archive\n\n\nView past courses & syllabi\n\n\nPHIL 101 — Intro to Philosophy (SP/SU/FA 2022–2025)\n\n\n\nUpdated: September 9, 2025"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Homepage | Ryan O’Loughlin | Philosopher of Science",
+    "section": "",
+    "text": "Ryan O’Loughlin\n\n\nPhilosopher of Science\n\n\nTrust without Truth Play a 2‑minute scenario →\n\n\n\n\nAll models are wrong. Why trust them?\n\nSee Research"
+  },
+  {
+    "objectID": "index.html#highlights",
+    "href": "index.html#highlights",
+    "title": "Homepage | Ryan O’Loughlin | Philosopher of Science",
+    "section": "Recent Highlights",
+    "text": "Recent Highlights\n\n\n\nTalk\n“Uncertainty and Climate Models,” Brown Climate Science Seminar (Sept 2025)\nDetails →\n\n\n\n\nPublication\n“Moving beyond post hoc eXplainable Artificial Intelligence (XAI),” GMD (2025)\nRead →\n\n\n\n\nAppointment\nI’m appointed as CUNY Grad Center Doctoral Faculty.\nDetails →"
+  },
+  {
+    "objectID": "index.html#what-i-do",
+    "href": "index.html#what-i-do",
+    "title": "Homepage | Ryan O’Loughlin | Philosopher of Science",
+    "section": "What I Work On",
+    "text": "What I Work On\nAll models are wrong—so why trust them? Too often we equate trustworthiness with truthfulness. Yet when models agree, they build confidence for action; when they disagree, they often teach us the most. Uncertainty and error aren’t failures—they’re how science moves forward. My work shows how we can trust science not just by mitigating its limits, but by embracing them.\n\n\nBig Questions\n\nHow can flawed models generate knowledge?\n\nWhen and why do agreement and disagreement strengthen trust in science?\n\nHow should we make decisions under uncertainty?\n\nExplore Philosophy →\n\n\nBridge to Science\n\nDiagnosing errors to learn from failure rather than hide it\n\nClarifying model evaluation so that convergence and divergence both build insight\n\nTranslating uncertainty into action\n\nFor scientists →"
+  },
+  {
+    "objectID": "index.html#audiences",
+    "href": "index.html#audiences",
+    "title": "Homepage | Ryan O’Loughlin | Philosopher of Science",
+    "section": "Who’s This For?",
+    "text": "Who’s This For?\nMy work speaks to philosophers (robustness, error, fruitfulness), scientists (model evaluation, uncertainty, pursuitworthiness), and the media (clear, plain-language analysis of climate modeling). And for students, it provides resources, mentorship, and guidance to think critically about science in a complex world.\n\n\n\n📚 Philosophers\nWorks-in-progress & workshops\nStart here →\n\n\n\n\n⚗️ Scientists\nTalks & collaboration ideas in plain language\nStart here →\n\n\n\n\n🎙️ Media\nBio, topics, headshot, contact\nStart here →\n\n\n\n\n🧑‍🎓 Students\nSyllabi, office hours, course resources\nStart here →"
+  },
+  {
+    "objectID": "index.html#contact-information",
+    "href": "index.html#contact-information",
+    "title": "Homepage | Ryan O’Loughlin | Philosopher of Science",
+    "section": "Contact Information",
+    "text": "Contact Information\n ryan.oloughlin@qc.cuny.edu   718-997-5270   Powdermaker Hall 350-V, Queens College, CUNY\nMore ways to reach me →\nUpdated: September 9, 2025"
+  },
+  {
+    "objectID": "media.html",
+    "href": "media.html",
+    "title": "Media / Press",
+    "section": "",
+    "text": "Ryan O’Loughlin is a philosopher of science at Queens College, CUNY. He studies how climate scientists generate trustworthy knowledge with imperfect models, focusing on uncertainty, robustness, and error. His work bridges philosophy and climate research, with publications in leading journals and collaborations with scientists.\n\n\n\n\n\nClick to expand\n\nRyan O’Loughlin is a philosopher of science whose work explains how scientists generate trustworthy knowledge with imperfect models. He is an Assistant Professor of Philosophy at Queens College, CUNY and doctoral faculty member in Earth & Environmental Sciences at the CUNY Graduate Center. His research focuses on climate models, robustness, and uncertainty, and he collaborates with scientists at Indiana University, NCAR, and Cornell. Ryan has published in leading journals including Synthese, and Climatic Change, and written for Yale Climate Connections. He is a clear and accessible voice on science, uncertainty, and decision-making.\n\n\n\n\n\n\nClick to expand\n\nRyan O’Loughlin is a philosopher of science specializing in climate models, uncertainty, and decision-making. He is an Assistant Professor of Philosophy at Queens College, CUNY, and serves as doctoral faculty member in Earth and Environmental Sciences at the CUNY Graduate Center. His research investigates how scientists trust and learn from imperfect models, and why error and failure can be epistemically productive. He has published in Synthese, Climatic Change, and Geoscientific Model Development, and co-authored interdisciplinary work with climate scientists at Indiana University, NCAR, and Cornell. In addition to academic writing, Ryan engages broader audiences through public-facing essays, including contributions to Yale Climate Connections, where he explains the value of imperfect models for climate policy. He has been invited to speak at Brown University, NASA GISS, and NCAR. Ryan is committed to making philosophy relevant beyond academia, clarifying how uncertainty and robustness matter for science, policy, and public trust."
+  },
+  {
+    "objectID": "media.html#bios",
+    "href": "media.html#bios",
+    "title": "Media / Press",
+    "section": "",
+    "text": "Ryan O’Loughlin is a philosopher of science at Queens College, CUNY. He studies how climate scientists generate trustworthy knowledge with imperfect models, focusing on uncertainty, robustness, and error. His work bridges philosophy and climate research, with publications in leading journals and collaborations with scientists.\n\n\n\n\n\nClick to expand\n\nRyan O’Loughlin is a philosopher of science whose work explains how scientists generate trustworthy knowledge with imperfect models. He is an Assistant Professor of Philosophy at Queens College, CUNY and doctoral faculty member in Earth & Environmental Sciences at the CUNY Graduate Center. His research focuses on climate models, robustness, and uncertainty, and he collaborates with scientists at Indiana University, NCAR, and Cornell. Ryan has published in leading journals including Synthese, and Climatic Change, and written for Yale Climate Connections. He is a clear and accessible voice on science, uncertainty, and decision-making.\n\n\n\n\n\n\nClick to expand\n\nRyan O’Loughlin is a philosopher of science specializing in climate models, uncertainty, and decision-making. He is an Assistant Professor of Philosophy at Queens College, CUNY, and serves as doctoral faculty member in Earth and Environmental Sciences at the CUNY Graduate Center. His research investigates how scientists trust and learn from imperfect models, and why error and failure can be epistemically productive. He has published in Synthese, Climatic Change, and Geoscientific Model Development, and co-authored interdisciplinary work with climate scientists at Indiana University, NCAR, and Cornell. In addition to academic writing, Ryan engages broader audiences through public-facing essays, including contributions to Yale Climate Connections, where he explains the value of imperfect models for climate policy. He has been invited to speak at Brown University, NASA GISS, and NCAR. Ryan is committed to making philosophy relevant beyond academia, clarifying how uncertainty and robustness matter for science, policy, and public trust."
+  },
+  {
+    "objectID": "media.html#headshot",
+    "href": "media.html#headshot",
+    "title": "Media / Press",
+    "section": "Download Headshot",
+    "text": "Download Headshot\n\nHigh-resolution headshot"
+  },
+  {
+    "objectID": "media.html#expertise",
+    "href": "media.html#expertise",
+    "title": "Media / Press",
+    "section": "Expertise Topics",
+    "text": "Expertise Topics\n\nClimate models & uncertainty\n\nRobustness and decision-making\n\nRisk communication & scientific credibility\n\nPhilosophy of failure and error in science\n\nExplanations in climate modeling\n\nGeoengineering and ethics of climate interventions"
+  },
+  {
+    "objectID": "media.html#highlights",
+    "href": "media.html#highlights",
+    "title": "Media / Press",
+    "section": "Selected Highlights",
+    "text": "Selected Highlights\n\nAffiliations: Assistant Professor of Philosophy, Queens College CUNY; Doctoral Faculty member, CUNY Graduate Center.\n\nInvited Talks: Brown University Climate Science Seminar (2025); NASA Goddard Institute for Space Studies (2023); NCAR Climate & Global Dynamics Lab (2022).\n\nPublic Writing: “Why imperfect climate models are more helpful than you think” (Yale Climate Connections, 2025).\n\nResearch Highlights: Lead author on “Moving beyond post hoc explainable artificial intelligence” (Geoscientific Model Development, 2025)."
+  },
+  {
+    "objectID": "media.html#media-contact",
+    "href": "media.html#media-contact",
+    "title": "Media / Press",
+    "section": "Media Contact",
+    "text": "Media Contact\n📧 ryan.oloughlin@qc.cuny.edu\n📞 718-997-5270\nOffice: Powdermaker Hall 350-V, Queens College, CUNY\nUpdated: September 9, 2025"
+  },
+  {
+    "objectID": "projects/weighting-and-uncertainty.html",
+    "href": "projects/weighting-and-uncertainty.html",
+    "title": "Weighting, Spread, and Confidence",
+    "section": "",
+    "text": "Details coming soon. Separates spread-narrowing from genuine epistemic confidence; implications for ensemble practice & communication.\nUpdated: August 30, 2025"
+  },
+  {
+    "objectID": "projects/decision-support.html",
+    "href": "projects/decision-support.html",
+    "title": "Decision Support Under Uncertainty",
+    "section": "",
+    "text": "Details coming soon. Maps uncertainty to decisions: robust conclusions, risk framing, and communication for stakeholders.\nUpdated: August 30, 2025"
   },
   {
     "objectID": "contact.html",

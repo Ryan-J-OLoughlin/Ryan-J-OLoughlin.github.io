@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 144" width="256" height="144">
+  <rect width="256" height="144" fill="#0f1c28"/>
+  <rect x="0" y="0" width="256" height="90" fill="#142432"/>
+  <!-- Wall shelves -->
+  <rect x="12" y="22" width="60" height="6" fill="#223b57"/>
+  <rect x="12" y="34" width="60" height="6" fill="#223b57"/>
+  <!-- Screen -->
+  <rect x="92" y="18" width="152" height="56" fill="#0f2133" stroke="#2a4d6f"/>
+  <!-- Desk -->
+  <rect x="0" y="90" width="256" height="54" fill="#1a2f45"/>
+  <!-- Mic -->
+  <rect x="46" y="98" width="6" height="18" fill="#0b1b2a"/>
+  <rect x="40" y="114" width="18" height="6" fill="#0b1b2a"/>
+</svg>
+

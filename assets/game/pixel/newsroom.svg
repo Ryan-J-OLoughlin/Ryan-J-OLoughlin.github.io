@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 144" width="256" height="144">
+  <rect width="256" height="144" fill="#0f1c28"/>
+  <!-- Back wall with shelves -->
+  <rect x="0" y="0" width="256" height="90" fill="#142432"/>
+  <rect x="12" y="18" width="60" height="6" fill="#223b57"/>
+  <rect x="12" y="30" width="60" height="6" fill="#223b57"/>
+  <rect x="12" y="42" width="60" height="6" fill="#223b57"/>
+  <!-- Screen -->
+  <rect x="88" y="16" width="156" height="64" fill="#11273a" stroke="#2a4d6f"/>
+  <!-- Chart bars/lines -->
+  <rect x="100" y="70" width="10" height="8" fill="#4de0ff"/>
+  <rect x="116" y="62" width="10" height="16" fill="#4de0ff"/>
+  <rect x="132" y="54" width="10" height="24" fill="#4de0ff"/>
+  <rect x="148" y="46" width="10" height="32" fill="#4de0ff"/>
+  <rect x="164" y="56" width="10" height="22" fill="#4de0ff"/>
+  <!-- Range band -->
+  <rect x="100" y="40" width="140" height="4" fill="#173a5a"/>
+  <!-- Desk -->
+  <rect x="0" y="90" width="256" height="54" fill="#1a2f45"/>
+  <!-- Notepad -->
+  <rect x="24" y="98" width="48" height="30" fill="#e9f1ff" stroke="#8aa5c1"/>
+  <rect x="26" y="104" width="44" height="2" fill="#8aa5c1"/>
+  <rect x="26" y="110" width="44" height="2" fill="#8aa5c1"/>
+  <rect x="26" y="116" width="44" height="2" fill="#8aa5c1"/>
+</svg>

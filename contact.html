@@ -76,11 +76,14 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Contact – Ryan O’Loughlin">
-<meta property="og:description" content="Philosophy of science • climate models • uncertainty &amp; decision-making">
+<meta property="og:description" content="philosophy of science • climate models • trust without truth • uncertainty">
+<meta property="og:image" content="https://Ryan-J-OLoughlin.github.io/assets/og-card.jpeg">
 <meta property="og:site_name" content="Ryan O'Loughlin">
+<meta property="og:image:alt" content="Ryan O'Loughlin — Philosophy of Science (climate models, uncertainty)">
 <meta name="twitter:title" content="Contact – Ryan O’Loughlin">
-<meta name="twitter:description" content="Philosophy of science • climate models • uncertainty &amp; decision-making">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="philosophy of science • climate models • trust without truth • uncertainty">
+<meta name="twitter:image" content="https://Ryan-J-OLoughlin.github.io/assets/og-card.jpeg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -359,7 +362,7 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="email" class="level2">
 <h2 class="anchored" data-anchor-id="email">Email</h2>
-<p>📧 <a href="mailto:%20ryan.oloughlin@qc.cuny.edu">ryan.oloughlin@qc.cuny.edu</a></p>
+<p>📧 <a href="mailto:ryan.oloughlin@qc.cuny.edu">ryan.oloughlin@qc.cuny.edu</a></p>
 </section>
 <section id="phone" class="level2">
 <h2 class="anchored" data-anchor-id="phone">Phone</h2>
@@ -407,6 +410,88 @@ Flushing, NY 11367</p>
 </section>
 
 </main> <!-- /main -->
+<!-- Injected site-wide: Game modal and loader -->
+<style>
+  /* Semi-transparent page overlay behind the game */
+  .modal-backdrop.show { background-color: rgba(5,17,28,0.62); }
+  /* Remove chrome/background from the wrapper window */
+  #gameModal .modal-content { background-color: transparent; box-shadow: none; }
+  #gameModal .modal-body { background-color: transparent; }
+  /* Subtle styling for overlay buttons without dimming the game */
+  #gameModal .btn-light { background-color: rgba(255,255,255,0.88); border-color: rgba(255,255,255,0.88); }
+  body.modal-open { overflow: hidden; }
+</style>
+
+<div class="modal fade" id="gameModal" tabindex="-1" aria-labelledby="gameModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content" style="border:0; border-radius:0;">
+      <div class="modal-body p-0" style="overflow:hidden; position:relative;">
+        <!-- Overlay controls (do not consume layout height) -->
+        <a id="gameOpenNewTab" class="btn btn-light btn-sm position-absolute top-0 start-0 m-2" href="#" target="_blank" rel="noopener">Open in new tab</a>
+        <button type="button" class="btn btn-light btn-sm position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close">Close</button>
+        <iframe id="gameFrame" title="Interactive Scenario" allowfullscreen="" allow="fullscreen; autoplay; clipboard-read; clipboard-write" style="border:0; width:100%; display:block;"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var modalEl = document.getElementById('gameModal');
+    var frame = document.getElementById('gameFrame');
+    var newTab = document.getElementById('gameOpenNewTab');
+    var gameURL = null;
+
+    function setURL(url){
+      gameURL = url || '/assets/game/index.html';
+      if(newTab) newTab.href = gameURL;
+    }
+
+    // Handle clicks on any element with data-game-url
+    document.addEventListener('click', function(ev){
+      var t = ev.target.closest('[data-game-url]');
+      if(!t) return;
+      ev.preventDefault();
+      setURL(t.getAttribute('data-game-url'));
+      try {
+        // Prefer Bootstrap modal if available
+        var modal = window.bootstrap && window.bootstrap.Modal ? new window.bootstrap.Modal(modalEl) : null;
+        if(modal){ modal.show(); } else {
+          // Fallback: open in new tab
+          window.open(gameURL, '_blank', 'noopener');
+          return;
+        }
+      } catch(e) {
+        window.open(gameURL, '_blank', 'noopener');
+        return;
+      }
+    });
+
+    function viewportHeight(){
+      // Prefer visualViewport for mobile browsers to get actual visible height
+      return (window.visualViewport && window.visualViewport.height) || window.innerHeight || document.documentElement.clientHeight || 600;
+    }
+    function sizeFrame(){
+      if(!modalEl || !frame) return;
+      var h = viewportHeight();
+      var body = modalEl.querySelector('.modal-body');
+      if(body){ body.style.height = h + 'px'; }
+      frame.style.height = h + 'px';
+    }
+
+    // Lazy-load the iframe once the modal is shown and fit to viewport
+    if(modalEl){
+      modalEl.addEventListener('shown.bs.modal', function(){
+        if(!frame.src){ frame.src = gameURL || '/assets/game/index.html'; }
+        sizeFrame();
+      });
+      modalEl.addEventListener('hidden.bs.modal', function(){
+        try { frame.contentWindow && frame.contentWindow.postMessage({type:'pause'}, '*'); } catch(e) {}
+      });
+      window.addEventListener('resize', sizeFrame);
+    }
+  })();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -842,7 +927,7 @@ Flushing, NY 11367</p>
 </a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="https://orcid.org/YOUR_ID">
+    <a class="nav-link" href="https://orcid.org/0000-0002-9106-1460">
 <p>ORCID</p>
 </a>
   </li>  

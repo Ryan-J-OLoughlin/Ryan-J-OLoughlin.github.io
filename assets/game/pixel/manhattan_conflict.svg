@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 144" width="256" height="144">
+  <rect width="256" height="144" fill="#0b1b2a"/>
+  <!-- Split panels -->
+  <rect x="8" y="8" width="116" height="128" fill="#11273a" stroke="#2a4d6f"/>
+  <rect x="132" y="8" width="116" height="128" fill="#11273a" stroke="#2a4d6f"/>
+
+  <!-- Left: worse flooding (higher water) -->
+  <rect x="16" y="96" width="100" height="32" fill="#157ab3"/>
+  <!-- Skyline blocks -->
+  <rect x="24" y="70" width="12" height="26" fill="#b4d7ff"/>
+  <rect x="40" y="52" width="10" height="44" fill="#a9e6ff"/>
+  <rect x="54" y="60" width="8" height="36" fill="#b4d7ff"/>
+  <rect x="66" y="40" width="14" height="56" fill="#a9e6ff"/>
+  <rect x="84" y="64" width="8" height="32" fill="#b4d7ff"/>
+  <!-- Water ripples -->
+  <rect x="18" y="110" width="20" height="2" fill="#a9e6ff"/>
+  <rect x="42" y="116" width="30" height="2" fill="#a9e6ff"/>
+  <rect x="78" y="108" width="24" height="2" fill="#a9e6ff"/>
+
+  <!-- Right: less flooding (lower water) -->
+  <rect x="140" y="112" width="100" height="16" fill="#157ab3"/>
+  <!-- Skyline blocks -->
+  <rect x="148" y="78" width="12" height="34" fill="#b4d7ff"/>
+  <rect x="164" y="60" width="10" height="52" fill="#a9e6ff"/>
+  <rect x="178" y="70" width="8" height="42" fill="#b4d7ff"/>
+  <rect x="190" y="48" width="14" height="64" fill="#a9e6ff"/>
+  <rect x="208" y="82" width="8" height="30" fill="#b4d7ff"/>
+  <!-- Water ripples (lower) -->
+  <rect x="142" y="122" width="22" height="2" fill="#a9e6ff"/>
+  <rect x="170" y="126" width="28" height="2" fill="#a9e6ff"/>
+  <rect x="204" y="120" width="26" height="2" fill="#a9e6ff"/>
+
+  <!-- Panel labels -->
+  <rect x="16" y="12" width="10" height="10" fill="#ffd55a"/>
+  <rect x="140" y="12" width="10" height="10" fill="#ffd55a"/>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 144" width="256" height="144">
+  <rect width="256" height="144" fill="#0f1c28"/>
+  <rect x="0" y="0" width="256" height="90" fill="#11273a"/>
+  <!-- Flag / emblem -->
+  <rect x="16" y="16" width="20" height="12" fill="#ffd55a"/>
+  <rect x="18" y="18" width="6" height="8" fill="#0b1b2a"/>
+  <!-- Screen -->
+  <rect x="56" y="18" width="184" height="56" fill="#0f2133" stroke="#2a4d6f"/>
+  <!-- Desk -->
+  <rect x="0" y="90" width="256" height="54" fill="#1a2f45"/>
+  <!-- Folders -->
+  <rect x="28" y="100" width="36" height="22" fill="#e9f1ff" stroke="#8aa5c1"/>
+  <rect x="70" y="102" width="32" height="18" fill="#e9f1ff" stroke="#8aa5c1"/>
+</svg>
+

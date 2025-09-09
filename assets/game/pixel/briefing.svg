@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 144" width="256" height="144">
+  <rect width="256" height="144" fill="#0f1c28"/>
+  <!-- Wall -->
+  <rect x="0" y="0" width="256" height="90" fill="#11273a"/>
+  <!-- Screen frame -->
+  <rect x="20" y="14" width="216" height="60" fill="#0f2133" stroke="#2a4d6f"/>
+  <!-- Screen content: range band and lines -->
+  <rect x="36" y="56" width="184" height="8" fill="#173a5a"/>
+  <rect x="36" y="48" width="184" height="2" fill="#b4d7ff"/>
+  <rect x="36" y="64" width="184" height="2" fill="#b4d7ff"/>
+  <rect x="36" y="58" width="40" height="2" fill="#4de0ff"/>
+  <rect x="76" y="54" width="40" height="2" fill="#4de0ff"/>
+  <rect x="116" y="58" width="40" height="2" fill="#4de0ff"/>
+  <rect x="156" y="52" width="40" height="2" fill="#4de0ff"/>
+  <!-- Desk -->
+  <rect x="0" y="90" width="256" height="54" fill="#1a2f45"/>
+  <!-- Papers -->
+  <rect x="28" y="98" width="44" height="28" fill="#e9f1ff" stroke="#8aa5c1"/>
+  <rect x="78" y="102" width="40" height="22" fill="#e9f1ff" stroke="#8aa5c1"/>
+  <!-- Mug -->
+  <rect x="128" y="104" width="12" height="14" fill="#ffd55a"/>
+  <rect x="140" y="108" width="4" height="6" fill="#ffd55a"/>
+</svg>

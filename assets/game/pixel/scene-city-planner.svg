@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 144" width="256" height="144">
+  <rect width="256" height="144" fill="#0b1b2a"/>
+  <rect x="0" y="90" width="256" height="54" fill="#1a2f45"/>
+  <!-- Skyline -->
+  <rect x="24" y="54" width="12" height="36" fill="#b4d7ff"/>
+  <rect x="44" y="42" width="10" height="48" fill="#a9e6ff"/>
+  <rect x="60" y="48" width="8" height="42" fill="#b4d7ff"/>
+  <rect x="74" y="34" width="14" height="56" fill="#b4d7ff"/>
+  <rect x="94" y="50" width="8" height="40" fill="#a9e6ff"/>
+  <!-- Water band -->
+  <rect x="0" y="112" width="256" height="16" fill="#157ab3"/>
+  <rect x="16" y="122" width="24" height="2" fill="#a9e6ff"/>
+  <rect x="54" y="126" width="36" height="2" fill="#a9e6ff"/>
+  <rect x="110" y="120" width="30" height="2" fill="#a9e6ff"/>
+  <rect x="160" y="124" width="34" height="2" fill="#a9e6ff"/>
+  <rect x="206" y="121" width="28" height="2" fill="#a9e6ff"/>
+</svg>
+

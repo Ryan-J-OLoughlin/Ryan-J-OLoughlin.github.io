@@ -1,0 +1,58 @@
+{
+  "id": "policymaker",
+  "title": "Policymaker",
+  "steps": [
+    {
+      "id": "briefing",
+      "scene": "models_spread",
+      "prompt": "You’re a national policymaker. Model projections show a wide spread. How do you interpret this uncertainty?",
+      "choices": [
+        { "key":"A", "label":"The spread means science is indecisive — don’t act.", "feedback":"Misreading: spreads are information, not indecision." },
+        { "key":"B", "label":"The range is useful — plan within it.", "feedback":"Correct: robust policies account for a range of futures." },
+        { "key":"C", "label":"Fund only best-track-record models.", "feedback":"Risky: narrowing too fast may bias decisions." },
+        { "key":"D", "label":"Ignore uncertainty; follow politics.", "feedback":"Dangerous: bypassing evidence leads to brittle decisions." }
+      ],
+      "next": "conflict"
+    },
+    {
+      "id": "conflict",
+      "scene": "briefing",
+      "prompt": "One model predicts extreme drought; another heavy rainfall in the same region. What guides your decision?",
+      "choices": [
+        { "key":"A", "label":"Ignore both — too unreliable.", "feedback":"Too risky. Both model outcomes are possible and consequential" },
+        { "key":"B", "label":"Seek expert diagnosis from modeling teams.", "feedback":"Scientists know their models’ biases — consultation builds credibility." },
+        { "key":"C", "label":"Split the difference; average outcomes.", "feedback":"Averages can hide crucial sign disagreements." },
+        { "key":"D", "label":"Use disagreement to stress-test policies.", "feedback":"Exactly: robust decisions anticipate multiple plausible futures." }
+      ],
+      "next": "imperfect"
+    },
+    {
+      "id": "imperfect",
+      "scene": "weak_model",
+      "prompt": "Advisors show some models perform worse against past data. Consider them in policymaking?",
+      "choices": [
+        { "key":"A", "label":"Ignore them — only top performers.", "feedback":"Tempting, but risky: discarding them may hide mechanisms and insights." },
+        { "key":"B", "label":"Task scientists to study weaker models further.", "feedback":"Appropriate: encourage experts to diagnose why weaker models differ." },
+        { "key":"C", "label":"Use only after further testing.", "feedback":"Prudent: additional independent evidence can clarify their value." },
+        { "key":"D", "label":"Average them in to smooth results.", "feedback":"Caution: averaging risks burying important signals." }
+      ],
+      "next": "geo"
+    },
+    {
+      "id": "geo",
+      "scene": "geoengineering",
+      "prompt": "Colleagues suggest funding geoengineering trials. What do you decide?",
+      "choices": [
+        { "key":"A", "label":"Launch large-scale deployment.", "feedback":"Even geoengineering proponents don't want this." },
+        { "key":"B", "label":"Fund small-scale, carefully monitored experiments.", "feedback":"Some may be premature; some may be worth pursuing to improve models." },
+        { "key":"C", "label":"Ban geoengineering research outright.", "feedback":"Precaution avoids some risks but creates others." },
+        { "key":"D", "label":"Delay decisions until more is known.", "feedback":"Waiting postpones action and can waste preparation time." }
+      ]
+    }
+  ],
+  "end": {
+    "summary": "As a Policymaker, you saw how uncertainty guides robust policy, how disagreements invite expert input, why tasking scientists to study weaker models is wise, and how small-scale experiments balance risk and learning.",
+    "links": []
+  }
+}
+

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 144" width="256" height="144">
+  <rect width="256" height="144" fill="#0b1b2a"/>
+  <rect x="0" y="0" width="256" height="90" fill="#11273a"/>
+  <!-- Blackboard -->
+  <rect x="20" y="18" width="216" height="54" fill="#173a5a" stroke="#2a4d6f"/>
+  <!-- Desk -->
+  <rect x="0" y="90" width="256" height="54" fill="#1a2f45"/>
+  <!-- Laptop silhouette -->
+  <rect x="40" y="104" width="36" height="12" fill="#0f1c28"/>
+  <rect x="44" y="96" width="28" height="8" fill="#0f1c28"/>
+</svg>
+

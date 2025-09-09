@@ -1,0 +1,58 @@
+{
+  "id": "student",
+  "title": "Science Student",
+  "steps": [
+    {
+      "id": "classroom",
+      "scene": "models_spread",
+      "prompt": "You’re explaining climate model uncertainty to peers. What do you emphasize?",
+      "choices": [
+        { "key":"A", "label":"We can’t trust models — all wrong.", "feedback":"Misconception: imperfection ≠ uselessness." },
+        { "key":"B", "label":"Agreement across models builds confidence.", "feedback":"Yes — this shows why ensembles matter." },
+        { "key":"C", "label":"Only high-performance models matter.", "feedback":"Not always — weaker models can reveal mechanisms too." },
+        { "key":"D", "label":"Uncertainty itself is information.", "feedback":"Correct: it guides planning and decisions." }
+      ],
+      "next": "lab"
+    },
+    {
+      "id": "lab",
+      "scene": "weak_model",
+      "prompt": "Comparing runs: one fails badly against observations. What now?",
+      "choices": [
+        { "key":"A", "label":"Worthless — throw it out.", "feedback":"Too quick: failures are often diagnostic clues." },
+        { "key":"B", "label":"Errors help us learn — investigate.", "feedback":"Right: diagnosing errors deepens understanding." },
+        { "key":"C", "label":"Keep it regardless.", "feedback":"Sometimes useful, but without diagnosis you risk compounding errors." },
+        { "key":"D", "label":"Compare against simpler models.", "feedback":"Good: low-skill models can reveal where complexity misleads." }
+      ],
+      "next": "geo"
+    },
+    {
+      "id": "geo",
+      "scene": "geoengineering",
+      "prompt": "Writing for the student paper about geoengineering. What stance?",
+      "choices": [
+        { "key":"A", "label":"Promote immediate large-scale geoengineering.", "feedback":"Too risky: untested large-scale interventions could cause harm." },
+        { "key":"B", "label":"Advocate small-scale, transparent experiments.", "feedback":"Pursuitworthy: generates knowledge responsibly." },
+        { "key":"C", "label":"Call for a complete ban.", "feedback":"Precautionary, but risks leaving society unprepared." },
+        { "key":"D", "label":"Encourage more debate before action.", "feedback":"Deliberation is valuable, but indefinite delay can paralyze decisions." }
+      ],
+      "next": "final"
+    },
+    {
+      "id": "final",
+      "scene": "briefing",
+      "prompt": "Seminar question: why trust climate science if models are wrong?",
+      "choices": [
+        { "key":"A", "label":"Agreement builds trust; disagreement sparks discovery.", "feedback":"Summarizes the key red thread insight." },
+        { "key":"B", "label":"Because models predict perfectly.", "feedback":"Incorrect — science earns trust by managing, not eliminating, uncertainty." },
+        { "key":"C", "label":"Failures teach us how to improve.", "feedback":"Yes: progress often comes through diagnosing errors." },
+        { "key":"D", "label":"Uncertainty itself is valuable evidence.", "feedback":"Exactly: uncertainty guides more resilient reasoning." }
+      ]
+    }
+  ],
+  "end": {
+    "summary": "As a Science Student, you learned that imperfection isn’t failure, errors can be productive, uncertainty guides stronger reasoning, and debates like geoengineering show how philosophy clarifies science in action.",
+    "links": []
+  }
+}
+
