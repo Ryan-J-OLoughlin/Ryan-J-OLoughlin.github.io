@@ -2,7 +2,7 @@
 title: "Student Dashboard"
 page-layout: full
 toc: false
-date-modified: 2025-08-30
+date-modified: last-modified
 ---
 
 ## Quick Actions
@@ -15,10 +15,10 @@ date-modified: 2025-08-30
 [🏢 Office Hours / Contact](teaching-students.qmd#office-hours--contact){.btn .btn-outline-primary .w-100}
 :::
 ::: {.g-col-12 .g-col-md-3}
-[📚 Academic Help ](teaching-students.qmd#academic-help-resources){.btn .btn-outline-secondary .w-100}
+[📚 Academic Help ](teaching-students.qmd#academic-help){.btn .btn-outline-secondary .w-100}
 :::
 ::: {.g-col-12 .g-col-md-3}
-[📬 Letter of Recomm ](teaching-students.qmd#requesting-letters-of-recommendation){.btn .btn-outline-secondary .w-100}
+[📬 Letter of Recomm ](teaching-students.qmd#professional-development){.btn .btn-outline-secondary .w-100}
 :::
 :::
 
@@ -46,7 +46,7 @@ date-modified: 2025-08-30
 :::
 :::
 
-## Office Hours & Contact
+## Office Hours & Contact{#office-hours--contact}
 
 ::: {.section-card}
 **Tuesdays 1–2 pm**, Powdermaker Hall 350V · or by appointment  
@@ -57,7 +57,7 @@ date-modified: 2025-08-30
 
 I am proud to support students in their academic and professional growth. Here are a few examples of supervised projects and where they’ve led:
 
-- *“Weighting the Many-Sided Die of Pascal's Wager”* — Jonathan Baruch  
+- *“Weighting the Many-Sided Die of Pascal's Wager”* (master's thesis) — Jonathan Baruch  
   → Admitted to **UPenn Law School** with a **Dean's Scholarship**
 
 
@@ -71,7 +71,7 @@ Send **one email** with:
 1) Name + CUNY ID + course(s)/term(s) + final grade(s)  
 2) **Deadline(s)** & submission method (portal/email)  
 3) **CV/Resume** + **unofficial transcript**  
-4) What you’re applying for & what to emphasize  
+4) What you’re applying for & what you want me to emphasize in my letter  
 5) Required forms (PDF) & **FERPA waiver** status, if needed  
 6) ≥ **3 weeks’ notice** before first deadline
 

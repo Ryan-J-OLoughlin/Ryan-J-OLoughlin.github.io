@@ -1,14 +1,14 @@
 ---
 title: "Teaching Why Trust Science"
-date-modified: 2025-08-30
+date-modified: last-modified
 ---
 
 ## Teaching Resources for Philosophy Instructors
 
-I design courses that link philosophy to urgent issues like climate change, scientific modeling, and environmental justice. This page collects syllabi, assignments, and teaching strategies that colleagues may find useful for adapting in their own classrooms, particularly for **non-science students**.
+I design courses that link philosophy to urgent issues like climate change, scientific modeling, environmental justice, energy transition, and biodiversity. Below are syllabi, assignments, and teaching strategies that colleagues may find useful for adapting in their own classrooms, particularly for **non-science students**.
 
 ### Teaching Philosophy
-I see teaching as a collaborative process where students learn by questioning, experimenting, and even failing. In my classes, I design **hands-on activities**—like building instruments in the makerspace—that let students experience the challenges of measurement and error firsthand. By connecting these activities to philosophical texts and Indigenous epistemologies, I help students see how knowledge is constructed and why uncertainty and failure are essential to learning.
+I see teaching as a collaborative process where students learn by questioning, experimenting, and even failing. In my classes, I design **hands-on activities**---like building instruments in the university makerspace---that let students experience the challenges of measurement and error firsthand. By connecting these activities to philosophical texts, I help students see how knowledge is constructed and why uncertainty and failure are essential to learning.
 
 ### Adaptable Syllabi
 
