@@ -46,10 +46,11 @@ Full list in my [CV →](about.qmd)
 
 ## What I Offer to Scientific Collaborators
 
-- **Clarifying uncertainty**: Distinguishing between statistical spread and genuine epistemic confidence.  
-- **Robustness reasoning**: Explaining why model disagreement can strengthen, rather than weaken, scientific conclusions.  
-- **Model evaluation**: Developing conceptual tools for understanding lower-skill models, error diagnosis, and ensemble practices.  
-- **Decision support**: Showing how philosophical analysis makes uncertainty actionable for policymakers.  
+- **Robustness reasoning**: Explaining why agreement and disagreement across models can each provide insight—how convergence boosts confidence, and how divergence points to hidden mechanisms or new knowledge.
+- **Model evaluation**: Developing conceptual tools for explaining model biases, interpreting ensemble spread, and showing how even “worse” models can play a constructive role in constraining estimates and resolving discrepancies. 
+- **Philosophical integration**: Bringing frameworks from philosophy of science (robustness, pursuit-worthiness, levels of understanding) into day-to-day scientific practice in climate and Earth system modeling. 
+- **Decision support**: Helping connect model-based insights to real-world contexts—turning technical evaluations of uncertainty into actionable guidance for policymakers, funders, and interdisciplinary teams.
+- **Encouraging reflection and big-picture thinking**: Creating space for scientists to step back, examine their everyday practices, and see how conceptual clarity can sharpen both individual projects and collective research agendas.
 
 ::: {.callout .callout-note .mb-5 .mt-5}
 If you’re a climate scientist, data scientist, or modeler interested in uncertainty, robustness, or model evaluation, I’d love to talk.
@@ -62,8 +63,6 @@ If you’re a climate scientist, data scientist, or modeler interested in uncert
 ## Ongoing Collaborations
 
 I have worked with scientists at **NASA GISS**, **NCAR**, **Cornell University**, and **Indiana University**, helping refine how models are evaluated and how uncertainty is communicated. 
-
-::: 
 
 # Let’s collaborate
 
