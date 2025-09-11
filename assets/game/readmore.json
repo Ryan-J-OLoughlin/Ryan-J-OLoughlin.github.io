@@ -1,8 +1,10 @@
 {
-  "defaults": [
-    { "label": "Why spreads matter (For Scientists)", "href": "for-scientists.qmd" },
-    { "label": "Diagnosing errors (EJPS, 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" }
-  ],
+  "defaults": {
+    "blurb": "Forthcoming.",
+    "links": [
+      { "label": "", "href": "" }
+    ]
+  },
 
   "city-planner/spread/A": {
     "blurb": "No single best model. Robustness compares multiple models to find stable insights.",
@@ -115,13 +117,24 @@
   ],  
 
 
-  "student/classroom/A": [ { "label": "Imperfection ≠ uselessness", "href": "for-philosophers.qmd" } ],
-  "student/classroom/B": [ { "label": "Ensembles build confidence", "href": "for-scientists.qmd" } ],
-  "student/classroom/C": [ { "label": "Value in weaker models", "href": "https://doi.org/10.1007/s10584-023-03661-7" } ],
-  "student/classroom/D": [ { "label": "Uncertainty as evidence", "href": "for-scientists.qmd" } ],
+  "student/classroom/A": [ { "label": "Why we need lower-performance climate models", "href": "https://doi.org/10.1007/s10584-023-03661-7" } ],
+  "student/classroom/B": [ { "label": "Climate model ensembles build confidence over time ", "href": "https://doi.org/10.1017/psa.2023.62" } ],
+  "student/classroom/C": [ { "label": "Mechanisms revealed, see especially figure 2", "href": "https://doi.org/10.1002/wcc.799" } ],
+  "student/classroom/D": [ { "label": "The Drama of Uncertainty", "href": " https://doi.org/10.1007/s10584-010-9841-6" } ],
 
-  "journalist/breaking/A": [ { "label": "Disagreement is normal", "href": "for-philosophers.qmd" } ],
-  "journalist/breaking/B": [ { "label": "Report the range", "href": "for-scientists.qmd" } ],
-  "journalist/breaking/C": [ { "label": "No single best model", "href": "https://doi.org/10.1016/j.shpsa.2020.12.005" } ],
-  "journalist/breaking/D": [ { "label": "Explain disagreements (EJPS 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" } ]
+  "student/lab/A": [ { "label": "Diagnosing errors (EJPS, 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" } ],
+  "student/lab/B": [ { "label": "Diagnosing errors (EJPS, 2023)", "href": "https://doi.org/10.1007/s13194-023-00522-z" } ],
+  "student/lab/C": [  ],
+  "student/lab/D": [ { "label": "From simple to complex: A hierarchy of understanding", "href": "https://doi.org/10.1175/BAMS-86-11-1609" } ],
+
+  "student/geo/A": [  ],
+  "student/geo/B": [ { "label": "When should we pursue small-scale geoengineering field experiments? ", "href": "https://philsci-archive.pitt.edu/25840/" } ],
+  "student/geo/C": [ { "label": "It’s a case of risk vs. risk", "href": "https://www.hup.harvard.edu/books/9780674773073" } ],
+  "student/geo/D": [ { "label": "How (not) to Argue about Solar Geoengineering", "href": "https://doi.org/10.1111/japp.12643" } ],
+
+  "student/final/A": [  ],
+  "student/final/B": [  ],
+  "student/final/C": [ { "label": "Antifragility", "href": "https://en.wikipedia.org/wiki/Antifragile_(book)" } ],
+  "student/final/D": [  ]
+
 }
