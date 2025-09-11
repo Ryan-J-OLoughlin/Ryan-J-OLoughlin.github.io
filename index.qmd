@@ -4,6 +4,7 @@ page-layout: full
 toc: false
 date-modified: last-modified
 description: "Ryan O’Loughlin — philosopher of science focused on climate models, uncertainty, and decision-making | Trust without Truth"
+include-in-header: partials/perf-home-head.html
 ---
 
 <style>

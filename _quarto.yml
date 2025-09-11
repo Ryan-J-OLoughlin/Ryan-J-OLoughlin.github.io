@@ -86,8 +86,11 @@ format:
       light: cosmo
       dark: darkly
     css: styles.css
+    include-in-header:
+      - partials/perf-head.html
     include-after-body:
       - partials/game-modal.html
+      - partials/perf-after.html
     toc: true
     toc-location: right
     page-navigation: true

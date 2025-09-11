@@ -1,0 +1,23 @@
+<script>
+// Lightweight progressive enhancements applied after the page loads
+(function(){
+  // 1) Lazy-load all non-critical images
+  try{
+    document.querySelectorAll('img:not([loading])').forEach(function(img){
+      img.setAttribute('loading','lazy');
+      img.setAttribute('decoding','async');
+      if(!img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority','low');
+    });
+  }catch(e){}
+
+  // 2) Lazy-load iframes (e.g., YouTube embeds); exclude the game modal
+  try{
+    document.querySelectorAll('iframe:not(#gameFrame):not([loading])').forEach(function(f){
+      f.setAttribute('loading','lazy');
+      // Also hint that these are low priority compared to main content
+      if(!f.hasAttribute('fetchpriority')) f.setAttribute('fetchpriority','low');
+    });
+  }catch(e){}
+})();
+</script>
+
