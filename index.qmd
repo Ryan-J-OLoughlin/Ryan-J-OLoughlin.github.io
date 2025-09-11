@@ -20,7 +20,7 @@ description: "Ryan O’Loughlin — philosopher of science focused on climate mo
 <div class="hero-role">Philosopher of Science</div>
 <div class="hero-tag">
   <a class="ghost-link" data-game-url="/assets/game/index.html" aria-label="Play a 2-minute interactive scenario" title="Play a 2-minute interactive scenario"><em>Trust without Truth</em></a>
-  <span class="ghost-hint">Play a 2‑minute scenario →</span>
+  <a class="ghost-hint ghost-link" data-game-url="/assets/game/index.html" aria-label="Play a 2-minute interactive scenario" title="Play a 2-minute interactive scenario">Play a 2‑minute interactive scenario →</a>
 </div>
 :::
 
