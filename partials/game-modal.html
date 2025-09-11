@@ -67,14 +67,21 @@
       frame.style.height = h + 'px';
     }
 
-    // Lazy-load the iframe once the modal is shown and fit to viewport
+    // Load/reload the iframe fresh when the modal is shown and fit to viewport
     if(modalEl){
       modalEl.addEventListener('shown.bs.modal', function(){
-        if(!frame.src){ frame.src = gameURL || '/assets/game/index.html'; }
+        // Clear any persisted game progress so each open starts fresh
+        try { sessionStorage && sessionStorage.removeItem('cyoa'); } catch(e) {}
+        // Always reload the iframe with a cache-busting query param
+        var base = gameURL || '/assets/game/index.html';
+        var sep = (base.indexOf('?') >= 0) ? '&' : '?';
+        frame.src = base + sep + 'ts=' + Date.now();
         sizeFrame();
       });
       modalEl.addEventListener('hidden.bs.modal', function(){
         try { frame.contentWindow && frame.contentWindow.postMessage({type:'pause'}, '*'); } catch(e) {}
+        // Optionally release resources between sessions
+        try { frame.removeAttribute('src'); } catch(e) {}
       });
       window.addEventListener('resize', sizeFrame);
     }

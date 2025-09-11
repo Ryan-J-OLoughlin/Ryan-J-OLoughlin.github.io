@@ -72,6 +72,11 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<!-- Performance hints: preconnect to fonts and preload site CSS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="preload" as="style" href="./styles.css">
+
 
 
 <link rel="stylesheet" href="styles.css">
@@ -587,19 +592,49 @@ Let’s Connect
       frame.style.height = h + 'px';
     }
 
-    // Lazy-load the iframe once the modal is shown and fit to viewport
+    // Load/reload the iframe fresh when the modal is shown and fit to viewport
     if(modalEl){
       modalEl.addEventListener('shown.bs.modal', function(){
-        if(!frame.src){ frame.src = gameURL || '/assets/game/index.html'; }
+        // Clear any persisted game progress so each open starts fresh
+        try { sessionStorage && sessionStorage.removeItem('cyoa'); } catch(e) {}
+        // Always reload the iframe with a cache-busting query param
+        var base = gameURL || '/assets/game/index.html';
+        var sep = (base.indexOf('?') >= 0) ? '&' : '?';
+        frame.src = base + sep + 'ts=' + Date.now();
         sizeFrame();
       });
       modalEl.addEventListener('hidden.bs.modal', function(){
         try { frame.contentWindow && frame.contentWindow.postMessage({type:'pause'}, '*'); } catch(e) {}
+        // Optionally release resources between sessions
+        try { frame.removeAttribute('src'); } catch(e) {}
       });
       window.addEventListener('resize', sizeFrame);
     }
   })();
 </script>
+<script>
+// Lightweight progressive enhancements applied after the page loads
+(function(){
+  // 1) Lazy-load all non-critical images
+  try{
+    document.querySelectorAll('img:not([loading])').forEach(function(img){
+      img.setAttribute('loading','lazy');
+      img.setAttribute('decoding','async');
+      if(!img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority','low');
+    });
+  }catch(e){}
+
+  // 2) Lazy-load iframes (e.g., YouTube embeds); exclude the game modal
+  try{
+    document.querySelectorAll('iframe:not(#gameFrame):not([loading])').forEach(function(f){
+      f.setAttribute('loading','lazy');
+      // Also hint that these are low priority compared to main content
+      if(!f.hasAttribute('fetchpriority')) f.setAttribute('fetchpriority','low');
+    });
+  }catch(e){}
+})();
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

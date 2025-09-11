@@ -221,35 +221,21 @@
     "href": "for-philosophers.html",
     "title": "For Philosophers",
     "section": "",
-    "text": "I welcome collaboration with philosophers interested in climate science, modeling, and uncertainty—coauthoring papers, organizing workshops, reading groups, and sharing works-in-progress for feedback.\n\nTopics: robustness reasoning, error & failure in modeling, epistemic values, and AI in science.\n\nI’m especially keen on projects that connect normative/methodological questions to modeling practice."
+    "text": "I welcome collaboration with philosophers interested in climate science, modeling, and uncertainty—coauthoring papers, organizing workshops, reading groups, and sharing works-in-progress for feedback.\n\nTopics: robustness reasoning, error & failure in modeling, informal confirmation, values in science, and AI-driven science.\nI’m especially keen on projects that connect normative/methodological questions to modeling practice."
   },
   {
     "objectID": "for-philosophers.html#collaboration",
     "href": "for-philosophers.html#collaboration",
     "title": "For Philosophers",
     "section": "",
-    "text": "I welcome collaboration with philosophers interested in climate science, modeling, and uncertainty—coauthoring papers, organizing workshops, reading groups, and sharing works-in-progress for feedback.\n\nTopics: robustness reasoning, error & failure in modeling, epistemic values, and AI in science.\n\nI’m especially keen on projects that connect normative/methodological questions to modeling practice."
+    "text": "I welcome collaboration with philosophers interested in climate science, modeling, and uncertainty—coauthoring papers, organizing workshops, reading groups, and sharing works-in-progress for feedback.\n\nTopics: robustness reasoning, error & failure in modeling, informal confirmation, values in science, and AI-driven science.\nI’m especially keen on projects that connect normative/methodological questions to modeling practice."
   },
   {
     "objectID": "for-philosophers.html#wip",
     "href": "for-philosophers.html#wip",
     "title": "For Philosophers",
     "section": "Works-in-Progress",
-    "text": "Works-in-Progress\n\nEpistemic Virtues in Ensemble Modeling — How epistemic values shape evaluation in multi-model ensembles.\n\nError and Disagreement as Epistemic Resources — Why “bad” models and disagreement can advance knowledge."
-  },
-  {
-    "objectID": "for-philosophers.html#invited-talks",
-    "href": "for-philosophers.html#invited-talks",
-    "title": "For Philosophers",
-    "section": "Recent Invited Talks",
-    "text": "Recent Invited Talks"
-  },
-  {
-    "objectID": "for-philosophers.html#workshops",
-    "href": "for-philosophers.html#workshops",
-    "title": "For Philosophers",
-    "section": "Workshops & Reading Groups",
-    "text": "Workshops & Reading Groups\n\n\n\nUpdated: August 30, 2025"
+    "text": "Works-in-Progress\n\nAntifragility in scientific modeling\nPursuitworthiness in controversial science, e.g., climate intervention research\nThe link between understanding and trust in cases of decision-making based on complex models\nAssumptions and challenges in model weighting\n\nUpdated: September 11, 2025"
   },
   {
     "objectID": "talks/nasa-giss-ml-2024.html",
@@ -354,14 +340,14 @@
     "href": "for-scientists.html#what-i-offer-to-scientific-collaborators",
     "title": "For Scientists",
     "section": "What I Offer to Scientific Collaborators",
-    "text": "What I Offer to Scientific Collaborators\n\nClarifying uncertainty: Distinguishing between statistical spread and genuine epistemic confidence.\n\nRobustness reasoning: Explaining why model disagreement can strengthen, rather than weaken, scientific conclusions.\n\nModel evaluation: Developing conceptual tools for understanding lower-skill models, error diagnosis, and ensemble practices.\n\nDecision support: Showing how philosophical analysis makes uncertainty actionable for policymakers.\n\n\n\n\n\n\n\nIf you’re a climate scientist, data scientist, or modeler interested in uncertainty, robustness, or model evaluation, I’d love to talk.\nEmail me Propose a talk Start a project"
+    "text": "What I Offer to Scientific Collaborators\n\nRobustness reasoning: Explaining why agreement and disagreement across models can each provide insight—how convergence boosts confidence, and how divergence points to hidden mechanisms or new knowledge.\nModel evaluation: Developing conceptual tools for explaining model biases, interpreting ensemble spread, and showing how even “worse” models can play a constructive role in constraining estimates and resolving discrepancies.\nPhilosophical integration: Bringing frameworks from philosophy of science (robustness, pursuit-worthiness, levels of understanding) into day-to-day scientific practice in climate and Earth system modeling.\nDecision support: Helping connect model-based insights to real-world contexts—turning technical evaluations of uncertainty into actionable guidance for policymakers, funders, and interdisciplinary teams.\nEncouraging reflection and big-picture thinking: Creating space for scientists to step back, examine their everyday practices, and see how conceptual clarity can sharpen both individual projects and collective research agendas.\n\n\n\n\n\n\n\nIf you’re a climate scientist, data scientist, or modeler interested in uncertainty, robustness, or model evaluation, I’d love to talk.\nEmail me Propose a talk Start a project"
   },
   {
     "objectID": "for-scientists.html#ongoing-collaborations",
     "href": "for-scientists.html#ongoing-collaborations",
     "title": "For Scientists",
     "section": "Ongoing Collaborations",
-    "text": "Ongoing Collaborations\nI have worked with scientists at NASA GISS, NCAR, Cornell University, and Indiana University, helping refine how models are evaluated and how uncertainty is communicated.\n:::"
+    "text": "Ongoing Collaborations\nI have worked with scientists at NASA GISS, NCAR, Cornell University, and Indiana University, helping refine how models are evaluated and how uncertainty is communicated."
   },
   {
     "objectID": "talks/ncar-cgd-error-taxonomy-2022.html",
@@ -480,7 +466,7 @@
     "href": "index.html",
     "title": "Homepage | Ryan O’Loughlin | Philosopher of Science",
     "section": "",
-    "text": "Ryan O’Loughlin\n\n\nPhilosopher of Science\n\n\nTrust without Truth Play a 2‑minute scenario →\n\n\n\n\nAll models are wrong. Why trust them?\n\nSee Research"
+    "text": "Ryan O’Loughlin\n\n\nPhilosopher of Science\n\n\nTrust without Truth Play a 2‑minute interactive scenario →\n\n\n\n\nAll models are wrong. Why trust them?\n\nSee Research"
   },
   {
     "objectID": "index.html#highlights",
@@ -508,7 +494,7 @@
     "href": "index.html#contact-information",
     "title": "Homepage | Ryan O’Loughlin | Philosopher of Science",
     "section": "Contact Information",
-    "text": "Contact Information\n ryan.oloughlin@qc.cuny.edu   718-997-5270   Powdermaker Hall 350-V, Queens College, CUNY\nMore ways to reach me →\nUpdated: September 9, 2025"
+    "text": "Contact Information\n ryan.oloughlin@qc.cuny.edu   718-997-5270   Powdermaker Hall 350-V, Queens College, CUNY\nMore ways to reach me →\nUpdated: September 11, 2025"
   },
   {
     "objectID": "media.html",

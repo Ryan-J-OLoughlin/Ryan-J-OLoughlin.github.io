@@ -288,21 +288,29 @@ body.quarto-dark .logo-strip img:hover{
   border-bottom-color: currentColor;
   outline: none;
 }
+/* Subtle, always-visible hint with gentle float */
 .ghost-hint{
-  display: inline-block;
-  margin-left: .6rem;
+  display: block;              /* place on its own line */
+  margin-left: 1rem;         
+  margin-top: .125rem;          /* small spacing from title */
   font-size: .9em;
-  opacity: 0;
-  transform: translateY(-2px);
-  transition: opacity .18s ease, transform .18s ease;
+  opacity: .6;                 /* lightly visible by default */
+  color: inherit;              /* match surrounding text */
+  text-decoration: none;       /* no underline */
+  cursor: pointer;
+  animation: ghostHintFloat 2.4s ease-in-out infinite;
 }
 .hero-tag:hover .ghost-hint,
-.ghost-link:focus + .ghost-hint{
-  opacity: .9;
-  transform: translateY(0);
+.ghost-link:focus + .ghost-hint,
+.ghost-hint:focus{
+  opacity: .95;                /* brighten on hover/focus */
+}
+@keyframes ghostHintFloat {
+  0%, 100% { transform: translateY(-1px); }
+  50%      { transform: translateY(-3px); }
 }
 @media (max-width: 576px){
-  .ghost-hint{ opacity: .6; display: block; margin-left: 0; margin-top: .25rem; }
+  .ghost-hint{ opacity: .6; }
 }
 .hero-bottom{
   align-self: end;

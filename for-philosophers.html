@@ -72,6 +72,11 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<!-- Performance hints: preconnect to fonts and preload site CSS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="preload" as="style" href="./styles.css">
+
 
 
 <link rel="stylesheet" href="styles.css">
@@ -337,8 +342,6 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#collaboration" id="toc-collaboration" class="nav-link active" data-scroll-target="#collaboration">Collaboration Opportunities</a></li>
   <li><a href="#wip" id="toc-wip" class="nav-link" data-scroll-target="#wip">Works-in-Progress</a></li>
-  <li><a href="#invited-talks" id="toc-invited-talks" class="nav-link" data-scroll-target="#invited-talks">Recent Invited Talks</a></li>
-  <li><a href="#workshops" id="toc-workshops" class="nav-link" data-scroll-target="#workshops">Workshops &amp; Reading Groups</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/edit/main/for-philosophers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -360,7 +363,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">August 30, 2025</p>
+      <p class="date-modified">September 11, 2025</p>
     </div>
   </div>
     
@@ -375,31 +378,19 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="collaboration">Collaboration Opportunities</h2>
 <p>I welcome collaboration with philosophers interested in climate science, modeling, and uncertainty—<strong>coauthoring papers, organizing workshops, reading groups</strong>, and sharing works-in-progress for feedback.</p>
 <ul>
-<li>Topics: robustness reasoning, error &amp; failure in modeling, epistemic values, and AI in science.<br>
-</li>
+<li>Topics: robustness reasoning, error &amp; failure in modeling, informal confirmation, values in science, and AI-driven science.</li>
 <li>I’m especially keen on projects that connect normative/methodological questions to modeling practice.</li>
 </ul>
 </section>
 <section id="wip" class="level2">
 <h2 class="anchored" data-anchor-id="wip">Works-in-Progress</h2>
 <ul>
-<li><strong>Epistemic Virtues in Ensemble Modeling</strong> — How epistemic values shape evaluation in multi-model ensembles.<br>
-</li>
-<li><strong>Error and Disagreement as Epistemic Resources</strong> — Why “bad” models and disagreement can advance knowledge.</li>
+<li>Antifragility in scientific modeling</li>
+<li>Pursuitworthiness in controversial science, e.g., climate intervention research</li>
+<li>The link between understanding and trust in cases of decision-making based on complex models</li>
+<li>Assumptions and challenges in model weighting</li>
 </ul>
-</section>
-<section id="invited-talks" class="level2">
-<h2 class="anchored" data-anchor-id="invited-talks">Recent Invited Talks</h2>
-<div id="AUTO_INVITED_TALKS">
-<!-- Filled automatically from files/cv-content.md -->
-</div>
-</section>
-<section id="workshops" class="level2">
-<h2 class="anchored" data-anchor-id="workshops">Workshops &amp; Reading Groups</h2>
-<div id="AUTO_WORKSHOPS">
-<!-- Filled automatically from files/cv-content.md -->
-</div>
-<p><em>Updated: August 30, 2025</em></p>
+<p><em>Updated: September 11, 2025</em></p>
 
 
 </section>
@@ -474,19 +465,49 @@ ul.task-list li input[type="checkbox"] {
       frame.style.height = h + 'px';
     }
 
-    // Lazy-load the iframe once the modal is shown and fit to viewport
+    // Load/reload the iframe fresh when the modal is shown and fit to viewport
     if(modalEl){
       modalEl.addEventListener('shown.bs.modal', function(){
-        if(!frame.src){ frame.src = gameURL || '/assets/game/index.html'; }
+        // Clear any persisted game progress so each open starts fresh
+        try { sessionStorage && sessionStorage.removeItem('cyoa'); } catch(e) {}
+        // Always reload the iframe with a cache-busting query param
+        var base = gameURL || '/assets/game/index.html';
+        var sep = (base.indexOf('?') >= 0) ? '&' : '?';
+        frame.src = base + sep + 'ts=' + Date.now();
         sizeFrame();
       });
       modalEl.addEventListener('hidden.bs.modal', function(){
         try { frame.contentWindow && frame.contentWindow.postMessage({type:'pause'}, '*'); } catch(e) {}
+        // Optionally release resources between sessions
+        try { frame.removeAttribute('src'); } catch(e) {}
       });
       window.addEventListener('resize', sizeFrame);
     }
   })();
 </script>
+<script>
+// Lightweight progressive enhancements applied after the page loads
+(function(){
+  // 1) Lazy-load all non-critical images
+  try{
+    document.querySelectorAll('img:not([loading])').forEach(function(img){
+      img.setAttribute('loading','lazy');
+      img.setAttribute('decoding','async');
+      if(!img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority','low');
+    });
+  }catch(e){}
+
+  // 2) Lazy-load iframes (e.g., YouTube embeds); exclude the game modal
+  try{
+    document.querySelectorAll('iframe:not(#gameFrame):not([loading])').forEach(function(f){
+      f.setAttribute('loading','lazy');
+      // Also hint that these are low priority compared to main content
+      if(!f.hasAttribute('fetchpriority')) f.setAttribute('fetchpriority','low');
+    });
+  }catch(e){}
+})();
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

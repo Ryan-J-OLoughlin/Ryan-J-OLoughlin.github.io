@@ -31,8 +31,8 @@
       "scene": "geoengineering",
       "prompt": "Writing for the student paper about geoengineering. What stance?",
       "choices": [
-        { "key":"A", "label":"Promote immediate large-scale geoengineering.", "feedback":"Too risky: untested large-scale interventions could cause harm." },
-        { "key":"B", "label":"Advocate small-scale, transparent experiments.", "feedback":"Pursuitworthy: generates knowledge responsibly." },
+        { "key":"A", "label":"Promote immediate large-scale geoengineering.", "feedback":"Not even enthusiastic supports of geoengineering would endorse this." },
+        { "key":"B", "label":"Advocate small-scale, transparent experiments.", "feedback":"Current research is model-based. Experiments, if pursued, should be in service of the modeling." },
         { "key":"C", "label":"Call for a complete ban.", "feedback":"Precautionary, but risks leaving society unprepared." },
         { "key":"D", "label":"Encourage more debate before action.", "feedback":"Deliberation is valuable, but indefinite delay can paralyze decisions." }
       ],

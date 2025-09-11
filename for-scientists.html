@@ -74,6 +74,11 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<!-- Performance hints: preconnect to fonts and preload site CSS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="preload" as="style" href="./styles.css">
+
 
 
 <link rel="stylesheet" href="styles.css">
@@ -416,13 +421,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="what-i-offer-to-scientific-collaborators" class="level2">
 <h2 class="anchored" data-anchor-id="what-i-offer-to-scientific-collaborators">What I Offer to Scientific Collaborators</h2>
 <ul>
-<li><strong>Clarifying uncertainty</strong>: Distinguishing between statistical spread and genuine epistemic confidence.<br>
-</li>
-<li><strong>Robustness reasoning</strong>: Explaining why model disagreement can strengthen, rather than weaken, scientific conclusions.<br>
-</li>
-<li><strong>Model evaluation</strong>: Developing conceptual tools for understanding lower-skill models, error diagnosis, and ensemble practices.<br>
-</li>
-<li><strong>Decision support</strong>: Showing how philosophical analysis makes uncertainty actionable for policymakers.</li>
+<li><strong>Robustness reasoning</strong>: Explaining why agreement and disagreement across models can each provide insight—how convergence boosts confidence, and how divergence points to hidden mechanisms or new knowledge.</li>
+<li><strong>Model evaluation</strong>: Developing conceptual tools for explaining model biases, interpreting ensemble spread, and showing how even “worse” models can play a constructive role in constraining estimates and resolving discrepancies.</li>
+<li><strong>Philosophical integration</strong>: Bringing frameworks from philosophy of science (robustness, pursuit-worthiness, levels of understanding) into day-to-day scientific practice in climate and Earth system modeling.</li>
+<li><strong>Decision support</strong>: Helping connect model-based insights to real-world contexts—turning technical evaluations of uncertainty into actionable guidance for policymakers, funders, and interdisciplinary teams.</li>
+<li><strong>Encouraging reflection and big-picture thinking</strong>: Creating space for scientists to step back, examine their everyday practices, and see how conceptual clarity can sharpen both individual projects and collective research agendas.</li>
 </ul>
 <div class="mb-5 mt-5 callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
@@ -439,7 +442,6 @@ ul.task-list li input[type="checkbox"] {
 <section id="ongoing-collaborations" class="level2">
 <h2 class="anchored" data-anchor-id="ongoing-collaborations">Ongoing Collaborations</h2>
 <p>I have worked with scientists at <strong>NASA GISS</strong>, <strong>NCAR</strong>, <strong>Cornell University</strong>, and <strong>Indiana University</strong>, helping refine how models are evaluated and how uncertainty is communicated.</p>
-<p>:::</p>
 </section>
 <section id="lets-collaborate" class="level1">
 <h1>Let’s collaborate</h1>
@@ -519,19 +521,49 @@ ul.task-list li input[type="checkbox"] {
       frame.style.height = h + 'px';
     }
 
-    // Lazy-load the iframe once the modal is shown and fit to viewport
+    // Load/reload the iframe fresh when the modal is shown and fit to viewport
     if(modalEl){
       modalEl.addEventListener('shown.bs.modal', function(){
-        if(!frame.src){ frame.src = gameURL || '/assets/game/index.html'; }
+        // Clear any persisted game progress so each open starts fresh
+        try { sessionStorage && sessionStorage.removeItem('cyoa'); } catch(e) {}
+        // Always reload the iframe with a cache-busting query param
+        var base = gameURL || '/assets/game/index.html';
+        var sep = (base.indexOf('?') >= 0) ? '&' : '?';
+        frame.src = base + sep + 'ts=' + Date.now();
         sizeFrame();
       });
       modalEl.addEventListener('hidden.bs.modal', function(){
         try { frame.contentWindow && frame.contentWindow.postMessage({type:'pause'}, '*'); } catch(e) {}
+        // Optionally release resources between sessions
+        try { frame.removeAttribute('src'); } catch(e) {}
       });
       window.addEventListener('resize', sizeFrame);
     }
   })();
 </script>
+<script>
+// Lightweight progressive enhancements applied after the page loads
+(function(){
+  // 1) Lazy-load all non-critical images
+  try{
+    document.querySelectorAll('img:not([loading])').forEach(function(img){
+      img.setAttribute('loading','lazy');
+      img.setAttribute('decoding','async');
+      if(!img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority','low');
+    });
+  }catch(e){}
+
+  // 2) Lazy-load iframes (e.g., YouTube embeds); exclude the game modal
+  try{
+    document.querySelectorAll('iframe:not(#gameFrame):not([loading])').forEach(function(f){
+      f.setAttribute('loading','lazy');
+      // Also hint that these are low priority compared to main content
+      if(!f.hasAttribute('fetchpriority')) f.setAttribute('fetchpriority','low');
+    });
+  }catch(e){}
+})();
+</script>
+
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
