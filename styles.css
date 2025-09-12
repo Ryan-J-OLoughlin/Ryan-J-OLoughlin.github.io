@@ -62,7 +62,7 @@ h1, h2, h3, h4, .navbar-brand {
 }
 h1, h2, h3 { 
   margin: var(--space-4) 0 var(--space-2); 
-  padding-top: var(--space-3);
+  padding-top: var(--space-4);
 }
 h4, h5, h6 { margin: var(--space-3) 0 var(--space-1); }
 p, ul, ol { margin: 0.6rem 0 0.9rem; }
@@ -190,6 +190,7 @@ h1.brand-bright, h2.brand-bright, h3.brand-bright, h4.brand-bright {
   opacity: .8;
   transition: opacity .2s ease, filter .2s ease, transform .2s ease;
 }
+.logo-strip { padding-top: 20px; }
 .logo-strip img:hover{
   filter: grayscale(0%);
   opacity: 1;
@@ -240,7 +241,7 @@ body.quarto-dark .logo-strip img:hover{
   content: "";
   position: absolute; inset: 0;
   /* top subtle, bottom darker to enhance bottom text legibility */
-  background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0.6) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.4) 80%,  rgba(0,0,0,0.75) 95%,rgba(0,0,0,0.9) 100%);
 }
 .hero-overlay{
   position: absolute; inset: 0; z-index: 1;
@@ -422,4 +423,104 @@ body.quarto-dark .logo-strip img:hover{
     height: 100dvh;  /* dynamic viewport */
     height: 100svh;  /* iOS Safari small viewport */
   }
+}
+
+/* === Pull-quote layout for What I Work On === */
+.what-i-do { position: relative; }
+.what-i-do::after { content: ""; display: table; clear: both; }
+
+.pull-quote {
+  background: var(--brand-white);
+  color: inherit;
+  font-family: var(--font-serif); /* match header font (Lora) */
+  border-left: 8px solid var(--brand-brightblue);
+  border-radius: 16px;
+  padding: 1rem 1.4rem 1.2rem 1.25rem; /* slightly shorter vertically */
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.08);
+}
+
+.pull-quote-right {
+  float: right;
+  width: clamp(340px, 44vw, 560px);
+  margin: 0 0 1rem 1.75rem; /* gap to flowing text on the left */
+  shape-outside: inset(0 round 16px); /* softer wrap on modern browsers */
+}
+
+/* Raise the quote to visually overlap the section heading */
+.pull-quote-raised { margin-top: -1.5rem; }
+@media (min-width: 768px){
+  .pull-quote-raised { margin-top: -2.25rem; }
+}
+@media (min-width: 992px){
+  .pull-quote-raised { margin-top: -4rem; }
+}
+
+.pull-quote-mark {
+  display: block;
+  line-height: 0.6;
+  font-family: var(--font-serif);
+  font-weight: 800;
+  font-size: clamp(80px, 12vw, 160px);
+  color: var(--brand-brightblue);   /* bright blue brand accent */
+  margin-bottom: .25rem;
+}
+
+.pull-quote-text {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  font-style: italic;
+  line-height: 1.48; /* tighten slightly to reduce height */
+  font-weight: 600; /* heavier for emphasis */
+}
+
+.float-clear { clear: both; }
+
+/* Dark mode polish */
+body.quarto-dark .pull-quote {
+  background: var(--brand-surface);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 .125rem .25rem rgba(0,0,0,.35);
+}
+
+/* === Full-height cover images inside grid columns === */
+.cover-img {
+  display: block;
+  width: 100%;
+  height: auto;          
+  object-fit: cover;      /* crop to fill without distortion */
+  object-position: top center; /* prefer showing top of image */
+  border-radius: 12px;    /* optional: soften corners */
+}
+/* Crop helper: constrain image box by aspect, show top half */
+.img-top-half { aspect-ratio: 1 / 1; }
+/* Bottom fade-out helper */
+.img-fade-bottom {
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.3) 90%,  rgba(0,0,0,0.1) 95%,rgba(0,0,0,0) 100%);
+          mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.3) 90%,  rgba(0,0,0,0.1) 95%,rgba(0,0,0,0) 100%);
+}
+/* (reverted) removed background-based cover crops */
+@media (max-width: 768px){
+  .cover-img {
+    height: auto;         /* stack naturally on small screens */
+    max-height: 60vh;     /* prevent overly tall images on small devices */
+  }
+}
+
+/* === Mobile ordering helpers (Grid/Flex compatible) === */
+@media (max-width: 768px){
+  .order-mobile-1 { order: 1 !important; }
+  .order-mobile-2 { order: 2 !important; }
+}
+
+/* === Scroll Reveal === */
+.reveal { 
+  opacity: 0; 
+  transform: translateY(12px);
+  transition: opacity 480ms ease, transform 560ms ease; 
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform; 
+}
+.reveal.reveal-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce){
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
 }

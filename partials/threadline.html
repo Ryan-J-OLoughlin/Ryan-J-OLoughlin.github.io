@@ -1,0 +1,113 @@
+<!-- Embedded threadline (v1): single thin path that scrolls with the page.
+     No glow, no mask, no branches. We'll tune waypoints first. -->
+<style>
+  /* Embedded overlay: anchored to content column and scrolls with page */
+  #threadline { position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 2; color: var(--threadline-color, #0a1f44); mix-blend-mode: multiply; }
+  #threadline svg { width: 100%; display: block; }
+  #threadline .base { stroke: currentColor; stroke-width: 1.2; opacity: 0.85; fill: none; stroke-linecap: round; }
+  /* Debug: boost visibility with ?threadDebug */
+  #threadline.debug { z-index: 1000; }
+  #threadline.debug .base { stroke-width: 1.6; opacity: 0.95; }
+</style>
+
+<div id="threadline" aria-hidden="true">
+  <svg id="threadline-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <path id="threadline-path" class="base" d="M 5 5 L 95 95" />
+  </svg>
+</div>
+
+<script>
+  (() => {
+    const wrapper = document.getElementById('threadline');
+    const svg = document.getElementById('threadline-svg');
+    const path = document.getElementById('threadline-path');
+    if (!wrapper || !svg || !path) return;
+
+    const DBG = new URLSearchParams(location.search).has('threadDebug');
+    if (DBG) wrapper.classList.add('debug');
+    // Embedded mode: let the line scroll with the page
+    const FORCE_TOP = false;
+
+    // Anchor to Quarto's main content column
+    const findHost = () => document.getElementById('quarto-document-content') || document.querySelector('main.content') || document.getElementById('quarto-content') || document.body;
+
+    const size = () => {
+      if (FORCE_TOP) {
+        wrapper.style.left = '0px';
+        wrapper.style.width = '100vw';
+        svg.style.height = window.innerHeight + 'px';
+        return;
+      }
+      const host = findHost();
+      const rect = host.getBoundingClientRect();
+      const scrollX = window.scrollX || document.documentElement.scrollLeft || 0;
+      const docH = document.documentElement.scrollHeight;
+      wrapper.style.left = (rect.left + scrollX) + 'px';
+      wrapper.style.width = rect.width + 'px';
+      svg.style.height = docH + 'px';
+    };
+
+    const buildPath = () => {
+      if (FORCE_TOP) {
+        // Simple, visible curve near the top of the viewport
+        const d = 'M 5 15 C 30 8, 70 22, 95 15';
+        path.setAttribute('d', d);
+        return;
+      }
+      const host = findHost();
+      const hostRect = host.getBoundingClientRect();
+      const sX = window.scrollX || document.documentElement.scrollLeft || 0;
+      const sY = window.scrollY || document.documentElement.scrollTop || 0;
+      const docH = document.documentElement.scrollHeight || 1;
+      const contentLeft = hostRect.left + sX;
+      const contentWidth = hostRect.width || 1;
+      const toUnitsY = (yPx) => Math.max(2, Math.min(98, (yPx / docH) * 100));
+      const toUnitsX = (xPx) => Math.max(2, Math.min(98, ((xPx - contentLeft) / contentWidth) * 100));
+      const centerOf = (el, ox = 0.5, oy = 0.5) => {
+        const r = el.getBoundingClientRect();
+        const x = r.left + sX + r.width * ox;
+        const y = r.top + sY + r.height * oy;
+        return { xUnits: toUnitsX(x), yUnits: toUnitsY(y) };
+      };
+
+      const q = (sel) => document.querySelector(sel);
+
+      const anchors = [];
+      const elHeroBtn = q('.hero-cta');
+      if (elHeroBtn) anchors.push(centerOf(elHeroBtn, 0.5, 0.5));
+      const elHighlights = q('#highlights');
+      if (elHighlights) anchors.push(centerOf(elHighlights, 0.15, 0.0));
+      const elQuote = q('.pull-quote');
+      if (elQuote) anchors.push(centerOf(elQuote, 0.85, 0.35));
+      const elPlato = Array.from(document.images).find(img => /plato\.png/i.test(img.src));
+      if (elPlato) anchors.push(centerOf(elPlato, 0.82, 0.14));
+      const elAristotle = Array.from(document.images).find(img => /aristotle\.png/i.test(img.src));
+      if (elAristotle) anchors.push(centerOf(elAristotle, 0.30, 0.55));
+      const elContact = q('#contact-information');
+      if (elContact) anchors.push(centerOf(elContact, 0.2, 0.0));
+
+      if (anchors.length < 2) return;
+
+      const dParts = [`M ${anchors[0].xUnits} ${anchors[0].yUnits}`];
+      for (let i = 1; i < anchors.length; i++) {
+        const p0 = anchors[i - 1];
+        const p1 = anchors[i];
+        const dy = p1.yUnits - p0.yUnits;
+        const c1 = { x: p0.xUnits, y: p0.yUnits + dy * 0.5 };
+        const c2 = { x: p1.xUnits, y: p1.yUnits - dy * 0.5 };
+        dParts.push(`C ${c1.x} ${c1.y}, ${c2.x} ${c2.y}, ${p1.x} ${p1.y}`);
+      }
+      path.setAttribute('d', dParts.join(' '));
+    };
+
+    const onScrollResize = () => {
+      requestAnimationFrame(() => { size(); buildPath(); });
+    };
+
+    size();
+    buildPath();
+    addEventListener('scroll', onScrollResize, { passive: true });
+    addEventListener('resize', onScrollResize, { passive: true });
+    window.addEventListener('load', () => { size(); buildPath(); }, { once: true });
+  })();
+</script>

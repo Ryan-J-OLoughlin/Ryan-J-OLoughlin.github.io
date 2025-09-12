@@ -356,7 +356,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 9, 2025</p>
+      <p class="date-modified">September 11, 2025</p>
     </div>
   </div>
     
@@ -448,7 +448,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
 <li>To express interest, email a <strong>1–2 paragraph</strong> note with topic interests &amp; prior coursework.<br>
 </li>
-<li><strong>Assistantships / openings:</strong> <em>None currently posted (last updated September 9, 2025).</em> Check back here for announcements.</li>
+<li><strong>Assistantships / openings:</strong> <em>None currently posted (last updated September 11, 2025).</em> Check back here for announcements.</li>
 </ul>
 </section>
 </div>
@@ -496,7 +496,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </details>
 <hr>
-<p><em>Updated: September 9, 2025</em></p>
+<p><em>Updated: September 11, 2025</em></p>
 
 
 </section>
@@ -614,6 +614,250 @@ ul.task-list li input[type="checkbox"] {
 })();
 </script>
 
+<script>
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return; // Respect reduced motion
+
+  const $ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+  // Targets: core sections, cards, images, pull-quote, and key text blocks
+  const targets = new Set([
+    ...$('#highlights, #what-i-do, #audiences'),
+    ...$('.section-card'),
+    ...$('.pull-quote'),
+    ...$('.g-col-lg-4 img.cover-img'),
+    ...$('.g-col-lg-8 h3, .g-col-lg-8 p, .g-col-lg-8 ol, .g-col-lg-8 a.btn'),
+  ]);
+
+  // Add reveal class only via JS so content isn't hidden without JS
+  targets.forEach(el => el.classList.add('reveal'));
+
+  // Stagger within grids/cards for a pleasant cascade
+  $('.highlights-grid .section-card').forEach((el, i) => {
+    el.style.setProperty('--reveal-delay', `${Math.min(i, 6) * 90}ms`);
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-visible');
+        io.unobserve(entry.target); // reveal once
+      }
+    });
+  }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+
+  targets.forEach(el => io.observe(el));
+})();
+</script>
+<!-- Scroll Flame: a small glow that lights at Plato's fingertip and travels to Aristotle's hand as you scroll. -->
+<style>
+  #scroll-flame { position: fixed; inset: 0; pointer-events: none; z-index: 9; }
+  #scroll-flame .flame {
+    position: absolute;
+    width: 10px; height: 10px;
+    transform: translate(-50%, -50%);
+    opacity: 0; /* shown only between anchors */
+    will-change: transform, opacity;
+  }
+  #scroll-flame .flame-core {
+    width: 100%; height: 100%; border-radius: 50%;
+    /* Soft, bright core with brand-tinted halo */
+    background: radial-gradient(circle at center,
+      rgba(255,255,255,0.95) 0%,
+      rgba(134, 178, 255, 0.85) 45%,
+      rgba(10,31,68,0.00) 70%);
+    box-shadow:
+      0 0 10px 4px rgba(134,178,255,0.65),
+      0 0 24px 10px rgba(10,31,68,0.35);
+    mix-blend-mode: screen;
+    animation: flame-flicker 2.2s ease-in-out infinite;
+    transform-origin: center center;
+  }
+  /* Slight size pulsing at Plato/Aristotle */
+  .pulse-small .flame-core { animation: flame-flicker 2.2s ease-in-out infinite, pulse-small 1.8s ease-in-out infinite; }
+  .pulse-large .flame-core { animation: flame-flicker 2.2s ease-in-out infinite, pulse-large 2.1s ease-in-out infinite; }
+  @keyframes flame-flicker {
+    0%, 100% { filter: drop-shadow(0 0 6px rgba(134,178,255,0.65)); }
+    50%      { filter: drop-shadow(0 0 10px rgba(134,178,255,0.85)); }
+  }
+  @keyframes pulse-small {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.12); }
+  }
+  @keyframes pulse-large {
+    0%, 100% { transform: scale(1.02); }
+    50%      { transform: scale(1.20); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #scroll-flame .flame-core { animation: none; }
+  }
+</style>
+
+<div id="scroll-flame" aria-hidden="true">
+  <div class="flame" id="flame"><div class="flame-core"></div></div>
+</div>
+
+<script>
+(() => {
+  const flame = document.getElementById('flame');
+  if (!flame) return;
+
+  const prefersReduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Tunable offsets inside each image (percent of width/height)
+  const platoOffset = { ox: 0.10, oy: 0.08 };      // fingertip approx
+  const aristOffset = { ox: 0.22, oy: 0.68 };      // hand approx
+
+  // Find target images by filename
+  const findImg = (re) => Array.from(document.images).find(img => re.test(img.src));
+  let platoImg = findImg(/plato\.png/i);
+  let aristImg = findImg(/aristotle\.png/i);
+  if (!platoImg || !aristImg) {
+    // Retry after load in case images weren't in DOM yet
+    window.addEventListener('load', () => {
+      platoImg = findImg(/plato\.png/i);
+      aristImg = findImg(/aristotle\.png/i);
+      init();
+    }, { once: true });
+  } else {
+    init();
+  }
+
+  function anchorPoint(img, {ox, oy}) {
+    const r = img.getBoundingClientRect();
+    const xPage = r.left + (window.scrollX || 0) + r.width * ox;
+    const yPage = r.top + (window.scrollY || 0) + r.height * oy;
+    return { x: xPage, y: yPage };
+  }
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+
+  function init() {
+    if (!platoImg || !aristImg) return;
+
+    const update = () => {
+      // Compute anchors each frame to handle responsive reflow
+      const p = anchorPoint(platoImg, platoOffset);
+      const a = anchorPoint(aristImg, aristOffset);
+
+      // Viewport progress uses the viewport center against the two anchors
+      const viewCenterY = (window.scrollY || 0) + window.innerHeight / 2;
+      const startY = p.y;
+      const endY = a.y;
+      if (endY - startY < 1) { flame.style.opacity = '0'; return; }
+
+      // Timing controls
+      const LEAD_PX = 200;   // appear this many px before Plato
+      const HOLD_PX = 120;   // stay parked at Plato for this many px after passing him
+      const SIZE_START = 8;  // px at Plato
+      const SIZE_END = 22;   // px at Aristotle
+
+      const appearStart = startY - LEAD_PX;
+      const moveStart = startY + HOLD_PX;
+
+      // Visibility window
+      if (viewCenterY < appearStart) {
+        flame.style.opacity = '0';
+        return;
+      }
+
+      // Hold at Plato before moving
+      if (viewCenterY <= moveStart) {
+        const xView = p.x - (window.scrollX || 0);
+        const yView = p.y - (window.scrollY || 0);
+        flame.style.opacity = '0.75';
+        flame.style.width = SIZE_START + 'px';
+        flame.style.height = SIZE_START + 'px';
+        flame.style.transform = `translate(${xView}px, ${yView}px) translate(-50%, -50%)`;
+        flame.classList.add('pulse-small');
+        flame.classList.remove('pulse-large');
+        return;
+      }
+
+      // Movement progress after hold
+      // If we've scrolled past Aristotle, pin the flame at his hand
+      if (viewCenterY >= endY) {
+        const xView = a.x - (window.scrollX || 0);
+        const yView = a.y - (window.scrollY || 0);
+        flame.style.opacity = '1';
+        flame.style.width = SIZE_END + 'px';
+        flame.style.height = SIZE_END + 'px';
+        flame.style.transform = `translate(${xView}px, ${yView}px) translate(-50%, -50%)`;
+        flame.classList.add('pulse-large');
+        flame.classList.remove('pulse-small');
+        return;
+      }
+
+      const denom = (endY - moveStart);
+      if (denom < 1) { flame.style.opacity = '0'; return; }
+      let t = (viewCenterY - moveStart) / denom;
+      t = clamp01(t);
+
+      // Position along a gentle arc between points
+      const dx = a.x - p.x, dy = a.y - p.y;
+      const ctrl1 = { x: p.x + dx * 0.25, y: p.y - Math.min(120, Math.abs(dy) * 0.25) };
+      const ctrl2 = { x: p.x + dx * 0.75, y: a.y - Math.min(120, Math.abs(dy) * 0.25) };
+      const x = cubicBezier(p.x, ctrl1.x, ctrl2.x, a.x, t);
+      const y = cubicBezier(p.y, ctrl1.y, ctrl2.y, a.y, t);
+
+      // Convert to viewport coords (container is fixed)
+      const xView = x - (window.scrollX || 0);
+      const yView = y - (window.scrollY || 0);
+
+      // Size/opacity scale
+      const size = lerp(SIZE_START, SIZE_END, t);
+      const opacity = 0.65 + 0.35 * t;
+      flame.style.opacity = opacity.toFixed(2);
+      flame.style.width = size + 'px';
+      flame.style.height = size + 'px';
+      flame.style.transform = `translate(${xView}px, ${yView}px) translate(-50%, -50%)`;
+      flame.classList.remove('pulse-small');
+      flame.classList.remove('pulse-large');
+    };
+
+    function cubicBezier(p0, p1, p2, p3, t) {
+      const mt = 1 - t;
+      return mt*mt*mt*p0 + 3*mt*mt*t*p1 + 3*mt*t*t*p2 + t*t*t*p3;
+    }
+
+    // Animation loop synced to scroll/resize
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => { update(); ticking = false; });
+        ticking = true;
+      }
+    };
+
+    // Initial
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    // Recompute after images load (if delayed)
+    if (platoImg.complete === false) platoImg.addEventListener('load', onScroll, { once: true });
+    if (aristImg.complete === false) aristImg.addEventListener('load', onScroll, { once: true });
+
+    if (prefersReduce) {
+      // Reduced motion: show a static, small flame at Plato when in view
+      const ro = new IntersectionObserver((entries) => {
+        const e = entries[0];
+        if (!e) return;
+        if (e.isIntersecting) {
+          const p = anchorPoint(platoImg, platoOffset);
+          flame.style.opacity = '0.6';
+          flame.style.width = '10px'; flame.style.height = '10px';
+          flame.style.transform = `translate(${p.x - (window.scrollX||0)}px, ${p.y - (window.scrollY||0)}px) translate(-50%, -50%)`;
+        } else {
+          flame.style.opacity = '0';
+        }
+      }, { root: null, threshold: 0.2 });
+      ro.observe(platoImg);
+    }
+  }
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

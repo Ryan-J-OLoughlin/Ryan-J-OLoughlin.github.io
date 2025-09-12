@@ -1,0 +1,147 @@
+<svg id="flowline-overlay" class="flowline-overlay" aria-hidden="true"></svg>
+<script>
+(function(){
+  const mq = window.matchMedia('(min-width: 992px)');
+  const svg = document.getElementById('flowline-overlay');
+  if (!svg) return;
+
+  function visibleDesktop(){ return mq.matches; }
+
+  function qs(sel){ return document.querySelector(sel); }
+  function qsa(sel){ return Array.from(document.querySelectorAll(sel)); }
+  function mid(r){ return { x: r.left + r.width/2 + window.scrollX, y: r.top + r.height/2 + window.scrollY }; }
+  function topCenter(r){ return { x: r.left + r.width/2 + window.scrollX, y: r.top + window.scrollY }; }
+  function bottomCenter(r){ return { x: r.left + r.width/2 + window.scrollX, y: r.bottom + window.scrollY }; }
+
+  function getAnchors(){
+    const anchors = [];
+    const heroBottomEl = qs('.hero-bottom') || qs('.hero-photo');
+    if (heroBottomEl){ anchors.push(bottomCenter(heroBottomEl.getBoundingClientRect())); }
+
+    const highlightsEl = qs('#highlights') || qs('.highlights-section');
+    if (highlightsEl){ anchors.push(topCenter(highlightsEl.getBoundingClientRect())); }
+
+    const quoteEl = qs('.pull-quote') || qs('#what-i-do');
+    if (quoteEl){ anchors.push(mid(quoteEl.getBoundingClientRect())); }
+
+    const imgs = qsa('.g-col-lg-4 img.cover-img');
+    if (imgs[0]) anchors.push(mid(imgs[0].getBoundingClientRect()));
+    if (imgs[imgs.length-1]) anchors.push(mid(imgs[imgs.length-1].getBoundingClientRect()));
+
+    const audiencesEl = qs('#audiences') || qs('.grid.gap-3');
+    if (audiencesEl){ anchors.push(topCenter(audiencesEl.getBoundingClientRect())); }
+
+    const contactLink = qs('a[href="contact.qmd"], a[href$="/contact.html"], a[href$="/contact/"], a[href$="contact"]');
+    if (contactLink){ anchors.push(mid(contactLink.getBoundingClientRect())); }
+
+    return anchors;
+  }
+
+  function pathD(points){
+    if (points.length < 2) return '';
+    const d = [];
+    const smooth = 0.2;
+    d.push(`M ${points[0].x} ${points[0].y}`);
+    for (let i=1; i<points.length; i++){
+      const p0 = points[i-1];
+      const p1 = points[i];
+      const dx = (p1.x - p0.x);
+      const dy = (p1.y - p0.y);
+      const c1x = p0.x + dx * smooth;
+      const c1y = p0.y + dy * smooth;
+      const c2x = p1.x - dx * smooth;
+      const c2y = p1.y - dy * smooth;
+      d.push(`C ${c1x} ${c1y}, ${c2x} ${c2y}, ${p1.x} ${p1.y}`);
+    }
+    return d.join(' ');
+  }
+
+  function ensureDefs(){
+    if (svg.querySelector('defs')) return;
+    const defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
+    const glow = document.createElementNS('http://www.w3.org/2000/svg','filter');
+    glow.setAttribute('id','flow-glow');
+    glow.innerHTML = '<feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>';
+    defs.appendChild(glow);
+    svg.appendChild(defs);
+  }
+
+  function draw(){
+    if (!visibleDesktop()) { svg.setAttribute('data-active','0'); svg.innerHTML = ''; return; }
+    svg.setAttribute('data-active','1');
+    ensureDefs();
+    const pts = getAnchors();
+    if (pts.length < 2) return;
+
+    // Set SVG viewport to full page size
+    const w = Math.max(document.documentElement.scrollWidth, document.documentElement.clientWidth);
+    const h = Math.max(document.documentElement.scrollHeight, document.documentElement.clientHeight);
+    svg.setAttribute('width', w);
+    svg.setAttribute('height', h);
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+
+    // Clear previous paths except defs
+    Array.from(svg.querySelectorAll('path.flow, path.flow-active')).forEach(n=>n.remove());
+
+    const d = pathD(pts);
+    const base = document.createElementNS('http://www.w3.org/2000/svg','path');
+    base.setAttribute('class','flow');
+    base.setAttribute('d', d);
+    svg.appendChild(base);
+
+    const active = document.createElementNS('http://www.w3.org/2000/svg','path');
+    active.setAttribute('class','flow-active');
+    active.setAttribute('d', d);
+    svg.appendChild(active);
+
+    updateActiveSegment(pts);
+  }
+
+  function updateActiveSegment(points){
+    const sections = [
+      qs('.hero-bottom') || qs('.hero-photo'),
+      qs('#highlights') || qs('.highlights-section'),
+      qs('.pull-quote') || qs('#what-i-do'),
+      qsa('.g-col-lg-4 img.cover-img')[0] || null,
+      qsa('.g-col-lg-4 img.cover-img').slice(-1)[0] || null,
+      qs('#audiences') || qs('.grid.gap-3'),
+      qs('a[href="contact.qmd"], a[href$="/contact.html"], a[href$="/contact/"], a[href$="contact"]')
+    ].filter(Boolean);
+
+    let activeIndex = 0;
+    let best = -Infinity;
+    const vh = window.innerHeight;
+    sections.forEach((el, i) => {
+      const r = el.getBoundingClientRect();
+      // score: how centered in viewport
+      const centerY = r.top + r.height/2;
+      const score = -Math.abs(centerY - vh/2);
+      if (score > best){ best = score; activeIndex = i; }
+    });
+    const totalLen = svg.querySelector('.flow-active')?.getTotalLength?.() || 0;
+    const segLen = totalLen / Math.max(points.length-1, 1);
+    const start = Math.max(activeIndex-0.2, 0) * segLen;
+    const end = Math.min(activeIndex+0.2, points.length-1) * segLen;
+    const dlen = Math.max(end - start, segLen * 0.6);
+
+    const p = svg.querySelector('.flow-active');
+    if (p){
+      p.style.strokeDasharray = `${dlen} ${totalLen}`;
+      p.style.strokeDashoffset = `${Math.max(totalLen - start - dlen, 0)}`;
+    }
+  }
+
+  let ro;
+  function setupObservers(){
+    const onScroll = () => visibleDesktop() && updateActiveSegment(getAnchors());
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', () => { draw(); }, { passive: true });
+    // observe layout shifts
+    ro = new ResizeObserver(() => draw());
+    ro.observe(document.documentElement);
+  }
+
+  if (visibleDesktop()) draw();
+  setupObservers();
+})();
+</script>
