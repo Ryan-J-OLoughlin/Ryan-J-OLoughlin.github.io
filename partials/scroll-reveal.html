@@ -1,0 +1,36 @@
+<script>
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return; // Respect reduced motion
+
+  const $ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+  // Targets: core sections, cards, images, pull-quote, and key text blocks
+  const targets = new Set([
+    ...$('#highlights, #what-i-do, #audiences'),
+    ...$('.section-card'),
+    ...$('.pull-quote'),
+    ...$('.g-col-lg-4 img.cover-img'),
+    ...$('.g-col-lg-8 h3, .g-col-lg-8 p, .g-col-lg-8 ol, .g-col-lg-8 a.btn'),
+  ]);
+
+  // Add reveal class only via JS so content isn't hidden without JS
+  targets.forEach(el => el.classList.add('reveal'));
+
+  // Stagger within grids/cards for a pleasant cascade
+  $('.highlights-grid .section-card').forEach((el, i) => {
+    el.style.setProperty('--reveal-delay', `${Math.min(i, 6) * 90}ms`);
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-visible');
+        io.unobserve(entry.target); // reveal once
+      }
+    });
+  }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+
+  targets.forEach(el => io.observe(el));
+})();
+</script>
