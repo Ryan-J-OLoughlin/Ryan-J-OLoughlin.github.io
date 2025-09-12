@@ -92,6 +92,7 @@ format:
       - partials/game-modal.html
       - partials/perf-after.html
       - partials/scroll-reveal.html
+      - partials/scroll-flame.html
     toc: true
     toc-location: right
     page-navigation: true
