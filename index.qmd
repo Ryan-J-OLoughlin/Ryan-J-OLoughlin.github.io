@@ -93,7 +93,10 @@ All models are wrong—so why trust them? Too often we equate trustworthiness wi
 <div class="float-clear"></div>
 
 :::{.grid .gap-4}
-::: {.g-col-12 .g-col-lg-6}
+::: {.g-col-12 .g-col-lg-4}
+![](assets/plato.png){.cover-img .img-top-half .img-fade-bottom}
+:::
+::: {.g-col-12 .g-col-lg-8}
 ### Big Questions
 1. **How can flawed models generate knowledge?**  
 2. **When and why do agreement and disagreement strengthen trust in science?**  
@@ -101,13 +104,19 @@ All models are wrong—so why trust them? Too often we equate trustworthiness wi
 
 [Explore Philosophy →](research.qmd)
 :::
-::: {.g-col-12 .g-col-lg-6}
+:::
+
+:::{.grid .gap-4}
+::: {.g-col-12 .g-col-lg-8}
 ### Bridge to Science
 1. **Diagnosing errors** to learn from failure rather than hide it  
 2. **Clarifying model evaluation** so that convergence and divergence both build insight  
 3. **Translating uncertainty into action**  
 
 [For scientists →](for-scientists.qmd)
+:::
+::: {.g-col-12 .g-col-lg-4}
+![](assets/aristotle.png){.cover-img .img-top-half .img-fade-bottom}
 :::
 :::
 

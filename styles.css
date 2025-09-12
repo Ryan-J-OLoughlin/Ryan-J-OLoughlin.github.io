@@ -480,3 +480,27 @@ body.quarto-dark .pull-quote {
   background: var(--brand-surface);
   box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 .125rem .25rem rgba(0,0,0,.35);
 }
+
+/* === Full-height cover images inside grid columns === */
+.cover-img {
+  display: block;
+  width: 100%;
+  height: auto;          
+  object-fit: cover;      /* crop to fill without distortion */
+  object-position: top center; /* prefer showing top of image */
+  border-radius: 12px;    /* optional: soften corners */
+}
+/* Crop helper: constrain image box by aspect, show top half */
+.img-top-half { aspect-ratio: 1 / 1; }
+/* Bottom fade-out helper */
+.img-fade-bottom {
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.3) 90%,  rgba(0,0,0,0.1) 95%,rgba(0,0,0,0) 100%);
+          mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.3) 90%,  rgba(0,0,0,0.1) 95%,rgba(0,0,0,0) 100%);
+}
+/* (reverted) removed background-based cover crops */
+@media (max-width: 768px){
+  .cover-img {
+    height: auto;         /* stack naturally on small screens */
+    max-height: 60vh;     /* prevent overly tall images on small devices */
+  }
+}
