@@ -190,6 +190,7 @@ h1.brand-bright, h2.brand-bright, h3.brand-bright, h4.brand-bright {
   opacity: .8;
   transition: opacity .2s ease, filter .2s ease, transform .2s ease;
 }
+.logo-strip { padding-top: 20px; }
 .logo-strip img:hover{
   filter: grayscale(0%);
   opacity: 1;

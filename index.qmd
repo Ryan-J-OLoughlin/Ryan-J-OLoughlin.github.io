@@ -10,6 +10,14 @@ include-in-header: partials/perf-home-head.html
 <style>
 /* Remove default top gap between navbar and first section on homepage */
 #quarto-content, main.content { padding-top: 0 !important; margin-top: 0 !important; }
+
+/* Add breathing room between the hero and "What I Work On" */
+section#what-i-do { margin-top: 3.5rem; }
+@media (min-width: 768px) { section#what-i-do { margin-top: 5rem; } }
+@media (min-width: 1200px) { section#what-i-do { margin-top: 6rem; } }
+
+/* Improve anchor jumps to this section */
+section#what-i-do { scroll-margin-top: 72px; }
 </style>
 
 <!-- Full-bleed hero with photo and overlayed text -->
@@ -35,46 +43,7 @@ include-in-header: partials/perf-home-head.html
 :::
 :::
 
-<!-- Logo strip -->
-<div class="logo-strip d-flex flex-wrap gap-4 align-items-center justify-content-center my-3 gap-6">
-  <img src="assets/logos/qc.svg" alt="Queens College">
-  <img src="assets/logos/cuny.svg" alt="CUNY">
-  <img src="assets/logos/psa.png" alt="Philosophy of Science Association">
-</div>  
-<!-- Logo strip 
-  <img src="assets/logos/nasa-giss.svg" alt="NASA GISS">
-  <img src="assets/logos/ncar.svg" alt="NCAR">
-   -->
 
-
-## Recent Highlights {#highlights}
-
-:::{.grid .gap-3}
-::: {.g-col-12 .g-col-md-4}
-::: {.section-card}
-#### Talk
-“Uncertainty and Climate Models,” *Brown Climate Science Seminar* (Sept 2025) 
-
-[Details →](for-scientists.qmd)
-:::
-:::
-::: {.g-col-12 .g-col-md-4}
-::: {.section-card}
-#### Publication
-"Moving beyond post hoc eXplainable Artificial Intelligence (XAI),” *GMD* (2025)  
-
-[Read →](research.qmd#selected-publications)
-:::
-:::
-::: {.g-col-12 .g-col-md-4}
-::: {.section-card}
-#### Appointment
-I'm appointed as CUNY Grad Center Doctoral Faculty.  
-
-[Details →](https://www.gc.cuny.edu/people/ryan-j-oloughlin)
-:::
-:::
-:::
 
 ## What I Work On {#what-i-do}
 
@@ -119,6 +88,49 @@ All models are wrong—so why trust them? Too often we equate trustworthiness wi
 ![](assets/aristotle.png){.cover-img .img-top-half .img-fade-bottom loading=lazy decoding=async fig-alt="Portrait of Aristotle" fig-cap="Aristotle"}
 :::
 :::
+
+
+
+
+## Recent Highlights {#highlights}
+
+:::{.grid .gap-3}
+::: {.g-col-12 .g-col-md-4}
+::: {.section-card}
+#### Talk
+“Uncertainty and Climate Models,” *Brown Climate Science Seminar* (Sept 2025) 
+
+[Details →](for-scientists.qmd)
+:::
+:::
+::: {.g-col-12 .g-col-md-4}
+::: {.section-card}
+#### Publication
+"Moving beyond post hoc eXplainable Artificial Intelligence (XAI),” *GMD* (2025)  
+
+[Read →](research.qmd#selected-publications)
+:::
+:::
+::: {.g-col-12 .g-col-md-4}
+::: {.section-card}
+#### Appointment
+I'm appointed as CUNY Grad Center Doctoral Faculty.  
+
+[Details →](https://www.gc.cuny.edu/people/ryan-j-oloughlin)
+:::
+:::
+:::
+
+<!-- Logo strip -->
+<div class="logo-strip d-flex flex-wrap gap-4 align-items-center justify-content-center my-3 gap-6">
+  <img src="assets/logos/qc.svg" alt="Queens College">
+  <img src="assets/logos/cuny.svg" alt="CUNY">
+  <img src="assets/logos/psa.png" alt="Philosophy of Science Association">
+</div>  
+<!-- Logo strip 
+  <img src="assets/logos/nasa-giss.svg" alt="NASA GISS">
+  <img src="assets/logos/ncar.svg" alt="NCAR">
+   -->
 
 ## Who’s This For? {#audiences}
 My work speaks to philosophers (robustness, error, fruitfulness), scientists (model evaluation, uncertainty, pursuitworthiness), and the media (clear, plain-language analysis of climate modeling). And for students, it provides resources, mentorship, and guidance to think critically about science in a complex world.
