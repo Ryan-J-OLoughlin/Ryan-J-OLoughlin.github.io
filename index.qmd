@@ -78,7 +78,19 @@ I'm appointed as CUNY Grad Center Doctoral Faculty.
 
 ## What I Work On {#what-i-do}
 
-All models are wrong—so why trust them? Too often we equate trustworthiness with truthfulness. Yet when models agree, they build confidence for action; when they disagree, they often teach us the most. Uncertainty and error aren’t failures---they’re how science moves forward. *My work shows how we can trust science not just by mitigating its limits, but by embracing them.*
+::: {.what-i-do}
+
+<blockquote class="pull-quote pull-quote-right pull-quote-raised" aria-label="Featured quote">
+  <span class="pull-quote-mark" aria-hidden="true">“</span>
+  <span class="pull-quote-text">Uncertainty and error aren’t failures—they’re how science moves forward — and how we learn.</span>
+  
+</blockquote>
+
+All models are wrong—so why trust them? Too often we equate trustworthiness with truthfulness. Yet when models agree, they build confidence for action; when they disagree, they often teach us the most. *My work shows how we can trust science not just by mitigating its limits, but by embracing them.*
+
+:::
+
+<div class="float-clear"></div>
 
 :::{.grid .gap-4}
 ::: {.g-col-12 .g-col-lg-6}

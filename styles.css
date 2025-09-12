@@ -423,3 +423,60 @@ body.quarto-dark .logo-strip img:hover{
     height: 100svh;  /* iOS Safari small viewport */
   }
 }
+
+/* === Pull-quote layout for What I Work On === */
+.what-i-do { position: relative; }
+.what-i-do::after { content: ""; display: table; clear: both; }
+
+.pull-quote {
+  background: var(--brand-white);
+  color: inherit;
+  font-family: var(--font-serif); /* match header font (Lora) */
+  border-left: 8px solid var(--brand-brightblue);
+  border-radius: 16px;
+  padding: 1rem 1.4rem 1.2rem 1.25rem; /* slightly shorter vertically */
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.08);
+}
+
+.pull-quote-right {
+  float: right;
+  width: clamp(340px, 44vw, 560px);
+  margin: 0 0 1rem 1.75rem; /* gap to flowing text on the left */
+  shape-outside: inset(0 round 16px); /* softer wrap on modern browsers */
+}
+
+/* Raise the quote to visually overlap the section heading */
+.pull-quote-raised { margin-top: -1.5rem; }
+@media (min-width: 768px){
+  .pull-quote-raised { margin-top: -2.25rem; }
+}
+@media (min-width: 992px){
+  .pull-quote-raised { margin-top: -4rem; }
+}
+
+.pull-quote-mark {
+  display: block;
+  line-height: 0.6;
+  font-family: var(--font-serif);
+  font-weight: 800;
+  font-size: clamp(80px, 12vw, 160px);
+  color: var(--brand-brightblue);   /* bright blue brand accent */
+  margin-bottom: .25rem;
+}
+
+.pull-quote-text {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  font-style: italic;
+  line-height: 1.48; /* tighten slightly to reduce height */
+  font-weight: 600; /* heavier for emphasis */
+}
+
+.float-clear { clear: both; }
+
+/* Dark mode polish */
+body.quarto-dark .pull-quote {
+  background: var(--brand-surface);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 .125rem .25rem rgba(0,0,0,.35);
+}
