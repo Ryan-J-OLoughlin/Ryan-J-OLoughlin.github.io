@@ -2,6 +2,8 @@
 title: "Collaboration"
 date-modified: 2025-08-30
 toc: false
+description: "Collaborate with philosopher of science Ryan O’Loughlin on uncertainty, model evaluation, and decision support for climate science."
+canonical: https://ryanoloughlin.org/collaboration.html
 ---
 
 ## For Philosophers
@@ -18,3 +20,12 @@ My talks and collaborations focus on clarifying uncertainty, model evaluation, a
 - Communicating uncertainty responsibly  
 - Diagnosing error in climate model ensembles  
 - Robust inference under deep uncertainty  
+- Modeling for decision support in climate adaptation  
+- Communicating deep uncertainty to public stakeholders  
+- Philosophy of machine learning in climate science  
+- Philosophy of geoengineering and climate intervention ethics  
+
+## Start a Conversation
+- [Browse current research themes](research.qmd)
+- [Preview talks and workshops for scientists](for-scientists.qmd)
+- [Get in touch to scope a project](contact.qmd)

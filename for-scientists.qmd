@@ -1,6 +1,8 @@
 ---
 title: "For Scientists"
 date-modified: 2025-09-05
+description: "Talks, workshops, and collaborations where Ryan O’Loughlin helps climate scientists communicate uncertainty and build trustworthy models."
+canonical: https://ryanoloughlin.org/for-scientists.html
 ---
 
 ## Featured Talks
@@ -8,7 +10,7 @@ date-modified: 2025-09-05
 :::{.grid .gap-4}
 
 ::: {.g-col-12 .g-col-md-4 .section-card .text-reset}
-[![](talks/cuny-esi-convergence-trust-2025.jpg){.talk-thumb}](talks/cuny-esi-convergence-trust-2025.qmd)
+[![Flyer for Ryan O’Loughlin’s CUNY ASRC talk on convergence, divergence, and trust in climate models](talks/cuny-esi-convergence-trust-2025.jpg){.talk-thumb}](talks/cuny-esi-convergence-trust-2025.qmd)
 
 #### [Convergence, Divergence, and Trust in Climate Models](talks/cuny-esi-convergence-trust-2025.qmd){.talk-title}
 ::: {.talk-meta}
@@ -17,7 +19,7 @@ date-modified: 2025-09-05
 :::
 
 ::: {.g-col-12 .g-col-md-4 .section-card .text-reset}
-[![](talks/nasa-giss-disagreement-2023.jpg){.talk-thumb}](talks/nasa-giss-disagreement-2023.qmd)
+[![Flyer for the NASA GISS seminar on why disagreement between climate models is valuable](talks/nasa-giss-disagreement-2023.jpg){.talk-thumb}](talks/nasa-giss-disagreement-2023.qmd)
 
 #### [Why We Should Want Models to Disagree](talks/nasa-giss-disagreement-2023.qmd){.talk-title}
 ::: {.talk-meta}
@@ -26,7 +28,7 @@ date-modified: 2025-09-05
 :::
 
 ::: {.g-col-12 .g-col-md-4 .section-card .text-reset}
-[![](talks/ncar-cgd-error-taxonomy-2022.png){.talk-thumb}](talks/ncar-cgd-error-taxonomy-2022.qmd)
+[![Flyer for the NCAR Climate & Global Dynamics seminar on diagnosing error in climate models](talks/ncar-cgd-error-taxonomy-2022.png){.talk-thumb}](talks/ncar-cgd-error-taxonomy-2022.qmd)
 
 #### [Error Diagnosis & Low-Skill Models](talks/ncar-cgd-error-taxonomy-2022.qmd){.talk-title}
 ::: {.talk-meta}

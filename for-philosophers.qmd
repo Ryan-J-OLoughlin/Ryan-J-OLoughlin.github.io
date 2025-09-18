@@ -1,6 +1,8 @@
 ---
 title: "For Philosophers"
 date-modified: last-modified
+description: "Invitation for philosophers to partner with Ryan O’Loughlin on climate modeling, robustness reasoning, and uncertainty research."
+canonical: https://ryanoloughlin.org/for-philosophers.html
 ---
 
 ## Collaboration Opportunities {#collaboration}
@@ -14,5 +16,7 @@ I welcome collaboration with philosophers interested in climate science, modelin
 - Pursuitworthiness in controversial science, e.g., climate intervention research
 - The link between understanding and trust in cases of decision-making based on complex models
 - Assumptions and challenges in model weighting
+
+[Email Ryan to compare notes](contact.qmd), or dive into [current research themes](research.qmd).
 
 *Updated: {{< meta date-modified >}}*

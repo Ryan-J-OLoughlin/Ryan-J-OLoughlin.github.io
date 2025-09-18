@@ -10,7 +10,8 @@ project:
 website:
   title: "Ryan O'Loughlin"
   description: "philosophy of science • climate models • trust without truth • uncertainty"
-  site-url: https://Ryan-J-OLoughlin.github.io/
+  site-url: https://ryanoloughlin.org/
+  favicon: assets/headshot.jpg
   twitter-card: true
   navbar:
     collapse-below: lg
@@ -74,13 +75,14 @@ website:
       - text: "Back to top ↑"
         href: "#"
       - text: "Built by DL with 🩶"
-        href: https://github.com/dan-li-o
+        href: https://danlio.studio
   search: true
   repo-url: https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io
   repo-actions: [edit, issue]
 
 format:
   html:
+    lang: en
     page-layout: article
     theme: 
       light: cosmo
@@ -88,6 +90,8 @@ format:
     css: styles.css
     include-in-header:
       - partials/perf-head.html
+    filters:
+      - filters/seo.lua
     include-after-body:
       - partials/game-modal.html
       - partials/perf-after.html
@@ -103,3 +107,12 @@ format:
     twitter-card:
       image: assets/og-card.jpeg
       card: summary_large_image
+    metadata:
+      author: "Ryan J. O'Loughlin"
+      keywords:
+        - philosophy of science
+        - climate models
+        - uncertainty
+        - trust without truth
+        - decision-making under uncertainty
+      robots: index, follow

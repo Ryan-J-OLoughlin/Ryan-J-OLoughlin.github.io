@@ -1,6 +1,8 @@
 ---
 title: "Climate Invariant Machine Learning: Insights from Philosophy of Induction"
 date-modified: 2025-08-30
+description: "NASA GISS talk where Ryan O’Loughlin connects philosophy of induction to climate-invariant machine learning techniques."
+canonical: https://ryanoloughlin.org/talks/nasa-giss-ml-2024.html
 ---
 
 # Climate Invariant Machine Learning: Lessons from Philosophy of Induction
@@ -20,4 +22,3 @@ NASA Goddard Institute for Space Studies (GISS), Feb 7, 2024
 coming soon.
 
 *Updated: {{< meta date-modified >}}*
-

@@ -1,6 +1,8 @@
 ---
 title: "Research"
 date-modified: last-modified
+description: "Research by Ryan O’Loughlin on why imperfect climate models remain trustworthy—covering robustness, disagreement, and decision support."
+canonical: https://ryanoloughlin.org/research.html
 ---
 
 ## The Challenge

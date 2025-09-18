@@ -3,6 +3,8 @@ title: "About Ryan"
 date-modified: last-modified
 layout: full
 toc: false
+description: "Meet Ryan O’Loughlin, a philosopher of science at Queens College CUNY studying climate models, uncertainty, and how error drives progress."
+canonical: https://ryanoloughlin.org/about.html
 ---
 
 ## About Me {#short-bio}

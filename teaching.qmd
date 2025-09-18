@@ -1,0 +1,28 @@
+---
+title: "Teaching"
+toc: false
+date-modified: last-modified
+description: "How Ryan O’Loughlin teaches philosophy of science—linking uncertainty, climate change, and hands-on experimentation for students and colleagues."
+canonical: https://ryanoloughlin.org/teaching.html
+---
+
+## Teaching Philosophy
+My courses show students that uncertainty and disagreement are not defects in science but drivers of better thinking. I combine close analysis of philosophical texts with hands-on exercises—from makerspace builds to data interpretation labs—so that students experience how concepts like measurement, robustness, and error feel in practice.
+
+## Resources for Instructors
+Looking to bring these themes into your classroom? Explore syllabi, assignments, and activity guides:
+
+- [Teaching “Trust without Truth”](teaching-instructors.qmd)
+- [Philosophy of science course materials](teaching-instructors.qmd#teaching-resources-for-philosophy-instructors)
+
+## Resources for Students
+Current and prospective students can find logistics, support services, and professional development resources on the dashboard:
+
+- [Student Dashboard](teaching-students.qmd)
+- [Office hours and advising](teaching-students.qmd#office-hours--contact)
+- [Letters of recommendation guidance](teaching-students.qmd#professional-development)
+
+## Connect Further
+Interested in a workshop, guest lecture, or co-developed course module? [Get in touch](contact.qmd) and we can plan something tailored to your students or department.
+
+*Updated: {{< meta date-modified >}}*
