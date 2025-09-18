@@ -3,7 +3,7 @@ title: "Teaching"
 toc: false
 date-modified: last-modified
 description: "How Ryan O’Loughlin teaches philosophy of science—linking uncertainty, climate change, and hands-on experimentation for students and colleagues."
-canonical: https://ryanoloughlin.org/teaching.html
+canonical: https://Ryan-J-OLoughlin.github.io/teaching.html
 ---
 
 ## Teaching Philosophy

@@ -2,7 +2,7 @@
 title: "Value of Lower-Skill Models"
 date-modified: 2025-08-30
 description: "How deliberately simpler climate models expose mechanisms that strengthen complex simulations in Ryan O’Loughlin’s research."
-canonical: https://ryanoloughlin.org/projects/lower-skill-models.html
+canonical: https://Ryan-J-OLoughlin.github.io/projects/lower-skill-models.html
 ---
 
 Details coming soon. When deliberately simpler or lower-skill configurations surface mechanisms that improve complex runs.

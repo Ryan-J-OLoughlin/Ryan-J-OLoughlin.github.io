@@ -2,7 +2,7 @@
 title: "For Scientists"
 date-modified: 2025-09-05
 description: "Talks, workshops, and collaborations where Ryan O’Loughlin helps climate scientists communicate uncertainty and build trustworthy models."
-canonical: https://ryanoloughlin.org/for-scientists.html
+canonical: https://Ryan-J-OLoughlin.github.io/for-scientists.html
 ---
 
 ## Featured Talks

@@ -2,7 +2,7 @@
 title: "Why we should want models to disagree: The value of 'bad' models in climate science"
 date-modified: 2025-08-30
 description: "NASA GISS seminar where Ryan O’Loughlin shows how so-called ‘bad’ climate models spark discovery and improve understanding."
-canonical: https://ryanoloughlin.org/talks/nasa-giss-disagreement-2023.html
+canonical: https://Ryan-J-OLoughlin.github.io/talks/nasa-giss-disagreement-2023.html
 ---
 
 # Why we should want models to disagree: The value of "bad" models in climate science

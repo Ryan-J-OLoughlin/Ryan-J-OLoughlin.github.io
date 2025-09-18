@@ -3,7 +3,7 @@ title: "Collaboration"
 date-modified: 2025-08-30
 toc: false
 description: "Collaborate with philosopher of science Ryan O’Loughlin on uncertainty, model evaluation, and decision support for climate science."
-canonical: https://ryanoloughlin.org/collaboration.html
+canonical: https://Ryan-J-OLoughlin.github.io/collaboration.html
 ---
 
 ## For Philosophers

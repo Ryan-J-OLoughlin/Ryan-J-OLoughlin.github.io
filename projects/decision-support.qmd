@@ -2,7 +2,7 @@
 title: "Decision Support Under Uncertainty"
 date-modified: 2025-08-30
 description: "Research notes on how Ryan O’Loughlin links climate model uncertainty to actionable decision support for stakeholders."
-canonical: https://ryanoloughlin.org/projects/decision-support.html
+canonical: https://Ryan-J-OLoughlin.github.io/projects/decision-support.html
 ---
 
 Details coming soon. Maps uncertainty to decisions: robust conclusions, risk framing, and communication for stakeholders.

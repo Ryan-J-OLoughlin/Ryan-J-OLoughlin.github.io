@@ -1,4 +1,4 @@
-local site_url = "https://ryanoloughlin.org/"
+local site_url = "https://Ryan-J-OLoughlin.github.io/"
 local site_name = "Ryan O'Loughlin"
 
 local same_as = {

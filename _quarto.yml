@@ -10,7 +10,7 @@ project:
 website:
   title: "Ryan O'Loughlin"
   description: "philosophy of science • climate models • trust without truth • uncertainty"
-  site-url: https://ryanoloughlin.org/
+  site-url: https://Ryan-J-OLoughlin.github.io/
   favicon: assets/headshot.jpg
   twitter-card: true
   navbar:

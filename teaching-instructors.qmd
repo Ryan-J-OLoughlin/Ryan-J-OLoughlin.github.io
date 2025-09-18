@@ -2,7 +2,7 @@
 title: "Teaching Why Trust Science"
 date-modified: last-modified
 description: "Syllabi, assignments, and teaching philosophy from Ryan O’Loughlin for courses on science, climate change, and uncertainty."
-canonical: https://ryanoloughlin.org/teaching-instructors.html
+canonical: https://Ryan-J-OLoughlin.github.io/teaching-instructors.html
 ---
 
 ## Teaching Resources for Philosophy Instructors

@@ -4,7 +4,7 @@ layout: full
 toc: false
 date-modified: 2025-08-30
 description: "Contact Ryan O’Loughlin at Queens College CUNY for research collaborations, media requests, or student support."
-canonical: https://ryanoloughlin.org/contact.html
+canonical: https://Ryan-J-OLoughlin.github.io/contact.html
 ---
 ## Email
 📧 [ryan.oloughlin@qc.cuny.edu](mailto:ryan.oloughlin@qc.cuny.edu) 

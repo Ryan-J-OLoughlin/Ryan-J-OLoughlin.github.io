@@ -4,7 +4,7 @@ page-layout: full
 toc: false
 date-modified: last-modified
 description: "Central hub for Ryan O’Loughlin’s students with syllabi, office hours, academic support, and professional development guidance."
-canonical: https://ryanoloughlin.org/teaching-students.html
+canonical: https://Ryan-J-OLoughlin.github.io/teaching-students.html
 ---
 
 ## Quick Actions

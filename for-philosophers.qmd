@@ -2,7 +2,7 @@
 title: "For Philosophers"
 date-modified: last-modified
 description: "Invitation for philosophers to partner with Ryan O’Loughlin on climate modeling, robustness reasoning, and uncertainty research."
-canonical: https://ryanoloughlin.org/for-philosophers.html
+canonical: https://Ryan-J-OLoughlin.github.io/for-philosophers.html
 ---
 
 ## Collaboration Opportunities {#collaboration}

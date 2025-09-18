@@ -2,7 +2,7 @@
 title: "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science"
 date-modified: 2025-08-30
 description: "NCAR CGD seminar by Ryan O’Loughlin on diagnosing error in climate model intercomparisons and learning from low-skill models."
-canonical: https://ryanoloughlin.org/talks/ncar-cgd-error-taxonomy-2022.html
+canonical: https://Ryan-J-OLoughlin.github.io/talks/ncar-cgd-error-taxonomy-2022.html
 ---
 
 # Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science

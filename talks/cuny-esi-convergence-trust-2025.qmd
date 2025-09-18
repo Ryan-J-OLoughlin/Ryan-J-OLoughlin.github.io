@@ -2,7 +2,7 @@
 title: "Convergence, divergence, and trust in climate models"
 date-modified: 2025-08-30
 description: "Talk by Ryan O’Loughlin at CUNY ASRC on how convergence and divergence across climate models shape scientific trust."
-canonical: https://ryanoloughlin.org/talks/cuny-esi-convergence-trust-2025.html
+canonical: https://Ryan-J-OLoughlin.github.io/talks/cuny-esi-convergence-trust-2025.html
 ---
 
 # Convergence, divergence, and trust in climate models

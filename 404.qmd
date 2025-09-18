@@ -4,7 +4,7 @@ description: "Sorry, we can’t find that page. Try the links below or use searc
 toc: false
 page-layout: full
 sitemap: false
-canonical: https://ryanoloughlin.org/404.html
+canonical: https://Ryan-J-OLoughlin.github.io/404.html
 robots: noindex, follow
 ---
 

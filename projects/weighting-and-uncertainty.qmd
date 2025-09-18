@@ -2,7 +2,7 @@
 title: "Weighting, Spread, and Confidence"
 date-modified: 2025-08-30
 description: "Ryan O’Loughlin’s work on distinguishing ensemble spread from genuine epistemic confidence in climate projections."
-canonical: https://ryanoloughlin.org/projects/weighting-and-uncertainty.html
+canonical: https://Ryan-J-OLoughlin.github.io/projects/weighting-and-uncertainty.html
 ---
 
 Details coming soon. Separates spread-narrowing from genuine epistemic confidence; implications for ensemble practice & communication.
