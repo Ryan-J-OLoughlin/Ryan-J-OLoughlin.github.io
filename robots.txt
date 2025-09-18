@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ryanoloughlin.org/sitemap.xml
+Sitemap: https://Ryan-J-OLoughlin.github.io/sitemap.xml
