@@ -1,3 +1,8 @@
+---
+title: "Curriculum Vitae"
+date-modified: last-modified
+---
+
 **Areas of Specialization:** Philosophy of Climate Science, Scientific Modeling, Values in Science  
 **Areas of Competence:** History and Philosophy of Science, Logic, Environmental Philosophy  
 
