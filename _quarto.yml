@@ -6,6 +6,7 @@ project:
   resources: 
     - assets/**
     - partials/**
+    - CNAME
 
 website:
   title: "Ryan O'Loughlin"
