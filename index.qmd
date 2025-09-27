@@ -100,9 +100,9 @@ All models are wrong—so why trust them? Too often we equate trustworthiness wi
 ::: {.g-col-12 .g-col-md-4}
 ::: {.section-card}
 #### Talk
-“Uncertainty and Climate Models,” *Brown Climate Science Seminar* (Sept 2025) 
+“From Robustness to Antifragility,” *Brown University DEEPS Colloquium* (Sept 2025) 
 
-[Details →](for-scientists.qmd)
+[Details →](https://events.brown.edu/earth-environmental-planetary/event/315627-deeps-colloquium-with-ryan-oloughlin)
 :::
 :::
 ::: {.g-col-12 .g-col-md-4}
