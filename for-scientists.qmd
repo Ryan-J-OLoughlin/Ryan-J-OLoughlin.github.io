@@ -10,7 +10,7 @@ canonical: https://Ryan-J-OLoughlin.github.io/for-scientists.html
 :::{.grid .gap-4}
 
 ::: {.g-col-12 .g-col-md-4 .section-card .text-reset}
-[![Flyer for Ryan O’Loughlin’s CUNY ASRC talk on convergence, divergence, and trust in climate models](talks/cuny-esi-convergence-trust-2025.jpg){.talk-thumb}](talks/cuny-esi-convergence-trust-2025.qmd)
+[![](talks/cuny-esi-convergence-trust-2025.jpg){.talk-thumb}](talks/cuny-esi-convergence-trust-2025.qmd)
 
 #### [Convergence, Divergence, and Trust in Climate Models](talks/cuny-esi-convergence-trust-2025.qmd){.talk-title}
 ::: {.talk-meta}
@@ -19,7 +19,7 @@ canonical: https://Ryan-J-OLoughlin.github.io/for-scientists.html
 :::
 
 ::: {.g-col-12 .g-col-md-4 .section-card .text-reset}
-[![Flyer for the NASA GISS seminar on why disagreement between climate models is valuable](talks/nasa-giss-disagreement-2023.jpg){.talk-thumb}](talks/nasa-giss-disagreement-2023.qmd)
+[![](talks/nasa-giss-disagreement-2023.jpg){.talk-thumb}](talks/nasa-giss-disagreement-2023.qmd)
 
 #### [Why We Should Want Models to Disagree](talks/nasa-giss-disagreement-2023.qmd){.talk-title}
 ::: {.talk-meta}
@@ -28,23 +28,25 @@ canonical: https://Ryan-J-OLoughlin.github.io/for-scientists.html
 :::
 
 ::: {.g-col-12 .g-col-md-4 .section-card .text-reset}
-[![Flyer for the NCAR Climate & Global Dynamics seminar on diagnosing error in climate models](talks/ncar-cgd-error-taxonomy-2022.png){.talk-thumb}](talks/ncar-cgd-error-taxonomy-2022.qmd)
+[![](talks/brown-antifragility-2025.jpg){.talk-thumb}]()
 
-#### [Error Diagnosis & Low-Skill Models](talks/ncar-cgd-error-taxonomy-2022.qmd){.talk-title}
+#### [Error Diagnosis & Low-Skill Models](talks/brown-antifragility-2025.qmd){.talk-title}
 ::: {.talk-meta}
-{{< fa university >}} NCAR CGD · Oct 2022
+{{< fa university >}} Brown University · Sept 2025
 :::
 :::
 
 :::
 
 <div class="mt-3 text-muted small text-end">
-Full list in my [CV →](about.qmd)
+Full list in my [CV →]((files/Ryan_OLoughlin_CV.pdf))
 </div>
 
 ## Archived Talks
 
 **Climate Invariant Machine Learning** with Dan Li, NASA GISS, Feb 2024     [Read More →](talks/nasa-giss-ml-2024.qmd)
+
+**Error Diagnosis & Low-Skill Models** NCAR CGD, Oct 2022     [Read More →](talks/ncar-cgd-error-taxonomy-2022.qmd)
 
 ## What I Offer to Scientific Collaborators
 

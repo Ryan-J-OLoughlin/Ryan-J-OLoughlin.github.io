@@ -91,9 +91,6 @@ All models are wrong—so why trust them? Too often we equate trustworthiness wi
 :::
 :::
 
-
-
-
 ## Recent Highlights {#highlights}
 
 :::{.grid .gap-3}
@@ -102,7 +99,7 @@ All models are wrong—so why trust them? Too often we equate trustworthiness wi
 #### Talk
 “From Robustness to Antifragility,” *Brown University DEEPS Colloquium* (Sept 2025) 
 
-[Details →](https://events.brown.edu/earth-environmental-planetary/event/315627-deeps-colloquium-with-ryan-oloughlin)
+[Details →](talks/brown-antifragility-2025.qmd)
 :::
 :::
 ::: {.g-col-12 .g-col-md-4}
