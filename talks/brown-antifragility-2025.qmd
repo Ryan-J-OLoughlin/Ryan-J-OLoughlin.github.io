@@ -1,0 +1,27 @@
+---
+title: "From Robustness to Antifragility: A Philosophical Perspective on Climate and Earth System Models"
+date-modified: last-modified
+description: "NCAR CGD seminar by Ryan O’Loughlin on diagnosing error in climate model intercomparisons and learning from low-skill models."
+canonical: https://Ryan-J-OLoughlin.github.io/talks/brown-antifragility-2025.html
+---
+
+# From Robustness to Antifragility: A Philosophical Perspective on Climate and Earth System Models
+
+## Abstract
+Our knowledge of future climate change is largely dependent on complex computer simulation models. These models are huge – they are made up of more than 1 million lines of computer code representing knowledge from dozens of scientific subfields – and no individual scientist fully understands all of the model's inner workings. What’s more, scientists regularly proclaim that “all models are wrong, but some are useful.”
+
+In this talk, I will explain some of the philosophical challenges and promises of climate modeling. Robustness has long been recognized as a valuable property: models that converge despite differing assumptions can strengthen our confidence in their shared mechanisms. Yet robustness is only part of the story. Climate and earth system models often benefit from their own imperfections: discrepancies between models can reveal hidden mechanisms, repurposed “failed” models can generate new insights, and sensitivity to assumptions can drive discovery rather than undermine it. By moving beyond robustness toward antifragility, we can better understand how scientific models not only survive error but also thrive because of it.
+
+
+
+## Venue
+
+Brown University, September 25, 2025 
+
+[Read More →](https://events.brown.edu/earth-environmental-planetary/event/315627-deeps-colloquium-with-ryan-oloughlin)
+
+## Slides / Handouts
+
+Download file [here →](brown-antifragility-2025.pdf)
+
+*Updated: {{< meta date-modified >}}*
