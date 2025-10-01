@@ -74,7 +74,7 @@
     "href": "about.html#curriculum-vitae",
     "title": "About Ryan",
     "section": "Curriculum Vitae",
-    "text": "Curriculum Vitae\nDownload CV as PDF\n\nUpdated: September 17, 2025"
+    "text": "Curriculum Vitae\nDownload CV as PDF\n\nUpdated: October 1, 2025"
   },
   {
     "objectID": "files/cv-content.html",
@@ -165,7 +165,7 @@
     "href": "files/cv-content.html#languages",
     "title": "Curriculum Vitae",
     "section": "Languages",
-    "text": "Languages\n\nEnglish (native)\n\nMandarin Chinese (intermediate proficiency, speaking & reading)\n\n\nUpdated: September 17, 2025"
+    "text": "Languages\n\nEnglish (native)\n\nMandarin Chinese (intermediate proficiency, speaking & reading)\n\n\nUpdated: October 1, 2025"
   },
   {
     "objectID": "research.html",
@@ -221,7 +221,7 @@
     "href": "research.html#whats-next",
     "title": "Research",
     "section": "What’s Next",
-    "text": "What’s Next\nNew projects on failure, uncertainty, and the future of modeling.\n\nExpanding my account of failure as a source of scientific progress.\nApplying lessons from climate modeling to the design of trustworthy AI systems.\n\n\n\n\n\n\n\nLet’s Connect\n\n\n\nFor scientists → Collaboration on uncertainty, robustness, and decision support.\nFor philosophers → Dialogue on error & scientific discovery, pluralism, and the philosophy of modeling.\nFor students → Courses and resources on how philosophy clarifies science.\nFor media → Expert commentary on climate models, uncertainty, and trust in science.\n\n\nUpdated: September 17, 2025"
+    "text": "What’s Next\nNew projects on failure, uncertainty, and the future of modeling.\n\nExpanding my account of failure as a source of scientific progress.\nApplying lessons from climate modeling to the design of trustworthy AI systems.\n\n\n\n\n\n\n\nLet’s Connect\n\n\n\nFor scientists → Collaboration on uncertainty, robustness, and decision support.\nFor philosophers → Dialogue on error & scientific discovery, pluralism, and the philosophy of modeling.\nFor students → Courses and resources on how philosophy clarifies science.\nFor media → Expert commentary on climate models, uncertainty, and trust in science.\n\n\nUpdated: October 1, 2025"
   },
   {
     "objectID": "for-philosophers.html",
@@ -242,35 +242,119 @@
     "href": "for-philosophers.html#wip",
     "title": "For Philosophers",
     "section": "Works-in-Progress",
-    "text": "Works-in-Progress\n\nAntifragility in scientific modeling\nPursuitworthiness in controversial science, e.g., climate intervention research\nThe link between understanding and trust in cases of decision-making based on complex models\nAssumptions and challenges in model weighting\n\nEmail Ryan to compare notes, or dive into current research themes.\nUpdated: September 17, 2025"
+    "text": "Works-in-Progress\n\nAntifragility in scientific modeling\nPursuitworthiness in controversial science, e.g., climate intervention research\nThe link between understanding and trust in cases of decision-making based on complex models\nAssumptions and challenges in model weighting\n\nEmail Ryan to compare notes, or dive into current research themes.\nUpdated: October 1, 2025"
   },
   {
-    "objectID": "talks/nasa-giss-ml-2024.html",
-    "href": "talks/nasa-giss-ml-2024.html",
-    "title": "Climate Invariant Machine Learning: Insights from Philosophy of Induction",
+    "objectID": "talks/brown-antifragility-2025.html",
+    "href": "talks/brown-antifragility-2025.html",
+    "title": "From Robustness to Antifragility: A Philosophical Perspective on Climate and Earth System Models",
     "section": "",
-    "text": "When climate scientists use supervised machine learning (ML), one challenge is that the trained ML model can only work on the training dataset and cannot generalize beyond the training data, particularly when simulating a warmer climate. This is expected because data of a warmer climate are not i.i.d. to those of the control climate. However, this challenge can be resolved by paying attention to the invariant relationships that help make the inductive leap between control climate and warmer climate. In this talk, I’ll explain the rationale behind “climate-invariant ML” using the philosophy of induction and offer two examples.\n\n\n\nNASA Goddard Institute for Space Studies (GISS), Feb 7, 2024\n\n\n\n\n\n\n\ncoming soon.\nUpdated: August 30, 2025"
+    "text": "Our knowledge of future climate change is largely dependent on complex computer simulation models. These models are huge – they are made up of more than 1 million lines of computer code representing knowledge from dozens of scientific subfields – and no individual scientist fully understands all of the model’s inner workings. What’s more, scientists regularly proclaim that “all models are wrong, but some are useful.”\nIn this talk, I will explain some of the philosophical challenges and promises of climate modeling. Robustness has long been recognized as a valuable property: models that converge despite differing assumptions can strengthen our confidence in their shared mechanisms. Yet robustness is only part of the story. Climate and earth system models often benefit from their own imperfections: discrepancies between models can reveal hidden mechanisms, repurposed “failed” models can generate new insights, and sensitivity to assumptions can drive discovery rather than undermine it. By moving beyond robustness toward antifragility, we can better understand how scientific models not only survive error but also thrive because of it.\n\n\n\nBrown University, September 25, 2025\nRead More →\n\n\n\nDownload file here →\nUpdated: October 1, 2025"
   },
   {
-    "objectID": "talks/nasa-giss-ml-2024.html#abstract",
-    "href": "talks/nasa-giss-ml-2024.html#abstract",
-    "title": "Climate Invariant Machine Learning: Insights from Philosophy of Induction",
+    "objectID": "talks/brown-antifragility-2025.html#abstract",
+    "href": "talks/brown-antifragility-2025.html#abstract",
+    "title": "From Robustness to Antifragility: A Philosophical Perspective on Climate and Earth System Models",
     "section": "",
-    "text": "When climate scientists use supervised machine learning (ML), one challenge is that the trained ML model can only work on the training dataset and cannot generalize beyond the training data, particularly when simulating a warmer climate. This is expected because data of a warmer climate are not i.i.d. to those of the control climate. However, this challenge can be resolved by paying attention to the invariant relationships that help make the inductive leap between control climate and warmer climate. In this talk, I’ll explain the rationale behind “climate-invariant ML” using the philosophy of induction and offer two examples."
+    "text": "Our knowledge of future climate change is largely dependent on complex computer simulation models. These models are huge – they are made up of more than 1 million lines of computer code representing knowledge from dozens of scientific subfields – and no individual scientist fully understands all of the model’s inner workings. What’s more, scientists regularly proclaim that “all models are wrong, but some are useful.”\nIn this talk, I will explain some of the philosophical challenges and promises of climate modeling. Robustness has long been recognized as a valuable property: models that converge despite differing assumptions can strengthen our confidence in their shared mechanisms. Yet robustness is only part of the story. Climate and earth system models often benefit from their own imperfections: discrepancies between models can reveal hidden mechanisms, repurposed “failed” models can generate new insights, and sensitivity to assumptions can drive discovery rather than undermine it. By moving beyond robustness toward antifragility, we can better understand how scientific models not only survive error but also thrive because of it."
   },
   {
-    "objectID": "talks/nasa-giss-ml-2024.html#venue",
-    "href": "talks/nasa-giss-ml-2024.html#venue",
-    "title": "Climate Invariant Machine Learning: Insights from Philosophy of Induction",
+    "objectID": "talks/brown-antifragility-2025.html#venue",
+    "href": "talks/brown-antifragility-2025.html#venue",
+    "title": "From Robustness to Antifragility: A Philosophical Perspective on Climate and Earth System Models",
     "section": "",
-    "text": "NASA Goddard Institute for Space Studies (GISS), Feb 7, 2024"
+    "text": "Brown University, September 25, 2025\nRead More →"
   },
   {
-    "objectID": "talks/nasa-giss-ml-2024.html#slides-handouts",
-    "href": "talks/nasa-giss-ml-2024.html#slides-handouts",
-    "title": "Climate Invariant Machine Learning: Insights from Philosophy of Induction",
+    "objectID": "talks/brown-antifragility-2025.html#slides-handouts",
+    "href": "talks/brown-antifragility-2025.html#slides-handouts",
+    "title": "From Robustness to Antifragility: A Philosophical Perspective on Climate and Earth System Models",
+    "section": "",
+    "text": "Download file here →\nUpdated: October 1, 2025"
+  },
+  {
+    "objectID": "talks/ncar-cgd-error-taxonomy-2022.html",
+    "href": "talks/ncar-cgd-error-taxonomy-2022.html",
+    "title": "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science",
+    "section": "",
+    "text": "Although scientists have been conducting relatively systematic climate model intercomparisons for decades, error diagnosis (i.e., identifying and attributing sources of model-model disagreement) has been far less systematized. In this talk, I analyze the strategies used to diagnose model errors based on what is reported in the scientific literature, going back to the first Atmospheric Model Intercomparison Project (AMIP). These strategies include, e.g., dimension reduction techniques, multi-model sensitivity analysis, physical reasoning about the radiative effects of clouds, and testing hypotheses about sources of potential model error. Based on the case studies considered, I suggest that a systematic model error repertoire can benefit climate modelers and other climate scientists alike. These benefits include proactively identifying which part(s) of a model are most in need of revision (and why) and demonstrating a deeper understanding of climate model behavior. Finally, I suggest that attending to error diagnosis in climate modeling invites us to ask new questions about the scientific value of model intercomparisons, e.g., concerning the knowledge gained from worse-performing models in model weighting analyses.\n\n\n\nNCAR Climate & Global Dynamics Laboratory, October 25, 2022 Read More →\n\n\n\n\n\n\n\ncoming soon.\nUpdated: August 30, 2025"
+  },
+  {
+    "objectID": "talks/ncar-cgd-error-taxonomy-2022.html#abstract",
+    "href": "talks/ncar-cgd-error-taxonomy-2022.html#abstract",
+    "title": "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science",
+    "section": "",
+    "text": "Although scientists have been conducting relatively systematic climate model intercomparisons for decades, error diagnosis (i.e., identifying and attributing sources of model-model disagreement) has been far less systematized. In this talk, I analyze the strategies used to diagnose model errors based on what is reported in the scientific literature, going back to the first Atmospheric Model Intercomparison Project (AMIP). These strategies include, e.g., dimension reduction techniques, multi-model sensitivity analysis, physical reasoning about the radiative effects of clouds, and testing hypotheses about sources of potential model error. Based on the case studies considered, I suggest that a systematic model error repertoire can benefit climate modelers and other climate scientists alike. These benefits include proactively identifying which part(s) of a model are most in need of revision (and why) and demonstrating a deeper understanding of climate model behavior. Finally, I suggest that attending to error diagnosis in climate modeling invites us to ask new questions about the scientific value of model intercomparisons, e.g., concerning the knowledge gained from worse-performing models in model weighting analyses."
+  },
+  {
+    "objectID": "talks/ncar-cgd-error-taxonomy-2022.html#venue",
+    "href": "talks/ncar-cgd-error-taxonomy-2022.html#venue",
+    "title": "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science",
+    "section": "",
+    "text": "NCAR Climate & Global Dynamics Laboratory, October 25, 2022 Read More →"
+  },
+  {
+    "objectID": "talks/ncar-cgd-error-taxonomy-2022.html#slides-handouts",
+    "href": "talks/ncar-cgd-error-taxonomy-2022.html#slides-handouts",
+    "title": "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science",
     "section": "",
     "text": "coming soon.\nUpdated: August 30, 2025"
+  },
+  {
+    "objectID": "for-scientists.html",
+    "href": "for-scientists.html",
+    "title": "For Scientists",
+    "section": "",
+    "text": "CUNY ASRC · Mar 2025\n\n\n\n\n\n\n\n\n NASA GISS · May 2023\n\n\n\n\n\n\n\n\n Brown University · Sept 2025\n\n\n\n\n\nFull list in my CV →"
+  },
+  {
+    "objectID": "for-scientists.html#featured-talks",
+    "href": "for-scientists.html#featured-talks",
+    "title": "For Scientists",
+    "section": "",
+    "text": "CUNY ASRC · Mar 2025\n\n\n\n\n\n\n\n\n NASA GISS · May 2023\n\n\n\n\n\n\n\n\n Brown University · Sept 2025\n\n\n\n\n\nFull list in my CV →"
+  },
+  {
+    "objectID": "for-scientists.html#archived-talks",
+    "href": "for-scientists.html#archived-talks",
+    "title": "For Scientists",
+    "section": "Archived Talks",
+    "text": "Archived Talks\nClimate Invariant Machine Learning with Dan Li, NASA GISS, Feb 2024 Read More →\nError Diagnosis & Low-Skill Models NCAR CGD, Oct 2022 Read More →"
+  },
+  {
+    "objectID": "for-scientists.html#what-i-offer-to-scientific-collaborators",
+    "href": "for-scientists.html#what-i-offer-to-scientific-collaborators",
+    "title": "For Scientists",
+    "section": "What I Offer to Scientific Collaborators",
+    "text": "What I Offer to Scientific Collaborators\n\nRobustness reasoning: Explaining why agreement and disagreement across models can each provide insight—how convergence boosts confidence, and how divergence points to hidden mechanisms or new knowledge.\nModel evaluation: Developing conceptual tools for explaining model biases, interpreting ensemble spread, and showing how even “worse” models can play a constructive role in constraining estimates and resolving discrepancies.\nPhilosophical integration: Bringing frameworks from philosophy of science (robustness, pursuit-worthiness, levels of understanding) into day-to-day scientific practice in climate and Earth system modeling.\nDecision support: Helping connect model-based insights to real-world contexts—turning technical evaluations of uncertainty into actionable guidance for policymakers, funders, and interdisciplinary teams.\nEncouraging reflection and big-picture thinking: Creating space for scientists to step back, examine their everyday practices, and see how conceptual clarity can sharpen both individual projects and collective research agendas.\n\n\n\n\n\n\n\nIf you’re a climate scientist, data scientist, or modeler interested in uncertainty, robustness, or model evaluation, I’d love to talk.\nEmail me Propose a talk Start a project"
+  },
+  {
+    "objectID": "for-scientists.html#ongoing-collaborations",
+    "href": "for-scientists.html#ongoing-collaborations",
+    "title": "For Scientists",
+    "section": "Ongoing Collaborations",
+    "text": "Ongoing Collaborations\nI have worked with scientists at NASA GISS, NCAR, Cornell University, and Indiana University, helping refine how models are evaluated and how uncertainty is communicated."
+  },
+  {
+    "objectID": "teaching-instructors.html",
+    "href": "teaching-instructors.html",
+    "title": "Teaching Why Trust Science",
+    "section": "",
+    "text": "I design courses that link philosophy to urgent issues like climate change, scientific modeling, environmental justice, energy transition, and biodiversity. Below are syllabi, assignments, and teaching strategies that colleagues may find useful for adapting in their own classrooms, particularly for non-science students.\n\n\nI see teaching as a collaborative process where students learn by questioning, experimenting, and even failing. In my classes, I design hands-on activities—like building instruments in the university makerspace—that let students experience the challenges of measurement and error firsthand. By connecting these activities to philosophical texts, I help students see how knowledge is constructed and why uncertainty and failure are essential to learning.\n\n\n\nDownload and adapt syllabi from courses I’ve designed and taught:\n\n\nThis course uses logic, conceptual analysis, and scientific research to explore climate change as an ethical and justice issue. We examine questions of responsibility, extreme weather, and climate justice in the context of environmental philosophy.\nDownload\n\n\n\nThis course introduces fundamentals of logic and their role in scientific reasoning, including deduction, induction, probability, and causality. More broadly, we examine how science justifies knowledge through evidence and explanation rather than absolute proof.\nDownload\n\n\n\nThis course examines core issues in philosophy of science and then turns to Indigenous ways of knowing, highlighting how their worldviews offer unique insights into stewardship, sustainability, and resilience.\nDownload\nEach syllabus includes suggested readings, discussion structures, and sample assessments.\n\n\n\n\nA collection of modular assignments and in-class activities:\n\n\nBuild a thermometer with basic materials to explore error, measurement, and concept formation.\nDownload\n\n\n\nFormat for student-led debates on topics like free will, climate engineering, or scientific realism.\nDownload"
+  },
+  {
+    "objectID": "teaching-instructors.html#teaching-resources-for-philosophy-instructors",
+    "href": "teaching-instructors.html#teaching-resources-for-philosophy-instructors",
+    "title": "Teaching Why Trust Science",
+    "section": "",
+    "text": "I design courses that link philosophy to urgent issues like climate change, scientific modeling, environmental justice, energy transition, and biodiversity. Below are syllabi, assignments, and teaching strategies that colleagues may find useful for adapting in their own classrooms, particularly for non-science students.\n\n\nI see teaching as a collaborative process where students learn by questioning, experimenting, and even failing. In my classes, I design hands-on activities—like building instruments in the university makerspace—that let students experience the challenges of measurement and error firsthand. By connecting these activities to philosophical texts, I help students see how knowledge is constructed and why uncertainty and failure are essential to learning.\n\n\n\nDownload and adapt syllabi from courses I’ve designed and taught:\n\n\nThis course uses logic, conceptual analysis, and scientific research to explore climate change as an ethical and justice issue. We examine questions of responsibility, extreme weather, and climate justice in the context of environmental philosophy.\nDownload\n\n\n\nThis course introduces fundamentals of logic and their role in scientific reasoning, including deduction, induction, probability, and causality. More broadly, we examine how science justifies knowledge through evidence and explanation rather than absolute proof.\nDownload\n\n\n\nThis course examines core issues in philosophy of science and then turns to Indigenous ways of knowing, highlighting how their worldviews offer unique insights into stewardship, sustainability, and resilience.\nDownload\nEach syllabus includes suggested readings, discussion structures, and sample assessments.\n\n\n\n\nA collection of modular assignments and in-class activities:\n\n\nBuild a thermometer with basic materials to explore error, measurement, and concept formation.\nDownload\n\n\n\nFormat for student-led debates on topics like free will, climate engineering, or scientific realism.\nDownload"
+  },
+  {
+    "objectID": "teaching-instructors.html#share-collaborate",
+    "href": "teaching-instructors.html#share-collaborate",
+    "title": "Teaching Why Trust Science",
+    "section": "Share & Collaborate",
+    "text": "Share & Collaborate\nIf you adapt these materials, I’d love to hear how they work in your classroom. I welcome exchanges of syllabi, assignments, and teaching approaches. Contact me at 📧 ryan.oloughlin@qc.cuny.edu\nMore ways to reach me →\nUpdated: October 1, 2025"
   },
   {
     "objectID": "talks/nasa-giss-disagreement-2023.html",
@@ -301,86 +385,30 @@
     "text": "coming soon.\nUpdated: August 30, 2025"
   },
   {
-    "objectID": "teaching-instructors.html",
-    "href": "teaching-instructors.html",
-    "title": "Teaching Why Trust Science",
+    "objectID": "talks/nasa-giss-ml-2024.html",
+    "href": "talks/nasa-giss-ml-2024.html",
+    "title": "Climate Invariant Machine Learning: Insights from Philosophy of Induction",
     "section": "",
-    "text": "I design courses that link philosophy to urgent issues like climate change, scientific modeling, environmental justice, energy transition, and biodiversity. Below are syllabi, assignments, and teaching strategies that colleagues may find useful for adapting in their own classrooms, particularly for non-science students.\n\n\nI see teaching as a collaborative process where students learn by questioning, experimenting, and even failing. In my classes, I design hands-on activities—like building instruments in the university makerspace—that let students experience the challenges of measurement and error firsthand. By connecting these activities to philosophical texts, I help students see how knowledge is constructed and why uncertainty and failure are essential to learning.\n\n\n\nDownload and adapt syllabi from courses I’ve designed and taught:\n\n\nThis course uses logic, conceptual analysis, and scientific research to explore climate change as an ethical and justice issue. We examine questions of responsibility, extreme weather, and climate justice in the context of environmental philosophy.\nDownload\n\n\n\nThis course introduces fundamentals of logic and their role in scientific reasoning, including deduction, induction, probability, and causality. More broadly, we examine how science justifies knowledge through evidence and explanation rather than absolute proof.\nDownload\n\n\n\nThis course examines core issues in philosophy of science and then turns to Indigenous ways of knowing, highlighting how their worldviews offer unique insights into stewardship, sustainability, and resilience.\nDownload\nEach syllabus includes suggested readings, discussion structures, and sample assessments.\n\n\n\n\nA collection of modular assignments and in-class activities:\n\n\nBuild a thermometer with basic materials to explore error, measurement, and concept formation.\nDownload\n\n\n\nFormat for student-led debates on topics like free will, climate engineering, or scientific realism.\nDownload"
+    "text": "When climate scientists use supervised machine learning (ML), one challenge is that the trained ML model can only work on the training dataset and cannot generalize beyond the training data, particularly when simulating a warmer climate. This is expected because data of a warmer climate are not i.i.d. to those of the control climate. However, this challenge can be resolved by paying attention to the invariant relationships that help make the inductive leap between control climate and warmer climate. In this talk, I’ll explain the rationale behind “climate-invariant ML” using the philosophy of induction and offer two examples.\n\n\n\nNASA Goddard Institute for Space Studies (GISS), Feb 7, 2024\n\n\n\n\n\n\n\ncoming soon.\nUpdated: August 30, 2025"
   },
   {
-    "objectID": "teaching-instructors.html#teaching-resources-for-philosophy-instructors",
-    "href": "teaching-instructors.html#teaching-resources-for-philosophy-instructors",
-    "title": "Teaching Why Trust Science",
+    "objectID": "talks/nasa-giss-ml-2024.html#abstract",
+    "href": "talks/nasa-giss-ml-2024.html#abstract",
+    "title": "Climate Invariant Machine Learning: Insights from Philosophy of Induction",
     "section": "",
-    "text": "I design courses that link philosophy to urgent issues like climate change, scientific modeling, environmental justice, energy transition, and biodiversity. Below are syllabi, assignments, and teaching strategies that colleagues may find useful for adapting in their own classrooms, particularly for non-science students.\n\n\nI see teaching as a collaborative process where students learn by questioning, experimenting, and even failing. In my classes, I design hands-on activities—like building instruments in the university makerspace—that let students experience the challenges of measurement and error firsthand. By connecting these activities to philosophical texts, I help students see how knowledge is constructed and why uncertainty and failure are essential to learning.\n\n\n\nDownload and adapt syllabi from courses I’ve designed and taught:\n\n\nThis course uses logic, conceptual analysis, and scientific research to explore climate change as an ethical and justice issue. We examine questions of responsibility, extreme weather, and climate justice in the context of environmental philosophy.\nDownload\n\n\n\nThis course introduces fundamentals of logic and their role in scientific reasoning, including deduction, induction, probability, and causality. More broadly, we examine how science justifies knowledge through evidence and explanation rather than absolute proof.\nDownload\n\n\n\nThis course examines core issues in philosophy of science and then turns to Indigenous ways of knowing, highlighting how their worldviews offer unique insights into stewardship, sustainability, and resilience.\nDownload\nEach syllabus includes suggested readings, discussion structures, and sample assessments.\n\n\n\n\nA collection of modular assignments and in-class activities:\n\n\nBuild a thermometer with basic materials to explore error, measurement, and concept formation.\nDownload\n\n\n\nFormat for student-led debates on topics like free will, climate engineering, or scientific realism.\nDownload"
+    "text": "When climate scientists use supervised machine learning (ML), one challenge is that the trained ML model can only work on the training dataset and cannot generalize beyond the training data, particularly when simulating a warmer climate. This is expected because data of a warmer climate are not i.i.d. to those of the control climate. However, this challenge can be resolved by paying attention to the invariant relationships that help make the inductive leap between control climate and warmer climate. In this talk, I’ll explain the rationale behind “climate-invariant ML” using the philosophy of induction and offer two examples."
   },
   {
-    "objectID": "teaching-instructors.html#share-collaborate",
-    "href": "teaching-instructors.html#share-collaborate",
-    "title": "Teaching Why Trust Science",
-    "section": "Share & Collaborate",
-    "text": "Share & Collaborate\nIf you adapt these materials, I’d love to hear how they work in your classroom. I welcome exchanges of syllabi, assignments, and teaching approaches. Contact me at 📧 ryan.oloughlin@qc.cuny.edu\nMore ways to reach me →\nUpdated: September 17, 2025"
-  },
-  {
-    "objectID": "for-scientists.html",
-    "href": "for-scientists.html",
-    "title": "For Scientists",
+    "objectID": "talks/nasa-giss-ml-2024.html#venue",
+    "href": "talks/nasa-giss-ml-2024.html#venue",
+    "title": "Climate Invariant Machine Learning: Insights from Philosophy of Induction",
     "section": "",
-    "text": "Flyer for Ryan O’Loughlin’s CUNY ASRC talk on convergence, divergence, and trust in climate models\n\n\n\n\n\n CUNY ASRC · Mar 2025\n\n\n\n\n\n\n\nFlyer for the NASA GISS seminar on why disagreement between climate models is valuable\n\n\n\n\n\n NASA GISS · May 2023\n\n\n\n\n\n\n\nFlyer for the NCAR Climate & Global Dynamics seminar on diagnosing error in climate models\n\n\n\n\n\n NCAR CGD · Oct 2022\n\n\n\n\n\nFull list in my CV →"
+    "text": "NASA Goddard Institute for Space Studies (GISS), Feb 7, 2024"
   },
   {
-    "objectID": "for-scientists.html#featured-talks",
-    "href": "for-scientists.html#featured-talks",
-    "title": "For Scientists",
-    "section": "",
-    "text": "Flyer for Ryan O’Loughlin’s CUNY ASRC talk on convergence, divergence, and trust in climate models\n\n\n\n\n\n CUNY ASRC · Mar 2025\n\n\n\n\n\n\n\nFlyer for the NASA GISS seminar on why disagreement between climate models is valuable\n\n\n\n\n\n NASA GISS · May 2023\n\n\n\n\n\n\n\nFlyer for the NCAR Climate & Global Dynamics seminar on diagnosing error in climate models\n\n\n\n\n\n NCAR CGD · Oct 2022\n\n\n\n\n\nFull list in my CV →"
-  },
-  {
-    "objectID": "for-scientists.html#archived-talks",
-    "href": "for-scientists.html#archived-talks",
-    "title": "For Scientists",
-    "section": "Archived Talks",
-    "text": "Archived Talks\nClimate Invariant Machine Learning with Dan Li, NASA GISS, Feb 2024 Read More →"
-  },
-  {
-    "objectID": "for-scientists.html#what-i-offer-to-scientific-collaborators",
-    "href": "for-scientists.html#what-i-offer-to-scientific-collaborators",
-    "title": "For Scientists",
-    "section": "What I Offer to Scientific Collaborators",
-    "text": "What I Offer to Scientific Collaborators\n\nRobustness reasoning: Explaining why agreement and disagreement across models can each provide insight—how convergence boosts confidence, and how divergence points to hidden mechanisms or new knowledge.\nModel evaluation: Developing conceptual tools for explaining model biases, interpreting ensemble spread, and showing how even “worse” models can play a constructive role in constraining estimates and resolving discrepancies.\nPhilosophical integration: Bringing frameworks from philosophy of science (robustness, pursuit-worthiness, levels of understanding) into day-to-day scientific practice in climate and Earth system modeling.\nDecision support: Helping connect model-based insights to real-world contexts—turning technical evaluations of uncertainty into actionable guidance for policymakers, funders, and interdisciplinary teams.\nEncouraging reflection and big-picture thinking: Creating space for scientists to step back, examine their everyday practices, and see how conceptual clarity can sharpen both individual projects and collective research agendas.\n\n\n\n\n\n\n\nIf you’re a climate scientist, data scientist, or modeler interested in uncertainty, robustness, or model evaluation, I’d love to talk.\nEmail me Propose a talk Start a project"
-  },
-  {
-    "objectID": "for-scientists.html#ongoing-collaborations",
-    "href": "for-scientists.html#ongoing-collaborations",
-    "title": "For Scientists",
-    "section": "Ongoing Collaborations",
-    "text": "Ongoing Collaborations\nI have worked with scientists at NASA GISS, NCAR, Cornell University, and Indiana University, helping refine how models are evaluated and how uncertainty is communicated."
-  },
-  {
-    "objectID": "talks/ncar-cgd-error-taxonomy-2022.html",
-    "href": "talks/ncar-cgd-error-taxonomy-2022.html",
-    "title": "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science",
-    "section": "",
-    "text": "Although scientists have been conducting relatively systematic climate model intercomparisons for decades, error diagnosis (i.e., identifying and attributing sources of model-model disagreement) has been far less systematized. In this talk, I analyze the strategies used to diagnose model errors based on what is reported in the scientific literature, going back to the first Atmospheric Model Intercomparison Project (AMIP). These strategies include, e.g., dimension reduction techniques, multi-model sensitivity analysis, physical reasoning about the radiative effects of clouds, and testing hypotheses about sources of potential model error. Based on the case studies considered, I suggest that a systematic model error repertoire can benefit climate modelers and other climate scientists alike. These benefits include proactively identifying which part(s) of a model are most in need of revision (and why) and demonstrating a deeper understanding of climate model behavior. Finally, I suggest that attending to error diagnosis in climate modeling invites us to ask new questions about the scientific value of model intercomparisons, e.g., concerning the knowledge gained from worse-performing models in model weighting analyses.\n\n\n\nNCAR Climate & Global Dynamics Laboratory, October 25, 2022 Read More →\n\n\n\n\n\n\n\ncoming soon.\nUpdated: August 30, 2025"
-  },
-  {
-    "objectID": "talks/ncar-cgd-error-taxonomy-2022.html#abstract",
-    "href": "talks/ncar-cgd-error-taxonomy-2022.html#abstract",
-    "title": "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science",
-    "section": "",
-    "text": "Although scientists have been conducting relatively systematic climate model intercomparisons for decades, error diagnosis (i.e., identifying and attributing sources of model-model disagreement) has been far less systematized. In this talk, I analyze the strategies used to diagnose model errors based on what is reported in the scientific literature, going back to the first Atmospheric Model Intercomparison Project (AMIP). These strategies include, e.g., dimension reduction techniques, multi-model sensitivity analysis, physical reasoning about the radiative effects of clouds, and testing hypotheses about sources of potential model error. Based on the case studies considered, I suggest that a systematic model error repertoire can benefit climate modelers and other climate scientists alike. These benefits include proactively identifying which part(s) of a model are most in need of revision (and why) and demonstrating a deeper understanding of climate model behavior. Finally, I suggest that attending to error diagnosis in climate modeling invites us to ask new questions about the scientific value of model intercomparisons, e.g., concerning the knowledge gained from worse-performing models in model weighting analyses."
-  },
-  {
-    "objectID": "talks/ncar-cgd-error-taxonomy-2022.html#venue",
-    "href": "talks/ncar-cgd-error-taxonomy-2022.html#venue",
-    "title": "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science",
-    "section": "",
-    "text": "NCAR Climate & Global Dynamics Laboratory, October 25, 2022 Read More →"
-  },
-  {
-    "objectID": "talks/ncar-cgd-error-taxonomy-2022.html#slides-handouts",
-    "href": "talks/ncar-cgd-error-taxonomy-2022.html#slides-handouts",
-    "title": "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science",
+    "objectID": "talks/nasa-giss-ml-2024.html#slides-handouts",
+    "href": "talks/nasa-giss-ml-2024.html#slides-handouts",
+    "title": "Climate Invariant Machine Learning: Insights from Philosophy of Induction",
     "section": "",
     "text": "coming soon.\nUpdated: August 30, 2025"
   },
@@ -445,7 +473,7 @@
     "href": "teaching.html#connect-further",
     "title": "Teaching",
     "section": "Connect Further",
-    "text": "Connect Further\nInterested in a workshop, guest lecture, or co-developed course module? Get in touch and we can plan something tailored to your students or department.\nUpdated: September 17, 2025"
+    "text": "Connect Further\nInterested in a workshop, guest lecture, or co-developed course module? Get in touch and we can plan something tailored to your students or department.\nUpdated: October 1, 2025"
   },
   {
     "objectID": "teaching-students.html",
@@ -487,7 +515,7 @@
     "href": "teaching-students.html#professional-development",
     "title": "Student Dashboard",
     "section": "Professional Development",
-    "text": "Professional Development\n\n\n\nRequesting Letters of Recommendation\nSend one email with:\n1) Name + CUNY ID + course(s)/term(s) + final grade(s)\n2) Deadline(s) & submission method (portal/email)\n3) CV/Resume + unofficial transcript\n4) What you’re applying for & what you want me to emphasize in my letter\n5) Required forms (PDF) & FERPA waiver status, if needed\n6) ≥ 3 weeks’ notice before first deadline\n\nEmail template\n\n\n\n\n\nResearch, Mentorship & Assistantships\n\nI supervise undergraduate research/theses and independent studies.\n\nTo express interest, email a 1–2 paragraph note with topic interests & prior coursework.\n\nAssistantships / openings: None currently posted (last updated September 17, 2025). Check back here for announcements."
+    "text": "Professional Development\n\n\n\nRequesting Letters of Recommendation\nSend one email with:\n1) Name + CUNY ID + course(s)/term(s) + final grade(s)\n2) Deadline(s) & submission method (portal/email)\n3) CV/Resume + unofficial transcript\n4) What you’re applying for & what you want me to emphasize in my letter\n5) Required forms (PDF) & FERPA waiver status, if needed\n6) ≥ 3 weeks’ notice before first deadline\n\nEmail template\n\n\n\n\n\nResearch, Mentorship & Assistantships\n\nI supervise undergraduate research/theses and independent studies.\n\nTo express interest, email a 1–2 paragraph note with topic interests & prior coursework.\n\nAssistantships / openings: None currently posted (last updated October 1, 2025). Check back here for announcements."
   },
   {
     "objectID": "teaching-students.html#academic-help",
@@ -501,7 +529,7 @@
     "href": "teaching-students.html#course-archive",
     "title": "Student Dashboard",
     "section": "Course Archive",
-    "text": "Course Archive\n\n\nView past courses & syllabi\n\n\nPHIL 101 — Intro to Philosophy (SP/SU/FA 2022–2025)\n\n\n\nUpdated: September 17, 2025"
+    "text": "Course Archive\n\n\nView past courses & syllabi\n\n\nPHIL 101 — Intro to Philosophy (SP/SU/FA 2022–2025)\n\n\n\nUpdated: October 1, 2025"
   },
   {
     "objectID": "index.html",
@@ -536,7 +564,7 @@
     "href": "index.html#contact-information",
     "title": "Homepage | Ryan O’Loughlin | Philosopher of Science",
     "section": "Contact Information",
-    "text": "Contact Information\n ryan.oloughlin@qc.cuny.edu   718-997-5270   Powdermaker Hall 350-V, Queens College, CUNY\nMore ways to reach me →\nUpdated: September 27, 2025"
+    "text": "Contact Information\n ryan.oloughlin@qc.cuny.edu   718-997-5270   Powdermaker Hall 350-V, Queens College, CUNY\nMore ways to reach me →\nUpdated: October 1, 2025"
   },
   {
     "objectID": "media.html",
@@ -578,7 +606,7 @@
     "href": "media.html#media-contact",
     "title": "Media / Press",
     "section": "Media Contact",
-    "text": "Media Contact\n📧 ryan.oloughlin@qc.cuny.edu\n📞 718-997-5270\nOffice: Powdermaker Hall 350-V, Queens College, CUNY\nUpdated: September 17, 2025"
+    "text": "Media Contact\n📧 ryan.oloughlin@qc.cuny.edu\n📞 718-997-5270\nOffice: Powdermaker Hall 350-V, Queens College, CUNY\nUpdated: October 1, 2025"
   },
   {
     "objectID": "projects/weighting-and-uncertainty.html",

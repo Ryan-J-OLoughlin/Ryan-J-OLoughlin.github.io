@@ -8,9 +8,9 @@
 
 <meta name="author" content="Ryan J. O’Loughlin">
 <meta name="keywords" content="philosophy of science, climate models, uncertainty, trust without truth, decision-making under uncertainty">
-<meta name="description" content="How Ryan O’Loughlin teaches philosophy of science—linking uncertainty, climate change, and hands-on experimentation for students and colleagues.">
+<meta name="description" content="NCAR CGD seminar by Ryan O’Loughlin on diagnosing error in climate model intercomparisons and learning from low-skill models.">
 
-<title>Teaching – Ryan O’Loughlin</title>
+<title>From Robustness to Antifragility: A Philosophical Perspective on Climate and Earth System Models – Ryan O’Loughlin</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,28 +26,28 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/headshot.jpg" rel="icon" type="image/jpeg">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-cabf14546cdf8e4428f4aea2098a25e9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b5185a30e6e8093d5516afcea4ca59bb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-cabf14546cdf8e4428f4aea2098a25e9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/headshot.jpg" rel="icon" type="image/jpeg">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-cabf14546cdf8e4428f4aea2098a25e9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-b5185a30e6e8093d5516afcea4ca59bb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-cabf14546cdf8e4428f4aea2098a25e9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,29 +79,29 @@ ul.task-list li input[type="checkbox"] {
 <!-- Performance hints: preconnect to fonts and preload site CSS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link rel="preload" as="style" href="./styles.css">
+<link rel="preload" as="style" href="../styles.css">
 
-<link rel="canonical" href="https://Ryan-J-OLoughlin.github.io/teaching.html">
-<meta property="og:url" content="https://Ryan-J-OLoughlin.github.io/teaching.html">
-<meta name="twitter:url" content="https://Ryan-J-OLoughlin.github.io/teaching.html">
+<link rel="canonical" href="https://Ryan-J-OLoughlin.github.io/talks/brown-antifragility-2025.html">
+<meta property="og:url" content="https://Ryan-J-OLoughlin.github.io/talks/brown-antifragility-2025.html">
+<meta name="twitter:url" content="https://Ryan-J-OLoughlin.github.io/talks/brown-antifragility-2025.html">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://Ryan-J-OLoughlin.github.io/#website","@type":"WebSite","inLanguage":"en","name":"Ryan O'Loughlin","publisher":{"@id":"https://Ryan-J-OLoughlin.github.io/#person"},"url":"https://Ryan-J-OLoughlin.github.io/"},{"@id":"https://Ryan-J-OLoughlin.github.io/#person","@type":"Person","affiliation":{"@type":"Organization","name":"City University of New York"},"image":"https://Ryan-J-OLoughlin.github.io/assets/headshot.jpg","jobTitle":"Assistant Professor of Philosophy","name":"Ryan J. O'Loughlin","sameAs":["https://scholar.google.com/citations?user=FVgAseQAAAAJ","https://orcid.org/0000-0002-9106-1460","https://philpeople.org/profiles/ryan-oloughlin","https://www.linkedin.com/in/ryan-o-loughlin-885256300/","https://github.com/Ryan-J-OLoughlin/"],"url":"https://Ryan-J-OLoughlin.github.io/","worksFor":{"@type":"CollegeOrUniversity","name":"Queens College, City University of New York","url":"https://www.qc.cuny.edu/"}},{"@id":"https://Ryan-J-OLoughlin.github.io/teaching.html","@type":"WebPage","description":"How Ryan O’Loughlin teaches philosophy of science—linking uncertainty, climate change, and hands-on experimentation for students and colleagues.","inLanguage":"en","isPartOf":{"@id":"https://Ryan-J-OLoughlin.github.io/#website"},"name":"Teaching","url":"https://Ryan-J-OLoughlin.github.io/teaching.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://Ryan-J-OLoughlin.github.io/#website","@type":"WebSite","inLanguage":"en","name":"Ryan O'Loughlin","publisher":{"@id":"https://Ryan-J-OLoughlin.github.io/#person"},"url":"https://Ryan-J-OLoughlin.github.io/"},{"@id":"https://Ryan-J-OLoughlin.github.io/#person","@type":"Person","affiliation":{"@type":"Organization","name":"City University of New York"},"image":"https://Ryan-J-OLoughlin.github.io/assets/headshot.jpg","jobTitle":"Assistant Professor of Philosophy","name":"Ryan J. O'Loughlin","sameAs":["https://scholar.google.com/citations?user=FVgAseQAAAAJ","https://orcid.org/0000-0002-9106-1460","https://philpeople.org/profiles/ryan-oloughlin","https://www.linkedin.com/in/ryan-o-loughlin-885256300/","https://github.com/Ryan-J-OLoughlin/"],"url":"https://Ryan-J-OLoughlin.github.io/","worksFor":{"@type":"CollegeOrUniversity","name":"Queens College, City University of New York","url":"https://www.qc.cuny.edu/"}},{"@id":"https://Ryan-J-OLoughlin.github.io/talks/brown-antifragility-2025.html","@type":"WebPage","description":"NCAR CGD seminar by Ryan O’Loughlin on diagnosing error in climate model intercomparisons and learning from low-skill models.","inLanguage":"en","isPartOf":{"@id":"https://Ryan-J-OLoughlin.github.io/#website"},"name":"From Robustness to Antifragility: A Philosophical Perspective on Climate and Earth System Models","url":"https://Ryan-J-OLoughlin.github.io/talks/brown-antifragility-2025.html"}]}</script>
 
 
-<link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Teaching – Ryan O’Loughlin">
-<meta property="og:description" content="How Ryan O’Loughlin teaches philosophy of science—linking uncertainty, climate change, and hands-on experimentation for students and colleagues.">
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="From Robustness to Antifragility: A Philosophical Perspective on Climate and Earth System Models – Ryan O’Loughlin">
+<meta property="og:description" content="NCAR CGD seminar by Ryan O’Loughlin on diagnosing error in climate model intercomparisons and learning from low-skill models.">
 <meta property="og:image" content="https://Ryan-J-OLoughlin.github.io/assets/og-card.jpeg">
 <meta property="og:site_name" content="Ryan O'Loughlin">
 <meta property="og:image:alt" content="Ryan O'Loughlin — Philosophy of Science (climate models, uncertainty)">
-<meta name="twitter:title" content="Teaching – Ryan O’Loughlin">
-<meta name="twitter:description" content="How Ryan O’Loughlin teaches philosophy of science—linking uncertainty, climate change, and hands-on experimentation for students and colleagues.">
+<meta name="twitter:title" content="From Robustness to Antifragility: A Philosophical Perspective on Climate and Earth System Models – Ryan O’Loughlin">
+<meta name="twitter:description" content="NCAR CGD seminar by Ryan O’Loughlin on diagnosing error in climate model intercomparisons and learning from low-skill models.">
 <meta name="twitter:image" content="https://Ryan-J-OLoughlin.github.io/assets/og-card.jpeg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -270,7 +270,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Ryan O’Loughlin</span>
     </a>
   </div>
@@ -281,15 +281,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./research.html"> 
+    <a class="nav-link" href="../research.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -298,11 +298,11 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-talks--collaboration">    
         <li>
-    <a class="dropdown-item" href="./for-philosophers.html">
+    <a class="dropdown-item" href="../for-philosophers.html">
  <span class="dropdown-text">For Philosophers</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./for-scientists.html">
+    <a class="dropdown-item" href="../for-scientists.html">
  <span class="dropdown-text">For Scientists</span></a>
   </li>  
     </ul>
@@ -313,21 +313,21 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching">    
         <li>
-    <a class="dropdown-item" href="./teaching-instructors.html">
+    <a class="dropdown-item" href="../teaching-instructors.html">
  <span class="dropdown-text">Teaching Trust without Truth</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./teaching-students.html">
+    <a class="dropdown-item" href="../teaching-students.html">
  <span class="dropdown-text">Resources for Students</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./media.html"> 
+    <a class="nav-link" href="../media.html"> 
 <span class="menu-text">Media</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contact.html"> 
+    <a class="nav-link" href="../contact.html"> 
 <span class="menu-text">Contact</span></a>
   </li>  
 </ul>
@@ -335,7 +335,7 @@ ul.task-list li input[type="checkbox"] {
             <div class="quarto-navbar-tools tools-wide">
     <a href="mailto:Ryan.Oloughlin@qc.cuny.edu" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-envelope"></i></a>
     <a href="https://www.linkedin.com/in/ryan-o-loughlin-885256300" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
-    <a href="./files/Ryan_OLoughlin_CV.pdf" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-file-earmark-text"></i></a>
+    <a href="../files/Ryan_OLoughlin_CV.pdf" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-file-earmark-text"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
@@ -345,19 +345,32 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#from-robustness-to-antifragility-a-philosophical-perspective-on-climate-and-earth-system-models" id="toc-from-robustness-to-antifragility-a-philosophical-perspective-on-climate-and-earth-system-models" class="nav-link active" data-scroll-target="#from-robustness-to-antifragility-a-philosophical-perspective-on-climate-and-earth-system-models">From Robustness to Antifragility: A Philosophical Perspective on Climate and Earth System Models</a>
+  <ul class="collapse">
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#venue" id="toc-venue" class="nav-link" data-scroll-target="#venue">Venue</a></li>
+  <li><a href="#slides-handouts" id="toc-slides-handouts" class="nav-link" data-scroll-target="#slides-handouts">Slides / Handouts</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/edit/main/talks/brown-antifragility-2025.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Teaching</h1>
+<h1 class="title">From Robustness to Antifragility: A Philosophical Perspective on Climate and Earth System Models</h1>
 </div>
 
 <div>
   <div class="description">
-    How Ryan O’Loughlin teaches philosophy of science—linking uncertainty, climate change, and hands-on experimentation for students and colleagues.
+    NCAR CGD seminar by Ryan O’Loughlin on diagnosing error in climate model intercomparisons and learning from low-skill models.
   </div>
 </div>
 
@@ -392,33 +405,25 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="teaching-philosophy" class="level2">
-<h2 class="anchored" data-anchor-id="teaching-philosophy">Teaching Philosophy</h2>
-<p>My courses show students that uncertainty and disagreement are not defects in science but drivers of better thinking. I combine close analysis of philosophical texts with hands-on exercises—from makerspace builds to data interpretation labs—so that students experience how concepts like measurement, robustness, and error feel in practice.</p>
+<section id="from-robustness-to-antifragility-a-philosophical-perspective-on-climate-and-earth-system-models" class="level1">
+<h1>From Robustness to Antifragility: A Philosophical Perspective on Climate and Earth System Models</h1>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>Our knowledge of future climate change is largely dependent on complex computer simulation models. These models are huge – they are made up of more than 1 million lines of computer code representing knowledge from dozens of scientific subfields – and no individual scientist fully understands all of the model’s inner workings. What’s more, scientists regularly proclaim that “all models are wrong, but some are useful.”</p>
+<p>In this talk, I will explain some of the philosophical challenges and promises of climate modeling. Robustness has long been recognized as a valuable property: models that converge despite differing assumptions can strengthen our confidence in their shared mechanisms. Yet robustness is only part of the story. Climate and earth system models often benefit from their own imperfections: discrepancies between models can reveal hidden mechanisms, repurposed “failed” models can generate new insights, and sensitivity to assumptions can drive discovery rather than undermine it. By moving beyond robustness toward antifragility, we can better understand how scientific models not only survive error but also thrive because of it.</p>
 </section>
-<section id="resources-for-instructors" class="level2">
-<h2 class="anchored" data-anchor-id="resources-for-instructors">Resources for Instructors</h2>
-<p>Looking to bring these themes into your classroom? Explore syllabi, assignments, and activity guides:</p>
-<ul>
-<li><a href="./teaching-instructors.html">Teaching “Trust without Truth”</a></li>
-<li><a href="./teaching-instructors.html#teaching-resources-for-philosophy-instructors">Philosophy of science course materials</a></li>
-</ul>
+<section id="venue" class="level2">
+<h2 class="anchored" data-anchor-id="venue">Venue</h2>
+<p>Brown University, September 25, 2025</p>
+<p><a href="https://events.brown.edu/earth-environmental-planetary/event/315627-deeps-colloquium-with-ryan-oloughlin">Read More →</a></p>
 </section>
-<section id="resources-for-students" class="level2">
-<h2 class="anchored" data-anchor-id="resources-for-students">Resources for Students</h2>
-<p>Current and prospective students can find logistics, support services, and professional development resources on the dashboard:</p>
-<ul>
-<li><a href="./teaching-students.html">Student Dashboard</a></li>
-<li><a href="./teaching-students.html#office-hours--contact">Office hours and advising</a></li>
-<li><a href="./teaching-students.html#professional-development">Letters of recommendation guidance</a></li>
-</ul>
-</section>
-<section id="connect-further" class="level2">
-<h2 class="anchored" data-anchor-id="connect-further">Connect Further</h2>
-<p>Interested in a workshop, guest lecture, or co-developed course module? <a href="./contact.html">Get in touch</a> and we can plan something tailored to your students or department.</p>
+<section id="slides-handouts" class="level2">
+<h2 class="anchored" data-anchor-id="slides-handouts">Slides / Handouts</h2>
+<p>Download file <a href="brown-antifragility-2025.pdf">here →</a></p>
 <p><em>Updated: October 1, 2025</em></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1242,11 +1247,11 @@ ul.task-list li input[type="checkbox"] {
 </a>
   </li>  
 </ul>
-    <div class="toc-actions"><ul><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/edit/main/teaching.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/edit/main/talks/brown-antifragility-2025.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="./#">
+    <a class="nav-link" href="../#">
 <p>Back to top ↑</p>
 </a>
   </li>  
@@ -1263,5 +1268,5 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
