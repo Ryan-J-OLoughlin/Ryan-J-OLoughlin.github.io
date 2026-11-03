@@ -1,16 +1,14 @@
 ---
-title: "Page Not Found (404)"
+title: "Oops — page not found"
 description: "Sorry, we can’t find that page. Try the links below or use search."
 toc: false
 page-layout: full
 sitemap: false
-canonical: https://Ryan-J-OLoughlin.github.io/404.html
 robots: noindex, follow
 ---
 
 ::: {.d-flex .flex-column .align-items-center .justify-content-center .py-5}
 
-# Oops — page not found
 
 The page you’re looking for doesn’t exist, moved, or the link is broken.  
 Route disagreement can be illuminating—just not here. Let’s find something more robust.

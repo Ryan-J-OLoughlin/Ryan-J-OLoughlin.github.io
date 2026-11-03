@@ -1,12 +1,17 @@
 ---
-title: "Homepage | Ryan O'Loughlin | Philosopher of Science" 
+title: "Ryan O'Loughlin"
+pagetitle: "Philosopher of Science"
 page-layout: full
 toc: false
 date-modified: last-modified
 description: "Ryan O’Loughlin — philosopher of science focused on climate models, uncertainty, and decision-making | Trust without Truth"
 include-in-header: partials/perf-home-head.html
-canonical: https://Ryan-J-OLoughlin.github.io/
 seo_type: website
+body-classes: page-home
+include-after-body:
+  - partials/game-modal.html
+  - partials/scroll-reveal.html
+  - partials/scroll-flame.html
 ---
 
 <style>

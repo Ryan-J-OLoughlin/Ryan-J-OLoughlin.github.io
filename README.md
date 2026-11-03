@@ -10,7 +10,7 @@ This repository contains the source for Ryan J O'Loughlin’s personal website, 
 
 - Install Quarto: https://quarto.org/docs/get-started/
 - Clone the repo and preview locally:
-  - `quarto preview` — live-reloads as you edit `*.qmd` and `styles.css`
+  - `quarto preview` — live-reloads as you edit `*.qmd` and `theme/*.scss`
   - `quarto render` — one-time build into `_site/`
 
 ## Deploy (GitHub Pages)
@@ -36,7 +36,7 @@ Site URL is set in `_quarto.yml` under `website.site-url`.
 - `for-scientists.qmd` — talks and collaboration for scientists
 - `teaching-students.qmd`, `teaching-instructors.qmd` — teaching resources and syllabi links
 - `media.qmd`, `contact.qmd`, `collaboration.qmd` — media kit, contact, and hub page
-- `styles.css` — site styling and brand tokens (light/dark aware)
+- `theme/` — SCSS theme: `light.scss` and `dark.scss` hold colour tokens, `base.scss` fonts and components, `_legacy.scss` pre-redesign components (temporary)
 - `_extensions/quarto-ext/fontawesome/` — Font Awesome shortcode support
 - `assets/` — images, logos, Open Graph card, timeline assets
 - `files/` — PDFs and sources (CV and syllabi)
@@ -45,7 +45,7 @@ Site URL is set in `_quarto.yml` under `website.site-url`.
 
 - Navbar and footer: `_quarto.yml` under `website.navbar` and `website.page-footer`
 - Theme and options: `_quarto.yml` under `format.html` (theme, TOC, smooth-scroll, etc.)
-- Styling: edit `styles.css` (fonts, colors, layout helpers, cards, logo-strip, dark mode)
+- Styling: edit `theme/*.scss`; self-hosted fonts live in `assets/fonts/`
 - Social cards: `assets/og-card.png`, plus `website.open-graph`/`twitter-card` enabled
 - Repo links: `_quarto.yml` `repo-url` and `repo-actions` (shows “Edit”/“Issue” links in page header)
 

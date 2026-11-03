@@ -1,0 +1,42 @@
+/*-- scss:defaults --*/
+// Ensemble — dark tokens. Keep in sync with light.scss and the :root block below.
+$paper:    #121110;
+$paper-2:  #1C1A17;
+$ink:      #ECE7DC;
+$ink-2:    #C4BEB1;
+$ink-3:    #9C968A;
+$rule:     #34302A;
+$err:      #F2804A;
+$err-wash: #2A1A12;
+
+$body-bg:    $paper;
+$body-color: $ink;
+$primary:    $ink;
+$secondary:  $ink-2;
+$danger:     $err;
+$link-color: $ink;
+
+$navbar-bg: $paper;
+$navbar-fg: $ink;
+$navbar-hl: $ink;
+$footer-bg: $paper;
+$footer-fg: $ink-3;
+$toc-color: $ink-2;
+
+$code-bg:    $paper-2;
+$code-color: $ink;
+$border-color: $rule;
+
+/*-- scss:rules --*/
+:root {
+  color-scheme: dark;
+  --paper: #{$paper};
+  --paper-2: #{$paper-2};
+  --ink: #{$ink};
+  --ink-2: #{$ink-2};
+  --ink-3: #{$ink-3};
+  --rule: #{$rule};
+  --run: rgba(236, 231, 220, 0.24);
+  --err: #{$err};
+  --err-wash: #{$err-wash};
+}

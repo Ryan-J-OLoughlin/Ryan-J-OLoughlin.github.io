@@ -1,0 +1,205 @@
+// Pre-redesign components, re-skinned with Ensemble tokens so the current
+// pages keep working during the rebuild. Delete this file (and its @import in
+// base.scss) once Phase 4 replaces index, research and for-scientists.
+
+.section-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--s-4);
+}
+.section-card h4 { margin-top: 0; }
+
+.talk-title {
+  margin: 0;
+  line-height: 1.25;
+  min-height: calc(1.25em * 2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.talk-meta {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.section-card img.talk-thumb {
+  width: 100%;
+  height: clamp(140px, 22vw, 200px);
+  object-fit: cover;
+  display: block;
+  border-radius: 2px;
+}
+
+.logo-strip { padding-top: var(--s-5); }
+.logo-strip img {
+  height: 26px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  margin: 0 8px;
+}
+body.quarto-dark .logo-strip img { filter: invert(1) grayscale(100%); }
+
+// Full-bleed photo hero (retired in Phase 2).
+.hero-photo {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  min-height: 100vh;
+  min-height: 100svh;
+  background: url("/assets/portrait.jpg") center / cover no-repeat;
+}
+.hero-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.45) 80%, rgba(0, 0, 0, 0.85) 100%);
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+.hero-id {
+  align-self: start;
+  justify-self: end;
+  margin: clamp(16px, 5vw, 40px);
+  color: #fff;
+  max-width: min(92vw, 520px);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+.hero-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.1;
+}
+.hero-role, .hero-tag { font-size: clamp(1rem, 2vw, 1.2rem); }
+.hero-bottom {
+  align-self: end;
+  padding: clamp(14px, 2vw, 22px) clamp(16px, 4vw, 40px);
+  color: #fff;
+}
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.4rem, 4.8vw, 2.6rem);
+  line-height: 1.15;
+  margin-bottom: var(--s-4);
+}
+.hero-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(48px, 8vh, 96px);
+  transform: translateX(-50%);
+  color: #fff;
+  text-decoration: none;
+}
+.hero-scroll .bi { font-size: 1.75rem; }
+.hero-photo .btn-primary { background: #fff; border-color: #fff; color: #1B1A17; }
+@media (max-width: 768px) {
+  .hero-id { align-self: end; text-align: right; margin: 12px; }
+  .hero-photo { background-size: 250% auto; }
+}
+@media (max-width: 480px) {
+  .hero-photo { background-size: 380% auto; background-position: top center; }
+}
+.mobile-br { display: none; }
+@media (max-width: 480px) { .mobile-br { display: inline; } }
+
+.ghost-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+  cursor: pointer;
+}
+.ghost-link:hover, .ghost-link:focus { border-bottom-color: currentColor; }
+.ghost-hint {
+  display: block;
+  margin-left: 1rem;
+  font-size: 0.9em;
+  opacity: 0.7;
+  color: inherit;
+  text-decoration: none;
+}
+
+// Pull-quote on the homepage.
+.what-i-do { position: relative; }
+.what-i-do::after { content: ""; display: table; clear: both; }
+.pull-quote {
+  background: var(--paper-2);
+  border-left: 3px solid var(--err);
+  border-radius: 2px;
+  padding: var(--s-4) var(--s-5);
+}
+.pull-quote-right {
+  float: right;
+  width: clamp(300px, 40vw, 520px);
+  margin: 0 0 var(--s-4) var(--s-6);
+}
+@media (max-width: 768px) { .pull-quote-right { float: none; width: auto; margin: 0 0 var(--s-4); } }
+.pull-quote-mark {
+  display: block;
+  line-height: 0.6;
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 9vw, 120px);
+  color: var(--err);
+}
+.pull-quote-text {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  font-style: italic;
+  line-height: 1.45;
+}
+.float-clear { clear: both; }
+
+.cover-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 2px;
+}
+.img-top-half { aspect-ratio: 1 / 1; }
+.img-fade-bottom {
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+}
+
+@media (max-width: 768px) {
+  .order-mobile-1 { order: 1; }
+  .order-mobile-2 { order: 2; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 480ms ease, transform 560ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.reveal-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+}
+
+// Home keeps its H1 for screen readers until the Phase 2 hero provides a visible one.
+.page-home .quarto-title-block {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
