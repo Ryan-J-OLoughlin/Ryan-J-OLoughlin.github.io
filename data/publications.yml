@@ -1,0 +1,162 @@
+# Single source for publications. Rendered by _templates/publication.ejs
+# (publications.qmd, thread pages). Every entry stays `verified: false`
+# until Ryan confirms it (see _review/). Fields:
+#   type: article | chapter | review | essay | public
+#   status: published | forthcoming | under-contract
+#   thread: agreement | error | values | ai
+#   oa: true when the version of record is free to read
+- id: ejps2026
+  type: article
+  status: published
+  year: 2026
+  title: "When are small-scale field experiments in solar geoengineering worth pursuing?"
+  authors: ["Ryan O'Loughlin", "Daniele Visioni"]
+  venue: "European Journal for Philosophy of Science"
+  volume: "16(3)"
+  pages: "54"
+  doi: 10.1007/s13194-026-00762-9
+  oa: true
+  oa_url: https://philsci-archive.pitt.edu/25840/
+  thread: values
+  verified: false
+  source: crossref, orcid
+- id: gmd2025
+  type: article
+  status: published
+  year: 2025
+  title: "Moving beyond post hoc explainable artificial intelligence: a perspective paper on lessons learned from dynamical climate modeling"
+  authors: ["Ryan O'Loughlin", "Dan Li", "R. Neale", "T. A. O'Brien"]
+  venue: "Geoscientific Model Development"
+  volume: "18"
+  pages: "787–802"
+  doi: 10.5194/gmd-18-787-2025
+  oa: true
+  thread: ai
+  note: "Site previously said 'selected as a highlight paper' — confirm."
+  verified: false
+  source: cv-2026, orcid
+- id: cc2024
+  type: article
+  status: published
+  year: 2024
+  title: "Why we need lower-performance climate models"
+  authors: ["Ryan O'Loughlin"]
+  venue: "Climatic Change"
+  volume: "177(2)"
+  pages: "1–21"
+  doi: 10.1007/s10584-023-03661-7
+  thread: error
+  verified: false
+  source: cv-2026, orcid
+- id: ejps2023
+  type: article
+  status: published
+  year: 2023
+  title: "Diagnosing errors in climate model intercomparisons"
+  authors: ["Ryan O'Loughlin"]
+  venue: "European Journal for Philosophy of Science"
+  volume: "13(2)"
+  pages: "1–29"
+  doi: 10.1007/s13194-023-00522-z
+  thread: error
+  verified: false
+  source: cv-2026, orcid
+- id: synthese2022
+  type: article
+  status: published
+  year: 2022
+  title: "Model robustness in economics: the admissibility and evaluation of tractability assumptions"
+  authors: ["Ryan O'Loughlin", "Dan Li"]
+  venue: "Synthese"
+  volume: "200"
+  pages: "1–23"
+  doi: 10.1007/s11229-022-03608-y
+  thread: agreement
+  verified: false
+  source: cv-2026, orcid
+- id: shps2021
+  type: article
+  status: published
+  year: 2021
+  title: "Robustness reasoning in climate model comparisons"
+  authors: ["Ryan O'Loughlin"]
+  venue: "Studies in History and Philosophy of Science Part A"
+  volume: "85"
+  pages: "35–43"
+  doi: 10.1016/j.shpsa.2020.12.005
+  thread: agreement
+  verified: false
+  source: cv-2026, orcid
+- id: shps2020
+  type: article
+  status: published
+  year: 2020
+  title: "Seepage, objectivity, and climate science"
+  authors: ["Ryan O'Loughlin"]
+  venue: "Studies in History and Philosophy of Science Part A"
+  volume: "81"
+  pages: "74–81"
+  doi: 10.1016/j.shpsa.2019.07.002
+  thread: values
+  verified: false
+  source: cv-2026, orcid
+- id: geosciences-forthcoming
+  type: chapter
+  status: forthcoming
+  year: 2027
+  title: "Why practice-oriented philosophy of the geosciences is essential: the case of “model robustness”"
+  authors: ["Ryan O'Loughlin", "Stuart Gluck", "Elisabeth Lloyd"]
+  venue: "Comprehensive Philosophy of Science: Philosophy of the Geosciences"
+  editors: "Miguel Ohnesorge and Aja Watkins"
+  thread: agreement
+  note: "Year is a placeholder for sorting; CV says 'Forth.'"
+  verified: false
+  source: cv-2026
+- id: lloyd-volume
+  type: chapter
+  status: under-contract
+  year: 2027
+  title: "Confirmation and robustness of climate models"
+  authors: ["Ryan O'Loughlin", "Stuart Gluck"]
+  venue: "Philosophy, Feminism, and Science: Critical Perspectives on the Work of Elisabeth A. Lloyd"
+  editors: "Ryan Ketcham and Michael R. Dietrich"
+  publisher: "University of Pittsburgh Press"
+  thread: agreement
+  note: "Year is a placeholder for sorting; CV says 'under contract'."
+  verified: false
+  source: cv-2026
+- id: jmp2025
+  type: review
+  status: published
+  year: 2025
+  title: "Values in Science, by Kevin Elliott (book review)"
+  authors: ["Ryan O'Loughlin"]
+  venue: "Journal of Moral Philosophy"
+  doi: 10.1163/17455243-20221202
+  thread: values
+  verified: false
+  source: cv-2026
+- id: cshps2021
+  type: essay
+  status: published
+  year: 2021
+  title: "The influence of climate contrarianism on scientific research"
+  authors: ["Ryan O'Loughlin"]
+  venue: "Canadian Society for the History and Philosophy of Science Communiqué, No. 104"
+  url: https://cshps.ca/no-104-autumn-automne-2021/
+  oa: true
+  thread: values
+  verified: false
+  source: cv-2026
+- id: ycc2025
+  type: public
+  status: published
+  year: 2025
+  title: "Why imperfect climate models are more helpful than you think"
+  authors: ["Ryan O'Loughlin"]
+  venue: "Yale Climate Connections"
+  url: https://yaleclimateconnections.org/2025/06/why-imperfect-climate-models-are-more-helpful-than-you-think/
+  oa: true
+  thread: error
+  verified: false
+  source: cv-2026

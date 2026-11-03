@@ -1,0 +1,16 @@
+---
+title: "Talks"
+description: "Invited talks, keynotes, and conference presentations to scientists and philosophers — from NASA GISS and NCAR to Brown and the CUNY Graduate Center."
+toc: false
+listing:
+  id: talks
+  contents: ../data/talks.yml
+  template: ../_templates/talk.ejs
+  sort: "date desc"
+  date-format: "MMM D, YYYY"
+---
+
+Want a talk for your department or lab? [Get in touch](../contact.qmd).
+
+::: {#talks}
+:::

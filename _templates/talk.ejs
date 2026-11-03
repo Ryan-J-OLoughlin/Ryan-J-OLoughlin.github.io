@@ -1,0 +1,28 @@
+<%
+// Talks grouped by year, newest first (listing sort: date desc). Entries with
+// public: false stay hidden until Ryan confirms them. Built as one HTML string
+// (see publication.ejs for why).
+const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const kindLabel = { keynote: "Keynote", invited: "Invited", conference: "Conference", poster: "Poster", workshop: "Workshop" };
+let html = "";
+let year = null;
+for (const t of items.filter(t => t.public !== false)) {
+  const y = String(t.date).match(/\d{4}/)[0];
+  if (y !== year) {
+    if (year) html += `</ol>`;
+    year = y;
+    html += `<h2 class="talk-year anchored" id="talks-${y}">${y}</h2><ol class="talk-list">`;
+  }
+  const title = t.page ? `<a href="${esc(t.page.replace(/\.qmd$/, ".html"))}">${esc(t.title)}</a>` : esc(t.title);
+  let links = "";
+  if (t.video) links += `<a href="https://www.youtube.com/watch?v=${esc(t.video)}">Watch</a>`;
+  if (t.slides) links += `<a href="${esc(t.slides)}">Slides (PDF)</a>`;
+  html += `<li class="talk" id="talk-${esc(t.id)}">`
+    + `<span class="talk-kind label">${esc(kindLabel[t.kind] || t.kind)}</span>`
+    + `<div class="talk-body"><p class="talk-title-line">${title}</p>`
+    + `<p class="talk-meta-line">${esc(t.venue)} · ${esc(t.place)} · ${esc(t.date)}</p>`
+    + (links ? `<p class="talk-links">${links}</p>` : "")
+    + `</div></li>`;
+}
+if (year) html += `</ol>`;
+%><%= html %>

@@ -1,0 +1,323 @@
+# Single source for talks. Rendered by _templates/talk.ejs (talks/index.qmd).
+# kind: keynote | invited | conference | poster | workshop
+# public: false keeps an entry off the site until Ryan confirms it.
+# page: a detail page under talks/ (if any); video: YouTube id.
+- id: leap-2026
+  date: 2026-10-05
+  title: "Invited talk (title to confirm)"
+  venue: "LEAP (NSF Science and Technology Center) Year 6 Annual Meeting, Columbia University"
+  place: "New York, NY"
+  kind: invited
+  thread: ai
+  public: false
+  note: "Date between Oct 4–7 per Dan; program is password-protected. Need date, title, OK to list."
+  verified: false
+  source: dan-2026-11-03
+- id: rff-2026
+  date: 2026-09-10
+  title: "When are small-scale field experiments in solar geoengineering worth pursuing?"
+  venue: "RFF and Harvard SRM Social Science Research Workshop — Panel: Field experiment research governance"
+  place: "Resources for the Future, Washington, DC"
+  kind: workshop
+  thread: values
+  verified: false
+  source: rff.org agenda
+- id: gordon-ce-2026
+  date: 2026-06-21
+  title: "When are small-scale field experiments in solar geoengineering worth pursuing?"
+  venue: "Gordon Research Conference on Climate Engineering"
+  place: "Newry, ME"
+  kind: poster
+  thread: values
+  verified: false
+  source: cv-2026
+- id: laguardia-2026
+  date: 2026-05-11
+  title: "Trust without truth: how philosophy can help science navigate uncertainty"
+  venue: "LaGuardia Philosophy and Social Science Conference (keynote)"
+  place: "LaGuardia Community College, Queens, NY"
+  kind: keynote
+  thread: error
+  featured: true
+  verified: false
+  source: cv-2026
+- id: egu-2026
+  date: 2026-05-03
+  title: "Earning credibility in AI-driven climate science: the role of component-level understanding"
+  venue: "EGU General Assembly (invited to submit)"
+  place: "Virtual"
+  kind: conference
+  thread: ai
+  note: "CV says 'European Geophysical Union (EGU) Annual Conference' — EGU is the European Geosciences Union; confirm wording."
+  verified: false
+  source: cv-2026
+- id: cuny-gc-2026
+  date: 2026-04-23
+  title: "From models to field experiments: when is solar geoengineering research worth doing?"
+  venue: "CUNY Graduate Center, Earth and Environmental Sciences Colloquium"
+  place: "New York, NY"
+  kind: invited
+  thread: values
+  verified: false
+  source: cv-2026
+- id: wcrp-sai-2025
+  date: 2025-10-06
+  title: "When are small-scale field experiments in solar geoengineering worth pursuing?"
+  venue: "World Climate Research Programme, Virtual Workshop Series on Stratospheric Aerosol Injection"
+  place: "Virtual"
+  kind: conference
+  thread: values
+  verified: false
+  source: cv-2026
+- id: brown-2025
+  date: 2025-09-25
+  title: "From robustness to antifragility: a philosophical perspective on climate and Earth system models"
+  venue: "Brown University, Earth, Environmental, and Planetary Sciences Colloquium"
+  place: "Providence, RI"
+  kind: invited
+  thread: error
+  page: brown-antifragility-2025.qmd
+  slides: brown-antifragility-2025.pdf
+  featured: true
+  verified: false
+  source: cv-2026
+- id: gordon-ml-2025
+  date: 2025-06-22
+  title: "Moving beyond post hoc explainable AI: lessons learned from dynamical climate modeling"
+  venue: "Gordon Research Conference: Machine Learning for Actionable Climate Science"
+  place: "Smithfield, RI"
+  kind: poster
+  thread: ai
+  verified: false
+  source: cv-2026
+- id: asrc-2025
+  date: 2025-03-12
+  title: "Convergence, divergence, and trust in climate models"
+  venue: "CUNY Advanced Science Research Center, Environmental Science Initiative Seminar"
+  place: "New York, NY"
+  kind: invited
+  thread: agreement
+  page: cuny-esi-convergence-trust-2025.qmd
+  verified: false
+  source: cv-2026
+- id: ncar-ml-2025
+  date: 2025-02-12
+  title: "Moving beyond post hoc XAI: lessons learned from dynamical climate modelling"
+  venue: "NCAR Climate and Global Dynamics Machine Learning Group (with Dan Li)"
+  place: "Boulder, CO (virtual)"
+  kind: workshop
+  thread: ai
+  verified: false
+  source: cv-2026
+- id: giss-sai-2024
+  date: 2024-12-04
+  title: "The ethics of researching stratospheric aerosol injections"
+  venue: "NASA Goddard Institute for Space Studies"
+  place: "New York, NY"
+  kind: workshop
+  thread: values
+  verified: false
+  source: cv-2026
+- id: mcps-2024
+  date: 2024-10-17
+  title: "Can philosophers help make advances in climate modeling?"
+  venue: "Philosophy of Science: Past, Present, and Future — Minnesota Center for Philosophy of Science"
+  place: "Minneapolis, MN"
+  kind: poster
+  verified: false
+  source: cv-2026
+- id: giss-values-2024
+  date: 2024-05-29
+  title: "Value-laden research and climate interventions"
+  venue: "NASA Goddard Institute for Space Studies"
+  place: "New York, NY"
+  kind: workshop
+  thread: values
+  verified: false
+  source: cv-2026
+- id: qc-ssrs-2024
+  date: 2024-04-08
+  title: "Philosophy and modeling Earth's future"
+  venue: "Queens College, Social Science Faculty Research Seminar"
+  place: "Flushing, NY"
+  kind: workshop
+  verified: false
+  source: cv-2026
+- id: giss-ml-2024
+  date: 2024-02-07
+  title: "Climate invariant machine learning: insights from philosophy of induction"
+  venue: "NASA Goddard Institute for Space Studies (with Dan Li)"
+  place: "New York, NY"
+  kind: invited
+  thread: ai
+  page: nasa-giss-ml-2024.qmd
+  video: 2zprUqHkCus
+  note: "Not in the 2026 CV; Dan confirms it is a separate talk from 'Holism in Climate Modeling'."
+  verified: false
+  source: site, dan-2026-11-03
+- id: giss-holism-2023
+  date: 2023-12-20
+  title: "Holism in climate modeling"
+  venue: "NASA Goddard Institute for Space Studies (with Dan Li)"
+  place: "New York, NY"
+  kind: workshop
+  thread: agreement
+  verified: false
+  source: cv-2026
+- id: s4-2023
+  date: 2023-11-08
+  title: "Can subpar models contribute to climate justice? The case of geoengineering research"
+  venue: "Society for Social Studies of Science (4S) Annual Meeting"
+  place: "Honolulu, HI"
+  kind: conference
+  thread: values
+  verified: false
+  source: cv-2026
+- id: wcrp-osc-2023
+  date: 2023-10-23
+  title: "The value of error and failure in climate modeling: a philosophical perspective"
+  venue: "World Climate Research Programme Open Science Conference"
+  place: "Kigali, Rwanda (virtual)"
+  kind: conference
+  thread: error
+  verified: false
+  source: cv-2026
+- id: qc-sees-2023
+  date: 2023-09-27
+  title: "A philosophical take on error and lower-skill models in climate science"
+  venue: "Queens College School of Earth and Environmental Sciences Colloquium"
+  place: "Queens, NY"
+  kind: invited
+  thread: error
+  verified: false
+  source: cv-2026
+- id: giss-2023
+  date: 2023-05-03
+  title: "Why we should want models to disagree: the value of “bad” models in climate science"
+  venue: "NASA Goddard Institute for Space Studies"
+  place: "New York, NY"
+  kind: invited
+  thread: error
+  page: nasa-giss-disagreement-2023.qmd
+  video: 5XzoL6K8qBg
+  featured: true
+  verified: false
+  source: cv-2026
+- id: lips-2023
+  date: 2023-04-01
+  title: "Diagnosing errors in climate model intercomparisons"
+  venue: "Long Island Philosophical Society Annual Conference, St. John's University"
+  place: "Queens, NY"
+  kind: conference
+  thread: error
+  verified: false
+  source: cv-2026
+- id: psa-2022
+  date: 2022-11-10
+  title: "Competition and pluralism in climate modeling"
+  venue: "Philosophy of Science Association Biennial Meeting"
+  place: "Pittsburgh, PA"
+  kind: conference
+  thread: agreement
+  verified: false
+  source: cv-2026
+- id: ncar-2022
+  date: 2022-10-25
+  title: "Why we should want models to disagree: the value of error diagnosis and low-skill models in climate science"
+  venue: "National Center for Atmospheric Research, Climate & Global Dynamics Laboratory"
+  place: "Boulder, CO (virtual)"
+  kind: invited
+  thread: error
+  page: ncar-cgd-error-taxonomy-2022.qmd
+  video: Udfvh2jhGaU
+  featured: true
+  verified: false
+  source: cv-2026
+- id: psa-2021
+  date: 2021-11-11
+  title: "Tractability assumptions, holism, and model robustness"
+  venue: "Philosophy of Science Association Biennial Meeting (PSA 2020)"
+  place: "Baltimore, MD"
+  kind: conference
+  thread: agreement
+  verified: false
+  source: cv-2026
+- id: epsa-2021
+  date: 2021-09-15
+  title: "Historical and contemporary climate model intercomparisons: lessons for pluralism in modeling"
+  venue: "European Philosophy of Science Association, 8th Biennial Meeting"
+  place: "Virtual"
+  kind: conference
+  thread: agreement
+  verified: false
+  source: cv-2026
+- id: cshps-2021
+  date: 2021-05-29
+  title: "Climate model comparisons: history and philosophical implications"
+  venue: "Canadian Society for the History and Philosophy of Science Annual Meeting"
+  place: "Virtual"
+  kind: conference
+  thread: agreement
+  verified: false
+  source: cv-2026
+- id: bu-2021
+  date: 2021-04-22
+  title: "Can we infer an absolute timescale via local data? Lessons from paleoclimatology"
+  venue: "Boston University Philosophy Graduate Conference (with Dan Li)"
+  place: "Virtual"
+  kind: conference
+  verified: false
+  source: cv-2026
+- id: gcc-2019
+  date: 2019-11-07
+  title: "Climate models: robust and explanatory"
+  venue: "13th Graduate Climate Conference"
+  place: "Woods Hole, MA"
+  kind: conference
+  thread: agreement
+  verified: false
+  source: cv-2026
+- id: apa-2019
+  date: 2019-04-17
+  title: "Objectivity, seepage, and climate science"
+  venue: "American Philosophical Association, Pacific Division Meeting"
+  place: "Vancouver, BC"
+  kind: conference
+  thread: values
+  verified: false
+  source: cv-2026
+- id: iu-hps-2019
+  date: 2019-03-29
+  title: "Objectivity, seepage, and climate science"
+  venue: "3rd IU Graduate Student Conference on the History and Philosophy of Science and Medicine"
+  place: "Bloomington, IN"
+  kind: conference
+  thread: values
+  verified: false
+  source: cv-2026
+- id: agu-2018
+  date: 2018-12-10
+  title: "A challenge to seepage in the global warming ‘hiatus’"
+  venue: "American Geophysical Union Fall Meeting"
+  place: "Washington, DC"
+  kind: poster
+  thread: values
+  verified: false
+  source: cv-2026
+- id: psa-2018
+  date: 2018-11-01
+  title: "A challenge to seepage in the global warming ‘hiatus’"
+  venue: "Philosophy of Science Association Biennial Meeting"
+  place: "Seattle, WA"
+  kind: poster
+  thread: values
+  verified: false
+  source: cv-2026
+- id: midsouth-2016
+  date: 2016-02-19
+  title: "The problem with regarding models as fictions"
+  venue: "Mid-South Philosophy Conference, Rhodes College"
+  place: "Memphis, TN"
+  kind: conference
+  verified: false
+  source: cv-2026

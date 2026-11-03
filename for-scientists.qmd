@@ -27,7 +27,7 @@ description: "Talks, workshops, and collaborations where Ryan O’Loughlin helps
 :::
 
 ::: {.g-col-12 .g-col-md-4 .section-card .text-reset}
-[![](talks/brown-antifragility-2025.jpg){.talk-thumb}]()
+[![Brown University colloquium talk](talks/brown-antifragility-2025.jpg){.talk-thumb}](talks/brown-antifragility-2025.qmd)
 
 #### [Error Diagnosis & Low-Skill Models](talks/brown-antifragility-2025.qmd){.talk-title}
 ::: {.talk-meta}
@@ -38,7 +38,7 @@ description: "Talks, workshops, and collaborations where Ryan O’Loughlin helps
 :::
 
 <div class="mt-3 text-muted small text-end">
-Full list in my [CV →]((files/Ryan_OLoughlin_CV.pdf))
+Full list in my [CV →](files/Ryan_OLoughlin_CV.pdf)
 </div>
 
 ## Archived Talks

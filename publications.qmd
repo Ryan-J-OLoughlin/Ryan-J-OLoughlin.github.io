@@ -1,0 +1,15 @@
+---
+title: "Publications"
+description: "Peer-reviewed articles, chapters, and public writing on climate models, error, and trust in science."
+toc: false
+listing:
+  id: publications
+  contents: data/publications.yml
+  template: _templates/publication.ejs
+  sort: "year desc"
+---
+
+::: {#publications}
+:::
+
+Full details in the [CV](files/Ryan_OLoughlin_CV.pdf).

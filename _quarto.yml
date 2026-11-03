@@ -21,36 +21,21 @@ website:
   navbar:
     collapse-below: lg
     left:
-      - text: Home
-        href: index.qmd
-      - text: About
-        href: about.qmd
       - text: Research
         href: research.qmd
-      - text: "Talks & Collaboration"
-        menu:
-          - text: For Philosophers
-            href: for-philosophers.qmd
-          - text: For Scientists
-            href: for-scientists.qmd
+      - text: Publications
+        href: publications.qmd
+      - text: Talks
+        href: talks/index.qmd
       - text: Teaching
-        #href: teaching.qmd
-        menu:
-          - text: Teaching Trust without Truth
-            href: teaching-instructors.qmd
-          - text: Resources for Students
-            href: teaching-students.qmd
-      - text: "Media" 
-        href: media.qmd
+        href: teaching.qmd
+      - text: About
+        href: about.qmd
       - text: Contact
         href: contact.qmd
-    tools:
-      - icon: envelope
-        href: "mailto:ryan.oloughlin@qc.cuny.edu"
-      - icon: linkedin
-        href: https://www.linkedin.com/in/ryan-o-loughlin-885256300/
-      - icon: file-earmark-text   # optional: direct CV download
-        href: /files/Ryan_OLoughlin_CV.pdf
+    right:
+      - text: CV
+        href: files/Ryan_OLoughlin_CV.pdf
   page-footer:
     center: 
       - text: "© Ryan J. O'Loughlin"

@@ -1,0 +1,38 @@
+<%
+// Publications grouped by type, newest first within each group (listing sort: year desc).
+// Built as one HTML string: Quarto passes template output through Markdown, so
+// indentation and blank lines would otherwise break the block structure.
+const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const groups = [
+  [["article"], "Journal articles"],
+  [["chapter"], "Book chapters"],
+  [["review", "essay"], "Reviews and essays"],
+  [["public"], "Public writing"],
+];
+const statusLabel = { forthcoming: "Forthcoming", "under-contract": "Under contract" };
+const threadLabel = { agreement: "Agreement", error: "Error", values: "Values &amp; interventions", ai: "AI" };
+const me = "Ryan O'Loughlin";
+let html = "";
+for (const [types, heading] of groups) {
+  const rows = items.filter(i => types.includes(i.type));
+  if (!rows.length) continue;
+  html += `<h2 class="pub-group anchored" id="${types[0]}s">${heading}</h2><ol class="pub-list">`;
+  for (const p of rows) {
+    const link = p.doi ? "https://doi.org/" + p.doi : (p.url || "");
+    const title = link ? `<a href="${esc(link)}">${esc(p.title)}</a>` : esc(p.title);
+    const authors = (p.authors || []).map(a => a === me ? `<strong>${esc(a)}</strong>` : esc(a)).join(", ");
+    let cite = `${authors}. <em>${esc(p.venue)}</em>`;
+    if (p.volume) cite += ` ${esc(p.volume)}`;
+    if (p.pages) cite += `, ${esc(p.pages)}`;
+    if (p.publisher) cite += `. ${esc(p.publisher)}`;
+    let links = p.thread ? `<span class="chip">${threadLabel[p.thread]}</span>` : "";
+    if (p.doi) links += `<a href="https://doi.org/${esc(p.doi)}">DOI</a>`;
+    if (p.oa && (p.oa_url || link)) links += `<a href="${esc(p.oa_url || link)}">Free to read</a>`;
+    html += `<li class="pub" id="pub-${esc(p.id)}" data-thread="${esc(p.thread)}">`
+      + `<span class="pub-year label">${esc(statusLabel[p.status] || p.year)}</span>`
+      + `<div class="pub-body"><p class="pub-title">${title}</p><p class="pub-meta">${cite}.</p>`
+      + `<p class="pub-links">${links}</p></div></li>`;
+  }
+  html += `</ol>`;
+}
+%><%= html %>

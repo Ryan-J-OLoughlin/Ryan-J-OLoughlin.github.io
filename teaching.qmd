@@ -24,4 +24,3 @@ Current and prospective students can find logistics, support services, and profe
 ## Connect Further
 Interested in a workshop, guest lecture, or co-developed course module? [Get in touch](contact.qmd) and we can plan something tailored to your students or department.
 
-*Updated: {{< meta date-modified >}}*
