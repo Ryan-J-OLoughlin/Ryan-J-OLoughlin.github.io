@@ -8,6 +8,8 @@ Quarto behaviour verified in Phase 1 spikes (Quarto 1.7.33, 2026-11-03), and the
 |---|---|---|
 | Listings from YAML data with custom EJS | Works, including `sort`, `include:` filters (e.g. `thread: error`) and mixing `.qmd` files with `.yml` in one listing | `data/*.yml` + `_templates/*.ejs` is the content model |
 | Listing container id | Quarto wraps a listing in `#listing-<id>` | Style and test against `#listing-…` |
+| Custom listing template syntax | Quarto uses **lodash** templates: `<%= x %>` outputs raw HTML, `<%- x %>` HTML-escapes (the reverse of EJS). Output is passed through Markdown, so indentation and blank lines break block structure | Templates build one HTML string with an `esc()` helper and emit it once with `<%= html %>` |
+| Listing `date` field | Formatted with the listing's `date-format` before the template sees it | Set `date-format` per listing |
 | Relative `aliases:` (e.g. `../projects/x.html`) | Writes JS + meta-refresh stubs; stubs are **not** in `sitemap.xml` | Use aliases for every retired URL in `tools/redirects.yml` |
 | `respect-user-color-scheme: true` | Supported; follows `prefers-color-scheme` on first visit | Enabled in `_quarto.yml` |
 | SCSS `@import "partial"` in theme files | Works (resolved relative to the theme file) | `theme/_legacy.scss` and future partials |
