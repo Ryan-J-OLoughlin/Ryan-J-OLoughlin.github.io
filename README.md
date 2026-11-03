@@ -78,7 +78,7 @@ Update the JSON to add, reorder, or edit timeline entries. Be sure image paths a
 
 - Syllabi PDFs live in `files/syllabi/` and are linked from teaching pages
 - CV PDF is at `files/Ryan_OLoughlin_CV.pdf`
-- Optional LaTeX sources for a CV (`files/cv-template.tex`, `files/cv-header.tex`, `files/cv-content.md`) are included but not part of the Quarto build; compile separately if you use them
+- Optional LaTeX sources for a CV (`_cv/cv-template.tex`, `_cv/cv-header.tex`, `_cv/cv-content.md`) are included but not part of the Quarto build; compile separately if you use them
 
 ## Notes
 

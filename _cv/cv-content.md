@@ -14,7 +14,6 @@ Queens College CUNY
 Flushing NY 11367  
 
 Email: [roloughlin@qc.cuny.edu](mailto:roloughlin@qc.cuny.edu)  
-Phone: (920) 905-4811  
 [https://www.ryanoloughlin.org/](https://www.ryanoloughlin.org/)
 
 ## Employment

@@ -5,7 +5,6 @@ project:
     watch-inputs: true
   resources: 
     - assets/**
-    - partials/**
     - CNAME
 
 website:
@@ -107,7 +106,7 @@ format:
       image-alt: "Ryan O'Loughlin — Philosophy of Science (climate models, uncertainty)"
     twitter-card:
       image: assets/og-card.jpeg
-      card: summary_large_image
+      card-style: summary_large_image
     metadata:
       author: "Ryan J. O'Loughlin"
       keywords:

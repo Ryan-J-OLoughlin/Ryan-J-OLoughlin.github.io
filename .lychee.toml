@@ -13,6 +13,3 @@ exclude = [
   "^https://www.linkedin.com/",
   "^https://scholar.google.com/"
 ]
-
-# Only check links found in built site (paths in HTML are resolved relative to this)
-base = "_site"

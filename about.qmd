@@ -36,6 +36,6 @@ Co-organized and convened “Making Climate Models & Data Actionable” workshop
 
 [Download CV as PDF](files/Ryan_OLoughlin_CV.pdf){.btn .btn-primary}
 
-<!--{{< include files/cv-content.md >}} -->
+<!--{{< include _cv/cv-content.md >}} -->
 
 *Updated: {{< meta date-modified >}}*
