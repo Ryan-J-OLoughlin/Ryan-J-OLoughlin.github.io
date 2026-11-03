@@ -9,6 +9,11 @@ Not rendered (underscore folder). Details and sources are in `intake-2026-11.md`
 - [ ] Approve the Sloan "Productive Error" blurb; mention research assistant recruitment or not
 - [ ] Anything new since mid-2026: papers, press, grants
 - [ ] PHIL 107 Logic and Scientific Reasoning: syllabus PDF and a one-line blurb for Teaching
+- [ ] Visuals for the "show, don't tell" redesign:
+  - figures from his papers he'd like featured (GMD 2025 is CC BY);
+  - photos of him speaking (NCAR, GISS, Brown, LaGuardia keynote);
+  - slide decks for thumbnails;
+  - a recent headshot.
 - [ ] Final sign-off on every `verified: false` item (Phase 6 checklist)
 
 ## On hold
