@@ -1,0 +1,28 @@
+# Every URL in the live sitemap before the 2026 redesign (captured 2026-11-03),
+# mapped to where it must resolve afterwards. tools/site_checks.py verifies each row.
+#   keep:  the page still exists at the same path
+#   alias: a Quarto `aliases:` stub on the target page redirects here
+#   gone:  intentionally removed (returns 404)
+- {old: index.html, keep: true}
+- {old: about.html, keep: true}
+- {old: research.html, keep: true}
+- {old: contact.html, keep: true}
+- {old: teaching.html, keep: true}
+- {old: teaching-students.html, keep: true}
+- {old: talks/brown-antifragility-2025.html, keep: true}
+- {old: talks/cuny-esi-convergence-trust-2025.html, keep: true}
+- {old: talks/nasa-giss-disagreement-2023.html, keep: true}
+- {old: talks/nasa-giss-ml-2024.html, keep: true}
+- {old: talks/ncar-cgd-error-taxonomy-2022.html, keep: true}
+- {old: media.html, alias: press.html}
+- {old: for-scientists.html, alias: contact.html}
+- {old: for-philosophers.html, alias: contact.html}
+- {old: collaboration.html, alias: contact.html}
+- {old: teaching-instructors.html, alias: teaching.html}
+- {old: projects/error-taxonomy.html, alias: research/error.html}
+- {old: projects/lower-skill-models.html, alias: research/error.html}
+- {old: projects/weighting-and-uncertainty.html, alias: research/agreement.html}
+- {old: projects/decision-support.html, alias: research/agreement.html}
+- {old: assets/game/index.html, alias: trust-without-truth.html}
+- {old: files/Ryan_OLoughlin_CV.pdf, keep: true}
+- {old: files/cv-content.html, gone: true}  # privacy: exposed personal phone
