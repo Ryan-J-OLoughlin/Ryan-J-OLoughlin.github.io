@@ -2,7 +2,6 @@
 title: "For Scientists"
 date-modified: 2025-09-05
 description: "Talks, workshops, and collaborations where Ryan O’Loughlin helps climate scientists communicate uncertainty and build trustworthy models."
-canonical: https://Ryan-J-OLoughlin.github.io/for-scientists.html
 ---
 
 ## Featured Talks
@@ -68,7 +67,7 @@ If you’re a climate scientist, data scientist, or modeler interested in uncert
 
 I have worked with scientists at **NASA GISS**, **NCAR**, **Cornell University**, and **Indiana University**, helping refine how models are evaluated and how uncertainty is communicated. 
 
-# Let’s collaborate
+## Let’s collaborate
 
 [More ways to reach me →](contact.qmd){.btn .btn-outline-primary}
 

@@ -1,0 +1,17 @@
+# Single source for contact details and profile links.
+# Pages use {{< var email >}} etc.; filters/seo.lua reads this file for JSON-LD.
+# Never add a personal phone number here.
+name: "Ryan J. O'Loughlin"
+job-title: "Assistant Professor of Philosophy"
+email: ryan.oloughlin@qc.cuny.edu
+department: "Department of Philosophy, Queens College, CUNY"
+address: "65-30 Kissena Blvd, Flushing, NY 11367"
+links:
+  scholar: https://scholar.google.com/citations?user=FVgAseQAAAAJ
+  orcid: https://orcid.org/0000-0002-9106-1460
+  philpeople: https://philpeople.org/profiles/ryan-o-loughlin   # TODO: confirm slug (site used two variants)
+  philsci: https://philsci-archive.pitt.edu/view/creators/O=27Loughlin=3ARyan=3A=3A.html
+  linkedin: https://www.linkedin.com/in/ryan-o-loughlin-885256300/
+  github: https://github.com/Ryan-J-OLoughlin/
+  gc-profile: https://www.gc.cuny.edu/people/ryan-j-oloughlin
+  productive-error: https://productive-error.org/

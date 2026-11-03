@@ -1,0 +1,4 @@
+# Preview profile: `quarto render --profile preview` (or QUARTO_PROFILE=preview).
+# Drafts are visible, and filters/seo.lua marks every page noindex, nofollow.
+website:
+  draft-mode: visible

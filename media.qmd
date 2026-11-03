@@ -2,7 +2,6 @@
 title: "Media / Press"
 date-modified: last-modified
 description: "Media resources for Ryan O’Loughlin, including bios, headshots, expertise topics, and recent highlights on climate science and philosophy."
-canonical: https://Ryan-J-OLoughlin.github.io/media.html
 ---
 
 ## Bios {#bios}

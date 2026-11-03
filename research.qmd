@@ -2,7 +2,8 @@
 title: "Research"
 date-modified: last-modified
 description: "Research by Ryan O’Loughlin on why imperfect climate models remain trustworthy—covering robustness, disagreement, and decision support."
-canonical: https://Ryan-J-OLoughlin.github.io/research.html
+include-after-body:
+  - partials/game-modal.html
 ---
 
 ## The Challenge
@@ -40,7 +41,7 @@ Step into the shoes of a city planner, policymaker, student, or journalist. Expl
 My work calls for a change in mindset: trustworthiness does not require truth. Since all models are false in some respects, credibility must come from elsewhere — from patterns of agreement, from productive disagreement, and from the ability to learn through error.
 
 ::: {.callout-note title="Quote"}
-All models are wrong. Some are useful --- Stastician George Box (1976)
+All models are wrong. Some are useful --- Statistician George Box (1976)
 :::
 
 This shifts us away from a binary view — “perfect or useless” — and toward a more practical stance: models can be wrong and yet useful, flawed but still trustworthy.
@@ -96,7 +97,7 @@ How scientists learn from failure, from climate modeling, AI, experiments, and b
 ::: {.g-col-12 .g-col-md-4}
 ::: {.section-card}
 #### Geoengineering and Pursuitworthiness
-Determing when small-scale intervention experiments are worth pursuing.
+Determining when small-scale intervention experiments are worth pursuing.
 :::
 :::
 :::

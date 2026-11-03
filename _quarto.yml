@@ -10,9 +10,14 @@ project:
 website:
   title: "Ryan O'Loughlin"
   description: "philosophy of science • climate models • trust without truth • uncertainty"
-  site-url: https://Ryan-J-OLoughlin.github.io/
+  site-url: https://ryanoloughlin.org/
   favicon: assets/headshot.jpg
-  twitter-card: true
+  open-graph:
+    image: assets/og-card.jpeg
+    image-alt: "Ryan O'Loughlin — Philosophy of Science (climate models, uncertainty)"
+  twitter-card:
+    image: assets/og-card.jpeg
+    card-style: summary_large_image
   navbar:
     collapse-below: lg
     left:
@@ -41,21 +46,20 @@ website:
         href: contact.qmd
     tools:
       - icon: envelope
-        href: "mailto:Ryan.Oloughlin@qc.cuny.edu"
+        href: "mailto:ryan.oloughlin@qc.cuny.edu"
       - icon: linkedin
-        href: https://www.linkedin.com/in/ryan-o-loughlin-885256300
+        href: https://www.linkedin.com/in/ryan-o-loughlin-885256300/
       - icon: file-earmark-text   # optional: direct CV download
         href: /files/Ryan_OLoughlin_CV.pdf
   page-footer:
     center: 
-      - text: "© 2025 Ryan J O'Loughlin"
-      #- text: "Updated: {{< meta date-modified >}}"
+      - text: "© Ryan J. O'Loughlin"
       - text: "CC BY 4.0"
         href: https://creativecommons.org/licenses/by/4.0/
     left:
       - icon: envelope
         #text: Email
-        href: "mailto:Ryan.Oloughlin@qc.cuny.edu"
+        href: "mailto:ryan.oloughlin@qc.cuny.edu"
       - icon: google
         #text: Scholar
         href: https://scholar.google.com/citations?user=FVgAseQAAAAJ&hl=en
@@ -74,7 +78,7 @@ website:
     right:
       - text: "Back to top ↑"
         href: "#"
-      - text: "Built by DL with 🩶"
+      - text: "Built by danlio.studio"
         href: https://danlio.studio
   search: true
   repo-url: https://github.com/Ryan-J-OLoughlin/Ryan-J-OLoughlin.github.io
@@ -84,29 +88,18 @@ format:
   html:
     lang: en
     page-layout: article
-    theme: 
-      light: cosmo
-      dark: darkly
-    css: styles.css
+    theme:
+      light: [default, theme/base.scss, theme/light.scss]
+      dark: [default, theme/base.scss, theme/dark.scss]
+    respect-user-color-scheme: true
     include-in-header:
-      - partials/perf-head.html
+      - _includes/head.html
     filters:
       - filters/seo.lua
-    include-after-body:
-      - partials/game-modal.html
-      - partials/perf-after.html
-      - partials/scroll-reveal.html
-      - partials/scroll-flame.html
     toc: true
     toc-location: right
     page-navigation: true
     smooth-scroll: true
-    open-graph:
-      image: assets/og-card.jpeg
-      image-alt: "Ryan O'Loughlin — Philosophy of Science (climate models, uncertainty)"
-    twitter-card:
-      image: assets/og-card.jpeg
-      card-style: summary_large_image
     metadata:
       author: "Ryan J. O'Loughlin"
       keywords:
@@ -115,4 +108,3 @@ format:
         - uncertainty
         - trust without truth
         - decision-making under uncertainty
-      robots: index, follow
