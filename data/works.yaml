@@ -5,6 +5,7 @@
 # topics:  robustness | errors | antifragility   (one or two; two = a cube on two layers)
 # review:  true means the topic was a judgment call. Ryan should confirm, then delete the line.
 # note:    why that topic was chosen, for Ryan. Delete after review.
+# featured: true marks a selected work: its cube is drawn in full color. Keep it to a handful.
 # links:   fill in pdf / slides / doi / url as files are added. Empty is fine.
 
 # ───────────────────────── papers ─────────────────────────
@@ -59,6 +60,7 @@
   note: Mainly errors; intercomparisons are also the robustness setting, so it sits on both layers.
 
 - id: lower-performance-2024
+  featured: true
   title: Why we need lower-performance climate models
   year: 2024
   type: paper
@@ -68,6 +70,7 @@
   links: { doi: https://doi.org/10.1007/s10584-023-03661-7 }
 
 - id: post-hoc-xai-2025
+  featured: true
   title: "Moving beyond post hoc explainable artificial intelligence: lessons learned from dynamical climate modeling"
   year: 2025
   type: paper
@@ -88,6 +91,7 @@
   note: Values and objectivity, the same thread as the seepage papers. A book review; Ryan may prefer to leave it off the grid.
 
 - id: geoengineering-field-experiments-2026
+  featured: true
   title: When are small-scale field experiments in solar geoengineering worth pursuing?
   year: 2026
   type: paper
@@ -373,6 +377,7 @@
 # ───────────────────────── grants ─────────────────────────
 
 - id: sloan-error-2026
+  featured: true
   title: The productive role of error in AI-driven modeling
   year: 2026
   type: grant

@@ -20,7 +20,9 @@ const HIDDEN_EDGES = 0.16; // edges behind the glass
 const box = new BoxGeometry(1, 1, 1);
 const edges = new EdgesGeometry(box);
 
-export function createGlassCube(color, edgeColor) {
+// strength > 1 makes a more solid cube (used for selected works).
+export function createGlassCube(color, edgeColor, strength = 1) {
+  const tint = Math.min(0.9, SURFACE * strength);
   // 1. depth only (pushed back a hair so the cube's own front edges still pass in front of it)
   const depthOnly = new MeshBasicMaterial({
     colorWrite: false, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1,
@@ -33,7 +35,7 @@ export function createGlassCube(color, edgeColor) {
   });
   // 4. tinted surface
   const surface = new MeshStandardMaterial({
-    color, transparent: true, opacity: SURFACE, roughness: 0.45, metalness: 0, depthWrite: false,
+    color, transparent: true, opacity: tint, roughness: 0.45, metalness: 0, depthWrite: false,
   });
 
   const depthMesh = new Mesh(box, depthOnly);
@@ -54,7 +56,7 @@ export function createGlassCube(color, edgeColor) {
     // Set color and visibility together, so a fading cube fades evenly.
     set(colorValue, visibility) {
       surface.color.copy(colorValue);
-      surface.opacity = SURFACE * visibility;
+      surface.opacity = tint * visibility;
       front.opacity = FRONT_EDGES * visibility;
       hidden.opacity = HIDDEN_EDGES * visibility;
       // A half-faded cube shouldn't hide what's behind it.

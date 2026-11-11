@@ -33,6 +33,7 @@
       <div class="scene-text scene-text-0">
         <p class="role">{{role}}</p>
         <h1 class="tagline">{{tagline}}</h1>
+        <p class="tagline-sub">{{tagline_sub}}</p>
       </div>
       <div class="scene-text scene-text-1">
         <h2 class="scene-h">{{layers_intro}}</h2>
@@ -40,18 +41,18 @@
       <div class="scene-text scene-text-2">
         <h2 class="scene-h">{{grid_intro}}</h2>
         <p class="scene-hint">{{grid_hint}}</p>
-        <button type="button" class="turn-button" aria-label="Turn the model a quarter turn">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/>
-          </svg>
-          <span>Turn 90°</span>
-        </button>
       </div>
       <div class="scene-text scene-text-3">
         <p class="scene-h scene-thanks">{{thank_you}}</p>
         <p class="scene-hint">{{people_hint}}</p>
       </div>
       <div class="grid-axes" aria-hidden="true"></div>
+      <button type="button" class="turn-button" aria-label="Turn the model a quarter turn">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/>
+          </svg>
+          <span>Turn 90°</span>
+        </button>
       <div class="esm-labels"></div>
       <div class="work-card" role="status" aria-live="polite" hidden></div>
       <ul class="scene-labels">
@@ -61,20 +62,18 @@
     </section>
 
     <nav class="stage-control" aria-label="Model resolution">
-      <button type="button" data-goto="0" aria-pressed="true"><span class="dot" aria-hidden="true"></span><span><span class="code">0D</span><span class="name">Energy balance</span></span></button>
-      <button type="button" data-goto="1" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span><span class="code">1D</span><span class="name">Single column</span></span></button>
-      <button type="button" data-goto="2" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span><span class="code">3D</span><span class="name">Full grid</span></span></button>
-      <button type="button" data-goto="3" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span><span class="code">ESM</span><span class="name">Coupled</span></span></button>
+      {{stage_buttons}}
     </nav>
     <!-- Stage 0D: the question -->
     <section class="stage stage-0" id="question" aria-label="The question">
       <p class="role">{{role}}</p>
       <h1 class="tagline">{{tagline}}</h1>
+      <p class="tagline-sub">{{tagline_sub}}</p>
     </section>
 
     <!-- Stage 1D: the three layers -->
     <section class="stage stage-1" aria-labelledby="layers-h">
-      <h2 id="layers-h" class="label">Three layers</h2>
+      <h2 id="layers-h" class="label">Three themes</h2>
       <ol class="layers">
 {{topics}}
       </ol>

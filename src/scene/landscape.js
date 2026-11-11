@@ -79,8 +79,9 @@ function placePeople(people) {
     const weighted = p.fields.flatMap((f, k) => (FIELD_CENTERS[f] ? (k === 0 ? [FIELD_CENTERS[f], FIELD_CENTERS[f]] : [FIELD_CENTERS[f]]) : []));
     const ax = weighted.reduce((s, c) => s + c[0], 0) / weighted.length;
     const az = weighted.reduce((s, c) => s + c[1], 0) / weighted.length;
-    const wantX = MODEL_SPOT[0] + (ax - MODEL_SPOT[0]) * 0.75 + Math.sin(i * 2.4) * 0.5;
-    const wantZ = MODEL_SPOT[1] + (az - MODEL_SPOT[1]) * 0.75 + Math.cos(i * 1.7) * 0.5;
+    // a small, fixed nudge so people with the same fields don't all aim at one cell
+    const wantX = MODEL_SPOT[0] + (ax - MODEL_SPOT[0]) * 0.75 + Math.sin(i * 2.4) * 0.2;
+    const wantZ = MODEL_SPOT[1] + (az - MODEL_SPOT[1]) * 0.75 + Math.cos(i * 1.7) * 0.2;
     // nearest free cell to where they'd like to be, searching outward ring by ring
     let best = null;
     for (let ring = 0; ring < 10 && !best; ring++) {

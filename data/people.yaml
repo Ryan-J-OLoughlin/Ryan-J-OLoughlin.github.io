@@ -5,10 +5,12 @@
 #           One field = sits inside it. Two = on the boundary. Three = where all three meet.
 #           List the field they lean toward most first.
 # url:      their own page. Empty means none found yet.
+# title:    one line shown when someone points at their name. Check these with Ryan; titles change.
 # review:   true means still unconfirmed. Confirm, then delete the line.
 
 - id: elisabeth-lloyd
   name: Elisabeth A. Lloyd
+  title: Professor of History and Philosophy of Science, Indiana University
   relation: mentor
   fields: [philosophy, climate-modeling]
   url: https://www.amacad.org/person/elisabeth-lloyd
@@ -16,18 +18,21 @@
 
 - id: dan-li
   name: Dan Li
+  title: Assistant Professor of Philosophy, Baruch College, CUNY
   relation: co-author
   fields: [philosophy, climate-modeling, ai]
-  url: https://danli.commons.gc.cuny.edu/
+  url: https://dan-li-o.github.io/
 
 - id: daniele-visioni
   name: Daniele Visioni
+  title: Assistant Professor of Earth and Atmospheric Sciences, Cornell University
   relation: co-author
   fields: [climate-modeling, policy]
   url: https://cals.cornell.edu/people/daniele-visioni
 
 - id: stuart-gluck
   name: Stuart Gluck
+  title: U.S. Department of Energy, Office of Science
   relation: co-author
   fields: [policy, philosophy]
   url: https://philpeople.org/profiles/stuart-gluck
@@ -35,12 +40,14 @@
 
 - id: travis-obrien
   name: Travis A. O'Brien
+  title: Associate Professor of Earth and Atmospheric Sciences, Indiana University
   relation: co-author
   fields: [ai, climate-modeling]
   url: https://earth.indiana.edu/directory/faculty/obrien-travis.html
 
 - id: richard-neale
   name: Richard Neale
+  title: Scientist, Climate and Global Dynamics Laboratory, NCAR
   relation: co-author
   fields: [climate-modeling]
   url: https://impacts.ucar.edu/en/persons/richard-neale/
@@ -48,6 +55,7 @@
 
 - id: ben-kravitz
   name: Ben Kravitz
+  title: Associate Professor of Earth and Atmospheric Sciences, Indiana University
   relation: mentor
   fields: [climate-modeling]
   url: https://climatemodeling.earth.indiana.edu/
@@ -55,24 +63,27 @@
 
 - id: gavin-schmidt
   name: Gavin A. Schmidt
+  title: Climate scientist, NASA Goddard Institute for Space Studies
   relation: colleague
-  fields: [climate-modeling, philosophy]
+  fields: [climate-modeling, philosophy]   # in climate, leaning toward philosophy
   url: https://science.gsfc.nasa.gov/earth/giss/bio/gavin.a.schmidt
   note: Director, NASA Goddard Institute for Space Studies.
 
 - id: matt-mayernik
   name: Matt Mayernik
+  title: Research scientist, NCAR
   relation: collaborator
-  fields: [climate-modeling]
+  fields: [climate-modeling, philosophy]   # in climate, nearer philosophy than Richard Neale
   url: https://impacts.ucar.edu/en/persons/matthew-mayernik/
   note: Co-PI on the Sloan project.
 
 - id: yoichi-ishida
   name: Yoichi Ishida
+  title: Associate Professor of Philosophy, Ohio University
   relation: mentor
   fields: [philosophy]
-  url: ""
-  note: Ohio University (MA). Kept for now.
+  url: https://yoichiishida.com/
+  note: Ohio University (MA).
 
 # Still to add: any other dissertation committee members besides Lloyd (chair)
 # and Kravitz. These aren't listed publicly, so they need to come from Ryan.

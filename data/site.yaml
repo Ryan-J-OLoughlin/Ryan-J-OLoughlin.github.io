@@ -4,15 +4,13 @@
 name: Ryan O'Loughlin
 role: Philosophy of science · Queens College, CUNY
 
-tagline:   # PLACEHOLDER — Stage 0D
-  - Idealized, imperfect models go in.
-  - Trustworthy knowledge comes out.
-  - How?
+tagline: Trust without truth.   # Stage 0D headline
+tagline_sub: How do idealized, imperfect models give us knowledge we can rely on?
 
-layers_intro: Three ways science earns trust without true models.   # PLACEHOLDER — Stage 1D heading
+layers_intro: Three ways imperfect models earn trust.   # Stage 1D heading
 
-grid_intro: The work, at full resolution.   # PLACEHOLDER — Stage 3D heading
-grid_hint: Each cube is a piece of work. Point at one to read it; click to keep it open.
+grid_intro: The work, at full resolution.   # Stage 3D heading
+grid_hint: Each cube is a piece of work; solid ones are selected. Point at one to read it, click to keep it open.
 
 thank_you: Every model is coupled to others. Thank you to everyone this one runs on.   # PLACEHOLDER — Stage ESM
 
@@ -34,12 +32,19 @@ categories:
   - { id: talk,     label: Talks }
   - { id: teaching, label: Teaching }
   - { id: outreach, label: Outreach }
-  - { id: grant,    label: Grant }
+  - { id: grant,    label: Grants }
 
 years: { from: 2020, to: 2026 }   # PLACEHOLDER — grid year range
 
-people_hint: Each small cube is someone this work depends on. Their names link to their pages.
+people_hint: Each cube is someone this work depends on. Names link to their pages.
 this_model: this model
+
+# The stage control: a short code (a nod to the climate-model hierarchy) and a plain name.
+stages:
+  - { code: 0D,  name: The question }
+  - { code: 1D,  name: Three themes }
+  - { code: 3D,  name: The work }
+  - { code: ESM, name: The people }
 
 # Stage ESM: the shared landscape.
 fields:

@@ -82,6 +82,8 @@ export function start() {
   const yearEls = grid.years.map((y) => axes.appendChild(Object.assign(document.createElement('span'), { className: 'axis axis-year', textContent: y })));
   const catEls = data.categories.map((c) => axes.appendChild(Object.assign(document.createElement('span'), { className: 'axis axis-cat', textContent: c.label })));
   const card = section.querySelector('.work-card');
+  const turnButton = section.querySelector('.turn-button');
+  const thanksText = section.querySelector('.scene-text-3');
 
   // ESM labels: field names, and a name for each person (a link to their page)
   const esmLayer = section.querySelector('.esm-labels');
@@ -90,12 +92,15 @@ export function start() {
     el.dataset.field = f.id;
     return { el, id: f.id };
   });
+  const titleEl = esmLayer.appendChild(Object.assign(document.createElement('span'), { className: 'esm-title' }));
+  titleEl.setAttribute('aria-hidden', 'true');
   let hoveredPerson = null;
   const personEls = landscape.entries.map((e) => {
     const p = e.person;
     const el = e.me || !p.url
       ? Object.assign(document.createElement('span'), { textContent: p.name })
       : Object.assign(document.createElement('a'), { textContent: p.name, href: p.url, target: '_blank', rel: 'noopener' });
+    if (p.title) el.setAttribute('aria-description', p.title);
     el.className = e.me ? 'esm-person is-me' : 'esm-person';
     if (!e.me) {
       el.addEventListener('mouseenter', () => { hoveredPerson = e; wake(); });
@@ -180,6 +185,23 @@ export function start() {
       pin(el, toScreen(camera, holder, c.x, y, c.z), axisOpacity, anchor);
     });
 
+    // the turn button: centred under the bottom grid, below its axis labels
+    {
+      const b = grid.layers.robustness;
+      const bs = b.group.scale.x;
+      const by = b.group.position.y;
+      const corners = [[-1, -1], [-1, 1], [1, -1], [1, 1]]
+        .map(([u, v]) => grid.turned(u * (grid.width / 2 + CELL) * bs, v * (grid.depth / 2 + CELL) * bs))
+        .map((c) => toScreen(camera, holder, c.x, by, c.z));
+      const centre = toScreen(camera, holder, 0, by, 0);
+      const H = holder.clientHeight;
+      const bw = turnButton.offsetWidth || 110;
+      const bh = turnButton.offsetHeight || 40;
+      const lowest = Math.max(...corners.map((c) => c.y)) + 18;
+      const floor = H - bh - (holder.clientWidth <= 820 ? 72 : 20); // clear of the phone stage control
+      pin(turnButton, { x: centre.x - bw / 2, y: Math.min(lowest, floor) }, axisOpacity, 'topleft');
+    }
+
     // the card for the work being pointed at
     if (shown && reveal > 0.9 && p3 < 0.05) {
       // beside the cube, flipped to the other side if it would run off screen
@@ -189,46 +211,108 @@ export function start() {
       const ch = card.offsetHeight;
       const W = holder.clientWidth;
       const H = holder.clientHeight;
+      const right = W - (W > 820 ? 210 : 8); // clear of the stage control
       let x = pos.x + 28;
-      if (x + cw > W - 8) x = pos.x - 28 - cw;
-      x = Math.max(8, Math.min(W - cw - 8, x));
+      if (x + cw > right) x = pos.x - 28 - cw;
+      x = Math.max(8, Math.min(right - cw, x));
       const y2 = Math.max(8, Math.min(H - ch - 8, pos.y - ch / 2));
       pin(card, { x, y: y2 }, 1, 'topleft');
     } else {
       pin(card, { x: 0, y: 0 }, 0);
     }
 
-    // ESM: field names on their hills, people's names above their cubes
+    // ESM: field names on their hills, people's names above their cubes.
+    // Nothing may overlap: the text column, the field names and each name keep clear of each other.
     const esmText = clamp((layout.people ?? 0) * 1.5);
     const fieldText = clamp(((layout.ground ?? 0) - 0.5) / 0.5);
+    const W = holder.clientWidth;
+    const wide = W > 820;
+    const hb = holder.getBoundingClientRect();
+    const boxes = [];
+    const pad = 6;
+    const clear = (o) => boxes.every((b) => o.x + o.w + pad < b.x || o.x > b.x + b.w + pad || o.y + o.h + pad < b.y || o.y > b.y + b.h + pad);
+    let textRight = 0;
+    if (wide && (layout.people ?? 0) > 0) {
+      const t = thanksText.getBoundingClientRect();
+      textRight = t.right - hb.left;
+      boxes.push({ x: t.left - hb.left, y: t.top - hb.top, w: t.width, h: t.height });
+    }
+    // every cube's footprint on screen, so labels don't sit on top of cubes
+    if ((layout.people ?? 0) > 0) {
+      for (const { entry } of personEls) {
+        landscape.topOf(entry, top);
+        const t = toScreen(camera, holder, top.x, top.y + LAND_Y, top.z);
+        const g = toScreen(camera, holder, entry.x, entry.ground + LAND_Y, entry.z);
+        const half = Math.max(18, (g.y - t.y) * 0.75);
+        boxes.push({ x: t.x - half, y: t.y, w: half * 2, h: Math.max(10, g.y - t.y + 6) });
+      }
+    }
     for (const { el, id } of fieldEls) {
       const [fx, fz] = FIELD_CENTERS[id];
       // out toward the edge of each hill, away from the people in the middle
       const pos = toScreen(camera, holder, fx * 1.55, LAND_Y + heightAt(fx * 1.55, fz * 1.55) + 0.4, fz * 1.55);
-      const half = (el.offsetWidth || 120) / 2;
-      const rightLimit = holder.clientWidth - (holder.clientWidth > 820 ? 190 : 6); // clear of the stage control
-      pos.x = Math.max(half + 6, Math.min(rightLimit - half, pos.x)); // keep on screen
-      pin(el, pos, fieldText * 0.9, 'center');
+      const w = el.offsetWidth || 120;
+      const h = el.offsetHeight || 20;
+      const rightLimit = W - (wide ? 200 : 6); // clear of the stage control
+      const leftLimit = wide ? textRight + 24 : 6; // clear of the text column
+      let x = Math.max(leftLimit, Math.min(rightLimit - w, pos.x - w / 2));
+      let y = pos.y - h;
+      // slide down until clear of anything already placed
+      // try nearby spots (down, up, sideways) until clear of anything already placed
+      const base = { x, y };
+      const moves = [[0, 0]];
+      for (let r = 1; r <= 6; r++) moves.push([0, r], [0, -r], [r * 1.5, 0], [-r * 1.5, 0]);
+      for (const [dx, dy] of moves) {
+        const tx = Math.max(leftLimit, Math.min(rightLimit - w, base.x + dx * h));
+        const ty = base.y + dy * h * 0.6;
+        if (clear({ x: tx, y: ty, w, h })) { x = tx; y = ty; break; }
+      }
+      boxes.push({ x, y, w, h });
+      pin(el, { x, y }, fieldText * 0.9, 'topleft');
     }
-    const W = holder.clientWidth;
-    const boxes = [];
+    let hoveredBox = null;
     for (const { el, entry } of personEls) {
       landscape.topOf(entry, top);
       const pos = toScreen(camera, holder, top.x, top.y + LAND_Y, top.z);
       const w = el.offsetWidth || 80;
       const h = el.offsetHeight || 16;
-      // above the cube if there's room, else below, else to the side
+      // above the cube if there's room, else below, else to either side, else higher up
       const options = [
-        { x: pos.x - w / 2, y: pos.y - h - 6 },
-        { x: pos.x - w / 2, y: pos.y + 30 },
-        { x: pos.x + 16, y: pos.y + 4 },
-        { x: pos.x - w - 16, y: pos.y + 4 },
-      ];
-      const fits = (o) => o.x > 4 && o.x + w < W - 4 && boxes.every((b) => o.x + w < b.x || o.x > b.x + b.w || o.y + h < b.y || o.y > b.y + b.h);
-      const spot = options.find(fits) ?? options[0];
-      boxes.push({ ...spot, w, h });
+        { x: pos.x - w / 2, y: pos.y - h - 8 },
+        { x: pos.x + 32, y: pos.y - h / 2 },
+        { x: pos.x - w - 32, y: pos.y - h / 2 },
+        { x: pos.x - w / 2, y: pos.y - 2 * h - 12 },
+        { x: pos.x - w / 2, y: pos.y + 52 },
+        { x: pos.x + 32, y: pos.y + 16 },
+        { x: pos.x - w - 32, y: pos.y + 16 },
+      ].map((o) => ({ ...o, w, h }));
+      const fits = (o) => o.x > 4 && o.x + w < W - 4 && clear(o);
+      // if nothing is fully clear, take the spot that overlaps least
+      const overlap = (o) => boxes.reduce((sum, bx) => sum
+        + Math.max(0, Math.min(o.x + o.w, bx.x + bx.w) - Math.max(o.x, bx.x))
+        * Math.max(0, Math.min(o.y + o.h, bx.y + bx.h) - Math.max(o.y, bx.y)), 0);
+      const spot = options.find(fits)
+        ?? options.filter((o) => o.x > 4 && o.x + w < W - 4).reduce((a, o) => (overlap(o) < overlap(a) ? o : a), options[0]);
+      boxes.push(spot);
       pin(el, spot, entry.me ? (layout.me ?? 0) : esmText * 0.95, 'topleft');
-      el.classList.toggle('is-hovered', entry === hoveredPerson);
+      const isHovered = entry === hoveredPerson;
+      el.classList.toggle('is-hovered', isHovered);
+      if (isHovered) hoveredBox = spot;
+    }
+    // a faint line with the hovered person's job title, just under their name
+    const title = hoveredPerson?.person?.title;
+    if (title && hoveredBox && esmText > 0.5) {
+      if (titleEl.textContent !== title) titleEl.textContent = title;
+      const tw = titleEl.offsetWidth;
+      const th = titleEl.offsetHeight;
+      const x = Math.max(4, Math.min(W - tw - 4, hoveredBox.x + hoveredBox.w / 2 - tw / 2));
+      const others = boxes.filter((bx) => bx !== hoveredBox);
+      const free = (o) => others.every((bx) => o.x + o.w < bx.x || o.x > bx.x + bx.w || o.y + o.h < bx.y || o.y > bx.y + bx.h);
+      const below = { x, y: hoveredBox.y + hoveredBox.h + 3, w: tw, h: th };
+      const above = { x, y: hoveredBox.y - th - 3, w: tw, h: th };
+      pin(titleEl, free(below) || !free(above) ? below : above, 1, 'topleft');
+    } else {
+      pin(titleEl, { x: 0, y: 0 }, 0);
     }
   }
 
@@ -251,7 +335,7 @@ export function start() {
     if (section.dataset.stage !== stage) {
       section.dataset.stage = stage;
       buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.goto === stage)));
-      if (stage !== '2') picker.clear();
+      if (stage !== '2') { picker.clear(); hideCard(); }
       if (stage < '2') { focused = null; if (state.turn % (Math.PI * 2) !== 0) turnTo(0); }
       picker.setEnabled(stage === '2');
       peoplePicker.setEnabled(stage === '3');
@@ -283,25 +367,52 @@ export function start() {
   }
 
   // ───── pointing at cubes ─────
+  // The card stays up for a moment after the pointer leaves its cube, and for as long as
+  // the pointer is on the card, so its link can be reached.
+  let hideTimer = 0;
+  let switchTimer = 0;
+  let overCard = false;
+  function showCard(entry, isPinned) {
+    clearTimeout(hideTimer);
+    shown = entry;
+    const w = entry.work;
+    const meta = [w.venue, w.with.length ? `with ${w.with.join(', ')}` : ''].filter(Boolean).join(' · ');
+    const also = w.topics.filter((t) => t !== entry.topic).map((t) => data.topics.find((x) => x.id === t)?.label).filter(Boolean);
+    card.innerHTML = `<span class="card-kicker">${w.year} · ${esc(w.typeLabel)}${w.featured ? ' · Selected work' : ''}</span>
+      <span class="card-title">${esc(w.title)}</span>
+      ${meta ? `<span class="card-meta">${esc(meta)}</span>` : ''}
+      ${also.length ? `<span class="card-also">Also in ${esc(also.join(', ').toLowerCase())}</span>` : ''}
+      ${w.link ? `<a class="card-link" href="${esc(w.link)}" target="_blank" rel="noopener">Open →</a>` : ''}`;
+    card.hidden = false;
+    card.classList.toggle('is-pinned', isPinned);
+    wake();
+  }
+  function hideCard() {
+    clearTimeout(hideTimer);
+    clearTimeout(switchTimer);
+    shown = null;
+    card.hidden = true;
+    wake();
+  }
+  card.addEventListener('pointerenter', () => { overCard = true; clearTimeout(hideTimer); clearTimeout(switchTimer); });
+  card.addEventListener('pointerleave', () => {
+    overCard = false;
+    if (!card.classList.contains('is-pinned')) hideTimer = setTimeout(hideCard, 250);
+  });
+
   const picker = createPicker({
     element: pinned,
     camera,
     targets: grid.pickTargets,
-    onChange(entry, pinned) {
-      shown = entry;
-      if (entry) {
-        const w = entry.work;
-        const meta = [w.venue, w.with.length ? `with ${w.with.join(', ')}` : ''].filter(Boolean).join(' · ');
-        card.innerHTML = `<span class="card-kicker">${w.year} · ${esc(w.typeLabel)}</span>
-          <span class="card-title">${esc(w.title)}</span>
-          ${meta ? `<span class="card-meta">${esc(meta)}</span>` : ''}
-          ${w.link ? `<a class="card-link" href="${esc(w.link)}" target="_blank" rel="noopener">Open →</a>` : ''}`;
-        card.hidden = false;
-        card.classList.toggle('is-pinned', pinned);
-      } else {
-        card.hidden = true;
-      }
-      wake();
+    ignore: '.work-card',
+    onChange(entry, isPinned) {
+      clearTimeout(switchTimer);
+      if (overCard && !isPinned) return;
+      if (entry && (!shown || isPinned)) showCard(entry, isPinned);
+      // already showing a card: wait a moment before switching, in case the pointer
+      // is only crossing other cubes on its way to the card
+      else if (entry) { if (entry !== shown) switchTimer = setTimeout(() => { if (!overCard) showCard(entry, false); }, 180); else clearTimeout(hideTimer); }
+      else { clearTimeout(hideTimer); hideTimer = setTimeout(() => { if (!overCard) hideCard(); }, 400); }
     },
   });
 
@@ -342,11 +453,10 @@ export function start() {
       onComplete: () => { turning = false; wake(); },
     });
   }
-  const turnButton = section.querySelector('.turn-button');
   turnButton.addEventListener('click', () => {
     state.turn %= Math.PI * 2; // keep the angle small; a full turn looks the same
     turnTo(state.turn + Math.PI / 2);
-    picker.clear();
+    picker.clear(); hideCard();
   });
 
   // Layer names: at 1D, clicking one goes to the grid with that layer forward;
@@ -356,7 +466,7 @@ export function start() {
       const topic = btn.dataset.focus;
       if (section.dataset.stage !== '2') { focused = topic; goTo('2'); return; }
       focused = focused === topic ? null : topic;
-      picker.clear();
+      picker.clear(); hideCard();
       wake();
     });
   });

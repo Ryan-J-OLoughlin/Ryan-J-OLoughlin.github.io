@@ -34,6 +34,7 @@ for (const w of works) {
   if (!w.title) problems.push(`${where}: missing title`);
   if (!Number.isInteger(w.year)) problems.push(`${where}: year must be a number`);
   if (!categoryIds.includes(w.type)) problems.push(`${where}: type "${w.type}" is not one of ${categoryIds.join(', ')}`);
+  if (w.featured !== undefined && typeof w.featured !== 'boolean') problems.push(`${where}: featured must be true or false`);
   if (!Array.isArray(w.topics) || w.topics.length === 0) problems.push(`${where}: needs at least one topic`);
   for (const t of w.topics ?? []) {
     if (!topicIds.includes(t)) problems.push(`${where}: topic "${t}" is not one of ${topicIds.join(', ')}`);
@@ -94,10 +95,11 @@ function workItem(w, topicId) {
     others.length ? `also ${others.join(', ').toLowerCase()}` : '',
   ].filter(Boolean);
   const links = workLinks(w.links);
-  return `<li class="work" data-id="${esc(w.id)}" data-type="${esc(w.type)}" data-year="${w.year}" data-topics="${esc(w.topics.join(' '))}">
+  const selected = w.featured ? '\n    <span class="work-selected">Selected work</span>' : '';
+  return `<li class="work${w.featured ? ' is-featured' : ''}" data-id="${esc(w.id)}" data-type="${esc(w.type)}" data-year="${w.year}" data-topics="${esc(w.topics.join(' '))}">
   <span class="work-year">${w.year}</span>
   <div class="work-body">
-    <span class="work-title">${esc(w.title)}</span>
+    <span class="work-title">${esc(w.title)}</span>${selected}
     <span class="work-meta">${esc(meta.join(' · '))}</span>${links ? `\n    <span class="work-links">${links}</span>` : ''}
   </div>
 </li>`;
@@ -129,7 +131,8 @@ const peopleHtml = site.fields
       .map((p) => {
         const name = p.url ? `<a href="${esc(p.url)}">${esc(p.name)}</a>` : esc(p.name);
         const also = p.fields.slice(1).map((id) => label.field[id]);
-        return `<li data-fields="${esc(p.fields.join(' '))}">${name}${also.length ? ` <span class="person-also">also ${esc(also.join(', '))}</span>` : ''}</li>`;
+        const title = p.title ? ` <span class="person-title">${esc(p.title)}</span>` : '';
+        return `<li data-fields="${esc(p.fields.join(' '))}">${name}${title}${also.length ? ` <span class="person-also">also ${esc(also.join(', '))}</span>` : ''}</li>`;
       })
       .join('\n');
     return `<div class="field" data-field="${f.id}">
@@ -150,7 +153,11 @@ const profiles = Object.entries(site.contact.links ?? {})
 const fill = {
   name: esc(site.name),
   role: esc(site.role),
-  tagline: site.tagline.map((l, i, a) => (i === a.length - 1 ? `<em>${esc(l)}</em>` : esc(l))).join('<br>'),
+  tagline: esc(site.tagline),
+  tagline_sub: esc(site.tagline_sub ?? ''),
+  stage_buttons: site.stages
+    .map((st, i) => `<button type="button" data-goto="${i}" aria-pressed="${i === 0}"><span class="dot" aria-hidden="true"></span><span><span class="code">${esc(st.code)}</span><span class="name">${esc(st.name)}</span></span></button>`)
+    .join('\n      '),
   topics: [...site.topics]
     .reverse()
     .map((t) => `<li><a href="#topic-${t.id}"><span class="topic-name">${esc(t.label)}</span> <span class="topic-line">${esc(t.line)}</span></a></li>`)
@@ -199,10 +206,11 @@ const sceneData = {
     venue: w.venue ?? '',
     with: (w.with ?? []).map((id) => personName[id]),
     link: firstLink(w.links),
+    featured: Boolean(w.featured),
   })),
 };
 sceneData.fields = site.fields;
-sceneData.people = people.map((p) => ({ id: p.id, name: p.name, url: p.url ?? '', fields: p.fields, relation: p.relation }));
+sceneData.people = people.map((p) => ({ id: p.id, name: p.name, url: p.url ?? '', title: p.title ?? '', fields: p.fields, relation: p.relation }));
 sceneData.thisModel = site.this_model ?? 'this model';
 mkdirSync(new URL('src/generated', root), { recursive: true });
 writeFileSync(new URL('src/generated/scene-data.json', root), JSON.stringify(sceneData));

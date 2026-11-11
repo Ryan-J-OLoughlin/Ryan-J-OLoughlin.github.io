@@ -5,6 +5,10 @@
 // in the same cell stack up. Work that belongs to two layers has a cube on both, joined
 // by a dashed thread. All three grids stay aligned, so a cell means the same thing on
 // every layer.
+//
+// Selected works (featured: true) are drawn in solid color; the rest stay pale glass.
+// Pointing at a work raises every cube of that work, so a piece that spans two layers
+// shows both of its parts at once.
 
 import {
   Group, InstancedMesh, BoxGeometry, MeshStandardMaterial, Object3D,
@@ -15,6 +19,7 @@ import { createGlassCube } from './cubes.js';
 export const CELL = 0.42;           // size of one grid cell, in world units
 const CUBE = CELL * 0.72;           // a work cube, a little smaller than its cell
 const STACK_GAP = CUBE * 0.12;
+const FEATURED = 1.85;              // how much more solid a selected work's cube is
 
 const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 const clamp = (x) => Math.min(1, Math.max(0, x));
@@ -73,7 +78,7 @@ export function createGrid({ data, layerY, colors }) {
     for (const topic of work.topics) {
       const key = `${topic}:${i}:${j}`;
       const k = (stackCount[key] = (stackCount[key] ?? -1) + 1);
-      const cube = createGlassCube(colors[topic], colors.ink);
+      const cube = createGlassCube(colors[topic], colors.ink, work.featured ? FEATURED : 1);
       cube.pick.userData.entry = null; // filled below
       layers[topic].group.add(cube.group);
       const entry = {
@@ -89,29 +94,38 @@ export function createGrid({ data, layerY, colors }) {
   }
 
   // threads between the two cubes of a work that sits on two layers
-  const threadPoints = [];
+  // (redrawn each frame, so they stay attached while cubes rise on hover)
+  const pairs = [];
   const byWork = {};
   for (const c of cubes) (byWork[c.work.id] ??= []).push(c);
   for (const list of Object.values(byWork)) {
+    for (const c of list) c.twins = list.filter((o) => o !== c);
     if (list.length < 2) continue;
     list.sort((a, b) => layers[a.topic].y - layers[b.topic].y);
-    for (let s = 0; s < list.length - 1; s++) {
-      const a = list[s];
-      const b = list[s + 1];
-      threadPoints.push(
-        a.x, layers[a.topic].y + a.baseY + CUBE / 2, a.z,
-        b.x, layers[b.topic].y + b.baseY - CUBE / 2, b.z,
-      );
-    }
+    for (let s = 0; s < list.length - 1; s++) pairs.push([list[s], list[s + 1]]);
   }
+  const threadPositions = new Float32Array(pairs.length * 6);
   const threadGeometry = new BufferGeometry();
-  threadGeometry.setAttribute('position', new Float32BufferAttribute(threadPoints, 3));
+  threadGeometry.setAttribute('position', new Float32BufferAttribute(threadPositions, 3));
   const threadMaterial = new LineDashedMaterial({
     color: colors.ink, dashSize: 0.05, gapSize: 0.06, transparent: true, opacity: 0, depthWrite: false,
   });
   const threads = new LineSegments(threadGeometry, threadMaterial);
-  threads.computeLineDistances();
   root.add(threads);
+  const cubeY = (c) => c.baseY + c.hover * CUBE * 0.9;
+  const cubeH = (c) => CUBE * (1 + 0.45 * c.hover);
+  function updateThreads() {
+    pairs.forEach(([a, b], n) => {
+      const la = layers[a.topic]; const lb = layers[b.topic];
+      threadPositions.set([
+        a.x, la.y + cubeY(a) + cubeH(a) / 2, a.z,
+        b.x, lb.y + cubeY(b) - cubeH(b) / 2, b.z,
+      ], n * 6);
+    });
+    threadGeometry.attributes.position.needsUpdate = true;
+    threads.computeLineDistances();
+  }
+  updateThreads();
 
   const scratch = new Color();
 
@@ -159,13 +173,15 @@ export function createGrid({ data, layerY, colors }) {
       const anyFocus = focusedTopic !== null;
       threadMaterial.opacity = 0.5 * clamp((reveal - 0.7) / 0.3) * (anyFocus ? 0 : 1) * fade; // threads hide while a layer is forward
       threads.visible = threadMaterial.opacity > 0.001;
+      if (threads.visible) updateThreads();
     },
 
     // ease each cube's hover amount toward 1 for the hovered one, 0 for the rest
     stepHover(hovered) {
       let moving = false;
       for (const c of cubes) {
-        const target = c === hovered ? 1 : 0;
+        // the pointed-at cube and its twins on other layers rise together
+        const target = hovered && (c === hovered || c.work === hovered.work) ? 1 : 0;
         const next = c.hover + (target - c.hover) * 0.2;
         if (Math.abs(next - c.hover) > 0.002) moving = true;
         c.hover = Math.abs(target - next) < 0.002 ? target : next;
