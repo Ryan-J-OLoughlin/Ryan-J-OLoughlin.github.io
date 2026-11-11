@@ -66,7 +66,8 @@ export function start() {
   const card = section.querySelector('.work-card');
 
   // ───── state ─────
-  const state = { progress: 0 };
+  const state = { progress: 0, turn: 0 };
+  let turning = false;
   let focused = null;   // a topic id when one layer is brought forward
   let shown = null;     // the work whose card is showing
   let tweening = false;
@@ -93,10 +94,12 @@ export function start() {
         const s = g.group.scale.x;
         const gy = g.group.position.y;
         const narrow = holder.clientWidth <= 820;
-        // left corner of the grid on wide screens; right corner on phones (more room there)
-        const pos = narrow
-          ? toScreen(camera, holder, grid.width / 2 * s, gy, -grid.depth / 2 * s)
-          : toScreen(camera, holder, -grid.width / 2 * s, gy, grid.depth / 2 * s);
+        // The grid's left-most corner on screen (wide screens) or right-most (phones),
+        // whichever corner that is after any turn.
+        const corners = [[-1, -1], [-1, 1], [1, -1], [1, 1]].map(([a, b]) => grid.turned(a * grid.width / 2 * s, b * grid.depth / 2 * s));
+        const across = (c) => c.x - c.z; // screen left → right
+        const corner = corners.reduce((best, c) => (narrow ? across(c) > across(best) : across(c) < across(best)) ? c : best);
+        const pos = toScreen(camera, holder, corner.x, gy, corner.z);
         pos.x += narrow ? 10 : -18;
         pos.y -= narrow ? 6 : 20;
         pin(el, pos, ((p2 - 0.5) / 0.5) * (g.dim ?? 1), narrow ? 'left' : 'right');
@@ -111,13 +114,22 @@ export function start() {
     const s = g.group.scale.x;
     const y = g.group.position.y;
     const axisOpacity = clamp((reveal - 0.6) / 0.4);
+    // Each axis goes on whichever of its two edges is at the front after any turn.
+    const front = (c) => c.x + c.z;   // towards the viewer
+    const across = (c) => c.x - c.z;  // screen left → right
+    const offZ = (grid.depth / 2 + CELL * 0.35) * s;
+    const offX = (grid.width / 2 + CELL * 0.35) * s;
+    const yearSide = front(grid.turned(0, offZ)) > front(grid.turned(0, -offZ)) ? 1 : -1;
+    const catSide = front(grid.turned(offX, 0)) > front(grid.turned(-offX, 0)) ? 1 : -1;
     yearEls.forEach((el, i) => {
-      const pos = toScreen(camera, holder, grid.cellX(i) * s, y, (grid.depth / 2 + CELL * 0.35) * s);
-      pin(el, pos, axisOpacity, 'right');
+      const c = grid.turned(grid.cellX(i) * s, yearSide * offZ);
+      const anchor = across(c) < across(grid.turned(0, 0)) ? 'right' : 'left';
+      pin(el, toScreen(camera, holder, c.x, y, c.z), axisOpacity, anchor);
     });
     catEls.forEach((el, j) => {
-      const pos = toScreen(camera, holder, (grid.width / 2 + CELL * 0.35) * s, y, grid.cellZ(j) * s);
-      pin(el, pos, axisOpacity, 'left');
+      const c = grid.turned(catSide * offX, grid.cellZ(j) * s);
+      const anchor = across(c) < across(grid.turned(0, 0)) ? 'right' : 'left';
+      pin(el, toScreen(camera, holder, c.x, y, c.z), axisOpacity, anchor);
     });
 
     // the card for the work being pointed at
@@ -143,6 +155,7 @@ export function start() {
     const seconds = reducedMotion ? 0 : (performance.now() - clock0) / 1000;
     const p2 = clamp(state.progress - 1);
     setup.blend(p2);
+    grid.setTurn(state.turn);
     const layout = stages.apply(state.progress, seconds, focused);
     hoverMoving = grid.stepHover(shown);
     renderer.render(scene, camera);
@@ -160,7 +173,7 @@ export function start() {
       const target = focused === null ? 0 : focused === id ? 1 : -1;
       return Math.abs(l.focus - target) > 0.01;
     });
-    return onScreen && !document.hidden && (tweening || airMoving || hoverMoving || focusMoving);
+    return onScreen && !document.hidden && (tweening || turning || airMoving || hoverMoving || focusMoving);
   }
 
   function loop() {
@@ -211,7 +224,11 @@ export function start() {
   function goTo(stage) {
     const target = Number(stage);
     buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.goto === stage)));
-    if (target < 2) { focused = null; picker.clear(); }
+    if (target < 2) {
+      focused = null;
+      picker.clear();
+      if (state.turn !== 0) turnTo(0);
+    }
     section.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
     if (reducedMotion) { state.progress = target; wake(); return; }
     tweening = true;
@@ -225,6 +242,23 @@ export function start() {
     });
   }
   buttons.forEach((b) => b.addEventListener('click', () => goTo(b.dataset.goto)));
+
+  // Turn the grid a quarter turn to see it from another side.
+  function turnTo(angle) {
+    if (reducedMotion) { state.turn = angle; wake(); return; }
+    turning = true;
+    wake();
+    gsap.to(state, {
+      turn: angle, duration: 1.1, ease: 'power2.inOut', overwrite: 'auto',
+      onComplete: () => { turning = false; wake(); },
+    });
+  }
+  const turnButton = section.querySelector('.turn-button');
+  turnButton.addEventListener('click', () => {
+    state.turn %= Math.PI * 2; // keep the angle small; a full turn looks the same
+    turnTo(state.turn + Math.PI / 2);
+    picker.clear();
+  });
 
   // Layer names: at 1D, clicking one goes to the grid with that layer forward;
   // at 3D, clicking toggles which layer is forward.

@@ -36,7 +36,7 @@ export function createSetup(container) {
     // World units visible top to bottom. Everything in the scene is sized in world
     // units, so this scales the model to the screen. The grid needs more room.
     const column = wide ? (h < 640 ? 7.8 : 7) : (w / h > 0.62 ? 10.5 : 9.6);
-    const gridView = wide ? (h < 640 ? 8.6 : 8) : 11.5;
+    const gridView = wide ? (h < 640 ? 8.6 : 8) : 13;
     const viewHeight = lerp(column, gridView, gridBlend);
     const aspect = w / h;
     camera.top = viewHeight / 2;
@@ -48,7 +48,7 @@ export function createSetup(container) {
     // Phone: below the text (and nudged left to leave room for labels).
     camera.clearViewOffset();
     if (wide) camera.setViewOffset(w, h, lerp(-w * 0.14, -w * 0.12, gridBlend), lerp(0, -h * 0.02, gridBlend), w, h);
-    else camera.setViewOffset(w, h, lerp(w * 0.16, w * 0.07, gridBlend), lerp(-h * 0.13, -h * 0.12, gridBlend), w, h);
+    else camera.setViewOffset(w, h, lerp(w * 0.16, w * 0.04, gridBlend), lerp(-h * 0.13, -h * 0.12, gridBlend), w, h);
     camera.updateProjectionMatrix();
   }
 

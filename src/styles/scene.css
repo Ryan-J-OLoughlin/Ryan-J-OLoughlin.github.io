@@ -154,3 +154,18 @@
   .axis { font-size: 0.6rem; }
   .scene-label.at-grid .topic-name { font-size: 0.85rem; }
 }
+
+/* turn button (stage 3D) */
+.turn-button {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  margin-top: 1.25rem; min-height: 44px; padding: 0 1rem 0 0.75rem;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(28, 32, 36, 0.18); border-radius: 999px;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink);
+  cursor: pointer;
+}
+.turn-button:hover { border-color: var(--ink); }
+.turn-button svg { transition: transform 0.6s ease; }
+.turn-button:hover svg { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) { .turn-button svg { transition: none; } }
+@media (max-width: 820px) { .turn-button { margin-top: 0.75rem; } }

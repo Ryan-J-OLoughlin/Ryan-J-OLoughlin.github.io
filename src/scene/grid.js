@@ -30,7 +30,9 @@ export function createGrid({ data, layerY, colors }) {
 
   // cell centre in a layer's own coordinates
   const cellX = (i) => (i - (nx - 1) / 2) * CELL;
-  const cellZ = (j) => (j - (nz - 1) / 2) * CELL;
+  // Categories run back to front in reverse list order, so the first one (Papers)
+  // sits at the front edge, where taller stacks behind it can't hide it.
+  const cellZ = (j) => ((nz - 1 - j) - (nz - 1) / 2) * CELL;
 
   const root = new Group();
   const layers = {};
@@ -170,11 +172,21 @@ export function createGrid({ data, layerY, colors }) {
       return moving;
     },
 
+    // Turn the whole model about the vertical axis (radians).
+    setTurn(angle) { root.rotation.y = angle; },
+
+    // A point in the grid's own coordinates → world coordinates, allowing for the turn.
+    turned(x, z) {
+      const a = root.rotation.y;
+      return { x: x * Math.cos(a) + z * Math.sin(a), z: -x * Math.sin(a) + z * Math.cos(a) };
+    },
+
     // top centre of a cube in world coordinates (for the card)
     topOf(entry, out) {
       const layer = layers[entry.topic];
       const s = layer.group.scale.x;
-      out.set(entry.x * s, layer.group.position.y + (entry.baseY + entry.hover * CUBE * 0.9 + CUBE * (1 + 0.45 * entry.hover) / 2) * s, entry.z * s);
+      const p = this.turned(entry.x * s, entry.z * s);
+      out.set(p.x, layer.group.position.y + (entry.baseY + entry.hover * CUBE * 0.9 + CUBE * (1 + 0.45 * entry.hover) / 2) * s, p.z);
       return out;
     },
   };
