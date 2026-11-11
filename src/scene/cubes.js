@@ -50,6 +50,7 @@ export function createGlassCube(color, edgeColor) {
 
   return {
     group,
+    pick: glass, // the surface the pointer can hit
     // Set color and visibility together, so a fading cube fades evenly.
     set(colorValue, visibility) {
       surface.color.copy(colorValue);

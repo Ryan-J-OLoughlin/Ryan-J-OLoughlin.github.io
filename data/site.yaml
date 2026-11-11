@@ -11,6 +11,9 @@ tagline:   # PLACEHOLDER — Stage 0D
 
 layers_intro: Three ways science earns trust without true models.   # PLACEHOLDER — Stage 1D heading
 
+grid_intro: The work, at full resolution.   # PLACEHOLDER — Stage 3D heading
+grid_hint: Each cube is a piece of work. Point at one to read it; click to keep it open.
+
 thank_you: Every model is coupled to others. Thank you to everyone this one runs on.   # PLACEHOLDER — Stage ESM
 
 # The three layers, bottom to top.

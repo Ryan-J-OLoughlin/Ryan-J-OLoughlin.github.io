@@ -35,6 +35,12 @@
       <div class="scene-text scene-text-1">
         <h2 class="scene-h">{{layers_intro}}</h2>
       </div>
+      <div class="scene-text scene-text-2">
+        <h2 class="scene-h">{{grid_intro}}</h2>
+        <p class="scene-hint">{{grid_hint}}</p>
+      </div>
+      <div class="grid-axes" aria-hidden="true"></div>
+      <div class="work-card" role="status" aria-live="polite" hidden></div>
       <ul class="scene-labels">
 {{scene_labels}}
       </ul>
@@ -43,7 +49,7 @@
     <nav class="stage-control" aria-label="Model resolution">
       <button type="button" data-goto="0" aria-pressed="true"><span class="dot" aria-hidden="true"></span><span><span class="code">0D</span><span class="name">Energy balance</span></span></button>
       <button type="button" data-goto="1" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span><span class="code">1D</span><span class="name">Single column</span></span></button>
-      <a href="#work"><span class="dot" aria-hidden="true"></span><span><span class="code">3D</span><span class="name">Full grid</span></span></a>
+      <button type="button" data-goto="2" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span><span class="code">3D</span><span class="name">Full grid</span></span></button>
       <a href="#people"><span class="dot" aria-hidden="true"></span><span><span class="code">ESM</span><span class="name">Coupled</span></span></a>
     </nav>
     <!-- Stage 0D: the question -->

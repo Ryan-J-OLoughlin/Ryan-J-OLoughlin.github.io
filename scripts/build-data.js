@@ -5,7 +5,7 @@
 // The template has placeholders like {{tagline}} and {{works}}.
 // Every placeholder is filled with plain HTML, so the page works with no JavaScript.
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import yaml from 'js-yaml';
 
 const root = new URL('..', import.meta.url);
@@ -156,8 +156,10 @@ const fill = {
     .map((t) => `<li><a href="#topic-${t.id}"><span class="topic-name">${esc(t.label)}</span> <span class="topic-line">${esc(t.line)}</span></a></li>`)
     .join('\n'),
   layers_intro: esc(site.layers_intro),
+  grid_intro: esc(site.grid_intro),
+  grid_hint: esc(site.grid_hint),
   scene_labels: site.topics
-    .map((t) => `<li class="scene-label" data-topic="${t.id}"><span class="topic-name">${esc(t.label)}</span><span class="topic-line">${esc(t.line)}</span></li>`)
+    .map((t) => `<li class="scene-label" data-topic="${t.id}"><button type="button" class="topic-name" data-focus="${t.id}">${esc(t.label)}</button><span class="topic-line">${esc(t.line)}</span></li>`)
     .join('\n'),
   works: worksHtml,
   people: peopleHtml,
@@ -178,4 +180,26 @@ html = html.replace(/\{\{(\w+)\}\}/g, (m, key) => {
 });
 
 writeFileSync(new URL('src/index.html', root), html);
+
+// ───────────── data for the 3D scene ─────────────
+// A trimmed copy of the works the cubes need. Review notes are left out.
+const firstLink = (links = {}) => links.pdf || links.doi || links.url || links.slides || '';
+const sceneData = {
+  years: site.years,
+  topics: site.topics.map((t) => ({ id: t.id, label: t.label })),
+  categories: site.categories,
+  works: works.map((w) => ({
+    id: w.id,
+    title: w.title,
+    year: w.year,
+    type: w.type,
+    typeLabel: singular[w.type],
+    topics: w.topics,
+    venue: w.venue ?? '',
+    with: (w.with ?? []).map((id) => personName[id]),
+    link: firstLink(w.links),
+  })),
+};
+mkdirSync(new URL('src/generated', root), { recursive: true });
+writeFileSync(new URL('src/generated/scene-data.json', root), JSON.stringify(sceneData));
 console.log(`Wrote src/index.html: ${works.length} works, ${people.length} people`);
