@@ -20,15 +20,16 @@ export const CUBE = LAND_CELL * 0.86; // a person's cube fills its cell, like a 
 // centre of the landscape cell that contains x (or z)
 const snap = (v) => (Math.floor((v + SIZE / 2) / LAND_CELL) + 0.5) * LAND_CELL - SIZE / 2;
 
-// Where each field's hill sits (world x, z). On screen: climate at the back,
-// philosophy right, AI left, policy at the front.
+// Where each field's hill sits (world x, z). On screen: climate at the front (most
+// people are there, so the crowd is closest), philosophy right, AI left, and policy,
+// the sparsest, at the back.
 export const FIELD_CENTERS = {
-  'climate-modeling': [-4.6, -4.6],
+  'climate-modeling': [4.6, 4.6],
   philosophy: [4.6, -4.6],
   ai: [-4.6, 4.6],
-  policy: [4.6, 4.6],
+  policy: [-4.6, -4.6],
 };
-export const MODEL_SPOT = [snap(0.3), snap(-1.8)]; // "this model": between climate and philosophy, in a cell
+export const MODEL_SPOT = [snap(2.2), snap(0.2)]; // "this model": between climate and philosophy, in a cell
 
 const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 const clamp = (x) => Math.min(1, Math.max(0, x));
@@ -61,12 +62,12 @@ function fieldColorAt(x, z, colors, out) {
 // Place people near "this model", each pulled toward their own field(s), then snapped
 // into a landscape cell. Everyone gets their own cell, with a little open ground
 // between neighbours so names have room.
-const SPACING_CELLS = 1; // empty cells kept around each cube (1 = one ring)
+const SPACING_CELLS = 2; // empty cells kept around each cube (2 = two rings)
 function placePeople(people) {
   const taken = new Set();
   const key = (x, z) => `${Math.round(x / LAND_CELL)}:${Math.round(z / LAND_CELL)}`;
   const blocked = (x, z) => {
-    for (let dx = -SPACING_CELLS; dx <= SPACING_CELLS; dx++) for (let dz = -SPACING_CELLS - 1; dz <= SPACING_CELLS + 1; dz++) {
+    for (let dx = -SPACING_CELLS; dx <= SPACING_CELLS; dx++) for (let dz = -SPACING_CELLS; dz <= SPACING_CELLS; dz++) {
       if (taken.has(key(x + dx * LAND_CELL, z + dz * LAND_CELL))) return true;
     }
     return false;
@@ -74,14 +75,15 @@ function placePeople(people) {
   taken.add(key(...MODEL_SPOT));
 
   return people.map((p, i) => {
-    const centers = p.fields.map((f) => FIELD_CENTERS[f]).filter(Boolean);
-    const ax = centers.reduce((s, c) => s + c[0], 0) / centers.length;
-    const az = centers.reduce((s, c) => s + c[1], 0) / centers.length;
-    const wantX = MODEL_SPOT[0] + (ax - MODEL_SPOT[0]) * 0.55 + Math.sin(i * 2.4) * 0.5;
-    const wantZ = MODEL_SPOT[1] + (az - MODEL_SPOT[1]) * 0.55 + Math.cos(i * 1.7) * 0.5;
+    // The first field listed is where they lean most: it counts twice.
+    const weighted = p.fields.flatMap((f, k) => (FIELD_CENTERS[f] ? (k === 0 ? [FIELD_CENTERS[f], FIELD_CENTERS[f]] : [FIELD_CENTERS[f]]) : []));
+    const ax = weighted.reduce((s, c) => s + c[0], 0) / weighted.length;
+    const az = weighted.reduce((s, c) => s + c[1], 0) / weighted.length;
+    const wantX = MODEL_SPOT[0] + (ax - MODEL_SPOT[0]) * 0.75 + Math.sin(i * 2.4) * 0.5;
+    const wantZ = MODEL_SPOT[1] + (az - MODEL_SPOT[1]) * 0.75 + Math.cos(i * 1.7) * 0.5;
     // nearest free cell to where they'd like to be, searching outward ring by ring
     let best = null;
-    for (let ring = 0; ring < 8 && !best; ring++) {
+    for (let ring = 0; ring < 10 && !best; ring++) {
       let bestD = Infinity;
       for (let dx = -ring; dx <= ring; dx++) for (let dz = -ring; dz <= ring; dz++) {
         if (Math.max(Math.abs(dx), Math.abs(dz)) !== ring) continue;

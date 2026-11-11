@@ -3,6 +3,7 @@
 # relation: co-author | collaborator | mentor | colleague
 # fields:   climate-modeling | philosophy | ai | policy
 #           One field = sits inside it. Two = on the boundary. Three = where all three meet.
+#           List the field they lean toward most first.
 # url:      their own page. Empty means none found yet.
 # review:   true means still unconfirmed. Confirm, then delete the line.
 

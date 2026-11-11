@@ -196,9 +196,11 @@ export function start() {
     const fieldText = clamp(((layout.ground ?? 0) - 0.5) / 0.5);
     for (const { el, id } of fieldEls) {
       const [fx, fz] = FIELD_CENTERS[id];
-      const pos = toScreen(camera, holder, fx * 1.05, LAND_Y + heightAt(fx, fz) + 0.6, fz * 1.05);
+      // out toward the edge of each hill, away from the people in the middle
+      const pos = toScreen(camera, holder, fx * 1.55, LAND_Y + heightAt(fx * 1.55, fz * 1.55) + 0.4, fz * 1.55);
       const half = (el.offsetWidth || 120) / 2;
-      pos.x = Math.max(half + 6, Math.min(holder.clientWidth - half - 6, pos.x)); // keep on screen
+      const rightLimit = holder.clientWidth - (holder.clientWidth > 820 ? 190 : 6); // clear of the stage control
+      pos.x = Math.max(half + 6, Math.min(rightLimit - half, pos.x)); // keep on screen
       pin(el, pos, fieldText * 0.9, 'center');
     }
     const W = holder.clientWidth;
