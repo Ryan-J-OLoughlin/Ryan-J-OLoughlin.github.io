@@ -131,7 +131,7 @@ const peopleHtml = site.fields
       .map((p) => {
         const name = p.url ? `<a href="${esc(p.url)}">${esc(p.name)}</a>` : esc(p.name);
         const also = p.fields.slice(1).map((id) => label.field[id]);
-        const title = p.title ? ` <span class="person-title">${esc(p.title)}</span>` : '';
+        const title = p.place ? ` <span class="person-title">${esc(p.place)}</span>` : '';
         return `<li data-fields="${esc(p.fields.join(' '))}">${name}${title}${also.length ? ` <span class="person-also">also ${esc(also.join(', '))}</span>` : ''}</li>`;
       })
       .join('\n');
@@ -210,7 +210,7 @@ const sceneData = {
   })),
 };
 sceneData.fields = site.fields;
-sceneData.people = people.map((p) => ({ id: p.id, name: p.name, url: p.url ?? '', title: p.title ?? '', fields: p.fields, relation: p.relation }));
+sceneData.people = people.map((p) => ({ id: p.id, name: p.name, url: p.url ?? '', place: p.place ?? '', fields: p.fields, relation: p.relation }));
 sceneData.thisModel = site.this_model ?? 'this model';
 mkdirSync(new URL('src/generated', root), { recursive: true });
 writeFileSync(new URL('src/generated/scene-data.json', root), JSON.stringify(sceneData));

@@ -100,7 +100,7 @@ export function start() {
     const el = e.me || !p.url
       ? Object.assign(document.createElement('span'), { textContent: p.name })
       : Object.assign(document.createElement('a'), { textContent: p.name, href: p.url, target: '_blank', rel: 'noopener' });
-    if (p.title) el.setAttribute('aria-description', p.title);
+    if (p.place) el.setAttribute('aria-description', p.place);
     // phones show family names only ("Lloyd", not "Elisabeth A. Lloyd"); the full name stays readable to screen readers
     el.dataset.full = p.name;
     el.dataset.short = e.me ? p.name : p.name.split(' ').pop();
@@ -305,8 +305,8 @@ export function start() {
       el.classList.toggle('is-hovered', isHovered);
       if (isHovered) hoveredBox = spot;
     }
-    // a faint line with the hovered person's job title, just under their name
-    const title = hoveredPerson?.person?.title;
+    // a faint line with where the hovered person works, just under their name
+    const title = hoveredPerson?.person?.place;
     if (wide && title && hoveredBox && esmText > 0.5) {
       if (titleEl.textContent !== title) titleEl.textContent = title;
       const tw = titleEl.offsetWidth;

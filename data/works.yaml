@@ -71,7 +71,7 @@
 
 - id: post-hoc-xai-2025
   featured: true
-  title: "Moving beyond post hoc explainable artificial intelligence: lessons learned from dynamical climate modeling"
+  title: "Moving beyond post hoc explainable artificial intelligence: a perspective paper on lessons learned from dynamical climate modeling"
   year: 2025
   type: paper
   topics: [errors]
@@ -294,6 +294,80 @@
   links: {}
   review: true
   note: Panel at an AI-and-physics climate center; grouped with the AI and errors work.
+
+# Added from the CV: talk versions of papers already on the grid. Their topics follow the paper.
+
+- id: diagnosing-errors-lips-2023
+  title: Diagnosing errors in climate model intercomparisons
+  year: 2023
+  type: talk
+  topics: [errors, robustness]
+  venue: Long Island Philosophical Society, St. John's University
+  with: []
+  links: {}
+
+- id: error-lower-skill-qc-2023
+  title: A philosophical take on error and lower-skill models in climate science
+  year: 2023
+  type: talk
+  topics: [errors, antifragility]
+  venue: Queens College School of Earth and Environmental Sciences Colloquium
+  with: []
+  links: {}
+
+- id: model-comparisons-cshps-2021
+  title: "Climate model comparisons: history and philosophical implications"
+  year: 2021
+  type: talk
+  topics: [robustness]
+  venue: Canadian Society for the History and Philosophy of Science
+  with: []
+  links: {}
+
+- id: post-hoc-xai-gordon-2025
+  title: "Moving beyond post hoc explainable artificial intelligence: lessons learned from dynamical climate modeling (poster)"
+  year: 2025
+  type: talk
+  topics: [errors]
+  venue: Gordon Research Conference, Machine Learning for Actionable Climate Science
+  with: []
+  links: {}
+
+- id: post-hoc-xai-ncar-2025
+  title: "Moving beyond post-hoc XAI: lessons learned from dynamical climate modelling"
+  year: 2025
+  type: talk
+  topics: [errors]
+  venue: NCAR Climate and Global Dynamics Machine Learning group
+  with: [dan-li]
+  links: {}
+
+- id: field-experiments-wcrp-2025
+  title: When are small-scale field experiments in solar geoengineering worth pursuing?
+  year: 2025
+  type: talk
+  topics: [errors, antifragility]
+  venue: World Climate Research Programme, workshop series on stratospheric aerosol injection
+  with: []
+  links: {}
+
+- id: field-experiments-gordon-2026
+  title: When are small-scale field experiments in solar geoengineering worth pursuing? (poster)
+  year: 2026
+  type: talk
+  topics: [errors, antifragility]
+  venue: Gordon Research Conference on Climate Engineering
+  with: []
+  links: {}
+
+- id: field-experiments-rff-2026
+  title: When are small-scale field experiments in solar geoengineering worth pursuing?
+  year: 2026
+  type: talk
+  topics: [errors, antifragility]
+  venue: Resources for the Future and Harvard SRM Research Workshop
+  with: []
+  links: {}
 
 # ───────────────────────── teaching ─────────────────────────
 
