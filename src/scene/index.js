@@ -6,7 +6,7 @@ import { gsap } from 'gsap';
 import { createSetup } from './setup.js';
 import { createGlassCube } from './cubes.js';
 import { createAir } from './air.js';
-import { createStages, LAYERS } from './stages.js';
+import { createStages, LAYERS, GAPS } from './stages.js';
 import { createLabels } from './labels.js';
 
 // Colors come from the CSS variables, so the palette lives in one place (base.css).
@@ -35,7 +35,11 @@ export function start() {
     cubes[layer] = createGlassCube(colors.start, colors.ink);
     scene.add(cubes[layer].group);
   }
-  const air = createAir(colors.air, [-0.875, 0.875]);
+  const gaps = [
+    { ...GAPS[0], tint: colors.robustness.clone().lerp(colors.errors, 0.5) },
+    { ...GAPS[1], tint: colors.errors.clone().lerp(colors.antifragility, 0.5) },
+  ];
+  const air = createAir(colors.air, gaps);
   scene.add(air.object);
 
   const stages = createStages({ cubes, air, colors });

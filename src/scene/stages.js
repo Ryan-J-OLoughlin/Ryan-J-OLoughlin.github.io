@@ -17,6 +17,12 @@ const SIZE_1D = 1.0;  // each cube in the column
 const SPACING = 1.75;  // centre to centre in the column
 const DELAY = { robustness: 0.1, errors: 0, antifragility: 0.2 }; // small stagger
 
+// The two gaps between cubes in the column, where the air moves.
+export const GAPS = [
+  { bottom: -SPACING + SIZE_1D / 2, top: -SIZE_1D / 2 },
+  { bottom: SIZE_1D / 2, top: SPACING - SIZE_1D / 2 },
+];
+
 export function createStages({ cubes, air, colors }) {
   const scratch = new Color();
 
@@ -39,7 +45,7 @@ export function createStages({ cubes, air, colors }) {
       result[layer] = { y, size, visibility: local };
     });
 
-    air.update(seconds, clamp((progress - 0.55) / 0.45), 1);
+    air.update(seconds, clamp((progress - 0.55) / 0.45));
     return result;
   }
 

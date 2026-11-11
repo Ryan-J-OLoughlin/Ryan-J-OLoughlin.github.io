@@ -30,7 +30,9 @@ export function createSetup(container) {
     const wide = w > 820;
     renderer.setSize(w, h, false);
 
-    const viewHeight = wide ? 7 : 9.6; // world units visible top to bottom
+    // World units visible top to bottom. Everything in the scene is sized in world
+    // units, so this one number scales the model to the screen.
+    const viewHeight = wide ? (h < 640 ? 7.8 : 7) : (w / h > 0.62 ? 10.5 : 9.6);
     const aspect = w / h;
     camera.top = viewHeight / 2;
     camera.bottom = -viewHeight / 2;
