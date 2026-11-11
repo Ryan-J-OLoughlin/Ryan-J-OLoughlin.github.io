@@ -1,0 +1,52 @@
+# site.yaml — site-wide words and settings.
+# Anything marked PLACEHOLDER still needs a decision.
+
+name: Ryan O'Loughlin
+role: Philosophy of science · Queens College, CUNY
+
+tagline:   # PLACEHOLDER — Stage 0D
+  - Idealized, imperfect models go in.
+  - Trustworthy knowledge comes out.
+  - How?
+
+layers_intro: Three ways science earns trust without true models.   # PLACEHOLDER — Stage 1D heading
+
+thank_you: Every model is coupled to others. Thank you to everyone this one runs on.   # PLACEHOLDER — Stage ESM
+
+# The three layers, bottom to top.
+topics:
+  - id: robustness
+    label: Robustness
+    line: What agreement between models can and can't tell us.   # PLACEHOLDER wording
+  - id: errors
+    label: Errors
+    line: Finding and fixing what went wrong.                    # PLACEHOLDER wording
+  - id: antifragility
+    label: Antifragility
+    line: Learning more when models fail.                         # PLACEHOLDER wording
+
+# The category axis of the grid, in display order.
+categories:
+  - { id: paper,    label: Papers }
+  - { id: talk,     label: Talks }
+  - { id: teaching, label: Teaching }
+  - { id: outreach, label: Outreach }
+  - { id: grant,    label: Grant }
+
+years: { from: 2020, to: 2026 }   # PLACEHOLDER — grid year range
+
+# Stage ESM: the shared landscape.
+fields:
+  - { id: climate-modeling, label: Climate and Earth system modeling }
+  - { id: philosophy,       label: Philosophy of science }
+  - { id: ai,               label: AI and machine learning }
+  - { id: policy,           label: Climate policy and intervention }
+
+contact:
+  email: roloughlin@qc.cuny.edu
+  cv: files/cv.pdf
+  links:            # PLACEHOLDER — add the real profile addresses
+    google_scholar: ""
+    philpeople: ""
+    orcid: ""
+    github: ""

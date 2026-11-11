@@ -1,0 +1,86 @@
+<!doctype html>
+<!-- template.html: edit this, not index.html. index.html is rebuilt from it by `npm run data`. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{name}}</title>
+  <meta name="description" content="{{name}} — {{role}}">
+  <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/scene.css">
+  <script type="module" src="./main.js"></script>
+</head>
+<body>
+  <a class="skip" href="#work">Skip to the work</a>
+
+  <header class="site-head">
+    <a class="site-name" href="./">{{name}}</a>
+    <nav aria-label="Site">
+      <a href="#work">Work</a>
+      <a href="#people">People</a>
+      <a href="{{cv}}">CV</a>
+      <a href="mailto:{{email}}">Email</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- The 3D scene (stages 0D and 1D). Hidden unless the browser can draw 3D;
+         then it replaces the plain versions of those two stages below. -->
+    <section class="scene" id="scene" aria-label="Overview" data-stage="0">
+      <div class="scene-canvas" aria-hidden="true"></div>
+      <div class="scene-text scene-text-0">
+        <p class="role">{{role}}</p>
+        <h1 class="tagline">{{tagline}}</h1>
+      </div>
+      <div class="scene-text scene-text-1">
+        <h2 class="scene-h">{{layers_intro}}</h2>
+      </div>
+      <ul class="scene-labels">
+{{scene_labels}}
+      </ul>
+    </section>
+
+    <nav class="stage-control" aria-label="Model resolution">
+      <button type="button" data-goto="0" aria-pressed="true"><span class="dot" aria-hidden="true"></span><span><span class="code">0D</span><span class="name">Energy balance</span></span></button>
+      <button type="button" data-goto="1" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span><span class="code">1D</span><span class="name">Single column</span></span></button>
+      <a href="#work"><span class="dot" aria-hidden="true"></span><span><span class="code">3D</span><span class="name">Full grid</span></span></a>
+      <a href="#people"><span class="dot" aria-hidden="true"></span><span><span class="code">ESM</span><span class="name">Coupled</span></span></a>
+    </nav>
+    <!-- Stage 0D: the question -->
+    <section class="stage stage-0" id="question" aria-label="The question">
+      <p class="role">{{role}}</p>
+      <h1 class="tagline">{{tagline}}</h1>
+    </section>
+
+    <!-- Stage 1D: the three layers -->
+    <section class="stage stage-1" aria-labelledby="layers-h">
+      <h2 id="layers-h" class="label">Three layers</h2>
+      <ol class="layers">
+{{topics}}
+      </ol>
+    </section>
+
+    <!-- Stage 3D: the work, one section per layer -->
+    <section class="stage stage-3" id="work" aria-labelledby="work-h">
+      <h2 id="work-h" class="label">The work</h2>
+{{works}}
+    </section>
+
+    <!-- Stage ESM: the people this model runs on -->
+    <section class="stage stage-esm" id="people" aria-labelledby="people-h">
+      <h2 id="people-h" class="label">Coupled to</h2>
+      <p class="thank-you">{{thank_you}}</p>
+      <div class="fields">
+{{people}}
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <a href="mailto:{{email}}">{{email}}</a>
+    <a href="{{cv}}">CV (PDF)</a>
+{{profiles}}
+    <span class="copy">© {{year}}</span>
+  </footer>
+</body>
+</html>

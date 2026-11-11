@@ -1,0 +1,77 @@
+# people.yaml — the people shown as cubes in the last stage (ESM).
+#
+# relation: co-author | collaborator | mentor | colleague
+# fields:   climate-modeling | philosophy | ai | policy
+#           One field = sits inside it. Two = on the boundary. Three = where all three meet.
+# url:      their own page. Empty means none found yet.
+# review:   true means still unconfirmed. Confirm, then delete the line.
+
+- id: elisabeth-lloyd
+  name: Elisabeth A. Lloyd
+  relation: mentor
+  fields: [philosophy, climate-modeling]
+  url: https://www.amacad.org/person/elisabeth-lloyd
+  note: Dissertation chair; co-author on the forthcoming geosciences chapter.
+
+- id: dan-li
+  name: Dan Li
+  relation: co-author
+  fields: [philosophy, climate-modeling, ai]
+  url: https://danli.commons.gc.cuny.edu/
+
+- id: daniele-visioni
+  name: Daniele Visioni
+  relation: co-author
+  fields: [climate-modeling, policy]
+  url: https://cals.cornell.edu/people/daniele-visioni
+
+- id: stuart-gluck
+  name: Stuart Gluck
+  relation: co-author
+  fields: [policy, philosophy]
+  url: https://philpeople.org/profiles/stuart-gluck
+  note: U.S. Department of Energy, Office of Science (Washington, DC). PhilPeople is the only public profile found.
+
+- id: travis-obrien
+  name: Travis A. O'Brien
+  relation: co-author
+  fields: [ai, climate-modeling]
+  url: https://earth.indiana.edu/directory/faculty/obrien-travis.html
+
+- id: richard-neale
+  name: Richard Neale
+  relation: co-author
+  fields: [climate-modeling]
+  url: https://impacts.ucar.edu/en/persons/richard-neale/
+  note: NCAR; co-author on the explainable-AI paper.
+
+- id: ben-kravitz
+  name: Ben Kravitz
+  relation: mentor
+  fields: [climate-modeling]
+  url: https://climatemodeling.earth.indiana.edu/
+  note: Dissertation committee member.
+
+- id: gavin-schmidt
+  name: Gavin A. Schmidt
+  relation: colleague
+  fields: [climate-modeling, philosophy]
+  url: https://science.gsfc.nasa.gov/earth/giss/bio/gavin.a.schmidt
+  note: Director, NASA Goddard Institute for Space Studies.
+
+- id: matt-mayernik
+  name: Matt Mayernik
+  relation: collaborator
+  fields: [climate-modeling]
+  url: https://impacts.ucar.edu/en/persons/matthew-mayernik/
+  note: Co-PI on the Sloan project.
+
+- id: yoichi-ishida
+  name: Yoichi Ishida
+  relation: mentor
+  fields: [philosophy]
+  url: ""
+  note: Ohio University (MA). Kept for now.
+
+# Still to add: any other dissertation committee members besides Lloyd (chair)
+# and Kravitz. These aren't listed publicly, so they need to come from Ryan.

@@ -1,0 +1,104 @@
+/* scene.css — the 3D layer. Only applies when main.js has added .has-scene,
+   i.e. when the browser can draw 3D. Otherwise the plain page shows as is. */
+
+#scene { display: none; }
+
+.has-scene #scene {
+  display: block;
+  position: relative;
+  height: 100svh;
+  min-height: 34rem;
+  overflow: hidden;
+  background: url("/contours.svg") center / cover no-repeat;
+}
+
+/* In 3D mode, the scene shows stages 0D and 1D, so their plain versions step aside. */
+.has-scene main > .stage-0,
+.has-scene main > .stage-1 { display: none; }
+.has-scene .site-head { position: absolute; inset: 0 0 auto 0; z-index: 3; }
+
+.scene-canvas { position: absolute; inset: 0; }
+.scene-canvas canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease; }
+#scene.is-ready .scene-canvas canvas { opacity: 1; }
+
+/* ───── stage text, left side ───── */
+
+.scene-text {
+  position: absolute;
+  left: max(var(--gap), calc((100vw - 64rem) / 2));
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(32rem, 38vw);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  z-index: 2;
+}
+.scene-text .tagline { font-size: clamp(2rem, 3.6vw, 3.3rem); }
+.scene-h {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(1.6rem, 3vw, 2.5rem); line-height: 1.15; margin: 0; max-width: 16ch;
+}
+
+#scene .scene-text-1 { opacity: 0; pointer-events: none; transform: translateY(-45%); }
+#scene[data-stage="1"] .scene-text-0 { opacity: 0; pointer-events: none; transform: translateY(-55%); }
+#scene[data-stage="1"] .scene-text-1 { opacity: 1; pointer-events: auto; transform: translateY(-50%); transition-delay: 0.35s; }
+#scene[data-stage="0"] .scene-text-0 { transition-delay: 0.35s; }
+
+/* ───── labels pinned to the cubes (moved by labels.js) ───── */
+
+.scene-labels { list-style: none; margin: 0; padding: 0; }
+.scene-label {
+  position: absolute; left: 0; top: 0;
+  display: flex; flex-direction: column; gap: 0.1rem;
+  width: 11.5rem; opacity: 0; z-index: 2;
+  will-change: transform, opacity;
+}
+.scene-label .topic-name { font-family: var(--font-display); font-size: 1.25rem; }
+.scene-label .topic-line { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.35; }
+.scene-label[data-topic="robustness"] .topic-name { color: var(--ocean); }
+.scene-label[data-topic="errors"] .topic-name { color: var(--green); }
+.scene-label[data-topic="antifragility"] .topic-name { color: var(--earth); }
+
+/* ───── stage control: right edge on desktop, bottom on phones ───── */
+
+.stage-control { display: none; }
+.has-scene .stage-control {
+  display: flex; flex-direction: column; gap: 0.25rem;
+  position: fixed; right: 1.5rem; top: 50%; transform: translateY(-50%);
+  padding: 0.6rem 0.9rem;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(28, 32, 36, 0.12);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  z-index: 5;
+}
+.stage-control button, .stage-control a {
+  display: flex; align-items: center; gap: 0.7rem;
+  min-height: 44px; padding: 0;
+  background: none; border: 0; cursor: pointer; text-align: left;
+  font: inherit; color: var(--ink-soft); text-decoration: none;
+}
+.stage-control .dot {
+  width: 11px; height: 11px; border-radius: 50%;
+  border: 1.5px solid var(--ink); flex: none;
+}
+.stage-control [aria-pressed="true"] { color: var(--ink); }
+.stage-control [aria-pressed="true"] .dot { background: var(--ink); }
+.stage-control .code { font-family: var(--font-mono); font-size: 0.75rem; display: block; }
+.stage-control .name { font-size: 0.78rem; display: block; line-height: 1.2; }
+
+@media (max-width: 820px) {
+  .scene-text { top: 6.5rem; transform: none; width: auto; right: var(--gap); }
+  #scene .scene-text-1 { transform: translateY(0.5rem); }
+  #scene[data-stage="1"] .scene-text-0 { transform: translateY(-0.5rem); }
+  #scene[data-stage="1"] .scene-text-1 { transform: none; }
+  .scene-label { width: 7.5rem; }
+  .scene-label .topic-name { font-size: 1.05rem; }
+  .scene-label .topic-line { display: none; }
+
+  .has-scene .stage-control {
+    flex-direction: row; gap: 0.9rem;
+    top: auto; bottom: 1rem; right: 50%; transform: translateX(50%);
+    padding: 0.2rem 0.9rem;
+  }
+  .stage-control .name { display: none; }
+}
