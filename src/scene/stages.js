@@ -2,6 +2,7 @@
 //
 // One number, `progress`, drives the whole scene:
 //   0 = stage 0D (one cube)   1 = stage 1D (three stacked cubes)   2 = stage 3D (three grids)
+//   3 = stage ESM (zoomed far out: the whole model is one small cube on a shared landscape)
 // Any value in between is a frame of a morph, so the same code serves click animations
 // now and scroll-driven morphing on phones later.
 
@@ -28,17 +29,18 @@ export const GAPS = [
   { bottom: SIZE_1D / 2, top: SPACING - SIZE_1D / 2 },
 ];
 
-export function createStages({ cubes, air, grid, colors }) {
+export function createStages({ cubes, air, grid, landscape, modelSpot, modelSize, colors }) {
   const scratch = new Color();
 
   function apply(progress, seconds, focusedTopic) {
     const p1 = clamp(progress);      // 0D → 1D
     const p2 = clamp(progress - 1);  // 1D → 3D
+    const p3 = clamp(progress - 2);  // 3D → ESM
     const flatten = ease(clamp(p2 / 0.6));               // column cubes spread into slabs
     const fadeColumn = 1 - clamp((p2 - 0.45) / 0.35);    // ...and fade as the grid appears
     const reveal = clamp((p2 - 0.35) / 0.65);            // grid builds up
 
-    const layout = { layers: {}, reveal, p1, p2 };
+    const layout = { layers: {}, reveal, p1, p2, p3 };
 
     LAYERS.forEach((layer, i) => {
       const local = ease(clamp((p1 - DELAY[layer]) / 0.8));
@@ -63,7 +65,18 @@ export function createStages({ cubes, air, grid, colors }) {
     });
 
     air.update(seconds, clamp((p1 - 0.55) / 0.45) * (1 - clamp(p2 / 0.3)));
-    grid.update(reveal, focusedTopic);
+    // 3D → ESM: the grid shrinks fast toward its spot on the landscape while the camera
+    // pulls back; then it hands over to the small "this model" cube.
+    const shrink = 1 - Math.pow(1 - clamp(p3 / 0.5), 4); // quick start, soft landing
+    grid.object.scale.setScalar(lerp(1, modelSize / grid.width, shrink)); // ends the size of one cube
+    grid.object.position.set(
+      lerp(0, modelSpot.x, shrink),
+      lerp(0, modelSpot.y, shrink),
+      lerp(0, modelSpot.z, shrink),
+    );
+    grid.update(reveal, focusedTopic, 1 - clamp((p3 - 0.42) / 0.12));
+    landscape.update(clamp((p3 - 0.25) / 0.5), clamp((p3 - 0.45) / 0.55));
+    layout.shrink = shrink;
     return layout;
   }
 

@@ -38,6 +38,9 @@ categories:
 
 years: { from: 2020, to: 2026 }   # PLACEHOLDER — grid year range
 
+people_hint: Each small cube is someone this work depends on. Their names link to their pages.
+this_model: this model
+
 # Stage ESM: the shared landscape.
 fields:
   - { id: climate-modeling, label: Climate and Earth system modeling }

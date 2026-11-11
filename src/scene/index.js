@@ -11,6 +11,9 @@ import { createGrid, CELL } from './grid.js';
 import { createStages, LAYERS, GAPS, LAYER_Y } from './stages.js';
 import { toScreen, pin } from './labels.js';
 import { createPicker } from './pick.js';
+import { createLandscape, heightAt, MODEL_SPOT, FIELD_CENTERS, CUBE as PERSON_CUBE } from './landscape.js';
+
+const LAND_Y = -1.4; // the landscape sits a little below the model's centre
 
 const clamp = (x) => Math.min(1, Math.max(0, x));
 const esc = (s = '') => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
@@ -33,7 +36,13 @@ export function start() {
     ink: cssColor('--ink'),
     air: cssColor('--ink-soft'),
     tile: cssColor('--rule'),
+    paper: cssColor('--ground'),
   };
+  // fields of the ESM landscape
+  colors['climate-modeling'] = colors.robustness;
+  colors.philosophy = colors.antifragility;
+  colors.ai = colors.errors;
+  colors.policy = cssColor('--sand');
 
   const setup = createSetup(holder);
   const { renderer, scene, camera } = setup;
@@ -54,7 +63,13 @@ export function start() {
   const grid = createGrid({ data, layerY: LAYER_Y, colors });
   scene.add(grid.object);
 
-  const stages = createStages({ cubes, air, grid, colors });
+  // stage ESM: the shared landscape and the people on it
+  const landscape = createLandscape({ data, colors });
+  landscape.object.position.y = LAND_Y;
+  scene.add(landscape.object);
+  const modelSpot = new Vector3(MODEL_SPOT[0], LAND_Y + landscape.entries[0].ground + PERSON_CUBE / 2, MODEL_SPOT[1]);
+
+  const stages = createStages({ cubes, air, grid, landscape, modelSpot, modelSize: PERSON_CUBE, colors });
 
   // ───── web-text overlays ─────
   const layerLabels = Object.fromEntries(
@@ -64,6 +79,30 @@ export function start() {
   const yearEls = grid.years.map((y) => axes.appendChild(Object.assign(document.createElement('span'), { className: 'axis axis-year', textContent: y })));
   const catEls = data.categories.map((c) => axes.appendChild(Object.assign(document.createElement('span'), { className: 'axis axis-cat', textContent: c.label })));
   const card = section.querySelector('.work-card');
+
+  // ESM labels: field names, and a name for each person (a link to their page)
+  const esmLayer = section.querySelector('.esm-labels');
+  const fieldEls = data.fields.map((f) => {
+    const el = esmLayer.appendChild(Object.assign(document.createElement('span'), { className: 'esm-field', textContent: f.label }));
+    el.dataset.field = f.id;
+    return { el, id: f.id };
+  });
+  let hoveredPerson = null;
+  const personEls = landscape.entries.map((e) => {
+    const p = e.person;
+    const el = e.me || !p.url
+      ? Object.assign(document.createElement('span'), { textContent: p.name })
+      : Object.assign(document.createElement('a'), { textContent: p.name, href: p.url, target: '_blank', rel: 'noopener' });
+    el.className = e.me ? 'esm-person is-me' : 'esm-person';
+    if (!e.me) {
+      el.addEventListener('mouseenter', () => { hoveredPerson = e; wake(); });
+      el.addEventListener('mouseleave', () => { if (hoveredPerson === e) hoveredPerson = null; wake(); });
+      el.addEventListener('focus', () => { hoveredPerson = e; wake(); });
+      el.addEventListener('blur', () => { if (hoveredPerson === e) hoveredPerson = null; wake(); });
+    }
+    esmLayer.appendChild(el);
+    return { el, entry: e };
+  });
 
   // ───── state ─────
   const state = { progress: 0, turn: 0 };
@@ -78,7 +117,8 @@ export function start() {
   const top = new Vector3();
 
   function placeOverlays(layout) {
-    const { p1, p2, reveal } = layout;
+    const { p1, p2, p3, reveal } = layout;
+    const gridText = 1 - clamp(p3 * 4); // grid labels fade fast as the camera pulls back
 
     // layer names: beside each column cube at 1D, beside each grid at 3D
     for (const layer of LAYERS) {
@@ -102,7 +142,7 @@ export function start() {
         const pos = toScreen(camera, holder, corner.x, gy, corner.z);
         pos.x += narrow ? 10 : -18;
         pos.y -= narrow ? 6 : 20;
-        pin(el, pos, ((p2 - 0.5) / 0.5) * (g.dim ?? 1), narrow ? 'left' : 'right');
+        pin(el, pos, ((p2 - 0.5) / 0.5) * (g.dim ?? 1) * gridText, narrow ? 'left' : 'right');
         el.classList.add('at-grid');
       }
       el.classList.toggle('is-focused', focused === layer);
@@ -113,7 +153,7 @@ export function start() {
     const g = grid.layers[axisLayer];
     const s = g.group.scale.x;
     const y = g.group.position.y;
-    const axisOpacity = clamp((reveal - 0.6) / 0.4);
+    const axisOpacity = clamp((reveal - 0.6) / 0.4) * gridText;
     // Each axis goes on whichever of its two edges is at the front after any turn.
     const front = (c) => c.x + c.z;   // towards the viewer
     const across = (c) => c.x - c.z;  // screen left → right
@@ -133,7 +173,7 @@ export function start() {
     });
 
     // the card for the work being pointed at
-    if (shown && reveal > 0.9) {
+    if (shown && reveal > 0.9 && p3 < 0.05) {
       // beside the cube, flipped to the other side if it would run off screen
       grid.topOf(shown, top);
       const pos = toScreen(camera, holder, top.x, top.y, top.z);
@@ -149,21 +189,53 @@ export function start() {
     } else {
       pin(card, { x: 0, y: 0 }, 0);
     }
+
+    // ESM: field names on their hills, people's names above their cubes
+    const esmText = clamp((p3 - 0.7) / 0.3);
+    for (const { el, id } of fieldEls) {
+      const [fx, fz] = FIELD_CENTERS[id];
+      const pos = toScreen(camera, holder, fx * 1.05, LAND_Y + heightAt(fx, fz) + 0.6, fz * 1.05);
+      const half = (el.offsetWidth || 120) / 2;
+      pos.x = Math.max(half + 6, Math.min(holder.clientWidth - half - 6, pos.x)); // keep on screen
+      pin(el, pos, esmText * 0.9, 'center');
+    }
+    const W = holder.clientWidth;
+    const boxes = [];
+    for (const { el, entry } of personEls) {
+      landscape.topOf(entry, top);
+      const pos = toScreen(camera, holder, top.x, top.y + LAND_Y, top.z);
+      const w = el.offsetWidth || 80;
+      const h = el.offsetHeight || 16;
+      // above the cube if there's room, else below, else to the side
+      const options = [
+        { x: pos.x - w / 2, y: pos.y - h - 6 },
+        { x: pos.x - w / 2, y: pos.y + 30 },
+        { x: pos.x + 16, y: pos.y + 4 },
+        { x: pos.x - w - 16, y: pos.y + 4 },
+      ];
+      const fits = (o) => o.x > 4 && o.x + w < W - 4 && boxes.every((b) => o.x + w < b.x || o.x > b.x + b.w || o.y + h < b.y || o.y > b.y + b.h);
+      const spot = options.find(fits) ?? options[0];
+      boxes.push({ ...spot, w, h });
+      pin(el, spot, esmText * (entry.me ? 1 : 0.95), 'topleft');
+      el.classList.toggle('is-hovered', entry === hoveredPerson);
+    }
   }
 
   function draw() {
     const seconds = reducedMotion ? 0 : (performance.now() - clock0) / 1000;
     const p2 = clamp(state.progress - 1);
-    setup.blend(p2);
+    const p3 = clamp(state.progress - 2);
+    setup.blend(p2, p3);
     grid.setTurn(state.turn);
     const layout = stages.apply(state.progress, seconds, focused);
-    hoverMoving = grid.stepHover(shown);
+    hoverMoving = grid.stepHover(shown) | landscape.stepHover(hoveredPerson);
     renderer.render(scene, camera);
     placeOverlays(layout);
-    const stage = state.progress < 0.5 ? '0' : state.progress < 1.5 ? '1' : '2';
+    const stage = state.progress < 0.5 ? '0' : state.progress < 1.5 ? '1' : state.progress < 2.5 ? '2' : '3';
     if (section.dataset.stage !== stage) {
       section.dataset.stage = stage;
       picker.setEnabled(stage === '2');
+      peoplePicker.setEnabled(stage === '3');
     }
   }
 
@@ -214,6 +286,22 @@ export function start() {
     },
   });
 
+  // pointing at people's cubes: the cube pops taller; clicking opens their page
+  const peoplePicker = createPicker({
+    element: section,
+    camera,
+    targets: landscape.pickTargets,
+    onChange(entry, pinned) {
+      hoveredPerson = entry;
+      if (entry && pinned) {
+        const link = personEls.find((p) => p.entry === entry)?.el;
+        if (link?.href) link.click();
+        peoplePicker.clear();
+      }
+      wake();
+    },
+  });
+
   new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; wake(); }).observe(section);
   document.addEventListener('visibilitychange', wake);
   window.addEventListener('resize', () => { setup.resize(); draw(); });
@@ -224,6 +312,7 @@ export function start() {
   function goTo(stage) {
     const target = Number(stage);
     buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.goto === stage)));
+    if (target !== 2) picker.clear();
     if (target < 2) {
       focused = null;
       picker.clear();

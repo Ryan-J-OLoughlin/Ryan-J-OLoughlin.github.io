@@ -158,6 +158,7 @@ const fill = {
   layers_intro: esc(site.layers_intro),
   grid_intro: esc(site.grid_intro),
   grid_hint: esc(site.grid_hint),
+  people_hint: esc(site.people_hint),
   scene_labels: site.topics
     .map((t) => `<li class="scene-label" data-topic="${t.id}"><button type="button" class="topic-name" data-focus="${t.id}">${esc(t.label)}</button><span class="topic-line">${esc(t.line)}</span></li>`)
     .join('\n'),
@@ -200,6 +201,9 @@ const sceneData = {
     link: firstLink(w.links),
   })),
 };
+sceneData.fields = site.fields;
+sceneData.people = people.map((p) => ({ id: p.id, name: p.name, url: p.url ?? '', fields: p.fields, relation: p.relation }));
+sceneData.thisModel = site.this_model ?? 'this model';
 mkdirSync(new URL('src/generated', root), { recursive: true });
 writeFileSync(new URL('src/generated/scene-data.json', root), JSON.stringify(sceneData));
 console.log(`Wrote src/index.html: ${works.length} works, ${people.length} people`);

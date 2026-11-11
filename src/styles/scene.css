@@ -6,6 +6,8 @@
 .has-scene #scene {
   display: block;
   position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw); /* full bleed: the scene spans the whole window */
   height: 100svh;
   min-height: 34rem;
   overflow: hidden;
@@ -169,3 +171,41 @@
 .turn-button:hover svg { transform: rotate(90deg); }
 @media (prefers-reduced-motion: reduce) { .turn-button svg { transition: none; } }
 @media (max-width: 820px) { .turn-button { margin-top: 0.75rem; } }
+
+/* ───── stage ESM: thank-you, field names, people ───── */
+
+#scene .scene-text-3 { opacity: 0; pointer-events: none; transform: translateY(-45%); }
+#scene[data-stage="3"] .scene-text-0,
+#scene[data-stage="3"] .scene-text-1,
+#scene[data-stage="3"] .scene-text-2 { opacity: 0; pointer-events: none; }
+#scene[data-stage="3"] .scene-text-3 { opacity: 1; pointer-events: auto; transform: translateY(-50%); transition-delay: 0.6s; }
+.scene-thanks { max-width: 15ch; }
+
+.esm-labels { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+.esm-field {
+  position: absolute; left: 0; top: 0; white-space: nowrap;
+  font-family: var(--font-display); font-size: 1.1rem; color: var(--ink-soft);
+  text-shadow: 0 0 6px var(--ground), 0 0 2px var(--ground);
+}
+.esm-field[data-field="climate-modeling"] { color: color-mix(in srgb, var(--ocean) 80%, var(--ink)); }
+.esm-field[data-field="philosophy"] { color: color-mix(in srgb, var(--earth) 80%, var(--ink)); }
+.esm-field[data-field="ai"] { color: color-mix(in srgb, var(--green) 75%, var(--ink)); }
+.esm-field[data-field="policy"] { color: color-mix(in srgb, var(--sand) 70%, var(--ink)); }
+
+.esm-person {
+  position: absolute; left: 0; top: 0; white-space: nowrap;
+  font-family: var(--font-mono); font-size: 0.66rem; color: var(--ink);
+  padding: 0 3px; border-radius: 3px;
+  background: rgba(238, 240, 234, 0.55);
+  pointer-events: auto; text-decoration: none;
+}
+a.esm-person { text-decoration: underline; text-decoration-color: rgba(28, 32, 36, 0.3); text-underline-offset: 0.2em; }
+a.esm-person:hover, .esm-person.is-hovered { background: rgba(255, 255, 255, 0.95); text-decoration-color: currentColor; }
+.esm-person.is-me { font-weight: 600; pointer-events: none; }
+
+@media (max-width: 820px) {
+  #scene .scene-text-3 { transform: translateY(0.5rem); }
+  #scene[data-stage="3"] .scene-text-3 { transform: none; }
+  .esm-field { font-size: 0.85rem; }
+  .esm-person { font-size: 0.56rem; }
+}

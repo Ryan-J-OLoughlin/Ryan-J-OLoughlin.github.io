@@ -27,6 +27,7 @@ export function createSetup(container) {
   scene.add(sun);
 
   let gridBlend = 0; // 0 = column stages, 1 = full grid
+  let farBlend = 0;  // 0 = full grid, 1 = zoomed out to the landscape (ESM)
 
   function fit() {
     const w = container.clientWidth;
@@ -37,7 +38,8 @@ export function createSetup(container) {
     // units, so this scales the model to the screen. The grid needs more room.
     const column = wide ? (h < 640 ? 7.8 : 7) : (w / h > 0.62 ? 10.5 : 9.6);
     const gridView = wide ? (h < 640 ? 8.6 : 8) : 13;
-    const viewHeight = lerp(column, gridView, gridBlend);
+    const far = wide ? 21 : 34;
+    const viewHeight = lerp(lerp(column, gridView, gridBlend), far, farBlend);
     const aspect = w / h;
     camera.top = viewHeight / 2;
     camera.bottom = -viewHeight / 2;
@@ -47,8 +49,15 @@ export function createSetup(container) {
     // Desktop: the model sits right of centre, text on the left.
     // Phone: below the text (and nudged left to leave room for labels).
     camera.clearViewOffset();
-    if (wide) camera.setViewOffset(w, h, lerp(-w * 0.14, -w * 0.12, gridBlend), lerp(0, -h * 0.02, gridBlend), w, h);
-    else camera.setViewOffset(w, h, lerp(w * 0.16, w * 0.04, gridBlend), lerp(-h * 0.13, -h * 0.12, gridBlend), w, h);
+    if (wide) {
+      const x = lerp(lerp(-w * 0.14, -w * 0.12, gridBlend), -w * 0.06, farBlend);
+      const y = lerp(lerp(0, -h * 0.02, gridBlend), -h * 0.04, farBlend);
+      camera.setViewOffset(w, h, x, y, w, h);
+    } else {
+      const x = lerp(lerp(w * 0.16, w * 0.04, gridBlend), 0, farBlend);
+      const y = lerp(lerp(-h * 0.13, -h * 0.12, gridBlend), -h * 0.1, farBlend);
+      camera.setViewOffset(w, h, x, y, w, h);
+    }
     camera.updateProjectionMatrix();
   }
 
@@ -60,8 +69,10 @@ export function createSetup(container) {
   return {
     renderer, scene, camera, resize,
     // Called each frame with how far into the grid stage we are.
-    blend(value) {
-      if (value !== gridBlend) { gridBlend = value; fit(); }
+    // far: how far into the zoom-out to ESM (eased fast, so the pull-back feels rapid)
+    blend(value, far = 0) {
+      const f = 1 - Math.pow(1 - far, 3);
+      if (value !== gridBlend || f !== farBlend) { gridBlend = value; farBlend = f; fit(); }
     },
   };
 }

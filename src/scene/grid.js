@@ -127,8 +127,9 @@ export function createGrid({ data, layerY, colors }) {
     pickTargets: cubes.map((c) => c.cube.pick),
 
     // reveal: 0 (no grid) – 1 (fully built); focused: a topic id or null
-    update(reveal, focusedTopic) {
-      root.visible = reveal > 0.001;
+    // fade: 1 normally; goes to 0 as the grid shrinks away into the ESM stage
+    update(reveal, focusedTopic, fade = 1) {
+      root.visible = reveal > 0.001 && fade > 0.001;
       if (!root.visible) return;
 
       for (const [id, layer] of Object.entries(layers)) {
@@ -142,7 +143,7 @@ export function createGrid({ data, layerY, colors }) {
         layer.offset = (layer.offset ?? 0) + (away - (layer.offset ?? 0)) * 0.18;
         layer.group.position.y = layer.y + layer.offset;
         layer.dim = dim;
-        layer.tileMaterial.opacity = 0.55 * clamp(reveal * 1.5) * dim;
+        layer.tileMaterial.opacity = 0.55 * clamp(reveal * 1.5) * dim * fade;
       }
 
       for (const c of cubes) {
@@ -152,11 +153,11 @@ export function createGrid({ data, layerY, colors }) {
         c.cube.group.position.set(c.x, (c.baseY * rise) + lift, c.z);
         c.cube.group.scale.set(CUBE * grow, Math.max(0.001, CUBE * rise * grow), CUBE * grow);
         scratch.copy(colors[c.topic]);
-        c.cube.set(scratch, clamp(rise * 1.2) * layers[c.topic].dim);
+        c.cube.set(scratch, clamp(rise * 1.2) * layers[c.topic].dim * fade);
       }
 
       const anyFocus = focusedTopic !== null;
-      threadMaterial.opacity = 0.5 * clamp((reveal - 0.7) / 0.3) * (anyFocus ? 0 : 1); // threads hide while a layer is forward
+      threadMaterial.opacity = 0.5 * clamp((reveal - 0.7) / 0.3) * (anyFocus ? 0 : 1) * fade; // threads hide while a layer is forward
       threads.visible = threadMaterial.opacity > 0.001;
     },
 
