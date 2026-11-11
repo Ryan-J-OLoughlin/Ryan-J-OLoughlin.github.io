@@ -8,11 +8,31 @@
   position: relative;
   width: 100vw;
   margin-left: calc(50% - 50vw); /* full bleed: the scene spans the whole window */
+  height: 100svh; /* scroll.js makes this taller, to scroll through the stages */
+  overflow-x: clip;
+}
+
+/* The picture that stays pinned while the section scrolls past. */
+.scene-sticky {
+  position: sticky;
+  top: 0;
   height: 100svh;
   min-height: 34rem;
   overflow: hidden;
   background: url("/contours.svg") center / cover no-repeat;
 }
+
+.scroll-cue {
+  position: absolute; left: 50%; bottom: 1.5rem; transform: translateX(-50%);
+  margin: 0; z-index: 2;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-soft);
+  transition: opacity 0.4s ease;
+}
+.scroll-cue span { display: inline-block; animation: nudge 2.2s ease-in-out infinite; }
+@keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+@media (prefers-reduced-motion: reduce) { .scroll-cue span { animation: none; } }
+#scene:not([data-stage="0"]) .scroll-cue { opacity: 0; }
+@media (max-width: 820px) { .scroll-cue { bottom: 5.5rem; } }
 
 /* In 3D mode, the scene shows stages 0D and 1D, so their plain versions step aside. */
 .has-scene main > .stage-0,

@@ -11,6 +11,7 @@ import { createGrid, CELL } from './grid.js';
 import { createStages, LAYERS, GAPS, LAYER_Y } from './stages.js';
 import { toScreen, pin } from './labels.js';
 import { createPicker } from './pick.js';
+import { createScroll } from './scroll.js';
 import { createLandscape, heightAt, MODEL_SPOT, FIELD_CENTERS, CUBE as PERSON_CUBE } from './landscape.js';
 
 const LAND_Y = -1.4; // the landscape sits a little below the model's centre
@@ -25,6 +26,7 @@ function cssColor(name) {
 
 export function start() {
   const section = document.getElementById('scene');
+  const pinned = section.querySelector('.scene-sticky'); // the picture that stays put while you scroll
   const holder = section.querySelector('.scene-canvas');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -105,9 +107,14 @@ export function start() {
     return { el, entry: e };
   });
 
+  const scroll = createScroll(section);
+  const buttons = [...document.querySelectorAll('.stage-control [data-goto]')];
+  window.addEventListener('scroll', () => wake(), { passive: true });
+
   // ───── state ─────
   const state = { progress: 0, turn: 0 };
   let turning = false;
+  let chasing = false; // still catching up with the scroll position
   let focused = null;   // a topic id when one layer is brought forward
   let shown = null;     // the work whose card is showing
   let tweening = false;
@@ -226,6 +233,11 @@ export function start() {
   }
 
   function draw() {
+    // ease toward where the scroll position says we should be (smooths out wheel steps)
+    const goal = scroll.progress();
+    const gap = goal - state.progress;
+    state.progress = reducedMotion || Math.abs(gap) < 0.0015 ? goal : state.progress + gap * 0.14;
+    chasing = state.progress !== goal;
     const seconds = reducedMotion ? 0 : (performance.now() - clock0) / 1000;
     const p2 = clamp(state.progress - 1);
     const p3 = clamp(state.progress - 2);
@@ -238,6 +250,9 @@ export function start() {
     const stage = state.progress < 0.5 ? '0' : state.progress < 1.5 ? '1' : state.progress < 2.5 ? '2' : '3';
     if (section.dataset.stage !== stage) {
       section.dataset.stage = stage;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.goto === stage)));
+      if (stage !== '2') picker.clear();
+      if (stage < '2') { focused = null; if (state.turn % (Math.PI * 2) !== 0) turnTo(0); }
       picker.setEnabled(stage === '2');
       peoplePicker.setEnabled(stage === '3');
     }
@@ -249,7 +264,7 @@ export function start() {
       const target = focused === null ? 0 : focused === id ? 1 : -1;
       return Math.abs(l.focus - target) > 0.01;
     });
-    return onScreen && !document.hidden && (tweening || turning || airMoving || hoverMoving || focusMoving);
+    return onScreen && !document.hidden && (chasing || tweening || turning || airMoving || hoverMoving || focusMoving);
   }
 
   function loop() {
@@ -269,7 +284,7 @@ export function start() {
 
   // ───── pointing at cubes ─────
   const picker = createPicker({
-    element: section,
+    element: pinned,
     camera,
     targets: grid.pickTargets,
     onChange(entry, pinned) {
@@ -292,7 +307,7 @@ export function start() {
 
   // pointing at people's cubes: the cube pops taller; clicking opens their page
   const peoplePicker = createPicker({
-    element: section,
+    element: pinned,
     camera,
     targets: landscape.pickTargets,
     onChange(entry, pinned) {
@@ -308,32 +323,12 @@ export function start() {
 
   new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; wake(); }).observe(section);
   document.addEventListener('visibilitychange', wake);
-  window.addEventListener('resize', () => { setup.resize(); draw(); });
+  window.addEventListener('resize', () => { setup.resize(); wake(); });
 
-  // ───── stage control ─────
-  const buttons = [...document.querySelectorAll('.stage-control [data-goto]')];
-
+  // ───── stage control: buttons scroll to their stage; scrolling does the rest ─────
   function goTo(stage) {
-    const target = Number(stage);
-    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.goto === stage)));
-    if (target !== 2) picker.clear();
-    if (target < 2) {
-      focused = null;
-      picker.clear();
-      if (state.turn !== 0) turnTo(0);
-    }
-    section.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
-    if (reducedMotion) { state.progress = target; wake(); return; }
-    tweening = true;
+    scroll.goTo(Number(stage), !reducedMotion);
     wake();
-    gsap.to(state, {
-      progress: target,
-      // the move to ESM has several steps, so it gets more time and an even pace
-      duration: (target === 3 || state.progress > 2) && Math.abs(target - state.progress) <= 1.01 ? 4.2 : 1.6 + 0.5 * Math.abs(target - state.progress),
-      ease: target === 3 || state.progress > 2 ? 'sine.inOut' : 'power2.inOut',
-      overwrite: true,
-      onComplete: () => { tweening = false; wake(); },
-    });
   }
   buttons.forEach((b) => b.addEventListener('click', () => goTo(b.dataset.goto)));
 
