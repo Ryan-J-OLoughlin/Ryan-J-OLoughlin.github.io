@@ -56,8 +56,9 @@ fields:
 contact:
   email: roloughlin@qc.cuny.edu
   cv: files/cv.pdf
-  links:            # PLACEHOLDER — add the real profile addresses
-    google_scholar: ""
-    philpeople: ""
-    orcid: ""
-    github: ""
+  links:            # from the current site (ryanoloughlin.org)
+    google_scholar: https://scholar.google.com/citations?user=FVgAseQAAAAJ&hl=en
+    philpeople: https://philpeople.org/profiles/ryan-o-loughlin
+    orcid: https://orcid.org/0000-0002-9106-1460
+    github: https://github.com/Ryan-J-OLoughlin/
+    linkedin: https://www.linkedin.com/in/ryan-o-loughlin-885256300/

@@ -101,6 +101,10 @@ export function start() {
       ? Object.assign(document.createElement('span'), { textContent: p.name })
       : Object.assign(document.createElement('a'), { textContent: p.name, href: p.url, target: '_blank', rel: 'noopener' });
     if (p.title) el.setAttribute('aria-description', p.title);
+    // phones show family names only ("Lloyd", not "Elisabeth A. Lloyd"); the full name stays readable to screen readers
+    el.dataset.full = p.name;
+    el.dataset.short = e.me ? p.name : p.name.split(' ').pop();
+    if (!e.me) el.setAttribute('aria-label', p.name);
     el.className = e.me ? 'esm-person is-me' : 'esm-person';
     if (!e.me) {
       el.addEventListener('mouseenter', () => { hoveredPerson = e; wake(); });
@@ -272,6 +276,8 @@ export function start() {
     }
     let hoveredBox = null;
     for (const { el, entry } of personEls) {
+      const label = wide ? el.dataset.full : el.dataset.short;
+      if (el.textContent !== label) el.textContent = label;
       landscape.topOf(entry, top);
       const pos = toScreen(camera, holder, top.x, top.y + LAND_Y, top.z);
       const w = el.offsetWidth || 80;
@@ -301,7 +307,7 @@ export function start() {
     }
     // a faint line with the hovered person's job title, just under their name
     const title = hoveredPerson?.person?.title;
-    if (title && hoveredBox && esmText > 0.5) {
+    if (wide && title && hoveredBox && esmText > 0.5) {
       if (titleEl.textContent !== title) titleEl.textContent = title;
       const tw = titleEl.offsetWidth;
       const th = titleEl.offsetHeight;

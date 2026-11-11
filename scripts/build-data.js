@@ -144,7 +144,7 @@ ${items}
   })
   .join('\n');
 
-const profileNames = { google_scholar: 'Google Scholar', philpeople: 'PhilPeople', orcid: 'ORCID', github: 'GitHub' };
+const profileNames = { google_scholar: 'Google Scholar', philpeople: 'PhilPeople', orcid: 'ORCID', github: 'GitHub', linkedin: 'LinkedIn' };
 const profiles = Object.entries(site.contact.links ?? {})
   .filter(([, href]) => href)
   .map(([k, href]) => `<a href="${esc(href)}">${profileNames[k] ?? esc(k)}</a>`)
