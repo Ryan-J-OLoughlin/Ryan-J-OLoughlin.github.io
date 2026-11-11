@@ -162,16 +162,19 @@ export function createLandscape({ data, colors }) {
     entries,
     pickTargets: entries.filter((e) => !e.me).map((e) => e.cube.pick),
 
-    // rise: 0 (flat, invisible) – 1 (full landscape); people: 0 – 1 (cubes popped up)
-    update(rise, people) {
-      group.visible = rise > 0.001;
+    // rise: 0 (flat, invisible) – 1 (full landscape)
+    // people: 0 – 1 (everyone else's cubes popped up); me: 0 – 1 ("this model" cube)
+    update(rise, people, me) {
+      group.visible = me > 0.001 || rise > 0.001;
       if (!group.visible) return;
+      ground.visible = rise > 0.001;
+      survey.visible = rise > 0.001;
       const r = ease(clamp(rise));
       group.scale.set(1, Math.max(0.001, r), 1);
       ground.material.opacity = 0.9 * clamp(rise * 1.6);
       lineMaterial.opacity = 0.22 * clamp((rise - 0.4) / 0.6);
       for (const e of entries) {
-        const p = e.me ? clamp(people * 3) : pop(clamp((people - e.delay) / 0.4));
+        const p = e.me ? me : pop(clamp((people - e.delay) / 0.4));
         const tall = 1 + 0.9 * e.hover;
         const h = Math.max(0.001, CUBE * p * tall);
         // the group is squashed vertically while the ground rises; undo that for the cubes

@@ -65,17 +65,24 @@ export function createStages({ cubes, air, grid, landscape, modelSpot, modelSize
     });
 
     air.update(seconds, clamp((p1 - 0.55) / 0.45) * (1 - clamp(p2 / 0.3)));
-    // 3D → ESM: the grid shrinks fast toward its spot on the landscape while the camera
-    // pulls back; then it hands over to the small "this model" cube.
-    const shrink = 1 - Math.pow(1 - clamp(p3 / 0.5), 4); // quick start, soft landing
+    // 3D → ESM happens in clear steps, so it's easy to follow:
+    //   0.00–0.35  zoom out: the grid shrinks to the size of one cube, camera pulls back
+    //   0.30–0.40  the grid hands over to the small "this model" cube, with its label
+    //   0.50–0.80  the landscape rises around it
+    //   0.72–1.00  the other people's cubes pop up, with their names
+    const shrink = 1 - Math.pow(1 - clamp(p3 / 0.35), 3);
     grid.object.scale.setScalar(lerp(1, modelSize / grid.width, shrink)); // ends the size of one cube
     grid.object.position.set(
       lerp(0, modelSpot.x, shrink),
       lerp(0, modelSpot.y, shrink),
       lerp(0, modelSpot.z, shrink),
     );
-    grid.update(reveal, focusedTopic, 1 - clamp((p3 - 0.42) / 0.12));
-    landscape.update(clamp((p3 - 0.25) / 0.5), clamp((p3 - 0.45) / 0.55));
+    grid.update(reveal, focusedTopic, 1 - clamp((p3 - 0.3) / 0.08));
+    const me = clamp((p3 - 0.28) / 0.1);
+    const ground = clamp((p3 - 0.5) / 0.3);
+    const people = clamp((p3 - 0.72) / 0.28);
+    landscape.update(ground, people, me);
+    Object.assign(layout, { me, ground, people });
     layout.shrink = shrink;
     return layout;
   }

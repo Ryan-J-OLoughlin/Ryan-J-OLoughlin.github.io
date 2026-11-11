@@ -67,7 +67,8 @@ export function start() {
   const landscape = createLandscape({ data, colors });
   landscape.object.position.y = LAND_Y;
   scene.add(landscape.object);
-  const modelSpot = new Vector3(MODEL_SPOT[0], LAND_Y + landscape.entries[0].ground + PERSON_CUBE / 2, MODEL_SPOT[1]);
+  // where the grid shrinks to: the ground is still flat then; the cube rides up as the land rises
+  const modelSpot = new Vector3(MODEL_SPOT[0], LAND_Y + PERSON_CUBE / 2, MODEL_SPOT[1]);
 
   const stages = createStages({ cubes, air, grid, landscape, modelSpot, modelSize: PERSON_CUBE, colors });
 
@@ -191,13 +192,14 @@ export function start() {
     }
 
     // ESM: field names on their hills, people's names above their cubes
-    const esmText = clamp((p3 - 0.7) / 0.3);
+    const esmText = clamp((layout.people ?? 0) * 1.5);
+    const fieldText = clamp(((layout.ground ?? 0) - 0.5) / 0.5);
     for (const { el, id } of fieldEls) {
       const [fx, fz] = FIELD_CENTERS[id];
       const pos = toScreen(camera, holder, fx * 1.05, LAND_Y + heightAt(fx, fz) + 0.6, fz * 1.05);
       const half = (el.offsetWidth || 120) / 2;
       pos.x = Math.max(half + 6, Math.min(holder.clientWidth - half - 6, pos.x)); // keep on screen
-      pin(el, pos, esmText * 0.9, 'center');
+      pin(el, pos, fieldText * 0.9, 'center');
     }
     const W = holder.clientWidth;
     const boxes = [];
@@ -216,7 +218,7 @@ export function start() {
       const fits = (o) => o.x > 4 && o.x + w < W - 4 && boxes.every((b) => o.x + w < b.x || o.x > b.x + b.w || o.y + h < b.y || o.y > b.y + b.h);
       const spot = options.find(fits) ?? options[0];
       boxes.push({ ...spot, w, h });
-      pin(el, spot, esmText * (entry.me ? 1 : 0.95), 'topleft');
+      pin(el, spot, entry.me ? (layout.me ?? 0) : esmText * 0.95, 'topleft');
       el.classList.toggle('is-hovered', entry === hoveredPerson);
     }
   }
@@ -225,7 +227,7 @@ export function start() {
     const seconds = reducedMotion ? 0 : (performance.now() - clock0) / 1000;
     const p2 = clamp(state.progress - 1);
     const p3 = clamp(state.progress - 2);
-    setup.blend(p2, p3);
+    setup.blend(p2, clamp(p3 / 0.35)); // the camera pull-back finishes with the shrink
     grid.setTurn(state.turn);
     const layout = stages.apply(state.progress, seconds, focused);
     hoverMoving = grid.stepHover(shown) | landscape.stepHover(hoveredPerson);
@@ -324,8 +326,9 @@ export function start() {
     wake();
     gsap.to(state, {
       progress: target,
-      duration: 1.6 + 0.5 * Math.abs(target - state.progress),
-      ease: 'power2.inOut',
+      // the move to ESM has several steps, so it gets more time and an even pace
+      duration: (target === 3 || state.progress > 2) && Math.abs(target - state.progress) <= 1.01 ? 4.2 : 1.6 + 0.5 * Math.abs(target - state.progress),
+      ease: target === 3 || state.progress > 2 ? 'sine.inOut' : 'power2.inOut',
       overwrite: true,
       onComplete: () => { tweening = false; wake(); },
     });
