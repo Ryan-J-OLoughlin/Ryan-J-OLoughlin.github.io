@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2A323D">
+  <title>Light · Ryan O'Loughlin</title>
+  <meta name="description" content="Light: a small game of flawed glass cubes and a dark landscape.">
+  <link rel="stylesheet" href="./light.css">
+  <script type="module" src="./main.js"></script>
+</head>
+<body>
+  <canvas role="img" aria-label="A dark landscape lit by one light. Place glass cubes to carry the light further."></canvas>
+
+  <header class="bar">
+    <a class="btn home" href="../" aria-label="Back to the homepage">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <output class="score" aria-label="Score">0</output>
+    <button type="button" class="btn center" aria-label="Back to the light">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+    </button>
+  </header>
+
+  <p class="region" aria-live="polite"></p>
+
+  <nav class="tray" aria-label="Cubes"></nav>
+
+  <noscript><p class="nojs">Light needs JavaScript. <a href="../">Back to the homepage</a></p></noscript>
+</body>
+</html>

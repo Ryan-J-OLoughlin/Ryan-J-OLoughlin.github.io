@@ -29,8 +29,18 @@ data/                 the content (YAML)
 public/files/         PDFs, slides, CV
 scripts/build-data.js checks the YAML and writes src/index.html from src/template.html
 src/template.html     page structure — edit this, never src/index.html
-src/styles/base.css   all styling; typefaces and colors are variables at the top
+src/styles/tokens.css typefaces, colors and type scale (shared by the homepage and Light)
+src/styles/base.css   homepage styling
+src/light/            the Light game, served at /light/ (plain JS, 2D canvas)
 ```
+
+## The Light game
+
+`src/light/` is a separate page. `npm run dev` serves it at http://localhost:5173/light/.
+Each file says at the top what it does: `world.js` (terrain from the seed), `cubes.js`
+(the four cube types), `beams.js` (how light travels), `draw.js`, `input.js`, `ui.js`,
+`save.js`, and `main.js` (the rules and scoring). The old game's address,
+`/assets/game.html`, redirects to `/light/`.
 
 ## Entries marked `review: true`
 

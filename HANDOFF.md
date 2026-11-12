@@ -56,8 +56,10 @@ public/                static files (contours.svg, CNAME, files/ for PDFs)
 scripts/build-data.js  checks the YAML; writes src/index.html and src/generated/scene-data.json
 src/template.html      page structure (edit this, never src/index.html)
 src/main.js            loads the 3D only if the browser can draw it
-src/styles/base.css    plain page; colors and typefaces are variables at the top
+src/styles/tokens.css  colors, typefaces, type scale (shared with the Light game)
+src/styles/base.css    plain page
 src/styles/scene.css   3D overlay text, labels, stage control
+src/light/             the Light game at /light/ (plain JS, 2D canvas; see README)
 src/scene/
   index.js     wires everything together; overlays; stage control
   scroll.js    scroll position → stage progress (holds and move lengths in TRACK)

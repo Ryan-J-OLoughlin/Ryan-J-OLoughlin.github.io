@@ -1,47 +1,7 @@
 /* base.css — the plain page. Works on its own; the 3D layer will sit on top later.
-   Typefaces, colors and spacing are all set here as variables, so they change in one place. */
+   Typefaces, colors and the type scale live in tokens.css (shared with the Light game). */
 
-:root {
-  /* Typefaces (placeholders: system fonts, no download). Swap these three lines to change them. */
-  --font-display: "Iowan Old Style", "Charter", "Palatino Linotype", Georgia, serif;
-  --font-text: "Iowan Old Style", "Charter", "Palatino Linotype", Georgia, serif;
-  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
-
-  /* Colors from survey maps */
-  --ground: #EEF0EA;      /* pale map paper */
-  --ink: #1C2024;
-  --ink-soft: #4D535A;
-  --rule: #C9CDC5;
-  --ocean: #2F6482;       /* robustness */
-  --green: #5F8A5B;       /* errors */
-  --earth: #9A6B45;       /* antifragility */
-  --sand: #A8925A;        /* policy (stage 4) */
-
-  /* Type scale: one ratio (1.2, a minor third) for every size on the site.
-     Use only these sizes; add a step here rather than a one-off size in a rule. */
-  --fs-2xs: 0.579rem;   /* phones only: crowded scene labels */
-  --fs-xs:  0.694rem;   /* monospace labels: nav, axes, codes, kickers */
-  --fs-sm:  0.833rem;   /* secondary text: meta lines, hints, captions */
-  --fs-md:  1rem;       /* body */
-  --fs-lg:  1.2rem;     /* small headings: layer names, card titles */
-  --fs-xl:  1.44rem;    /* section headings */
-  --fs-2xl: clamp(1.44rem, 2.4vw, 2.074rem);  /* stage headings */
-  --fs-3xl: clamp(2.074rem, 5vw, 3.583rem);   /* the tagline */
-
-  /* Weights: regular and one emphasis, nothing else */
-  --fw-regular: 400;
-  --fw-strong: 600;
-
-  /* Line heights */
-  --lh-tight: 1.1;      /* display */
-  --lh-snug: 1.3;       /* headings, short lines */
-  --lh-body: 1.55;      /* running text */
-
-  /* Spacing */
-  --measure: 40rem;       /* comfortable line length */
-  --gap: clamp(1rem, 3vw, 2rem);
-  --section: clamp(4rem, 12vw, 9rem);
-}
+@import "./tokens.css";
 
 *, *::before, *::after { box-sizing: border-box; }
 
