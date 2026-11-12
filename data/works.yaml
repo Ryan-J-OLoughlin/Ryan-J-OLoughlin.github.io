@@ -2,10 +2,11 @@
 # Draft from Ryan's CV (Sept 4, 2026). Edit freely.
 #
 # type:    paper | talk | teaching | outreach | grant
-# topics:  robustness | errors | antifragility   (one or two; two = a cube on two layers)
+# topics:  robustness | errors | antifragility   (one or more; each extra topic = a twin cube on that layer)
 # review:  true means the topic was a judgment call. Ryan should confirm, then delete the line.
 # note:    why that topic was chosen, for Ryan. Delete after review.
 # featured: true marks a selected work: its cube is drawn in full color. Keep it to a handful.
+# show:    false keeps a work here for the record but leaves it off the site.
 # links:   fill in pdf / slides / doi / url as files are added. Empty is fine.
 
 # ───────────────────────── papers ─────────────────────────
@@ -36,8 +37,6 @@
   venue: CSHPS Communiqué, no. 104
   with: []
   links: { url: https://cshps.ca/no-104-autumn-automne-2021/ }
-  review: true
-  note: Continues the seepage argument (outside pressure shaping research), so grouped with robustness.
 
 - id: robustness-economics-2022
   title: "Model robustness in economics: the admissibility and evaluation of tractability assumptions"
@@ -80,6 +79,7 @@
   links: { doi: https://doi.org/10.5194/gmd-18-787-2025 }
 
 - id: elliott-review-2025
+  show: false   # kept for the record and the CV; not on the site
   title: "Review of Values in Science, by Kevin Elliott"
   year: 2025
   type: paper
@@ -87,8 +87,6 @@
   venue: Journal of Moral Philosophy
   with: []
   links: { doi: https://doi.org/10.1163/17455243-20221202 }
-  review: true
-  note: Values and objectivity, the same thread as the seepage papers. A book review; Ryan may prefer to leave it off the grid.
 
 - id: geoengineering-field-experiments-2026
   featured: true
@@ -99,8 +97,6 @@
   venue: European Journal for Philosophy of Science
   with: [daniele-visioni]
   links: { doi: https://doi.org/10.1007/s13194-026-00762-9 }
-  review: true
-  note: Geoengineering paper. Small experiments test where models are wrong (errors) and are worth doing even when imperfect (antifragility). Best fit of the three, but a judgment call.
 
 - id: practice-oriented-geosciences-forthcoming
   title: "Why practice-oriented philosophy of the geosciences is essential: the case of model robustness"
@@ -110,8 +106,6 @@
   venue: "Comprehensive Philosophy of Science: Philosophy of the Geosciences (forthcoming)"
   with: [stuart-gluck, elisabeth-lloyd]
   links: {}
-  review: true
-  note: Forthcoming; year set to 2026 as a placeholder.
 
 # ───────────────────────── talks ─────────────────────────
 # Invited talks and selected conference talks. Grad-school talks before 2020
@@ -179,21 +173,18 @@
   venue: Society for Social Studies of Science, Honolulu
   with: []
   links: {}
-  review: true
-  note: Geoengineering talk. Its core claim, that subpar models can still be valuable, is the antifragility thread.
 
 - id: holism-giss-2023
   title: Holism in climate modeling
   year: 2023
   type: talk
-  topics: [robustness]
+  topics: [errors]
   venue: NASA Goddard Institute for Space Studies
   with: [dan-li]
   links: {}
-  review: true
-  note: Follows from the tractability and holism work, so grouped with robustness.
 
 - id: value-laden-interventions-2024
+  show: false   # kept for the record and the CV; not on the site
   title: Value-laden research and climate interventions
   year: 2024
   type: talk
@@ -201,8 +192,6 @@
   venue: NASA Goddard Institute for Space Studies
   with: []
   links: {}
-  review: true
-  note: Values talk on geoengineering. Values and objectivity fit robustness best of the three; weakest fit in the list.
 
 - id: philosophers-advances-2024
   title: Can philosophers help make advances in climate modeling?
@@ -212,10 +201,9 @@
   venue: Minnesota Center for Philosophy of Science
   with: []
   links: {}
-  review: true
-  note: Title alone doesn't say. Guessed errors, since that's where the philosophy-to-modeling contribution is most direct.
 
 - id: sai-ethics-2024
+  show: false   # kept for the record and the CV; not on the site
   title: The ethics of researching stratospheric aerosol injections
   year: 2024
   type: talk
@@ -223,8 +211,6 @@
   venue: NASA Goddard Institute for Space Studies
   with: []
   links: {}
-  review: true
-  note: Geoengineering ethics. Grouped with the field-experiments paper's argument about when imperfect research is worth doing. Weak fit.
 
 - id: convergence-divergence-2025
   title: Convergence, divergence, and trust in climate models
@@ -261,19 +247,15 @@
   venue: CUNY Graduate Center, Earth and Environmental Sciences
   with: []
   links: {}
-  review: true
-  note: Talk version of the 2026 field-experiments paper; same topics.
 
 - id: trust-without-truth-2026
   title: "Trust without truth: how philosophy can help science navigate uncertainty"
   year: 2026
   type: talk
-  topics: [robustness, antifragility]
+  topics: [robustness, errors, antifragility]
   venue: Keynote, LaGuardia Philosophy and Social Science Conference
   with: []
   links: {}
-  review: true
-  note: Broad keynote; tagged with the two topics the title points to.
 
 - id: antifragility-apsa-2026
   title: Antifragility in scientific modeling
@@ -288,12 +270,10 @@
   title: "Weather and climate modeling: value across disciplines (panel)"
   year: 2026
   type: talk
-  topics: [errors]
+  topics: [antifragility]
   venue: LEAP Annual Meeting, Columbia University
   with: []
   links: {}
-  review: true
-  note: Panel at an AI-and-physics climate center; grouped with the AI and errors work.
 
 # Added from the CV: talk versions of papers already on the grid. Their topics follow the paper.
 
@@ -364,7 +344,7 @@
   title: When are small-scale field experiments in solar geoengineering worth pursuing?
   year: 2026
   type: talk
-  topics: [errors, antifragility]
+  topics: [robustness]
   venue: Resources for the Future and Harvard SRM Research Workshop
   with: []
   links: {}
@@ -379,8 +359,6 @@
   venue: Indiana University
   with: []
   links: {}
-  review: true
-  note: Geoengineering course. Placed with the other geoengineering work; could equally go on errors.
 
 - id: trust-models-course-2023
   title: Why should we trust (climate) models if they're all wrong?
@@ -399,8 +377,6 @@
   venue: Queens College (taught 2022–2025)
   with: []
   links: {}
-  review: true
-  note: Taught most years; placed at its latest year. Its climate-justice focus fits none of the three topics cleanly; robustness is a placeholder.
 
 - id: natural-sciences-course-2025
   title: "Philosophy of the Natural Sciences: pluralism and Indigenous perspectives on climate science"
@@ -410,19 +386,15 @@
   venue: Queens College (cross-listed with Environmental Sciences)
   with: []
   links: {}
-  review: true
-  note: Pluralism links to the intercomparison and robustness work.
 
 - id: logic-scientific-reasoning-2026
   title: Logic and Scientific Reasoning
   year: 2026
   type: teaching
-  topics: [errors]
+  topics: [robustness]
   venue: Queens College
   with: []
   links: {}
-  review: true
-  note: Reasoning about evidence and error. A guess; an intro course may not need a topic at all.
 
 # Intro to Philosophy (taught every term) is left off the grid. Ryan to confirm.
 
@@ -445,8 +417,6 @@
   venue: CUNY, 2023–present
   with: []
   links: {}
-  review: true
-  note: Ongoing membership; placed at its start year. No natural topic; may be better left off the grid.
 
 # ───────────────────────── grants ─────────────────────────
 
@@ -468,8 +438,6 @@
   venue: PSC-CUNY
   with: []
   links: {}
-  review: true
-  note: The CV doesn't say what this funded. Topic is a placeholder.
 
 - id: qc-research-enhancement-2023
   title: Research travel to NCAR
@@ -479,19 +447,15 @@
   venue: Queens College Research Enhancement Grant and Mellon Foundation Fund
   with: []
   links: {}
-  review: true
-  note: Funded travel to NCAR in 2024; topic is a guess.
 
 - id: psc-cuny-2025
   title: PSC-CUNY Research Grant, Cycle 56
   year: 2025
   type: grant
-  topics: [antifragility]
+  topics: [robustness]
   venue: PSC-CUNY
   with: []
   links: {}
-  review: true
-  note: The CV doesn't say what this funded. Topic is a placeholder.
 
 # Left off the grid for now (CV page only): student awards and fellowships,
 # the Templeton writing workshop, the CALI and OER teaching fellowships,

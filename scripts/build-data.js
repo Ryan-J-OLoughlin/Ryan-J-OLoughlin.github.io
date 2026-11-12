@@ -12,7 +12,7 @@ const root = new URL('..', import.meta.url);
 const read = (path) => yaml.load(readFileSync(new URL(path, root), 'utf8'));
 
 const site = read('data/site.yaml');
-const works = read('data/works.yaml');
+const allWorks = read('data/works.yaml');
 const people = read('data/people.yaml');
 
 // ───────────── checks ─────────────
@@ -26,7 +26,7 @@ const personIds = new Set(people.map((p) => p.id));
 const relations = ['co-author', 'collaborator', 'mentor', 'colleague'];
 
 const seen = new Set();
-for (const w of works) {
+for (const w of allWorks) {
   const where = `works.yaml → ${w.id ?? w.title ?? '(no id)'}`;
   if (!w.id) problems.push(`${where}: missing id`);
   if (seen.has(w.id)) problems.push(`${where}: id used twice`);
@@ -34,6 +34,7 @@ for (const w of works) {
   if (!w.title) problems.push(`${where}: missing title`);
   if (!Number.isInteger(w.year)) problems.push(`${where}: year must be a number`);
   if (!categoryIds.includes(w.type)) problems.push(`${where}: type "${w.type}" is not one of ${categoryIds.join(', ')}`);
+  if (w.show !== undefined && typeof w.show !== 'boolean') problems.push(`${where}: show must be true or false`);
   if (w.featured !== undefined && typeof w.featured !== 'boolean') problems.push(`${where}: featured must be true or false`);
   if (!Array.isArray(w.topics) || w.topics.length === 0) problems.push(`${where}: needs at least one topic`);
   for (const t of w.topics ?? []) {
@@ -59,7 +60,10 @@ if (problems.length) {
   process.exit(1);
 }
 
-const flagged = works.filter((w) => w.review).length + people.filter((p) => p.review).length;
+// show: false keeps a work in the data (and the CV) but off the site.
+const works = allWorks.filter((w) => w.show !== false);
+
+const flagged = allWorks.filter((w) => w.review).length + people.filter((p) => p.review).length;
 if (flagged) console.log(`Note: ${flagged} entries still marked review: true`);
 
 // ───────────── HTML pieces ─────────────
