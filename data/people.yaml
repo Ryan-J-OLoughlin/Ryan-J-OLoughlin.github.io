@@ -1,0 +1,104 @@
+# people.yaml — the people shown as cubes in the last stage (ESM).
+#
+# relation: co-author | collaborator | mentor | colleague
+# fields:   climate-modeling | philosophy | ai | policy
+#           One field = sits inside it. Two = on the boundary. Three = where all three meet.
+#           List the field they lean toward most first.
+# url:      their own page. Empty means none found yet.
+# place:    where they work, shown when someone points at their name (desktop only).
+#           The CV doesn't say where people work, so these need Ryan's check.
+# cv:       what Ryan's CV (Sept 4, 2026) says about this person; "not in CV" means unverified.
+# review:   true means still unconfirmed. Confirm, then delete the line.
+
+- id: elisabeth-lloyd
+  name: Elisabeth A. Lloyd
+  place: Indiana University
+  cv: "dissertation chair; research assistant 2018–2021; co-author, forthcoming geosciences chapter"
+  relation: mentor
+  fields: [philosophy, climate-modeling]
+  url: https://www.amacad.org/person/elisabeth-lloyd
+  note: Dissertation chair; co-author on the forthcoming geosciences chapter.
+
+- id: dan-li
+  name: Dan Li
+  place: O'Loughlin Inc.   # Dan's own joke: she runs the household full time
+  cv: "co-author (Synthese 2022, GMD 2025); NASA GISS talk 2023; co-led a Queens College philosophy club event"
+  relation: co-author
+  fields: [philosophy, climate-modeling, ai]
+  url: https://dan-li-o.github.io/
+
+- id: daniele-visioni
+  name: Daniele Visioni
+  place: Cornell University
+  cv: "co-author (European Journal for Philosophy of Science 2026)"
+  relation: co-author
+  fields: [climate-modeling, policy]
+  url: https://cals.cornell.edu/people/daniele-visioni
+
+- id: stuart-gluck
+  name: Stuart Gluck
+  place: U.S. Department of Energy, Office of Science
+  cv: "co-author, forthcoming geosciences chapter"
+  relation: co-author
+  fields: [policy, philosophy]
+  url: https://philpeople.org/profiles/stuart-gluck
+  note: U.S. Department of Energy, Office of Science (Washington, DC). PhilPeople is the only public profile found.
+
+- id: travis-obrien
+  name: Travis A. O'Brien
+  place: Indiana University
+  cv: "co-author (GMD 2025)"
+  relation: co-author
+  fields: [ai, climate-modeling]
+  url: https://earth.indiana.edu/directory/faculty/obrien-travis.html
+
+- id: richard-neale
+  name: Richard Neale
+  place: NCAR
+  cv: "co-author (GMD 2025)"
+  relation: co-author
+  fields: [climate-modeling]
+  url: https://impacts.ucar.edu/en/persons/richard-neale/
+  note: NCAR; co-author on the explainable-AI paper.
+
+- id: ben-kravitz
+  name: Ben Kravitz
+  place: Indiana University
+  cv: "not in CV"
+  relation: mentor
+  fields: [climate-modeling]
+  url: https://climatemodeling.earth.indiana.edu/
+  note: Dissertation committee member.
+  review: true
+
+- id: gavin-schmidt
+  name: Gavin A. Schmidt
+  place: NASA Goddard Institute for Space Studies
+  cv: "not in CV"
+  relation: colleague
+  fields: [climate-modeling, philosophy]   # in climate, leaning toward philosophy
+  url: https://science.gsfc.nasa.gov/earth/giss/bio/gavin.a.schmidt
+  note: Director, NASA Goddard Institute for Space Studies (unconfirmed).
+  review: true
+
+- id: matt-mayernik
+  name: Matt Mayernik
+  place: NCAR
+  cv: "not in CV (CV lists Ryan as PI on the Sloan grant and names no co-PI)"
+  relation: collaborator
+  fields: [climate-modeling, philosophy]   # in climate, nearer philosophy than Richard Neale
+  url: https://impacts.ucar.edu/en/persons/matthew-mayernik/
+  note: Co-PI on the Sloan project.
+  review: true
+
+- id: yoichi-ishida
+  name: Yoichi Ishida
+  place: Ohio University
+  cv: "Ohio University: Ryan was his teaching assistant (FA15); he nominated Ryan for the 2016 Student Achievement Award"
+  relation: mentor
+  fields: [philosophy]
+  url: https://yoichiishida.com/
+  note: Ohio University (MA).
+
+# Still to add: any other dissertation committee members besides Lloyd (chair)
+# and Kravitz. These aren't listed publicly, so they need to come from Ryan.

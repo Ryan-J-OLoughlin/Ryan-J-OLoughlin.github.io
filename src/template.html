@@ -1,0 +1,106 @@
+<!doctype html>
+<!-- template.html: edit this, not index.html. index.html is rebuilt from it by `npm run data`. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{name}}</title>
+  <meta name="description" content="{{name}} — {{role}}">
+  <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/scene.css">
+  <script type="module" src="./main.js"></script>
+</head>
+<body>
+  <a class="skip text-only" href="#work">Skip to the work</a>
+
+  <header class="site-head">
+    <a class="site-name" href="./">{{name}}</a>
+    <nav aria-label="Site">
+      <a class="text-only" href="#work">Work</a>
+      <a class="text-only" href="#people">People</a>
+      <a href="{{cv}}">CV</a>
+      <a href="mailto:{{email}}">Email</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- The 3D scene (stages 0D and 1D). Hidden unless the browser can draw 3D;
+         then it replaces the plain versions of those two stages below. -->
+    <section class="scene" id="scene" aria-label="Overview" data-stage="0">
+      <div class="scene-sticky">
+      <div class="scene-canvas" aria-hidden="true"></div>
+      <p class="scroll-cue" aria-hidden="true">Scroll <span>↓</span></p>
+      <div class="scene-text scene-text-0">
+        <p class="role">{{role}}</p>
+        <h1 class="tagline">{{tagline}}</h1>
+        <p class="tagline-sub">{{tagline_sub}}</p>
+      </div>
+      <div class="scene-text scene-text-1">
+        <h2 class="scene-h">{{layers_intro}}</h2>
+      </div>
+      <div class="scene-text scene-text-2">
+        <h2 class="scene-h">{{grid_intro}}</h2>
+        <p class="scene-hint">{{grid_hint}}</p>
+      </div>
+      <div class="scene-text scene-text-3">
+        <p class="scene-h scene-thanks">{{thank_you}}</p>
+        <p class="scene-hint">{{people_hint}}</p>
+      </div>
+      <div class="grid-axes" aria-hidden="true"></div>
+      <button type="button" class="turn-button" aria-label="Turn the model a quarter turn">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/>
+          </svg>
+          <span>Turn 90°</span>
+        </button>
+      <div class="esm-labels"></div>
+      <div class="work-card" role="status" aria-live="polite" hidden></div>
+      <ul class="scene-labels">
+{{scene_labels}}
+      </ul>
+      </div>
+    </section>
+
+    <nav class="stage-control" aria-label="Model resolution">
+      {{stage_buttons}}
+    </nav>
+    <!-- Stage 0D: the question -->
+    <section class="stage stage-0" id="question" aria-label="The question">
+      <p class="role">{{role}}</p>
+      <h1 class="tagline">{{tagline}}</h1>
+      <p class="tagline-sub">{{tagline_sub}}</p>
+    </section>
+
+    <!-- Stage 1D: the three layers -->
+    <section class="stage stage-1" aria-labelledby="layers-h">
+      <h2 id="layers-h" class="label">Three themes</h2>
+      <ol class="layers">
+{{topics}}
+      </ol>
+    </section>
+
+    <!-- Stage 3D: the work, one section per layer -->
+    <section class="stage stage-3" id="work" aria-labelledby="work-h">
+      <h2 id="work-h" class="label">The work</h2>
+{{works}}
+    </section>
+
+    <!-- Stage ESM: the people this model runs on -->
+    <section class="stage stage-esm" id="people" aria-labelledby="people-h">
+      <h2 id="people-h" class="label">Coupled to</h2>
+      <p class="thank-you">{{thank_you}}</p>
+      <div class="fields">
+{{people}}
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <a href="mailto:{{email}}">{{email}}</a>
+    <a href="{{cv}}">CV (PDF)</a>
+{{profiles}}
+    <button type="button" class="text-toggle" aria-expanded="false" aria-controls="work people">Text version</button>
+    <span class="copy">© {{year}}</span>
+  </footer>
+</body>
+</html>

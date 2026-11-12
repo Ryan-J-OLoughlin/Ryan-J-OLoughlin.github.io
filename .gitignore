@@ -1,6 +1,4 @@
-/.quarto/
-_site/
-.quarto/
-.DS_Store
-/.luarc.json
-*:Zone.Identifier
+node_modules
+dist/
+src/index.html
+src/generated/
