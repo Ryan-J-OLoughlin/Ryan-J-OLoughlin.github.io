@@ -39,7 +39,8 @@
 .has-scene main > .stage-1 { display: none; }
 /* The work and people lists repeat the 3D stages; with the scene they wait behind the footer's "Text version". */
 .has-scene:not(.show-text) main > .stage-3,
-.has-scene:not(.show-text) main > .stage-esm { display: none; }
+.has-scene:not(.show-text) main > .stage-esm,
+.has-scene:not(.show-text) .text-only { display: none; }
 .has-scene .site-head { position: absolute; inset: 0 0 auto 0; z-index: 3; }
 
 .scene-canvas { position: absolute; inset: 0; }
