@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interactive: Trust Without Truth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/assets/game/css/game.css" />
+  <style>
+    /* Semi-transparent deep blue to let the site backdrop subtly show through */
+    html, body { height:100%; margin:0; background: rgba(11, 27, 42, 0.6); }
+    /* Remove extra padding so the game can use full height */
+    #cyoa { padding-top: 0; padding-bottom: 0; }
+  </style>
+  <script>
+    window.CYOA_CONFIG = { mount: '#cyoa' };
+  </script>
+</head>
+<body>
+  <div id="cyoa" aria-live="polite"></div>
+
+  <!-- Load game logic: file currently contains <script> wrapper; load and execute safely -->
+  <script>
+    (function(){
+      var url = '/assets/game/js/game.js';
+      fetch(url, {cache: 'no-store'}).then(function(r){ return r.text(); }).then(function(txt){
+        // Strip optional outer <script> wrapper to avoid syntax errors when executing
+        var code = txt.replace(/^\s*<script[^>]*>/i, '').replace(/<\/script>\s*$/i, '');
+        // Rewrite relative asset paths to absolute so they resolve when served from /assets/game/
+        code = code.split('assets/game/').join('/assets/game/');
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.text = code;
+        document.body.appendChild(s);
+      }).catch(function(err){
+        console.error('Failed to load game code', err);
+        var el = document.getElementById('cyoa');
+        if(el){ el.innerHTML = '<div class="cyoa-card"><div class="cyoa-title">Error</div><p>Could not load the interactive.</p></div>'; }
+      });
+    })();
+  </script>
+</body>
+</html>

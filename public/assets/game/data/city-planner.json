@@ -1,0 +1,57 @@
+{
+  "id": "city-planner",
+  "title": "City Planner",
+  "steps": [
+    {
+      "id": "spread",
+      "scene": "models_spread",
+      "prompt": "You’re a city planner. Model projections of floods spread apart. What do you make of this spread?",
+      "choices": [
+        { "key":"A", "label":"I want the best single model.", "feedback":"No single best model. Each has strengths/weaknesses; trust comes from comparing many." },
+        { "key":"B", "label":"If models don't agree, I can’t trust this.", "feedback":"Too quick. Model spread does not mean ignorance." },
+        { "key":"C", "label":"The spread is our best estimate.", "feedback":"Exactly — the spread captures uncertainty we can plan around." },
+        { "key":"D", "label":"I’ll take the average.", "feedback":"Beware false precision — averages can hide risks." }
+      ],
+      "next":"disagree"
+    },
+    {
+      "id":"disagree",
+      "scene":"manhattan_conflict",
+      "prompt":"Two models disagree on Manhattan’s flood risk. One predicts worse flooding, another less. What do you do?",
+      "choices":[
+        {"key":"A","label":"These models are useless.","feedback":"Disagreement is often a clue, not a failure — it pushes scientists to diagnose errors."},
+        {"key":"B","label":"Just average them.","feedback":"Averaging hides sign-changes — a red flag that a process may be misrepresented."},
+        {"key":"C","label":"Call the scientists.","feedback":"Modelers know biases and limitations — asking them is wise."},
+        {"key":"D","label":"Plan for the worst.","feedback":"Precaution has a role, but resources are finite — balance matters."}
+      ],
+      "next":"weak"
+    },
+    {
+      "id":"weak",
+      "scene":"weak_model",
+      "prompt":"One model performs worse than others at matching past data. Ignore it?",
+      "choices":[
+        {"key":"A","label":"Yes, drop it.","feedback":"Tempting, but risky: rejecting too quickly may blind you to insights."},
+        {"key":"B","label":"Keep it — it might reveal something.","feedback":"Lower-performance models can still constrain estimates and reveal mechanisms."},
+        {"key":"C","label":"Test it further with other evidence.","feedback":"Good call — independent checks clarify what’s wrong or right."},
+        {"key":"D","label":"Average it in.","feedback":"Caution: averaging can hide why it differs; investigate first."}
+      ],
+      "next":"geo"
+    },
+    {
+      "id":"geo",
+      "scene":"geoengineering",
+      "prompt":"Geoengineering is on the table. What should the city support?",
+      "choices":[
+        {"key":"A","label":"Large-scale deployment now.","feedback":"Even geoengineering proponents don't want this."},
+        {"key":"B","label":"Small-scale field experiments.","feedback":"Some may be premature; some may be worth pursuing to improve models."},
+        {"key":"C","label":"Ban geoengineering.","feedback":"Precaution avoids risks but may leave us unprepared."},
+        {"key":"D","label":"Delay — watch and wait.","feedback":"Delay feels safe, but can lock in untested decisions later."}
+      ]
+    }
+  ],
+  "end":{
+    "summary":"As a City Planner, you saw why there is no ‘best model,’ why spreads matter, how disagreement drives discovery, why even lower-performance models can help, and why cautious experiments may be worth pursuing.",
+    "links":[]
+  }
+}

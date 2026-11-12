@@ -1,0 +1,58 @@
+{
+  "id": "journalist",
+  "title": "Journalist",
+  "steps": [
+    {
+      "id": "breaking",
+      "scene": "newsroom",
+      "prompt": "A new report shows model spread on regional impacts. How do you frame the story?",
+      "choices": [
+        { "key":"A", "label":"‘Scientists can’t agree — crisis of credibility’.", "feedback":"Misleading: disagreement is normal and productive." },
+        { "key":"B", "label":"Focus on the range of outcomes as guide.", "feedback":"Accurate: spreads show what scientists know and don’t know." },
+        { "key":"C", "label":"Highlight one model as most reliable.", "feedback":"Risky: no single best model exists." },
+        { "key":"D", "label":"Interview scientists to explain disagreements.", "feedback":"Best practice: helps the public see how science learns from error." }
+      ],
+      "next": "public"
+    },
+    {
+      "id": "public",
+      "scene": "briefing",
+      "prompt": "Readers ask why imperfect models should be trusted at all. How do you respond?",
+      "choices": [
+        { "key":"A", "label":"Because models are perfect.", "feedback":"Incorrect: no model is perfect." },
+        { "key":"B", "label":"Agreement across imperfect models is powerful.", "feedback":"Yes: convergence shows reliable patterns." },
+        { "key":"C", "label":"Disagreement means models are useless.", "feedback":"Wrong: disagreements drive deeper inquiry." },
+        { "key":"D", "label":"Errors reveal how science improves.", "feedback":"Exactly: failure is a source of learning." }
+      ],
+      "next": "geo"
+    },
+    {
+      "id": "geo",
+      "scene": "geoengineering",
+      "prompt": "You’re assigned to report on a proposed geoengineering trial. How do you report it?",
+      "choices": [
+        { "key":"A", "label":"Promote the trial as a quick fix.", "feedback":"Misleading: geoengineering is no silver bullet." },
+        { "key":"B", "label":"Report cautiously; emphasize small-scale and uncertainties.", "feedback":"Responsible: informs readers without hype." },
+        { "key":"C", "label":"Dismiss it entirely.", "feedback":"Inaccurate: debate is ongoing and complex." },
+        { "key":"D", "label":"Frame it as part of broader strategies.", "feedback":"Yes: one of many tools under consideration." }
+      ],
+      "next": "imperfect"
+    },
+    {
+      "id": "imperfect",
+      "scene": "weak_model",
+      "prompt": "An editor asks why you included a weaker model’s results. Feature weaker models?",
+      "choices": [
+        { "key":"A", "label":"Ignore weaker models completely.", "feedback":"Risky: discarding them hides how science learns from diversity and error." },
+        { "key":"B", "label":"Explain that scientists are studying these models.", "feedback":"Best: shows the public that error-diagnosis is part of progress." },
+        { "key":"C", "label":"Treat them as equal to top models.", "feedback":"Misleading: not all models should be weighed the same in reporting." },
+        { "key":"D", "label":"Average them in to avoid confusion.", "feedback":"Problematic: averages can bury important differences." }
+      ]
+    }
+  ],
+  "end": {
+    "summary": "As a Journalist, you learned to report on uncertainty without sensationalism, highlight the value of agreement and disagreement, show why scientists study weaker models, and responsibly cover emerging technologies like geoengineering.",
+    "links": []
+  }
+}
+
