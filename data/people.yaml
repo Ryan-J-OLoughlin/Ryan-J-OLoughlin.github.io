@@ -21,7 +21,7 @@
 
 - id: dan-li
   name: Dan Li
-  place: Independent scholar
+  place: O'Loughlin Inc.   # Dan's own joke: she runs the household full time
   cv: "co-author (Synthese 2022, GMD 2025); NASA GISS talk 2023; co-led a Queens College philosophy club event"
   relation: co-author
   fields: [philosophy, climate-modeling, ai]
