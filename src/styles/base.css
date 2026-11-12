@@ -81,6 +81,8 @@ a:hover { color: var(--ocean); }
 .site-head nav { display: flex; gap: 1.25rem; font-family: var(--font-mono); font-size: var(--fs-xs); }
 .site-head nav a { text-decoration: none; color: var(--ink-soft); }
 .site-head nav a:hover { color: var(--ink); }
+.text-toggle { display: none; font: inherit; color: inherit; background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
+.has-scene .text-toggle { display: inline; }
 
 .site-foot {
   display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem;

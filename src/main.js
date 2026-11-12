@@ -11,6 +11,14 @@ function canDraw3D() {
   }
 }
 
+const toggle = document.querySelector('.text-toggle');
+toggle?.addEventListener('click', () => {
+  const open = document.documentElement.classList.toggle('show-text');
+  toggle.setAttribute('aria-expanded', String(open));
+  toggle.textContent = open ? 'Hide text version' : 'Text version';
+  if (open) document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
+});
+
 if (canDraw3D()) {
   document.documentElement.classList.add('has-scene');
   const start = () => import('./scene/index.js').then((m) => m.start());

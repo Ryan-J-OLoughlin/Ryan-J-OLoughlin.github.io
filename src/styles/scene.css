@@ -37,6 +37,9 @@
 /* In 3D mode, the scene shows stages 0D and 1D, so their plain versions step aside. */
 .has-scene main > .stage-0,
 .has-scene main > .stage-1 { display: none; }
+/* The work and people lists repeat the 3D stages; with the scene they wait behind the footer's "Text version". */
+.has-scene:not(.show-text) main > .stage-3,
+.has-scene:not(.show-text) main > .stage-esm { display: none; }
 .has-scene .site-head { position: absolute; inset: 0 0 auto 0; z-index: 3; }
 
 .scene-canvas { position: absolute; inset: 0; }
