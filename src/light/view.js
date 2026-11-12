@@ -5,12 +5,12 @@
 //   y = H/2 + ((gx - cam.x) + (gy - cam.y)) · z/4 − h · LIFT · z
 // where z is the width of one tile on screen, in CSS pixels.
 
-import { level, MAX_LEVEL } from './world.js';
+import { corner, tileH, MAX_H } from './world.js';
 
-export const LIFT = 0.16;               // height of one terrace step, in tile widths
+export const LIFT = 1.0;                // screen height of one unit of ground height, in tile widths
 export const ZOOM_MAX = 120;
-// Zoomed out, at most ~28 tiles span the short side of the screen (keeps big screens fast).
-const zoomMin = () => Math.max(22, Math.min(cam.W, cam.H) / 28);
+// Zoomed out, at most ~24 tiles span the short side of the screen (keeps big screens fast).
+const zoomMin = () => Math.max(22, Math.min(cam.W, cam.H) / 24);
 export const cam = { x: 0.5, y: 0.5, z: 56, W: 1, H: 1 };
 
 export function project(gx, gy, h) {
@@ -43,18 +43,29 @@ export function zoom(f, px, py) {
 
 // Put the top of tile (x, y) in the middle of the screen.
 export function centerOn(x, y) {
-  const h = level(x, y);
+  const h = tileH(x, y);
   cam.x = x + 0.5 - 2 * h * LIFT;
   cam.y = y + 0.5 - 2 * h * LIFT;
 }
 
-// The tile whose top surface is under (px, py): the frontmost of the candidates at each height.
+// Is (px, py) inside the polygon given as a flat list of points?
+function inside(px, py, pts) {
+  let s = false;
+  for (let i = 0, j = pts.length - 2; i < pts.length; j = i, i += 2) {
+    const [xi, yi, xj, yj] = [pts[i], pts[i + 1], pts[j], pts[j + 1]];
+    if ((yi > py) !== (yj > py) && px < ((xj - xi) * (py - yi)) / (yj - yi) + xi) s = !s;
+  }
+  return s;
+}
+
+// The tile whose ground is under (px, py): the frontmost tile whose outline holds the point.
 export function pickTile(px, py) {
+  const [gx, gy] = unproject(px, py, MAX_H / 2);
   let best = null;
-  for (let h = MAX_LEVEL; h >= 0; h--) {
-    const [gx, gy] = unproject(px, py, h);
-    const x = Math.floor(gx), y = Math.floor(gy);
-    if (level(x, y) === h && (!best || x + y > best[0] + best[1])) best = [x, y];
+  for (let y = Math.floor(gy) - 4; y <= gy + 4; y++) for (let x = Math.floor(gx) - 4; x <= gx + 4; x++) {
+    if (best && x + y <= best[0] + best[1]) continue;
+    const pts = [[x, y], [x + 1, y], [x + 1, y + 1], [x, y + 1]].flatMap(([cx, cy]) => project(cx, cy, corner(cx, cy)));
+    if (inside(px, py, pts)) best = [x, y];
   }
   return best;
 }
@@ -63,7 +74,7 @@ export function pickTile(px, py) {
 export function visibleBounds() {
   let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
   for (const [px, py] of [[0, 0], [cam.W, 0], [0, cam.H], [cam.W, cam.H]]) {
-    for (const h of [-2, MAX_LEVEL + 6]) {
+    for (const h of [-1, MAX_H + 3]) {
       const [gx, gy] = unproject(px, py, h);
       x0 = Math.min(x0, gx); x1 = Math.max(x1, gx); y0 = Math.min(y0, gy); y1 = Math.max(y1, gy);
     }

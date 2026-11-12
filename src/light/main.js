@@ -18,7 +18,7 @@ import { load, save } from './save.js';
 import { hash } from './rng.js';
 import { setupTray, showTray, showScore, announceRegion, floatPoints, flyCube, nudge, slot } from './ui.js';
 import { cam, project, pan, zoom, centerOn, pickTile } from './view.js';
-import { key, unkey, areaKey, regionKey, level, landmark, SOURCE } from './world.js';
+import { key, unkey, areaKey, regionKey, tileH, landmark, SOURCE } from './world.js';
 
 const POINTS = { area: 10, robust: 30, landmark: [0, 20, 50, 60] }; // landmark: by kind (tree, house, tower)
 const LIT = 0.3;            // brightness at which a tile counts as lit
@@ -94,7 +94,7 @@ function relight(animate = true, delay = 0) {
 }
 
 const bitsCount = (b) => (b & 1) + ((b >> 1) & 1) + ((b >> 2) & 1) + ((b >> 3) & 1);
-const screenOf = (x, y) => project(x + 0.5, y + 0.5, level(x, y));
+const screenOf = (x, y) => project(x + 0.5, y + 0.5, tileH(x, y));
 
 function gain(points, x, y, at, kind) {
   if (quiet) return;
@@ -161,7 +161,7 @@ function pickAt(px, py) {
   let best = null, depth = -Infinity;
   for (const [k] of g.cubes) {
     const [x, y] = unkey(k), [cx, cy] = screenOf(x, y), z = cam.z;
-    if (Math.abs(px - cx) < z * 0.3 && py > cy - z * 0.52 && py < cy + z * 0.16 && x + y > depth) {
+    if (Math.abs(px - cx) < z * 0.34 && py > cy - z * 0.58 && py < cy + z * 0.17 && x + y > depth) {
       best = [x, y]; depth = x + y;
     }
   }

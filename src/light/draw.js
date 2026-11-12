@@ -1,16 +1,21 @@
-// draw.js — paints one frame on the 2D canvas, back to front.
+// draw.js — paints one frame on the 2D canvas, back to front, in the homepage's style.
 //
-// For each tile: the terrace top (hill-shaded), its cliff faces, contour lines at each
-// step, the beams crossing it, then whatever stands on it (landmark, cube, the source).
-// Darkness is a soft dusk tint: every color is mixed from the dusk color toward its real
+// The ground is the homepage's ESM landscape: a smooth surface in blended field colors
+// washed toward map paper, shaded by a sun from the upper left, with white survey lines
+// and faint contour lines. Cubes are its tinted glass cubes: see-through faces, crisp ink
+// front edges, faint hidden edges.
+//
+// Darkness is a soft dusk wash: every color is mixed from the dusk color toward its real
 // color by how lit the tile is, so light reveals the map underneath.
 
 import { cam, LIFT, visibleBounds } from './view.js';
-import { level, shade, landmark, key, areaKey, AREA, SOURCE, TREE, HOUSE, TOWER } from './world.js';
+import { corner, tileH, weights, landmark, key, areaKey, SOURCE, TREE, HOUSE, TOWER } from './world.js';
 
 export const STEP = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 42; // ms per tile of travel
-const DIM = 0.22;  // how much of the map shows in full darkness
-const MEMORY = 0.45; // how lit an area stays once it has been lit
+const DIM = 0.48;      // how much of the map's color shows in darkness
+const MEMORY = 0.72;   // how lit an area stays once it has been lit
+const CONTOUR = 0.22;   // height between contour lines
+const PAPER_WASH = 0.3;  // like the homepage landscape: field colors mixed this far toward paper
 
 let ctx, P;
 
@@ -21,172 +26,166 @@ const clamp = (t) => (t < 0 ? 0 : t > 1 ? 1 : t);
 // Colors come from the CSS variables (tokens.css and light.css), like the homepage scene.
 function palette() {
   const s = getComputedStyle(document.documentElement);
-  const c = (n, d) => hex(s.getPropertyValue(n).trim() || d);
-  const ground = c('--ground', '#EEF0EA'), ink = c('--ink', '#1C2024'), ocean = c('--ocean', '#2F6482');
-  const green = c('--green', '#5F8A5B'), earth = c('--earth', '#9A6B45'), sand = c('--sand', '#A8925A');
-  const amber = c('--amber', '#D4893A'), frost = c('--frost', '#F3F3EF'), glass = c('--glass', '#CFE0E4');
+  const c = (n) => hex(s.getPropertyValue(n).trim());
+  const paper = c('--ground'), green = c('--green'), ocean = c('--ocean'), sand = c('--sand'), earth = c('--earth');
+  const amber = c('--amber'), gold = c('--gold');
   return {
-    dusk: c('--dusk', '#2A323D'), ink, soft: c('--ink-soft', '#4D535A'), ground,
-    levels: [mix(ground, ocean, 0.34), mix(ground, green, 0.2), mix(ground, green, 0.3), mix(ground, green, 0.4),
-      mix(ground, sand, 0.34), mix(ground, sand, 0.46), mix(ground, earth, 0.4), mix(ground, earth, 0.52)],
-    tree: mix(green, ink, 0.2), roof: earth, wall: mix(ground, sand, 0.12), warm: [255, 214, 140],
-    tint: [glass, amber, ocean, frost],
+    paper, ink: c('--ink'), soft: c('--ink-soft'), dusk: c('--dusk'), warm: [255, 241, 208],
+    fields: [green, ocean, sand, earth],
+    tree: mix(green, paper, 0.15), roof: earth, wall: mix(paper, [255, 255, 255], 0.4), gold,
+    tint: [c('--glass'), amber, ocean, c('--frost')],
     // beam colors by kind bit: clear, amber, blue, frosted, source
-    beam: [[255, 253, 244], [255, 196, 112], [150, 205, 255], [236, 238, 246], [255, 243, 212]],
+    beam: [mix(gold, paper, 0.2), amber, mix(ocean, paper, 0.15), mix(c('--ink-soft'), paper, 0.35), gold],
   };
 }
 
-// A color mixed from dusk toward c by v, times brightness m, as a CSS string.
+// Color c mixed from dusk by v (0 dark – 1 lit), times brightness m, as a CSS string.
 function col(c, v, m = 1, a = 1) {
   const d = P.dusk;
   return `rgba(${d[0] + (c[0] * m - d[0]) * v | 0},${d[1] + (c[1] * m - d[1]) * v | 0},${d[2] + (c[2] * m - d[2]) * v | 0},${a})`;
 }
+const rgba = (c, a) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
 
 export function setupDraw(canvas) {
   ctx = canvas.getContext('2d');
   P = palette();
-  document.documentElement.style.background = col(P.dusk, 0);
 }
 
-function poly(pts, fill) {
+function path(pts) {
   ctx.beginPath();
   ctx.moveTo(pts[0], pts[1]);
   for (let i = 2; i < pts.length; i += 2) ctx.lineTo(pts[i], pts[i + 1]);
   ctx.closePath();
-  ctx.fillStyle = fill;
-  ctx.fill();
 }
-
+function poly(pts, fill) { path(pts); ctx.fillStyle = fill; ctx.fill(); }
 function line(x0, y0, x1, y1) { ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); }
 
-// A solid box standing on the point (cx, cy): side a (tiles), height hgt (px). Returns its top centre.
-function box(cx, cy, a, hgt, v, wall, top) {
-  const w = a * cam.z / 2, q = a * cam.z / 4;
-  poly([cx - w, cy, cx, cy + q, cx, cy + q - hgt, cx - w, cy - hgt], col(wall, v, 0.78));
-  poly([cx, cy + q, cx + w, cy, cx + w, cy - hgt, cx, cy + q - hgt], col(wall, v, 0.9));
-  if (top) poly([cx, cy - q - hgt, cx + w, cy - hgt, cx, cy + q - hgt, cx - w, cy - hgt], col(top, v));
-  return [cx, cy - hgt];
-}
+// ───── glass ─────
 
-function drawLandmark(kind, cx, cy, v, lit) {
-  const z = cam.z;
-  if (kind === TREE) {
-    ctx.strokeStyle = col(P.soft, v);
-    ctx.lineWidth = Math.max(1, z / 30);
-    ctx.beginPath(); line(cx, cy, cx, cy - z * 0.2); ctx.stroke();
-    ctx.beginPath();
-    ctx.ellipse(cx, cy - z * 0.32, z * 0.17, z * 0.21, 0, 0, 7);
-    ctx.fillStyle = col(P.tree, v);
-    ctx.fill();
-  } else if (kind === HOUSE) {
-    const w = 0.44 * z / 2, q = 0.44 * z / 4;
-    const [tx, ty] = box(cx, cy, 0.44, z * 0.2, v, P.wall);
-    const apex = ty - z * 0.2;
-    poly([tx - w, ty, tx, ty + q, tx, apex], col(P.roof, v, 0.8));
-    poly([tx, ty + q, tx + w, ty, tx, apex], col(P.roof, v));
-    poly([tx - w, ty, tx, ty - q, tx, apex], col(P.roof, v, 1.1));
-    if (lit) poly([tx + w * 0.35, ty + q * 0.1 + z * 0.05, tx + w * 0.7, ty - q * 0.25 + z * 0.05, tx + w * 0.7, ty - q * 0.25 + z * 0.11, tx + w * 0.35, ty + q * 0.1 + z * 0.11], col(P.warm, 1));
-  } else if (kind === TOWER) {
-    const [tx, ty] = box(cx, cy, 0.3, z * 0.85, v, P.wall, P.wall);
-    const w = 0.3 * z / 2, q = 0.3 * z / 4;
-    poly([tx - w, ty, tx, ty + q, tx + w, ty, tx, ty - z * 0.18], col(P.soft, v));
-    if (lit) {
-      ctx.beginPath();
-      ctx.arc(tx, ty - z * 0.24, z * 0.05, 0, 7);
-      ctx.fillStyle = col(P.warm, 1);
-      ctx.fill();
-    }
-  }
-}
-
-// A tinted glass cube, drawn like the homepage's: faint hidden edges, see-through faces, crisp front edges.
-export function drawCube(t, r, cx, cy, v, lit, scale = 1) {
-  const z = cam.z * scale, a = 0.56;
-  const w = a * z / 2, q = a * z / 4, hgt = a * z * 0.62;
-  const tint = P.tint[t], k = t === 3 ? 0.8 : t === 0 ? 0.45 : 0.62;
-  const edge = col(mix(P.ground, P.ink, v), 1, 1, 0.8);
-  const Ty = cy - hgt;
-  ctx.lineWidth = Math.max(1, z / 56);
+// A glass box standing on (cx, cy): side a (in tiles), height hgt (px), like the homepage cube:
+// faint hidden edges, see-through tinted faces (top lightest), crisp ink front edges.
+function glass(cx, cy, a, hgt, tint, alpha, v, edge = 0.75) {
+  const w = a * cam.z / 2, q = a * cam.z / 4, Ty = cy - hgt;
+  const ink = mix(P.ink, P.dusk, 0.25 * (1 - v));
+  ctx.lineWidth = Math.max(1, cam.z / 70);
   ctx.lineJoin = 'round';
-  // hidden edges
-  ctx.strokeStyle = col(mix(P.ground, P.ink, v), 1, 1, 0.18);
+  ctx.strokeStyle = rgba(ink, 0.16 * edge);
   ctx.beginPath();
   line(cx, cy - q, cx, Ty - q); line(cx, cy - q, cx - w, cy); line(cx, cy - q, cx + w, cy);
   ctx.stroke();
-  // faces
-  const lv = 0.55 + 0.45 * v;
-  poly([cx - w, cy, cx, cy + q, cx, Ty + q, cx - w, Ty], col(tint, lv, 0.82, 0.55 * k + 0.2));
-  poly([cx, cy + q, cx + w, cy, cx + w, Ty, cx, Ty + q], col(tint, lv, 0.95, 0.45 * k + 0.15));
-  poly([cx, Ty - q, cx + w, Ty, cx, Ty + q, cx - w, Ty], col(tint, lv, 1.08, 0.3 * k + 0.12));
-  if (lit > 0) {
-    ctx.globalCompositeOperation = 'lighter';
-    poly([cx, Ty - q, cx + w, Ty, cx, Ty + q, cx - w, Ty], `rgba(255,236,200,${0.35 * Math.min(1, lit)})`);
-    poly([cx - w, cy, cx, cy + q, cx + w, cy, cx + w, Ty, cx, Ty + q, cx - w, Ty], `rgba(255,236,200,${0.12 * Math.min(1, lit)})`);
-    ctx.globalCompositeOperation = 'source-over';
-  }
-  // front edges
-  ctx.strokeStyle = edge;
+  const tv = 0.65 + 0.35 * v;
+  poly([cx - w, cy, cx, cy + q, cx, Ty + q, cx - w, Ty], col(tint, tv, 0.9, alpha));
+  poly([cx, cy + q, cx + w, cy, cx + w, Ty, cx, Ty + q], col(tint, tv, 0.8, alpha));
+  poly([cx, Ty - q, cx + w, Ty, cx, Ty + q, cx - w, Ty], col(tint, tv, 1.08, alpha * 0.8));
+  ctx.strokeStyle = rgba(ink, edge);
   ctx.beginPath();
   ctx.moveTo(cx, Ty - q); ctx.lineTo(cx + w, Ty); ctx.lineTo(cx, Ty + q); ctx.lineTo(cx - w, Ty); ctx.closePath();
   line(cx - w, Ty, cx - w, cy); line(cx, Ty + q, cx, cy + q); line(cx + w, Ty, cx + w, cy);
   line(cx - w, cy, cx, cy + q); line(cx, cy + q, cx + w, cy);
   ctx.stroke();
-  // which way it faces (a blue cube faces two ways)
-  if (r < 0) return;
-  const dirs = t === 2 ? [r, (r + 1) % 4] : [r];
-  ctx.beginPath();
-  for (const d of dirs) {
-    const [ex, ey] = EDGE[d];
-    const mx = cx + ex * a * z, my = Ty + (ey - 0.25) * a * z; // edge midpoint on the top face
-    line(cx, Ty, mx * 0.8 + cx * 0.2, my * 0.8 + Ty * 0.2);
+  return Ty;
+}
+
+// Edge midpoints of a tile in grid units from its corner (x, y), and the two corners of that edge.
+const MID = [[1, 0.5], [0.5, 1], [0, 0.5], [0.5, 0]];
+const ENDS = [[[1, 0], [1, 1]], [[0, 1], [1, 1]], [[0, 0], [0, 1]], [[0, 0], [1, 0]]];
+const ALPHA = [0.42, 0.62, 0.55, 0.78]; // glass strength: clear, amber, blue, frosted
+
+export function drawCube(t, r, cx, cy, v, lit, scale = 1) {
+  const a = 0.66 * scale, z = cam.z, hgt = a * z * 0.61;
+  const Ty = glass(cx, cy, a, hgt, P.tint[t], ALPHA[t], v);
+  const w = a * z / 2, q = a * z / 4;
+  if (lit > 0) { // light passing through warms the glass
+    poly([cx, Ty - q, cx + w, Ty, cx, Ty + q, cx - w, Ty], rgba(P.warm, 0.5 * Math.min(1, lit)));
+    poly([cx - w, cy, cx, cy + q, cx + w, cy, cx + w, Ty, cx, Ty + q, cx - w, Ty], rgba(P.warm, 0.18 * Math.min(1, lit)));
   }
-  ctx.lineWidth = Math.max(2, z / 16);
+  if (r < 0) return;
+  // which way it faces (a blue cube faces two ways): an ink stroke on the top face
+  ctx.beginPath();
+  for (const d of t === 2 ? [r, (r + 1) % 4] : [r]) {
+    const [mx, my] = MID[d];
+    const ex = cx + ((mx - 0.5) - (my - 0.5)) * w * 0.8, ey = Ty + ((mx - 0.5) + (my - 0.5)) * q * 0.8;
+    line(cx, Ty, ex, ey);
+  }
+  ctx.strokeStyle = rgba(P.ink, 0.8);
+  ctx.lineWidth = Math.max(1.5, z / 26);
   ctx.lineCap = 'round';
-  ctx.strokeStyle = t === 3 || t === 0 ? col(P.ink, 1, 1, 0.75) : 'rgba(255,250,238,0.9)';
   ctx.stroke();
   ctx.lineCap = 'butt';
 }
 
-// Edge midpoints of a tile, relative to its top corner, in tile widths: +x, +y, −x, −y.
-const EDGE = [[0.25, 0.375], [-0.25, 0.375], [-0.25, 0.125], [0.25, 0.125]];
-const NX = [1, 0, -1, 0], NY = [0, 1, 0, -1];
+// ───── landmarks and the source ─────
 
-function drawSource(cx, cy) {
-  const z = cam.z;
-  box(cx, cy, 0.34, z * 0.18, 1, P.soft, P.ground);
-  const oy = cy - z * 0.48;
-  const g = ctx.createRadialGradient(cx, oy, 0, cx, oy, z * 1.1);
-  g.addColorStop(0, 'rgba(255,240,200,0.75)');
-  g.addColorStop(0.25, 'rgba(255,225,160,0.25)');
-  g.addColorStop(1, 'rgba(255,220,150,0)');
-  ctx.globalCompositeOperation = 'lighter';
-  ctx.fillStyle = g;
-  ctx.fillRect(cx - z * 1.2, oy - z * 1.2, z * 2.4, z * 2.4);
-  ctx.globalCompositeOperation = 'source-over';
-  ctx.beginPath();
-  ctx.arc(cx, oy, z * 0.11, 0, 7);
-  ctx.fillStyle = '#FFF8E8';
-  ctx.fill();
+function drawLandmark(kind, cx, cy, v, lit, z) {
+  if (kind === TREE) {
+    ctx.strokeStyle = col(P.soft, v);
+    ctx.lineWidth = Math.max(1, z / 45);
+    ctx.beginPath(); line(cx, cy, cx, cy - z * 0.2); ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(cx, cy - z * 0.3, z * 0.15, 0, 7);
+    ctx.fillStyle = col(P.tree, v, 1, 0.92);
+    ctx.fill();
+    ctx.strokeStyle = col(P.ink, v, 1, 0.35);
+    ctx.stroke();
+  } else if (kind === HOUSE) {
+    const a = 0.46, w = a * z / 2, q = a * z / 4;
+    const Ty = glass(cx, cy, a, z * 0.2, P.wall, 0.95, v, 0.6);
+    const apex = Ty - z * 0.2;
+    poly([cx - w, Ty, cx, Ty + q, cx, apex], col(P.roof, v, 0.85, 0.95));
+    poly([cx, Ty + q, cx + w, Ty, cx, apex], col(P.roof, v, 0.72, 0.95));
+    ctx.strokeStyle = col(P.ink, v, 1, 0.6);
+    ctx.beginPath(); line(cx - w, Ty, cx, apex); line(cx, Ty + q, cx, apex); line(cx + w, Ty, cx, apex); ctx.stroke();
+    if (lit) poly([cx + w * 0.3, cy + q * 0.45 - z * 0.06, cx + w * 0.62, cy + q * 0.2 - z * 0.06, cx + w * 0.62, cy + q * 0.2 - z * 0.13, cx + w * 0.3, cy + q * 0.45 - z * 0.13], rgba(P.gold, 0.95));
+  } else if (kind === TOWER) {
+    const a = 0.3, w = a * z / 2, q = a * z / 4;
+    const Ty = glass(cx, cy, a, z * 0.8, P.wall, 0.95, v, 0.6);
+    poly([cx - w, Ty, cx, Ty + q, cx + w, Ty, cx, Ty - z * 0.16], col(P.soft, v, 1, 0.9));
+    if (lit) {
+      ctx.beginPath();
+      ctx.arc(cx + w * 0.45, Ty + z * 0.12, z * 0.035, 0, 7);
+      ctx.fillStyle = rgba(P.gold, 1);
+      ctx.fill();
+    }
+  }
 }
+
+// The first light: a glowing gold glass cube.
+function drawSource(cx, cy, z) {
+  const g = ctx.createRadialGradient(cx, cy - z * 0.2, 0, cx, cy - z * 0.2, z * 1.3);
+  g.addColorStop(0, rgba(P.warm, 0.85));
+  g.addColorStop(0.35, rgba(P.warm, 0.35));
+  g.addColorStop(1, rgba(P.warm, 0));
+  ctx.fillStyle = g;
+  ctx.fillRect(cx - z * 1.4, cy - z * 1.5, z * 2.8, z * 2.8);
+  glass(cx, cy, 0.5, z * 0.5 * 0.61, P.gold, 0.85, 1);
+}
+
+// ───── the frame ─────
+
+const wts = [0, 0, 0, 0];
 
 // Draws everything. `g` is the game: { light, segs, hits, segT, oldSegs, cubes, memory, marks, hold }.
 // Returns true while something is still moving (so the loop keeps drawing).
 export function render(g, now) {
   const { W, H, z } = cam;
   const hw = z / 2, hq = z / 4, lift = LIFT * z;
+  const SX = (gx, gy) => W / 2 + ((gx - cam.x) - (gy - cam.y)) * hw;
+  const SY = (gx, gy, h) => H / 2 + ((gx - cam.x) + (gy - cam.y)) * hq - h * lift;
   let busy = false;
-  ctx.fillStyle = col(P.dusk, 0);
+  ctx.fillStyle = col(P.paper, DIM);
   ctx.fillRect(0, 0, W, H);
   const [x0, x1, y0, y1] = visibleBounds();
-  const thin = Math.max(1, z / 50);
+  const thin = Math.max(0.75, z / 80);
 
   for (let d = x0 + y0; d <= x1 + y1; d++) {
     for (let x = Math.max(x0, d - y1); x <= Math.min(x1, d - y0); x++) {
-      const y = d - x, lv = level(x, y);
-      const ax = W / 2 + ((x - cam.x) - (y - cam.y)) * hw;
-      const ay = H / 2 + ((x - cam.x) + (y - cam.y)) * hq - lv * lift;
-      if (ax < -z || ax > W + z || ay - z * 1.6 > H || ay + hq * 2 + lv * lift < 0) continue;
+      const y = d - x;
+      const ha = corner(x, y), hb = corner(x + 1, y), hc = corner(x + 1, y + 1), hd = corner(x, y + 1);
+      const ax = SX(x, y), ay = SY(x, y, ha);
+      if (ax < -z || ax > W + z || ay - z * 1.6 > H || ay + z < 0) continue;
+      const bx = ax + hw, by = SY(x + 1, y, hb), cxp = ax, cyp = SY(x + 1, y + 1, hc), dx = ax - hw, dy = SY(x, y + 1, hd);
 
+      // how lit
       const k = key(x, y), rec = g.light.get(k);
       let L = 0;
       if (rec) {
@@ -194,74 +193,86 @@ export function render(g, now) {
         if (p < 1) busy = true;
         L = rec.from + (rec.l - rec.from) * p;
       }
-      const v = DIM + (1 - DIM) * Math.max((g.memory.get(areaKey(x, y)) ?? Infinity) <= now ? MEMORY : 0, Math.min(1, L * 1.5));
-      const base = P.levels[lv], m = lv ? 1 + shade(x, y) * 0.09 : 1;
+      const lit = Math.min(1, L * 1.5);
+      const v = DIM + (1 - DIM) * Math.max((g.memory.get(areaKey(x, y)) ?? Infinity) <= now ? MEMORY : 0, lit);
 
-      // terrace top
-      const Bx = ax + hw, By = ay + hq, Cy = ay + 2 * hq, Dx = ax - hw;
-      poly([ax, ay, Bx, By, ax, Cy, Dx, By], col(base, v, m));
-      // cliff faces down to lower neighbours in front
-      const nr = level(x + 1, y), nl = level(x, y + 1);
-      if (nr < lv) poly([Bx, By, ax, Cy, ax, Cy + (lv - nr) * lift, Bx, By + (lv - nr) * lift], col(base, v, m * 0.84));
-      if (nl < lv) poly([Dx, By, ax, Cy, ax, Cy + (lv - nl) * lift, Dx, By + (lv - nl) * lift], col(base, v, m * 0.74));
-      // contour lines on the lip of every step, survey lines on area edges
-      ctx.lineWidth = thin;
-      ctx.beginPath();
-      if (level(x, y - 1) < lv) line(ax, ay, Bx, By);
-      if (level(x - 1, y) < lv) line(ax, ay, Dx, By);
-      if (nr < lv) line(Bx, By, ax, Cy);
-      if (nl < lv) line(Dx, By, ax, Cy);
-      ctx.strokeStyle = col(P.soft, v, 1, 0.5);
+      // ground color: blended fields washed toward paper, hill-shaded, warmed by light
+      weights(x, y, wts);
+      const sum = wts[0] + wts[1] + wts[2] + wts[3], hm = (ha + hb + hc + hd) / 4;
+      let base = [0, 1, 2].map((i) => (wts[0] * P.fields[0][i] + wts[1] * P.fields[1][i] + wts[2] * P.fields[2][i] + wts[3] * P.fields[3][i]) / sum);
+      base = mix(base, P.paper, PAPER_WASH + 0.1 - 0.06 * hm); // higher ground a little richer, like the homepage
+      if (lit > 0) base = mix(base, P.warm, 0.16 * lit);
+      const shadeM = Math.min(1.16, Math.max(0.74, 1 + 0.5 * ((hb + hc - ha - hd) / 2) + 0.18 * ((hc + hd - ha - hb) / 2)));
+      const fill = col(base, v, shadeM);
+      path([ax, ay, bx, by, cxp, cyp, dx, dy]);
+      ctx.fillStyle = fill;
+      ctx.fill();
+      ctx.strokeStyle = fill; // hides hairline seams between neighbouring tiles
+      ctx.lineWidth = 0.8;
       ctx.stroke();
-      if (x % AREA === 0 || y % AREA === 0) {
-        ctx.beginPath();
-        if (x % AREA === 0) line(ax, ay, Dx, By);
-        if (y % AREA === 0) line(ax, ay, Bx, By);
-        ctx.strokeStyle = col(P.soft, v, 1, 0.13);
-        ctx.stroke();
-      }
 
-      // beams: half-lines from the tile's centre to its edges
+      // contour lines where the height crosses each step (marching squares)
+      const lo = Math.min(ha, hb, hc, hd), hi = Math.max(ha, hb, hc, hd);
+      ctx.beginPath();
+      for (let lev = Math.ceil(lo / CONTOUR) * CONTOUR; lev < hi; lev += CONTOUR) {
+        const pts = [];
+        const edge = (h1, h2, gx1, gy1, gx2, gy2) => {
+          if ((h1 - lev) * (h2 - lev) < 0) {
+            const t = (lev - h1) / (h2 - h1), gx = gx1 + (gx2 - gx1) * t, gy = gy1 + (gy2 - gy1) * t;
+            pts.push(SX(gx, gy), SY(gx, gy, lev));
+          }
+        };
+        edge(ha, hb, x, y, x + 1, y); edge(hb, hc, x + 1, y, x + 1, y + 1);
+        edge(hc, hd, x + 1, y + 1, x, y + 1); edge(hd, ha, x, y + 1, x, y);
+        for (let i = 0; i + 3 < pts.length; i += 4) line(pts[i], pts[i + 1], pts[i + 2], pts[i + 3]);
+      }
+      ctx.strokeStyle = rgba(P.soft, 0.2 + 0.12 * v);
+      ctx.lineWidth = thin;
+      ctx.stroke();
+
+      // white survey lines along the grid (back edges only, so each is drawn once)
+      ctx.beginPath();
+      line(dx, dy, ax, ay); line(ax, ay, bx, by);
+      ctx.strokeStyle = `rgba(255,255,255,${0.06 + 0.3 * (v - DIM) / (1 - DIM)})`;
+      ctx.stroke();
+
+      // beams: half-lines from the tile's middle to its edges, hugging the ground
+      const mx0 = SX(x + 0.5, y + 0.5), my0 = SY(x + 0.5, y + 0.5, tileH(x, y));
       const segs = g.segs.get(k);
       if (segs) {
-        const cy = ay + hq;
         for (const s of segs) {
           const p = g.oldSegs.has(`${k}:${s.d}:${s.bit}`) ? 1
             : clamp((now - g.segT - (s.a - (s.in ? 0.5 : 0)) * STEP) / (STEP / 2 || 1));
-          if (p <= 0) { busy = true; continue; }
           if (p < 1) busy = true;
-          const mx = ax + EDGE[s.d][0] * z, my = ay + EDGE[s.d][1] * z;
-          let sx, sy, ex, ey;
-          if (s.in) { sx = mx; sy = my; ex = mx + (ax - mx) * p; ey = my + (cy - my) * p; }
-          else { sx = ax; sy = cy; ex = ax + (mx - ax) * p; ey = cy + (my - cy) * p; }
+          if (p <= 0) continue;
+          const [e0, e1] = ENDS[s.d], [mgx, mgy] = MID[s.d];
+          const eh = (corner(x + e0[0], y + e0[1]) + corner(x + e1[0], y + e1[1])) / 2;
+          const ex = SX(x + mgx, y + mgy), ey = SY(x + mgx, y + mgy, eh);
+          const [sx, sy, tx, ty] = s.in ? [ex, ey, mx0, my0] : [mx0, my0, ex, ey];
           ctx.beginPath();
-          line(sx, sy, ex, ey);
-          // step up or down to the neighbour's terrace (hidden when it falls behind this tile)
-          const nlv = level(x + NX[s.d], y + NY[s.d]);
-          if (!s.in && p === 1 && nlv !== lv && !(s.d > 1 && nlv < lv)) line(mx, my, mx, my + (lv - nlv) * lift);
+          line(sx, sy, sx + (tx - sx) * p, sy + (ty - sy) * p);
           const c = P.beam[Math.log2(s.bit)], w = Math.min(1, s.w);
-          ctx.globalCompositeOperation = 'lighter';
-          ctx.strokeStyle = `rgba(${c},${0.22 * w})`;
-          ctx.lineWidth = z * (0.1 + 0.12 * w);
+          ctx.strokeStyle = rgba(P.warm, 0.35 * w); // soft glow (square ends, so halves don't overlap)
+          ctx.lineWidth = z * (0.12 + 0.1 * w);
           ctx.stroke();
-          ctx.globalCompositeOperation = 'source-over';
-          ctx.strokeStyle = `rgba(${c},${0.4 + 0.6 * w})`;
-          ctx.lineWidth = z * (0.02 + 0.035 * w);
+          ctx.lineCap = 'round';
+          ctx.strokeStyle = rgba(c, 0.55 + 0.45 * w);
+          ctx.lineWidth = z * (0.022 + 0.028 * w);
           ctx.stroke();
+          ctx.lineCap = 'butt';
         }
       }
 
       // what stands on the tile
-      const cx = ax, cy = ay + hq;
       const mk = landmark(x, y);
-      if (x === SOURCE.x && y === SOURCE.y) drawSource(cx, cy);
-      else if (mk) drawLandmark(mk, cx, cy, v, g.marks.has(k));
+      if (x === SOURCE.x && y === SOURCE.y) drawSource(mx0, my0, z);
+      else if (mk) drawLandmark(mk, mx0, my0, v, g.marks.has(k), z);
       const cube = g.cubes.get(k);
       if (cube) {
         const age = clamp((now - (cube.born || 0)) / 260);
         if (age < 1) busy = true;
-        const sc = age < 1 ? 1 + 0.25 * Math.sin(age * Math.PI) * (1 - age) - 0.3 * (1 - age) : 1;
-        drawCube(cube.t, cube.r, cx, cy, v, g.hits.get(k) || 0, sc);
+        const sc = age < 1 ? 0.7 + 0.3 * age + 0.12 * Math.sin(age * Math.PI) : 1;
+        drawCube(cube.t, cube.r, mx0, my0, v, g.hits.get(k) || 0, sc);
       }
     }
   }
@@ -271,11 +282,10 @@ export function render(g, now) {
     const p = clamp((now - g.hold.t) / g.hold.ms);
     ctx.beginPath();
     ctx.arc(g.hold.x, g.hold.y, 26, -Math.PI / 2, -Math.PI / 2 + p * Math.PI * 2);
-    ctx.strokeStyle = 'rgba(255,248,232,0.85)';
-    ctx.lineWidth = 3;
+    ctx.strokeStyle = rgba(P.ink, 0.7);
+    ctx.lineWidth = 2;
     ctx.stroke();
     busy = true;
   }
   return busy;
 }
-

@@ -1,15 +1,15 @@
-/* light.css — the Light game. Typefaces and the map palette come from the site's tokens. */
+/* light.css — the Light game. Typefaces and the map palette come from the site's tokens;
+   the controls reuse the homepage's pieces: the stage-control panel (cube tray), the
+   "Turn 90°" pill buttons (top bar), the name chips (points) and the field labels (regions). */
 
 @import "../styles/tokens.css";
 
 :root {
-  --dusk: #2A323D;        /* darkness: a soft dusk over the map */
+  --dusk: #8C96A1;        /* darkness: a soft blue-grey dusk over the map */
+  --gold: #D9A441;        /* the first light */
   --amber: #D4893A;       /* warm orange glass */
-  --frost: #F3F3EF;       /* milky glass */
-  --glass: #CFE0E4;       /* clear glass */
-  --pane: rgba(238, 240, 234, 0.12);  /* glass panels over the dark map */
-  --pane-edge: rgba(238, 240, 234, 0.28);
-  --light-ink: #F4F1E8;
+  --frost: #F4F4F1;       /* milky glass */
+  --glass: #C9DADF;       /* clear glass */
   --pad: max(12px, env(safe-area-inset-left));
 }
 
@@ -17,7 +17,7 @@
 
 html, body {
   margin: 0; height: 100%; overflow: hidden;
-  background: var(--dusk); color: var(--light-ink);
+  background: var(--ground); color: var(--ink);
   font-family: var(--font-text);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
@@ -26,13 +26,9 @@ html, body {
 }
 
 canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--ocean); outline-offset: 3px; }
 
-/* glass panel: the homepage cube's look, flat */
-.btn, .score, .tray {
-  background: var(--pane);
-  border: 1px solid var(--pane-edge);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-}
+/* ───── top bar: the homepage's pill buttons ───── */
 
 .bar {
   position: fixed; left: 0; right: 0; top: 0;
@@ -42,89 +38,97 @@ canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; t
 }
 .bar > * { pointer-events: auto; }
 
-.btn {
-  width: 44px; height: 44px; display: grid; place-items: center;
-  border-radius: 4px; color: var(--light-ink); padding: 0; cursor: pointer;
+.btn, .score {
+  min-height: 40px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(28, 32, 36, 0.18); border-radius: 999px;
+  backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+  color: var(--ink);
 }
-.btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.btn:hover { background: rgba(238, 240, 234, 0.2); }
-:focus-visible { outline: 2px solid var(--light-ink); outline-offset: 2px; }
+.btn { width: 40px; display: grid; place-items: center; padding: 0; cursor: pointer; }
+.btn:hover { border-color: var(--ink); }
+.btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
 .score {
-  min-width: 4.5rem; padding: 8px 14px; border-radius: 4px; text-align: center;
-  font-family: var(--font-mono); font-size: var(--fs-md); letter-spacing: 0.04em;
+  display: grid; place-items: center; min-width: 4.5rem; padding: 0 1rem;
+  font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
 }
 .score.bump { animation: bump 0.4s ease; }
-@keyframes bump { 40% { transform: scale(1.12); background: rgba(255, 236, 200, 0.3); } }
+@keyframes bump { 40% { transform: scale(1.1); border-color: var(--ink); } }
+
+/* ───── region name: like the homepage's field labels ───── */
 
 .region {
-  position: fixed; left: 50%; top: 22%; margin: 0; transform: translate(-50%, 8px);
-  font-family: var(--font-display); font-style: italic; font-size: var(--fs-2xl);
-  letter-spacing: 0.02em; white-space: nowrap; pointer-events: none;
-  text-shadow: 0 1px 12px rgba(20, 24, 30, 0.6);
-  opacity: 0; transition: opacity 0.6s ease, transform 0.6s ease;
+  position: fixed; left: 50%; top: 20%; margin: 0; transform: translate(-50%, 8px);
+  font-family: var(--font-display); font-size: var(--fs-2xl); white-space: nowrap;
+  color: color-mix(in srgb, var(--ocean) 80%, var(--ink));
+  text-shadow: 0 0 10px var(--ground), 0 0 4px var(--ground), 0 0 2px var(--ground);
+  pointer-events: none; opacity: 0; transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .region.show { opacity: 1; transform: translate(-50%, 0); }
 
-/* ───── cube tray, within thumb reach ───── */
+/* ───── cube tray: the homepage's stage-control panel ───── */
 
 .tray {
-  position: fixed; left: 50%; bottom: max(12px, env(safe-area-inset-bottom));
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom));
   transform: translateX(-50%);
-  display: flex; gap: 6px; padding: 6px; border-radius: 6px;
+  display: flex; gap: 4px; padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(28, 32, 36, 0.08); border-radius: 12px;
+  backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
 }
 .slot {
-  position: relative; width: 64px; height: 64px; padding: 0;
-  display: grid; place-items: center;
-  background: transparent; border: 1px solid transparent; border-radius: 4px;
-  color: var(--light-ink); cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  width: 64px; min-height: 72px; padding: 6px 0 4px;
+  background: none; border: 0; cursor: pointer;
+  font: inherit; color: var(--ink-soft);
 }
-.slot svg { width: 40px; height: 40px; }
-.slot[aria-pressed="true"] { background: rgba(238, 240, 234, 0.2); border-color: rgba(238, 240, 234, 0.55); transform: translateY(-4px); }
-.slot.empty svg { opacity: 0.3; }
-.slot .n {
-  position: absolute; right: 5px; bottom: 3px;
-  font-family: var(--font-mono); font-size: var(--fs-xs); font-variant-numeric: tabular-nums;
-}
-.slot.empty .n { opacity: 0.5; }
+.slot svg { width: 38px; height: 38px; transition: transform 0.15s ease; }
+.slot .n { display: flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: var(--fs-xs); font-variant-numeric: tabular-nums; }
+/* the stage control's dot: filled for the chosen cube */
+.slot .n::before { content: ""; width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--ink); }
+.slot[aria-pressed="true"] { color: var(--ink); }
+.slot[aria-pressed="true"] .n::before { background: var(--ink); }
+.slot[aria-pressed="true"] svg { transform: translateY(-2px); }
+.slot.empty svg { opacity: 0.35; }
 .slot.shake { animation: shake 0.35s ease; }
-.slot.got { animation: got 0.4s ease; }
-.tray.hint .slot[aria-pressed="true"] { animation: hint 1.6s ease-in-out infinite; }
+.slot.got svg { animation: got 0.4s ease; }
+.tray.hint .slot[aria-pressed="true"] svg { animation: hint 1.6s ease-in-out infinite; }
 @keyframes shake { 25% { translate: -4px 0; } 75% { translate: 4px 0; } }
 @keyframes got { 40% { scale: 1.15; } }
-@keyframes hint { 50% { box-shadow: 0 0 0 4px rgba(255, 236, 200, 0.35); } }
+@keyframes hint { 50% { translate: 0 -5px; } }
 
-/* cube icons: tint per type, crisp edges like the homepage glass */
+/* cube icons: the homepage's glass cube, flat — tinted faces, ink edges */
 svg .l, svg .r, svg .u { stroke: none; }
-svg .e { fill: none; stroke: var(--light-ink); stroke-width: 1.4; stroke-linejoin: round; opacity: 0.9; }
-.t0 .l { fill: var(--glass); opacity: 0.55; } .t0 .r { fill: var(--glass); opacity: 0.4; } .t0 .u { fill: var(--glass); opacity: 0.25; }
-.t1 .l { fill: var(--amber); opacity: 0.9; } .t1 .r { fill: var(--amber); opacity: 0.7; } .t1 .u { fill: var(--amber); opacity: 0.5; }
-.t2 .l { fill: var(--ocean); opacity: 0.95; } .t2 .r { fill: var(--ocean); opacity: 0.75; } .t2 .u { fill: #5E8FAB; opacity: 0.7; }
-.t3 .l { fill: var(--frost); opacity: 0.8; } .t3 .r { fill: var(--frost); opacity: 0.68; } .t3 .u { fill: var(--frost); opacity: 0.55; }
+svg .e { fill: none; stroke: var(--ink); stroke-width: 1; stroke-linejoin: round; opacity: 0.75; }
+.t0 .l { fill: var(--glass); opacity: 0.8; } .t0 .r { fill: var(--glass); opacity: 0.65; } .t0 .u { fill: var(--glass); opacity: 0.45; }
+.t1 .l { fill: var(--amber); opacity: 0.65; } .t1 .r { fill: var(--amber); opacity: 0.8; } .t1 .u { fill: var(--amber); opacity: 0.45; }
+.t2 .l { fill: var(--ocean); opacity: 0.6; } .t2 .r { fill: var(--ocean); opacity: 0.75; } .t2 .u { fill: var(--ocean); opacity: 0.4; }
+.t3 .l { fill: #E6E7E3; opacity: 0.95; } .t3 .r { fill: #D9DBD7; opacity: 0.95; } .t3 .u { fill: #FAFAF8; opacity: 0.95; }
 
-/* ───── points and flying cubes ───── */
+/* ───── points and flying cubes: the homepage's name chips ───── */
 
 .points {
   position: fixed; transform: translate(-50%, -50%); pointer-events: none;
-  font-family: var(--font-mono); font-size: var(--fs-sm); color: #FFF4DC;
-  text-shadow: 0 1px 6px rgba(20, 24, 30, 0.7);
+  padding: 0 4px; border-radius: 3px;
+  background: rgba(238, 240, 234, 0.8);
+  font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--ink);
   opacity: 0; animation: rise 1.3s ease-out both;
 }
-.points.robust { color: #CFE6FF; font-size: var(--fs-md); }
-.points.landmark { color: #FFD38C; font-size: var(--fs-lg); }
+.points.robust { color: var(--ocean); font-weight: var(--fw-strong); }
+.points.landmark { color: var(--earth); font-weight: var(--fw-strong); }
 @keyframes rise { 0% { opacity: 0; translate: 0 6px; } 15% { opacity: 1; } 100% { opacity: 0; translate: 0 -34px; } }
 
 .fly { position: fixed; width: 34px; height: 34px; pointer-events: none; z-index: 5; }
-.fly svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 0 6px rgba(255, 236, 200, 0.6)); }
+.fly svg { width: 100%; height: 100%; display: block; }
 
 .nojs { position: fixed; inset: auto 0 45% 0; text-align: center; }
 .nojs a { color: inherit; }
 
-@media (max-width: 360px) { .slot { width: 56px; height: 56px; } }
+@media (max-width: 360px) { .slot { width: 56px; } }
 @media (prefers-reduced-motion: reduce) {
-  .points, .score.bump, .slot.shake, .slot.got, .tray.hint .slot[aria-pressed="true"] { animation: none; }
+  .points, .score.bump, .slot.shake, .slot.got svg, .tray.hint .slot[aria-pressed="true"] svg { animation: none; }
   .points { opacity: 1; }
   .region { transition: none; }
 }
