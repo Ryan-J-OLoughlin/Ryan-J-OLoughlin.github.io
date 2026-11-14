@@ -14,7 +14,7 @@ export function createGround(uniforms, size) {
     new THREE.ShaderMaterial({
       uniforms,
       vertexShader: `varying vec2 vW;void main(){vec4 w=modelMatrix*vec4(position,1.);vW=w.xz;gl_Position=projectionMatrix*viewMatrix*w;}`,
-      fragmentShader: `uniform sampler2D light,reveal,tintT;uniform vec2 lO,rO,center;uniform float lS,rS,day;uniform vec3 duskC,paperC,ember;varying vec2 vW;
+      fragmentShader: `uniform sampler2D light,reveal,tintT;uniform vec2 lO,rO,center;uniform float lS,rS,day,veil;uniform vec3 duskC,paperC,ember;varying vec2 vW;
   float H(vec2 p){return .55*sin(p.x*.42+.6)*cos(p.y*.37-.4)+.35*sin((p.x+p.y)*.23+1.3)+.22*cos(p.x*.71-p.y*.52)+.12*sin(p.y*1.1+p.x*.2)+.3*sin(p.x*.09+p.y*.07);}
   void main(){
     float h=H(vW),v=h*6.,fw=fwidth(v);float n=floor(v+.5);float d=abs(v-n)/max(fw,1e-4);
@@ -32,7 +32,7 @@ export function createGround(uniforms, size) {
     float l=1.-exp(-L*2.4);
     vec3 col=mix(mem,p*mix(vec3(1.,.86,.68),vec3(1.,.985,.95),l),l);col+=ember*.22*l*(1.-l)*(1.-l)*3.;
     float far=smoothstep(lS*.36,lS*.5,length(vW-center));col=mix(col,mem,far);
-    gl_FragColor=vec4(mix(col,p,day),1.);}`,
+    gl_FragColor=vec4(mix(mix(col,p,day),duskC,veil),1.);}`,
     }),
   );
   mesh.rotation.x = -Math.PI / 2;

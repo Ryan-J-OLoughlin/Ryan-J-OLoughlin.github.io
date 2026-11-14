@@ -20,9 +20,9 @@ export function enableLightLink({ camera, holder, cube }) {
     const box = new Box3().setFromObject(cube);
     const centre = box.getCenter(new Vector3());
     const at = toScreen(camera, holder, centre.x, centre.y, centre.z);
-    const left = toScreen(camera, holder, box.min.x, centre.y, box.max.z);
-    const right = toScreen(camera, holder, box.max.x, centre.y, box.min.z);
-    const width = Math.abs(right.x - left.x) || 120;
+    // the camera's scale (world units per pixel, after the shrink) and the cube's size, so the game
+    // page can draw exactly the same picture in its first frame
+    const perPixel = (camera.top - camera.bottom) / camera.zoom / holder.clientHeight / SHRINK;
     const rect = holder.getBoundingClientRect();
     const x = rect.left + at.x,
       y = rect.top + at.y;
@@ -37,7 +37,8 @@ export function enableLightLink({ camera, holder, cube }) {
         from: 'home',
         x: (x / innerWidth).toFixed(4),
         y: (y / innerHeight).toFixed(4),
-        s: Math.round(width * SHRINK),
+        u: perPixel.toFixed(5),
+        w: cube.scale.x.toFixed(3),
       });
       location.href = `${link.getAttribute('href')}?${q}`;
     };

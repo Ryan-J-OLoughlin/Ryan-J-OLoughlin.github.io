@@ -90,6 +90,7 @@ const U = {
   rO: { value: new THREE.Vector2(RO[0], RO[1]) },
   rS: { value: RW },
   day: { value: 1 },
+  veil: { value: 0 }, // a flat dusk over the ground: the homepage's last frame
   center: { value: new THREE.Vector2() },
   duskC: { value: toVec3(C.dusk) },
   paperC: { value: toVec3(C.ground) },
@@ -2268,7 +2269,7 @@ function setDay(d) {
   sun.color.lerpColors(nightSunC, daySunC, d);
   tmp.lerpColors(duskC, groundC, d);
   renderer.setClearColor(tmp);
-  document.body.style.background = '#' + tmp.getHexString();
+  document.body.style.background = fromHome && intro.state !== 'play' ? '#20262D' : '#' + tmp.getHexString();
 }
 /* ---------- entrance: the homepage's cube becomes your first lantern (or, with a save, your last cube) ----------
    Arriving from the homepage (?from=home&x&y&s), the page is already at dusk and the cube starts exactly where
@@ -2279,7 +2280,8 @@ const homeCube = glass(C.ocean, 0.46);
 homeCube.own = true;
 scene.add(homeCube.g);
 const homeSize = 1.9; // the homepage's 0D cube
-let flyFrom = null,
+let startHalf = null, // the homepage's zoom, when arriving from it
+  flyFrom = null,
   flySize = homeSize,
   lastCube = null; // the cube most recently placed or moved; saved, and where a returning visit lands
 
@@ -2330,15 +2332,16 @@ function beginEntrance() {
   if (fromHome) intro.t0 -= 1.0; // the homepage already did the dimming
 }
 if (fromHome) {
-  // pick up the picture the homepage left: dusk, the cube small, where it was on screen
-  half = homeHalf();
+  // reproduce the homepage's last frame exactly: same camera angle (both use the site's), same scale
+  // (world units per pixel), and the cube at the same point on screen and the same size
+  const perPixel = Number(arrival.get('u')) || 0.02;
+  startHalf = half = (perPixel * innerHeight) / 2;
+  U.veil.value = 1; // flat dusk, as the homepage left it; the cube still in the homepage's daylight
   applyCam();
-  setDay(0);
-  const x = Number(arrival.get('x')) * innerWidth,
-    y = Number(arrival.get('y')) * innerHeight,
-    px = Number(arrival.get('s')) || 60;
-  const size = (px * ((2 * half * innerWidth) / innerHeight)) / innerWidth / Math.SQRT2;
-  rayAt(x, y);
+  camera.updateMatrixWorld(); // the camera hasn't been drawn yet; make its position current before aiming at the screen point
+  setDay(1);
+  const size = Number(arrival.get('w')) || homeSize;
+  rayAt(Number(arrival.get('x')) * innerWidth, Number(arrival.get('y')) * innerHeight);
   ray.ray.intersectPlane(PL(size / 2), hp);
   homeCube.g.position.copy(hp);
   homeCube.g.scale.setScalar(size);
@@ -2358,10 +2361,11 @@ function introTick() {
   }
   if (intro.state !== 'transit') return;
   const a = t - intro.t0,
-    c = easeIO(clamp01((a - 0.3) / 2.6)),
+    c = easeIO(clamp01((a - (fromHome ? 1.0 : 0.3)) / 2.6)), // from the homepage the zoom starts from its exact frame
     L = landing();
-  if (!fromHome) setDay(1 - c);
-  half = lerp(homeHalf(), firstDone ? gameHalf() : tutHalf, c);
+  setDay(1 - c);
+  if (fromHome) U.veil.value = 1 - clamp01((c - 0.72) / 0.28); // the map fades in once the light has fallen
+  half = lerp(startHalf ?? homeHalf(), firstDone ? gameHalf() : tutHalf, c);
   if (L.ent) L.ent.g.visible = false;
   const f = easeIO(clamp01((a - 1.0) / 2.2)),
     k = clamp01((f - 0.6) / 0.4);
@@ -2754,7 +2758,7 @@ for (const e of ents)
     e.g.visible = false;
     if (e.kind !== 'source') hideAtHome.push(e);
   }
-setDay(fromHome ? 0 : 1); // arriving from the homepage, it is already dusk
+setDay(1); // daylight on the cubes to start; from the homepage the veil keeps the ground at dusk
 recenter(true);
 refreshActive();
 let last = performance.now();
