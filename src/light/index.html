@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Light — Ryan O'Loughlin</title>
     <meta name="description" content="A small, quiet game about guiding light with glass cubes." />
+    <script>
+      // arriving from the homepage: be dark from the very first paint, so nothing flashes
+      if (location.search.includes('from=home')) document.documentElement.style.background = '#20262D';
+    </script>
     <link rel="stylesheet" href="../styles/base.css" />
     <link rel="stylesheet" href="./light.css" />
     <script type="module" src="./main.js"></script>
