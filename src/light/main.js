@@ -1393,7 +1393,7 @@ function nextHop(P, T, last) {
   for (const [ox, oz] of offsets) {
     const N = [base[0] + ox, base[1] + oz];
     if (Math.abs(N[0] - P[0]) > 4 || Math.abs(N[1] - P[1]) > 4 || (N[0] === P[0] && N[1] === P[1])) continue;
-    if (!last && permanent(...N)) continue;
+    if (!last && (permanent(...N) || reserved.has(key(...N)))) continue; // never inside another lane
     for (const C of [
       [N[0], P[1]],
       [P[0], N[1]],
