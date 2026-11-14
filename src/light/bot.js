@@ -25,7 +25,8 @@ export async function runBot(api, { greats = 3 } = {}) {
     await waitFor(() => api.hint() || api.state.firstDone, 20000);
     while (!api.state.firstDone) {
       const h = api.hint();
-      if (h?.cell) api.place(h.type, h.cell, h.rot);
+      if (h?.pick) api.move(h.pick, h.cell, h.rot); // reuse: move the old cube to the new spot
+      else if (h?.cell) api.place(h.type, h.cell, h.rot);
       else if (h?.tap) api.aim(h.tap, h.rot);
       else if (h?.discard) api.pickUp(h.discard);
       await sleep(900);
