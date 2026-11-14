@@ -6,6 +6,7 @@ import { createGround, toVec3 } from './ground.js';
 import { glowCv, glowTex, flameTex, sprite } from './textures.js';
 import { box, boxEdges, allGlass, glass, forgetGlass } from './glass.js';
 import { segs, TYPES, crackGeo } from './marks.js';
+import { createAmbient } from './ambient.js';
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const DIR = [
@@ -82,6 +83,7 @@ let lox = 0,
 
 /* ---------- ground: endless survey map ---------- */
 const U = {
+  styleT: { value: null },
   tintT: { value: null },
   light: { value: lightTex },
   reveal: { value: revTex },
@@ -602,12 +604,49 @@ const chunkTerr = new Map();
 const TS = 512,
   tintCv = Object.assign(document.createElement('canvas'), { width: TS, height: TS }),
   tctx = tintCv.getContext('2d');
+const styleCv = Object.assign(document.createElement('canvas'), { width: TS, height: TS }),
+  sctx = styleCv.getContext('2d'),
+  styleTex = new THREE.CanvasTexture(styleCv);
+styleTex.flipY = false;
+U.styleT.value = styleTex;
 tintTex = new THREE.CanvasTexture(tintCv);
 tintTex.flipY = false;
 U.tintT.value = tintTex;
+// the land under the camera, for the ambient motion
+const landCache = new Map();
+const landAt = (x, z) => chunkTerr.get(key(Math.floor(x / CH), Math.floor(z / CH)));
+function landParams(k) {
+  if (!landCache.has(k)) landCache.set(k, terrParams(k));
+  return landCache.get(k);
+}
+let ambient = null;
+function ambientTick(dt) {
+  ambient ??= createAmbient(scene);
+  const k = landAt(camT.x, camT.z),
+    w = k == null ? [0.34, 0.33, 0.33] : landParams(k).w,
+    strength = intro.state === 'play' ? (1 - U.day.value) * (k == null ? 0.25 : 1) : 0;
+  ambient(dt, t, camT, w, strength, reduce);
+}
+
+// Each land leans on one of the three ideas (never the same one twice running); every third is a blend of two.
+const dominantMemo = [0];
+function dominant(k) {
+  while (dominantMemo.length <= k) {
+    const j = dominantMemo.length;
+    dominantMemo.push((dominantMemo[j - 1] + 1 + Math.floor(rng(j * 31 + 5)() * 2)) % 3);
+  }
+  return dominantMemo[k];
+}
 function terrParams(k) {
-  const r = rng(k * 7919 + 17);
-  let w = k === 0 ? [1, 0.3, 0.45] : [0.15 + r(), 0.15 + r(), 0.15 + r()];
+  const r = rng(k * 7919 + 17),
+    d = dominant(k);
+  let w = [0.12, 0.12, 0.12];
+  w[d] = 0.76;
+  if (k > 0 && k % 3 === 0) {
+    const o = (d + 1 + Math.floor(r() * 2)) % 3;
+    w = [0.1, 0.1, 0.1];
+    w[d] = w[o] = 0.45; // e.g. ocean + earth: purple land, with both kinds of feature
+  }
   const sm = w[0] + w[1] + w[2];
   w = w.map((x) => x / sm);
   const col = new THREE.Color(0, 0, 0);
@@ -629,6 +668,12 @@ function terrParams(k) {
     brk: 0.5 + 1.6 * w[1],
     hidden: 0.1 + 0.32 * w[2],
     dist: Math.min(40, 20 + 4 * k),
+    // terrain style: green = dense ridges, earth = terraces, ocean = wide plains
+    style: [
+      Math.round(255 * Math.min(1, (w[1] * 9 + w[0] * 1.5 + w[2] * 3) / 10)),
+      Math.round(255 * w[2]),
+      Math.round(255 * w[0]),
+    ],
   };
 }
 /* Memory of where light has been: the window above follows the camera; what it leaves behind is kept in
@@ -670,6 +715,7 @@ function recenter(force = false) {
       if (c) rctx.drawImage(c, (x - ox) * sc, (z - oz) * sc);
     }
   revTex.needsUpdate = true;
+  sctx.clearRect(0, 0, TS, TS);
   tctx.clearRect(0, 0, TS, TS); // territory tint is recomputed from the chunks, so it needs no tiles
   for (const [k, terrK] of chunkTerr) {
     const [i, j] = k.split(',').map(Number);
@@ -691,6 +737,14 @@ function paintTint(i, j, k) {
   tctx.fillStyle = gr;
   tctx.fillRect(x - R, z - R, 2 * R, 2 * R);
   tintTex.needsUpdate = true;
+  const st = `rgb(${P.style.join(',')})`,
+    g2 = sctx.createRadialGradient(x, z, 0, x, z, R);
+  g2.addColorStop(0, st);
+  g2.addColorStop(0.55, st);
+  g2.addColorStop(1, st.replace('rgb(', 'rgba(').replace(')', ',0)'));
+  sctx.fillStyle = g2;
+  sctx.fillRect(x - R, z - R, 2 * R, 2 * R);
+  styleTex.needsUpdate = true;
 }
 
 const reserved = new Set();
@@ -2794,6 +2848,7 @@ function loop(now) {
   }
   applyCam();
   ground.position.set(Math.round(camT.x), 0, Math.round(camT.z)); // the ground goes wherever you go
+  ambientTick(dt);
   drawLight();
   updateEnts(dt);
   hintTick();
