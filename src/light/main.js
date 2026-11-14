@@ -64,9 +64,9 @@ const SCR_UP = new THREE.Vector3(-1, 0, -1).normalize(),
 /* ---------- light canvases ---------- */
 const LW = 46,
   LS = 460,
-  RS = 1024,
-  RW = 420,
-  RO = -210;
+  RS = 640, // memory window: 160 cells around the camera, 4 px per cell
+  RW = 160;
+let RO = [-80, -80]; // the memory window's corner in world cells; it follows the camera
 const lightCv = Object.assign(document.createElement('canvas'), { width: LS, height: LS }),
   lctx = lightCv.getContext('2d');
 const revCv = Object.assign(document.createElement('canvas'), { width: RS, height: RS }),
@@ -87,7 +87,7 @@ const U = {
   reveal: { value: revTex },
   lO: { value: new THREE.Vector2() },
   lS: { value: LW },
-  rO: { value: new THREE.Vector2(RO, RO) },
+  rO: { value: new THREE.Vector2(RO[0], RO[1]) },
   rS: { value: RW },
   day: { value: 1 },
   center: { value: new THREE.Vector2() },
@@ -97,6 +97,14 @@ const U = {
 };
 const ground = createGround(U, RW);
 scene.add(ground);
+
+// Lanterns, beacons and houses glow through sprites and painted light; this keeps their 'intensity' handle
+// without the cost of a real light per object.
+function glowStub() {
+  const o = new THREE.Object3D();
+  o.intensity = 0;
+  return o;
+}
 
 /* ---------- motes ---------- */
 const motes = [];
@@ -263,7 +271,7 @@ function makeLantern(cx, cz, rot, s = 1) {
   const haze = sprite(C.flame, 1.2 + 1.1 * s);
   haze.position.y = sz * 0.55;
   g.add(haze);
-  const pl = new THREE.PointLight(C.flame, 0, 4.5, 1.5);
+  const pl = glowStub();
   pl.position.y = 0.6;
   g.add(pl);
   const [dx, dz] = DIR[rot];
@@ -363,7 +371,7 @@ function makeBeacon(cx, cz, hidden = false, need, tag, great = false) {
   const sp = sprite(C.flame, 2.3);
   sp.position.y = ph + 0.25;
   g.add(sp);
-  const pl = new THREE.PointLight(C.flame, 0, 6, 1.4);
+  const pl = glowStub();
   pl.position.y = 1.4;
   g.add(pl);
   if (hidden) g.visible = false;
@@ -429,7 +437,7 @@ function makeHouse(cx, cz, hidden = false) {
   const sp = sprite(C.flame, 1.4);
   sp.position.y = 0.35;
   g.add(sp);
-  const pl = new THREE.PointLight(C.flame, 0, 3.5, 1.6);
+  const pl = glowStub();
   pl.position.y = 0.8;
   g.add(pl);
   if (hidden) g.visible = false;
@@ -622,11 +630,57 @@ function terrParams(k) {
     dist: Math.min(40, 20 + 4 * k),
   };
 }
+/* Memory of where light has been: the window above follows the camera; what it leaves behind is kept in
+   tiles, so the map never runs out and old ground is remembered when you come back. */
+const TILE = 32,
+  TPX = (TILE * RS) / RW,
+  tiles = new Map();
+function tileCanvas(i, j, create) {
+  let c = tiles.get(key(i, j));
+  if (!c && create) {
+    c = Object.assign(document.createElement('canvas'), { width: TPX, height: TPX });
+    tiles.set(key(i, j), c);
+  }
+  return c;
+}
+function stashWindow() {
+  const sc = RS / RW;
+  for (let x = RO[0]; x < RO[0] + RW; x += TILE)
+    for (let z = RO[1]; z < RO[1] + RW; z += TILE) {
+      const g = tileCanvas(x / TILE, z / TILE, true).getContext('2d');
+      g.globalCompositeOperation = 'copy';
+      g.drawImage(revCv, (x - RO[0]) * sc, (z - RO[1]) * sc, TPX, TPX, 0, 0, TPX, TPX);
+    }
+}
+function recenter(force = false) {
+  const ox = Math.floor((camT.x - RW / 2) / TILE) * TILE,
+    oz = Math.floor((camT.z - RW / 2) / TILE) * TILE;
+  if (!force && Math.abs(ox - RO[0]) < TILE * 1.5 && Math.abs(oz - RO[1]) < TILE * 1.5) return;
+  if (!force) stashWindow();
+  RO = [ox, oz];
+  U.rO.value.set(ox, oz);
+  const sc = RS / RW;
+  rctx.globalCompositeOperation = 'source-over';
+  rctx.fillStyle = '#000';
+  rctx.fillRect(0, 0, RS, RS);
+  for (let x = ox; x < ox + RW; x += TILE)
+    for (let z = oz; z < oz + RW; z += TILE) {
+      const c = tileCanvas(x / TILE, z / TILE, false);
+      if (c) rctx.drawImage(c, (x - ox) * sc, (z - oz) * sc);
+    }
+  revTex.needsUpdate = true;
+  tctx.clearRect(0, 0, TS, TS); // territory tint is recomputed from the chunks, so it needs no tiles
+  for (const [k, terrK] of chunkTerr) {
+    const [i, j] = k.split(',').map(Number);
+    if ((i + 1) * CH >= ox && i * CH <= ox + RW && (j + 1) * CH >= oz && j * CH <= oz + RW)
+      paintTint(i, j, terrK);
+  }
+}
 function paintTint(i, j, k) {
   const P = terrParams(k),
     sc = TS / RW,
-    x = ((i + 0.5) * CH - RO) * sc,
-    z = ((j + 0.5) * CH - RO) * sc,
+    x = ((i + 0.5) * CH - RO[0]) * sc,
+    z = ((j + 0.5) * CH - RO[1]) * sc,
     R = CH * 1.25 * sc;
   const gr = tctx.createRadialGradient(x, z, 0, x, z, R);
   const c = P.col.getStyle();
@@ -715,6 +769,7 @@ function trace(PV = false) {
   }
   const q = [];
   for (const e of ents) {
+    if (!near(e, 45)) continue; // light far from the camera can't be seen; it is traced again when you come near
     if (e.kind === 'source' && e.on >= 0) {
       const [dx, dz] = DIR[e.rot];
       q.push({
@@ -1062,7 +1117,7 @@ function drawLight() {
     const bl = p.e && p.e.revealed ? p.e.bloom : clamp01(age * 1.5);
     blob(p.x, p.z, p.r * (0.4 + 0.6 * bl), p.s * (p.f ? st : 1) * br * 0.9 * clamp01(age * 2));
   }
-  for (const e of ents)
+  for (const e of active)
     if (e.kind === 'source' && e.on >= 0)
       blob(e.cx + 0.5, e.cz + 0.5, 0.9 + 0.8 * e.s, (0.5 + 0.45 * e.s) * br * ignite(e) * (e.flick || 1));
   for (let i = cels.length - 1; i >= 0; i--) {
@@ -1082,7 +1137,7 @@ function drawLight() {
   const sc = RS / RW;
   rctx.globalCompositeOperation = 'lighten';
   if (frame % 5 === 0) {
-    rctx.drawImage(lightCv, (lox - RO) * sc, (loz - RO) * sc, LW * sc, LW * sc);
+    rctx.drawImage(lightCv, (lox - RO[0]) * sc, (loz - RO[1]) * sc, LW * sc, LW * sc);
     revTex.needsUpdate = true;
   }
 }
@@ -1114,19 +1169,40 @@ function wiggle(e) {
   const a = t - (e.wigT ?? -9);
   e.g.rotation.z = a < 0.6 && !reduce ? 0.07 * Math.sin(a * 38) * (1 - a / 0.6) : 0;
 }
+// The active set: things within reach of the camera. Everything else is hidden and skipped each frame.
+const NEAR = 30;
+let active = [],
+  lastDay = -1,
+  traceAt = new THREE.Vector3(1e9, 0, 0);
+const near = (e, r = NEAR) => Math.abs(e.cx + 0.5 - camT.x) + Math.abs(e.cz + 0.5 - camT.z) < r * 1.4;
+function refreshActive() {
+  active = [];
+  for (const e of ents) {
+    const n = intro.state !== 'play' || near(e) || e.dragging;
+    if (n) active.push(e);
+    if (intro.state === 'play' && e.far !== !n) {
+      e.far = !n;
+      if (!n) e.g.visible = false;
+      else e.g.visible = !(e.hidden && !e.revealed);
+    }
+  }
+}
 function updateEnts(dt) {
   const br = breath(t),
     st = stutter(t),
     k = Math.min(1, dt * 4),
     day = U.day.value;
   edgeNow.copy(chalkC).lerp(inkC, day);
-  for (const g of allGlass)
-    if (!g.own) {
-      g.front.color.copy(edgeNow);
-      g.hidden.color.copy(edgeNow);
-    }
-  for (let i = ents.length - 1; i >= 0; i--) {
-    const e = ents[i];
+  if (day !== lastDay || frame % 30 === 0)
+    for (const g of allGlass)
+      if (!g.own) {
+        g.front.color.copy(edgeNow);
+        g.hidden.color.copy(edgeNow);
+      }
+  lastDay = day;
+  for (let i = active.length - 1; i >= 0; i--) {
+    const e = active[i];
+    if (!ents.includes(e)) continue;
     if (e.wigT != null) wiggle(e);
     if (e.kind === 'cube') {
       e.ap = Math.min(1, e.ap + dt * 3.2);
@@ -2574,8 +2650,7 @@ function save() {
         last: latestCube() && [latestCube().cx, latestCube().cz],
         res: [...reserved],
         cam: [camT.x, camT.z],
-        rev: revCv.toDataURL('image/png'),
-        tint: tintCv.toDataURL('image/png'),
+        mem: (stashWindow(), Object.fromEntries([...tiles].map(([k, c]) => [k, c.toDataURL('image/png')]))),
       }),
     );
   } catch (_) {}
@@ -2644,15 +2719,13 @@ function restore(S) {
   step = 5;
   hints = [];
   lantern0 = ents.find((e) => e.kind === 'source') || null;
-  for (const [src, cv, tx] of [
-    [S.rev, rctx, () => revTex],
-    [S.tint, tctx, () => tintTex],
-  ]) {
-    if (!src) continue;
-    const im = new Image();
+  // memory of lit ground, tile by tile (older saves kept one image; that memory is simply not restored)
+  for (const [k, src] of Object.entries(S.mem || {})) {
+    const [i, j] = k.split(',').map(Number),
+      im = new Image();
     im.onload = () => {
-      cv.drawImage(im, 0, 0);
-      tx().needsUpdate = true;
+      tileCanvas(i, j, true).getContext('2d').drawImage(im, 0, 0);
+      recenter(true);
     };
     im.src = src;
   }
@@ -2682,6 +2755,8 @@ for (const e of ents)
     if (e.kind !== 'source') hideAtHome.push(e);
   }
 setDay(fromHome ? 0 : 1); // arriving from the homepage, it is already dusk
+recenter(true);
+refreshActive();
 let last = performance.now();
 function loop(now) {
   const dt = Math.min(0.05, (now - last) / 1000);
@@ -2694,7 +2769,7 @@ function loop(now) {
     tiltTick(dt);
     edgeScroll(dt);
     half += ((firstDone ? gameHalf() : tutHalf) - half) * Math.min(1, dt * 2);
-    if (t - lastSave > 8) save();
+    if (t - lastSave > 20) save();
     if (firstDone && frame % 20 === 0) {
       const n = ents.length;
       ensureChunks();
@@ -2703,11 +2778,18 @@ function loop(now) {
     breakTick();
     valveTick();
   }
+  if (frame % 15 === 0) {
+    refreshActive();
+    recenter();
+    if (traceAt.distanceTo(camT) > 8) dirty = true; // new things came into reach
+  }
   if (dirty) {
     dirty = false;
+    traceAt.copy(camT);
     trace();
   }
   applyCam();
+  ground.position.set(Math.round(camT.x), 0, Math.round(camT.z)); // the ground goes wherever you go
   drawLight();
   updateEnts(dt);
   hintTick();
