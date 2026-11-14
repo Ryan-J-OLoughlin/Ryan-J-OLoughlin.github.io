@@ -1689,6 +1689,8 @@ function place(type, cell) {
   const r = h && h.cell && h.cell[0] === cell[0] && h.cell[1] === cell[1] && h.type === type ? h.rot : 0;
   const e = makeCube(type, ...cell, r);
   e.spinT = t;
+  lastCube = e;
+  e.placedT = t;
   inv[type]--;
   dirty = true;
   refreshTray();
@@ -1996,6 +1998,8 @@ function endDrag(ev) {
   }
   e.g.position.set(e.cx + 0.5, 0, e.cz + 0.5);
   cells.set(key(e.cx, e.cz), e);
+  lastCube = e;
+  e.placedT = t;
   dirty = true;
 }
 
@@ -2190,9 +2194,19 @@ function setDay(d) {
   renderer.setClearColor(tmp);
   document.body.style.background = '#' + tmp.getHexString();
 }
+/* ---------- entrance: the homepage's cube becomes your first lantern (or, with a save, your last cube) ----------
+   Arriving from the homepage (?from=home&x&y&s), the page is already at dusk and the cube starts exactly where
+   and how big it was on the homepage. Visiting /light/ directly, the entrance starts on the site's paper. */
+const arrival = new URLSearchParams(location.search);
+const fromHome = arrival.get('from') === 'home';
 const homeCube = glass(C.ocean, 0.46);
 homeCube.own = true;
 scene.add(homeCube.g);
+const homeSize = 1.9; // the homepage's 0D cube
+let flyFrom = null,
+  flySize = homeSize,
+  lastCube = null; // the cube most recently placed or moved; saved, and where a returning visit lands
+
 function homeSpot() {
   const a = innerWidth / innerHeight;
   return camT
@@ -2201,52 +2215,94 @@ function homeSpot() {
     .addScaledVector(SCR_UP, a > 1.05 ? 0 : -1.8)
     .add(new THREE.Vector3(0, 0.95, 0));
 }
-let flyFrom = null;
+// where the cube lands, how big it ends up and what it turns into
+// the most recently placed or moved cube still on the map
+function latestCube() {
+  if (lastCube && ents.includes(lastCube)) return lastCube;
+  return (
+    ents
+      .filter((e) => e.kind === 'cube' && !e.fixed)
+      .sort((a, b) => (b.placedT ?? -1) - (a.placedT ?? -1))[0] || null
+  );
+}
+function landing() {
+  if (saved && lastCube && ents.includes(lastCube))
+    return {
+      at: new THREE.Vector3(lastCube.cx + 0.5, 0.4, lastCube.cz + 0.5),
+      size: 0.8,
+      color: TYPES[lastCube.type].color,
+      tint: lastCube.c.tint,
+      ent: lastCube,
+    };
+  if (!saved && lantern0)
+    return {
+      at: new THREE.Vector3(lantern0.cx + 0.5, lantern0.sz / 2, lantern0.cz + 0.5),
+      size: lantern0.sz,
+      color: C.ground,
+      tint: 0.16,
+      ent: lantern0,
+    };
+  return { at: new THREE.Vector3(camT.x, 0.3, camT.z), size: 0.05, color: C.ocean, tint: 0.46, ent: null };
+}
 function beginEntrance() {
   if (intro.state !== 'home') return;
   enableTilt();
   intro.state = 'transit';
   intro.t0 = t;
   flyFrom = homeCube.g.position.clone();
+  flySize = homeCube.g.scale.x;
+  if (fromHome) intro.t0 -= 1.0; // the homepage already did the dimming
 }
-setTimeout(beginEntrance, 500); // the homepage's "Light" link brings you here; the entrance plays by itself
+if (fromHome) {
+  // pick up the picture the homepage left: dusk, the cube small, where it was on screen
+  half = homeHalf();
+  applyCam();
+  setDay(0);
+  const x = Number(arrival.get('x')) * innerWidth,
+    y = Number(arrival.get('y')) * innerHeight,
+    px = Number(arrival.get('s')) || 60;
+  const size = (px * ((2 * half * innerWidth) / innerHeight)) / innerWidth / Math.SQRT2;
+  rayAt(x, y);
+  ray.ray.intersectPlane(PL(size / 2), hp);
+  homeCube.g.position.copy(hp);
+  homeCube.g.scale.setScalar(size);
+  intro.state = 'home';
+  setTimeout(beginEntrance, 50);
+} else setTimeout(beginEntrance, 500);
+
 const hideAtHome = [];
 function introTick() {
   if (intro.state === 'home') {
+    if (fromHome) return;
     half = homeHalf();
     homeCube.g.position.copy(homeSpot());
-    homeCube.g.scale.setScalar(1.9);
+    homeCube.g.scale.setScalar(homeSize);
     homeCube.g.rotation.y = 0.05 * Math.sin(t * 0.4);
     return;
   }
   if (intro.state !== 'transit') return;
   const a = t - intro.t0,
-    c = easeIO(clamp01((a - 0.3) / 2.6));
-  setDay(1 - c);
+    c = easeIO(clamp01((a - 0.3) / 2.6)),
+    L = landing();
+  if (!fromHome) setDay(1 - c);
   half = lerp(homeHalf(), firstDone ? gameHalf() : tutHalf, c);
+  if (L.ent) L.ent.g.visible = false;
   const f = easeIO(clamp01((a - 1.0) / 2.2)),
-    to =
-      saved || !lantern0
-        ? new THREE.Vector3(camT.x, 0.3, camT.z)
-        : new THREE.Vector3(lantern0.cx + 0.5, lantern0.sz / 2, lantern0.cz + 0.5);
-  homeCube.g.position.lerpVectors(flyFrom, to, f);
+    k = clamp01((f - 0.6) / 0.4);
+  homeCube.g.position.lerpVectors(flyFrom, L.at, f);
   homeCube.g.position.y += Math.sin(f * Math.PI) * 1.1;
-  homeCube.g.scale.setScalar(lerp(1.9, saved ? 0.05 : lantern0.sz, f));
+  homeCube.g.scale.setScalar(lerp(flySize, L.size, f));
   homeCube.g.rotation.y = reduce ? 0 : Math.PI * 2 * easeOut(f); // one spin, like the site
-  homeCube.surface.color.copy(oceanC).lerp(groundC, clamp01((f - 0.6) / 0.4));
-  homeCube.surface.opacity = lerp(0.46, 0.16, clamp01((f - 0.6) / 0.4));
+  homeCube.surface.color.copy(oceanC).lerp(new THREE.Color(L.color), k);
+  homeCube.surface.opacity = lerp(0.46, L.tint, k);
   homeCube.surface.emissive.copy(flameC).multiplyScalar(0.3 * clamp01((f - 0.75) / 0.25));
-  if (a > 2.4) for (const e of hideAtHome) e.g.visible = true;
+  if (a > 2.4) for (const e of hideAtHome) if (e !== L.ent) e.g.visible = true;
   if (a >= 3.25 && homeCube.g.visible) {
     homeCube.g.visible = false;
-    if (lantern0 && !saved) {
-      lantern0.g.visible = true;
-      lantern0.on = t;
-    }
+    if (L.ent) L.ent.g.visible = true;
+    if (L.ent === lantern0 && !saved) lantern0.on = t;
     dirty = true;
-    const mp =
-      saved || !lantern0 ? [camT.x, 0.3, camT.z] : [lantern0.cx + 0.5, lantern0.sz * 0.6, lantern0.cz + 0.5];
-    for (let i = 0; i < 8; i++) setTimeout(() => mote(...mp, 0), i * 80);
+    for (let i = 0; i < 8; i++) setTimeout(() => mote(L.at.x, L.at.y + 0.2, L.at.z, 0), i * 80);
   }
   if (a >= 3.9) startPlay();
 }
@@ -2515,6 +2571,7 @@ function save() {
         found,
         chunks: [...chunkTerr],
         great: great && !great.woken ? [great.cx, great.cz, !!great.routed] : null,
+        last: latestCube() && [latestCube().cx, latestCube().cz],
         res: [...reserved],
         cam: [camT.x, camT.z],
         rev: revCv.toDataURL('image/png'),
@@ -2581,6 +2638,8 @@ function restore(S) {
     if (best) routeTo(best.cx, best.cz, great);
   } else if (great) great.routed = true;
   camT.set(S.cam[0], 0, S.cam[1]);
+  if (S.last) lastCube = cells.get(key(...S.last)) || null;
+  if (lastCube) camT.set(lastCube.cx + 0.5, 0, lastCube.cz + 0.5); // you come back to your last cube
   firstDone = true;
   step = 5;
   hints = [];
@@ -2622,7 +2681,7 @@ for (const e of ents)
     e.g.visible = false;
     if (e.kind !== 'source') hideAtHome.push(e);
   }
-setDay(1);
+setDay(fromHome ? 0 : 1); // arriving from the homepage, it is already dusk
 let last = performance.now();
 function loop(now) {
   const dt = Math.min(0.05, (now - last) / 1000);
