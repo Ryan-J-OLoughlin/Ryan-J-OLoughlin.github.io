@@ -404,3 +404,37 @@ body {
   color: var(--flame-core);
   border-color: rgba(242, 179, 94, 0.45);
 }
+
+/* an optional, harder puzzle nearby: a quiet double chevron with ✦ for its difficulty */
+#challenge {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 46px;
+  height: 30px;
+  margin: -15px 0 0 -23px;
+  color: var(--chalk);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+#challenge.on {
+  opacity: 0.75;
+}
+#challenge svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#challenge .stars {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--t-split);
+}
