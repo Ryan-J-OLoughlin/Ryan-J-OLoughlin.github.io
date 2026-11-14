@@ -524,27 +524,37 @@ const born = (e) => {
   e.born = t;
   return e;
 };
+// The first stretch teaches one idea per step, in order:
+//   1 place a prism · 2 watch light carry on · 3 aim a lit beacon · 4 reuse a cube you already placed
+//   5 a twin beacon needs two beams (reuse again) · 6 find the cracked cube and replace it
+const yourPrism = () =>
+  ents
+    .filter((e) => e.kind === 'cube' && e.type === 'prism' && !e.fixed && !e.broken)
+    .sort((a, b) => Math.hypot(a.cx, a.cz + 1) - Math.hypot(b.cx, b.cz + 1))[0];
 const STEPS = {
   2: () => {
-    born(makeGift(2, -3, 'prism'));
-    born(makeBeacon(2, -6, false, 1, 'L2'));
+    born(makeBeacon(2, -6, false, 1, 'L2')); // the first beacon's light reaches it by itself
     return [];
   },
   3: () => {
-    born(makeGift(2, -7, 'prism'));
-    born(makeBeacon(5, -8, false, 2, 'L3'));
-    return [
-      { cell: [2, -8], type: 'prism', rot: 0 },
-      { tap: L1, rot: 0 },
-      { cell: [5, -1], type: 'prism', rot: 3 },
-    ];
+    born(makeBeacon(6, -6, false, 1, 'L3')); // to the side: tap the lit beacon to turn its beam
+    const L2 = ents.find((e) => e.tag === 'L2');
+    return [{ tap: L2, rot: 0 }];
   },
   4: () => {
-    born(makeGift(5, -10, 'prism'));
-    born(makeCube('prism', 5, -11, 2, true));
-    const b = born(makeCube('prism', 3, -11, 3, true, true));
-    born(makeBeacon(3, -14, false, 1, 'L4'));
-    return [{ discard: b }, { cell: [3, -11], type: 'prism', rot: 3 }];
+    born(makeBeacon(3, -9, false, 1, 'L4')); // the tray is empty: pick up your first prism and use it again
+    return [{ move: yourPrism(), cell: [6, -9], type: 'prism', rot: 2 }];
+  },
+  5: () => {
+    born(makeBeacon(3, -13, false, 2, 'L5')); // one beam arrives by itself; move the prism once more for the second
+    return [{ move: cells.get(key(6, -9)) || yourPrism(), cell: [6, -13], type: 'prism', rot: 2 }];
+  },
+  6: () => {
+    born(makeGift(3, -15, 'prism')); // collected on the way, for the repair
+    born(makeCube('prism', 3, -16, 0, true));
+    const b = born(makeCube('prism', 5, -16, 3, true, true));
+    born(makeBeacon(5, -19, false, 1, 'L6'));
+    return [{ discard: b }, { cell: [5, -16], type: 'prism', rot: 3 }];
   },
 };
 const FRAME = {
@@ -555,21 +565,29 @@ const FRAME = {
   ],
   2: [
     [2, -1],
-    [2, -3],
     [2, -6],
   ],
   3: [
-    [2, -1],
-    [5, -1],
     [2, -6],
-    [2, -8],
-    [5, -8],
+    [6, -6],
   ],
   4: [
-    [5, -8],
-    [5, -11],
-    [3, -11],
-    [3, -14],
+    [0, -1],
+    [6, -6],
+    [6, -9],
+    [3, -9],
+  ],
+  5: [
+    [3, -9],
+    [6, -9],
+    [6, -13],
+    [3, -13],
+  ],
+  6: [
+    [3, -13],
+    [3, -16],
+    [5, -16],
+    [5, -19],
   ],
 };
 let tutHalf = 5;
@@ -591,13 +609,15 @@ function frameStep(n, dur = 2.4) {
   glideTo(c, dur);
 }
 function advance(n) {
+  logPT('done');
   step = n;
   stepT = t;
+  logPT('start');
   hints = STEPS[n]();
   dirty = true;
   frameStep(n);
 }
-const inFirst = (x, z) => x >= -6 && x <= 9 && z >= -18 && z <= 6;
+const inFirst = (x, z) => x >= -6 && x <= 10 && z >= -22 && z <= 6;
 
 // territories: each great beacon you wake moves you into new land, a blend of the three ideas (never named)
 let terr = 0;
@@ -1381,7 +1401,14 @@ function updateEnts(dt) {
         celebrate(e);
         onWake(e);
       }
-      const call = reduce ? 0.42 : 0.3 + 0.2 * (0.5 + 0.5 * Math.sin(t * Math.PI * 0.5 + e.cx));
+      const goal = !firstDone && e.tag === 'L' + step && !e.woken; // the current step's goal: unmistakable
+      const call = reduce
+        ? goal
+          ? 0.7
+          : 0.42
+        : goal
+          ? 0.5 + 0.4 * (0.5 + 0.5 * Math.sin(t * Math.PI * 1.2))
+          : 0.3 + 0.2 * (0.5 + 0.5 * Math.sin(t * Math.PI * 0.5 + e.cx));
       e.rings.forEach((r, i) => {
         let inp = e.inputs[i];
         if (inp && t < inp.at) inp = null;
@@ -1671,9 +1698,11 @@ function onWake(e) {
       if (c.kind === 'cube' && !c.fixed && !c.bound && Math.hypot(c.cx - e.cx, c.cz - e.cz) <= 5) dissolve(c);
     setTimeout(() => spawnGreat(e.cx, e.cz), 2600);
   }
-  const nx = { L1: 2, L2: 3, L3: 4 }[e.tag];
+  const nx = { L1: 2, L2: 3, L3: 4, L4: 5, L5: 6 }[e.tag];
   if (nx) setTimeout(() => advance(nx), 1500);
-  if (e.tag === 'L4') {
+  if (e.tag === 'L6') {
+    logPT('done');
+    setTimeout(showPlaytest, 4000);
     firstDone = true;
     hints = [];
     setTimeout(() => spawnGreat(e.cx, e.cz), 1800);
@@ -1890,6 +1919,7 @@ function placeSel() {
   selBack.style.top = sy - 24 + 'px';
 }
 function turn(e) {
+  noteBusy();
   if (e.fixed) return;
   e.rot = (e.rot + 1) & 3;
   e.ang -= Math.PI / 2;
@@ -2073,6 +2103,8 @@ canvas.addEventListener('pointerup', (ev) => {
     return;
   }
   if (G.moved) return;
+  noteTap();
+  logPT('tap');
   const x = ev.clientX,
     y = ev.clientY,
     h = groundAt(x, y);
@@ -2217,6 +2249,8 @@ function moveDrag(x, y) {
   }
 }
 function endDrag(ev) {
+  noteBusy();
+  logPT('move');
   const e = dragE;
   dragE = null;
   if (!e) return;
@@ -2557,6 +2591,7 @@ function introTick() {
   if (a >= 3.9) startPlay();
 }
 function startPlay() {
+  if (!firstDone) logPT('start');
   if (intro.state === 'play') return;
   intro.state = 'play';
   if (!firstDone) frameStep(1, 1.2);
@@ -2662,7 +2697,7 @@ function previewTick() {
   }
   // stuck in the first stretch for a while: show where the light would go from the glowing spot
   const hh = intro.state === 'play' ? curHint() : null;
-  if (hh && hh.cell && t - lastAct > 12 && t - stepT > 12 && !glide) {
+  if (hh && hh.cell && ((t - lastAct > 12 && t - stepT > 12) || (step === 5 && t - stepT > 4)) && !glide) {
     preview(hh.type, hh.cell, hh.rot);
     pvMat.opacity = 0.25 + 0.3 * (0.5 + 0.5 * Math.sin(t * 2.4));
     return;
@@ -2690,7 +2725,12 @@ function curHint() {
   if (firstDone) return null;
   const targets = ents.filter((e) => e.kind === 'beacon' && e.tag === 'L' + step);
   if (targets.length && targets.every((e) => e.woken)) return null;
-  return hints.find((h) => !done(h)) || null;
+  const h = hints.find((x) => !done(x)) || null;
+  // reuse: point at the old cube while it's on the map; once it's back in the tray, point at the spot
+  if (h && h.move && (!ents.includes(h.move) || h.move.dragging))
+    return { cell: h.cell, type: h.type, rot: h.rot, from: h.move };
+  if (h && h.move) return { ...h, pick: h.move };
+  return h;
 }
 const hintG = new THREE.Group();
 scene.add(hintG);
@@ -2726,6 +2766,9 @@ const hintRing = new THREE.Mesh(
 hintRing.rotation.x = -Math.PI / 2;
 hintRing.position.y = 0.03;
 hintG.add(hintEdges, hintSq, hintRing);
+const pickRing = new THREE.Mesh(hintRing.geometry, hintRing.material.clone()); // around the cube to pick up again
+pickRing.rotation.x = -Math.PI / 2;
+scene.add(pickRing);
 function hintTick() {
   const h = intro.state === 'play' ? curHint() : null,
     boost = t - hintBoost < 2.2,
@@ -2733,9 +2776,22 @@ function hintTick() {
     p = boost ? 0.75 + 0.25 * Math.sin(t * 9) : reduce ? 0.7 : 0.5 + 0.5 * Math.sin(t * 3.6);
   for (const b of toolBtns)
     b.classList.toggle('hint', !!(show && h.cell && b.dataset.t === h.type && inv[h.type] > 0 && !selE));
-  selBack.classList.toggle('hint', !!(show && h.discard && selE === h.discard));
-  hintEdges.material.opacity = hintSq.material.opacity = hintRing.material.opacity = 0;
+  selBack.classList.toggle(
+    'hint',
+    !!(show && ((h.discard && selE === h.discard) || (h.pick && selE === h.pick))),
+  );
+  hintEdges.material.opacity =
+    hintSq.material.opacity =
+    hintRing.material.opacity =
+    pickRing.material.opacity =
+      0;
+  demoTick(intro.state === 'play' ? h : null);
   if (!show) return;
+  if (h.pick) {
+    pickRing.position.set(h.pick.cx + 0.5, 0.03, h.pick.cz + 0.5);
+    pickRing.scale.setScalar(0.85 + 0.25 * p);
+    pickRing.material.opacity = 0.25 + 0.55 * p;
+  }
   if (h.cell) {
     hintG.position.set(h.cell[0] + 0.5, 0, h.cell[1] + 0.5);
     hintEdges.material.color.set(TYPES[h.type].lift);
@@ -2748,6 +2804,111 @@ function hintTick() {
     hintRing.scale.setScalar(0.85 + 0.25 * p);
     hintRing.material.opacity = 0.25 + 0.55 * p;
   }
+}
+
+/* ---------- "show me": when someone seems lost, a translucent ghost acts out the move once ----------
+   Lost means: many taps with nothing changing, lots of moving cubes without progress, or a long quiet. */
+const ghostDemo = new THREE.Group();
+const demoEdges = new THREE.LineSegments(
+  boxEdges,
+  new THREE.LineBasicMaterial({ color: C.core, transparent: true, opacity: 0, depthWrite: false }),
+);
+demoEdges.renderOrder = 8;
+demoEdges.scale.setScalar(0.8);
+const demoGlow = sprite(C.core, 1.2);
+const finger = sprite(0xffffff, 0.55); // a soft fingertip
+ghostDemo.add(demoEdges, demoGlow);
+scene.add(ghostDemo, finger);
+let demo = null,
+  lastDemoT = -99,
+  progressKey = '',
+  progressT = 0,
+  taps = [],
+  busy = 0;
+const noteTap = () => taps.push(t);
+const noteBusy = () => busy++;
+function lostReason(h) {
+  const k = step + ':' + JSON.stringify([h.cell, !!h.tap, !!h.discard, !!h.pick]);
+  if (k !== progressKey) [progressKey, progressT, taps, busy] = [k, t, [], 0];
+  if (taps.filter((x) => t - x < 6).length >= 4) return 'taps';
+  if (busy >= 3 && t - progressT > 12) return 'busy';
+  if (t - progressT > 14 && t - lastAct > 6) return 'quiet';
+  return null;
+}
+function trayGround() {
+  const r = trayEl.getBoundingClientRect();
+  rayAt(r.left + r.width / 2, r.top);
+  return ray.ray.intersectPlane(PL(0.4), new THREE.Vector3()) || camT.clone();
+}
+function demoTick(h) {
+  if (!demo && h && !dragE && !glide && t - lastDemoT > 6) {
+    const why = lostReason(h);
+    if (why) {
+      const at = (x, z, y = 0.4) => new THREE.Vector3(x + 0.5, y, z + 0.5);
+      if (h.tap) demo = { kind: 'tap', to: at(h.tap.cx, h.tap.cz, 1.6) };
+      else if (h.discard) demo = { kind: 'discard', from: at(h.discard.cx, h.discard.cz), to: trayGround() };
+      else if (h.pick)
+        demo = { kind: 'move', from: at(h.pick.cx, h.pick.cz), to: at(...h.cell), type: h.type };
+      else if (h.cell)
+        demo = { kind: 'place', from: h.from ? trayGround() : trayGround(), to: at(...h.cell), type: h.type };
+      if (demo) [demo.t0, lastDemoT, taps, busy] = [t, t, [], 0];
+      logPT('demo', why);
+    }
+  }
+  if (!demo)
+    return void (demoEdges.material.opacity = demoGlow.material.opacity = finger.material.opacity = 0);
+  const a = (t - demo.t0) / 2.2,
+    fade = Math.min(clamp01(a / 0.15), clamp01((1 - a) / 0.15));
+  if (a >= 1) return void (demo = null);
+  if (demo.kind === 'tap') {
+    // a fingertip comes down on the beacon twice
+    const press = Math.abs(Math.sin(a * Math.PI * 2));
+    finger.position.copy(demo.to).add(new THREE.Vector3(0, 0.6 * press, 0));
+    finger.material.opacity = 0.8 * fade;
+    demoEdges.material.opacity = demoGlow.material.opacity = 0;
+    if (press < 0.08 && !demo.rippled) {
+      demo.rippled = true;
+      cels.push({ x: demo.to.x, z: demo.to.z, t0: t, dur: 0.8, r: 0.9, big: 0 });
+    }
+    if (press > 0.5) demo.rippled = false;
+    return;
+  }
+  // a ghost cube travels from where it is (or the tray) to where it should go, lifted along an arc
+  const k = easeIO(clamp01((a - 0.15) / 0.65));
+  ghostDemo.position
+    .lerpVectors(demo.from, demo.to, k)
+    .add(new THREE.Vector3(0, Math.sin(k * Math.PI) * 0.9, 0));
+  if (demo.type) demoEdges.material.color.set(TYPES[demo.type].lift);
+  demoEdges.material.opacity = 0.75 * fade * (demo.kind === 'discard' ? 1 - k : 1);
+  demoGlow.material.opacity = 0.35 * fade;
+  finger.position.copy(ghostDemo.position).add(new THREE.Vector3(0, 0.7, 0));
+  finger.material.opacity = 0.6 * fade;
+}
+
+/* ---------- ?playtest: a quiet record of each step (time, taps, moves, demos), kept in this browser ---------- */
+const PT = new URLSearchParams(location.search).has('playtest') ? { steps: {}, t0: 0 } : null;
+function logPT(what, detail) {
+  if (!PT) return;
+  if (what === 'start') PT.steps[step] = { start: t, taps: 0, moves: 0, demos: [] };
+  const st = (PT.steps[step] ??= { start: t, taps: 0, moves: 0, demos: [] });
+  if (what === 'tap') st.taps++;
+  if (what === 'move') st.moves++;
+  if (what === 'demo') st.demos.push(detail);
+  if (what === 'done') st.end = t;
+}
+function showPlaytest() {
+  if (!PT) return;
+  const rows = Object.entries(PT.steps)
+    .map(
+      ([n, v]) =>
+        `<tr><td>${n}</td><td>${Math.round((v.end ?? t) - v.start)} s</td><td>${v.taps}</td><td>${v.moves}</td><td>${v.demos.join(', ') || '—'}</td></tr>`,
+    )
+    .join('');
+  const el = document.createElement('div');
+  el.className = 'pt-summary';
+  el.innerHTML = `<b>Playtest</b><table><tr><th>step</th><th>time</th><th>taps</th><th>moves</th><th>show-me</th></tr>${rows}</table><button class="btn mono">Close</button>`;
+  el.querySelector('button').onclick = () => el.remove();
+  document.body.append(el);
 }
 
 const goalEl = document.getElementById('goal');
