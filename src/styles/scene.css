@@ -244,3 +244,7 @@ a.esm-person:hover, .esm-person.is-hovered { background: rgba(255, 255, 255, 0.9
   .esm-person { font-size: var(--fs-2xs); }
   #scene .scene-text-3 { width: auto; }
 }
+
+/* ───── the way into Light (to-light.js) ───── */
+.to-light-shade { position: fixed; inset: 0; background: #20262D; opacity: 0; pointer-events: none; z-index: 20; }
+.to-light-lifted { z-index: 21; }

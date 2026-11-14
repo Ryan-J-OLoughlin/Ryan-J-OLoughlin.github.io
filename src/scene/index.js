@@ -13,6 +13,7 @@ import { toScreen, pin } from './labels.js';
 import { createPicker } from './pick.js';
 import { createScroll } from './scroll.js';
 import { createLandscape, heightAt, MODEL_SPOT, FIELD_CENTERS, CUBE as PERSON_CUBE } from './landscape.js';
+import { enableLightLink } from './to-light.js';
 
 const LAND_Y = -1.4; // the landscape sits a little below the model's centre
 
@@ -73,6 +74,9 @@ export function start() {
   const modelSpot = new Vector3(MODEL_SPOT[0], LAND_Y + PERSON_CUBE / 2, MODEL_SPOT[1]);
 
   const stages = createStages({ cubes, air, grid, landscape, modelSpot, modelSize: PERSON_CUBE, colors });
+
+  // the nav's "Light" link: dim the page and shrink the 0D cube into the game (see to-light.js)
+  enableLightLink({ camera, holder, cube: cubes.errors.group });
 
   // ───── web-text overlays ─────
   const layerLabels = Object.fromEntries(
