@@ -7,6 +7,7 @@ import { glowCv, glowTex, flameTex, sprite } from './textures.js';
 import { box, boxEdges, allGlass, glass, forgetGlass } from './glass.js';
 import { segs, TYPES, crackGeo } from './marks.js';
 import { createAmbient } from './ambient.js';
+import * as pieces from './pieces.js';
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const DIR = [
@@ -890,7 +891,7 @@ function trace(PV = false) {
       if (k !== last) {
         last = k;
         const e = cells.get(k);
-        if (e && e.kind !== 'source' && !e.dragging && !(e.kind === 'gift' && e.taken)) {
+        if (e && e.kind !== 'source' && !e.dragging && !(e.kind === 'gift' && (e.taken || trayFull()))) {
           hit = e;
           break;
         }
@@ -958,7 +959,7 @@ function trace(PV = false) {
       if (e.hidden && !e.revealed) {
         if (!PV && s >= 0.2) reveal(e, at);
       } else {
-        e.inputs.push({ s, f: r.f, at });
+        e.inputs.push({ s, f: r.f, at, from: [Math.round(dx), Math.round(dz)] });
         e.hit = Math.max(e.hit, s);
         if (r.f) e.inF = true;
       }
@@ -979,6 +980,13 @@ function trace(PV = false) {
       if (e.fed && !e.woken) {
         e.woken = true;
         e.wakeAt = Math.max(...e.inputs.map((i) => i.at));
+        // a route beacon first answers the light that woke it (its beam goes back the way the light came),
+        // so it never solves the next puzzle by accident; tap it to aim it onward
+        if (e.route && !e.tag && !PV) {
+          const [ix, iz] = e.inputs[0].from;
+          e.rot = ix > 0 ? 2 : ix < 0 ? 0 : iz > 0 ? 3 : 1;
+          e.ang = (-e.rot * Math.PI) / 2;
+        }
         dirty = true;
       }
     }
@@ -1242,6 +1250,27 @@ function refreshActive() {
     }
   }
 }
+const WEAR_LIFE = 240; // seconds of full light a cube can carry
+function shatter(e) {
+  for (let i = 0; i < 10; i++)
+    mote(
+      e.cx + 0.5 + (Math.random() - 0.5) * 0.6,
+      0.2 + Math.random() * 0.6,
+      e.cz + 0.5 + (Math.random() - 0.5) * 0.6,
+      0,
+      C.fault,
+    );
+  if (selE === e) select(null);
+  removeEnt(e);
+  dirty = true;
+}
+function dissolve(e) {
+  for (let i = 0; i < 12; i++)
+    setTimeout(() => mote(e.cx + 0.5, 0.3 + Math.random() * 0.5, e.cz + 0.5, 0), i * 50);
+  if (selE === e) select(null);
+  removeEnt(e);
+  dirty = true;
+}
 function updateEnts(dt) {
   const br = breath(t),
     st = stutter(t),
@@ -1270,6 +1299,21 @@ function updateEnts(dt) {
         ? 0
         : Math.PI * 2 * easeOut(clamp01((t - e.spinT) / 0.9)) - (t - e.spinT < 0.9 ? Math.PI * 2 : 0); // place: one gentle spin
       e.c.g.rotation.y += (e.ang + (t - e.spinT < 0.9 ? spin : 0) - e.c.g.rotation.y) * Math.min(1, dt * 12);
+      // wear: a cube carries only so much light; near the end a crack grows, then it shatters
+      if (!e.fixed && !e.bound && e.active && t >= e.arr && !e.dragging) {
+        e.wear = (e.wear || 0) + (dt / WEAR_LIFE) * Math.min(1, e.inS);
+        if (e.wear >= 1) {
+          shatter(e);
+          continue;
+        }
+      }
+      if (e.bound && e.bound.until) {
+        const u = cells.get(key(...e.bound.until));
+        if (u && u.woken && t > u.wakeAt + 1.5) {
+          dissolve(e);
+          continue;
+        }
+      }
       const arrived = t >= e.arr;
       e.glow += ((e.active && arrived && !e.dragging ? Math.min(1, e.inS) : 0) - e.glow) * k;
       const m = (e.broken || e.inF ? st : 1) * br,
@@ -1289,7 +1333,9 @@ function updateEnts(dt) {
       e.c.hidden.color.copy(edgeNow);
       e.markMat.color.copy(e.lift).lerp(coreC, Math.min(1, gl * 0.6));
       e.c.front.opacity = 0.65 + 0.3 * Math.min(1, gl);
-      e.crackMat.opacity = e.broken ? Math.min(1, 0.95 * (0.55 + 0.45 * st) + bf) : 0;
+      e.crackMat.opacity = e.broken
+        ? Math.min(1, 0.95 * (0.55 + 0.45 * st) + bf)
+        : clamp01(((e.wear || 0) - 0.6) / 0.4) * 0.8;
       e.sel.material.opacity +=
         ((e === selE || e.dragging ? 0.9 : 0) - e.sel.material.opacity) * Math.min(1, dt * 10);
     } else if (e.kind === 'source') {
@@ -1387,6 +1433,10 @@ function updateEnts(dt) {
     }
   }
 }
+// Resources: the tray holds at most TRAY cubes; a gift waits on the map (light passes it) until there's room.
+const TRAY = 6;
+const trayCount = () => Object.values(inv).reduce((a, b) => a + b, 0);
+const trayFull = () => trayCount() >= TRAY;
 function collect(e) {
   inv[e.type] = (inv[e.type] || 0) + 1;
   seen.add(e.type);
@@ -1504,49 +1554,69 @@ function stone(x, z) {
   b.born = t;
   return b;
 }
-// the next hop from P toward the target T: a stone within 4 cells each way, reached through a clear lane
-function nextHop(P, T, last) {
-  const step = (d) => Math.sign(d) * Math.min(4, Math.abs(d));
-  const base = last ? T : [P[0] + step(T[0] - P[0]), P[1] + step(T[1] - P[1])];
-  const offsets = last
-    ? [[0, 0]]
-    : [
-        [0, 0],
-        [1, 0],
-        [-1, 0],
-        [0, 1],
-        [0, -1],
-        [1, 1],
-        [-1, -1],
-        [1, -1],
-        [-1, 1],
-      ];
-  for (const [ox, oz] of offsets) {
-    const N = [base[0] + ox, base[1] + oz];
-    if (Math.abs(N[0] - P[0]) > 4 || Math.abs(N[1] - P[1]) > 4 || (N[0] === P[0] && N[1] === P[1])) continue;
-    if (!last && (permanent(...N) || reserved.has(key(...N)))) continue; // never inside another lane
-    for (const C of [
-      [N[0], P[1]],
-      [P[0], N[1]],
-    ])
-      if (laneClear(P, C, N)) return { at: N, via: C };
-  }
-  return null;
+// What pieces need from the world (see pieces.js)
+const pieceCtx = {
+  free: (x, z) => !permanent(x, z) && !reserved.has(key(x, z)),
+  lane: laneClear,
+  claim: clearLane,
+  stone(cell, need) {
+    keepClear(...cell);
+    const o = cells.get(key(...cell));
+    if (o) return o;
+    const b = makeBeacon(cell[0], cell[1], false, need);
+    Object.assign(b, { reach: 10, route: true, born: t });
+    return b;
+  },
+  cube(type, cell, rot, o = {}) {
+    keepClear(...cell);
+    const e = makeCube(type, cell[0], cell[1], rot, !!o.fixed, !!o.broken);
+    Object.assign(e, { ap: 1, keep: !!o.keep, route: true });
+    if (o.bound) e.bound = { cell: o.bound.cell, r: o.bound.r, until: o.bound.until };
+    return e;
+  },
+  rock(cell) {
+    keepClear(...cell);
+    makeRock(...cell).route = true;
+  },
+  spot(near) {
+    const c = nearestFree(near[0] + 0.5, near[1] + 0.5);
+    if (!c || reserved.has(key(...c)) || permanent(...c)) return null;
+    reserved.add(key(...c));
+    return c;
+  },
+};
+// Each land favours its own pieces: ocean → fork, green → fault, earth → spill; turns everywhere.
+function pickPiece(w, r) {
+  const weights = [
+    ['turn', 0.35],
+    ['fork', 0.65 * w[0]],
+    ['fault', 0.65 * w[1]],
+    ['spill', 0.65 * w[2]],
+  ];
+  let x = r * weights.reduce((a, b) => a + b[1], 0);
+  for (const [k, v] of weights) if ((x -= v) <= 0) return k;
+  return 'turn';
 }
 function routeTo(fx, fz, G) {
   const { S1, S2, S3, lanes } = helperLayout(G.cx, G.cz);
   for (const l of lanes) clearLane(...l);
   for (const S of [S1, S2, S3]) stone(...S);
-  const route = [{ at: [fx, fz] }]; // G.route: the hops in order, each with the corner its prism goes on
+  const route = [{ at: [fx, fz] }]; // G.route: the hops in order, each with the plan that solves it
+  const w = landParams(terr).w,
+    r = rng(G.cx * 92821 + G.cz * 68917);
   let P = [fx, fz];
   for (let guard = 0; guard < 40; guard++) {
     const last = Math.abs(S1[0] - P[0]) <= 4 && Math.abs(S1[1] - P[1]) <= 4;
-    const hop = nextHop(P, S1, last) || (last && nextHop(P, S1, false));
-    if (!hop) break; // should not happen; the safety valve and the solver (next) cover it
-    clearLane(P, hop.via, hop.at);
-    stone(...hop.at);
+    const kind = last ? 'turn' : pickPiece(w, r());
+    const hop =
+      (kind === 'fork' && pieces.fork(pieceCtx, P, S1)) ||
+      (kind === 'fault' && pieces.fault(pieceCtx, P, S1, () => r() < 0.5)) ||
+      (kind === 'spill' && pieces.spill(pieceCtx, P, S1)) ||
+      pieces.turn(pieceCtx, P, S1, last) ||
+      (last && pieces.turn(pieceCtx, P, S1, false));
+    if (!hop) break; // should not happen; the safety valve covers it
     route.push(hop);
-    if (route.length % 2 === 0) {
+    if (route.length % 3 === 0) {
       const c = nearestFree(P[0] + 0.5, P[1] + 1.7);
       if (c && !reserved.has(key(...c))) makeGift(...c, 'prism').born = t;
     }
@@ -1556,10 +1626,49 @@ function routeTo(fx, fz, G) {
   G.route = route;
   G.helpers = [S1, S2, S3];
   G.routed = true;
+  buildChallenge(route, r);
+}
+// An optional side puzzle: from a stepping stone, one or two harder pieces lead sideways to a vault
+// that releases rarer cubes when lit. Off the main way, so nobody is ever blocked by it.
+function buildChallenge(route, r) {
+  if (route.length < 3 || r() > 0.6) return;
+  const from = route[1 + Math.floor(r() * (route.length - 2))].at,
+    toMain = [route[route.length - 1].at[0] - from[0], route[route.length - 1].at[1] - from[1]],
+    side = r() < 0.5 ? [-toMain[1], toMain[0]] : [toMain[1], -toMain[0]],
+    len = Math.hypot(...side) || 1,
+    T = [Math.round(from[0] + (side[0] / len) * 14), Math.round(from[1] + (side[1] / len) * 14)];
+  const stars = r() < 0.5 ? 1 : 2,
+    kinds = ['fork', 'fault', 'spill'];
+  let P = from,
+    hop = null;
+  for (let i = 0; i < stars; i++) {
+    const k = kinds[Math.floor(r() * 3)];
+    hop =
+      (k === 'fork' && pieces.fork(pieceCtx, P, T)) ||
+      (k === 'fault' && pieces.fault(pieceCtx, P, T, () => r() < 0.5)) ||
+      (k === 'spill' && pieces.spill(pieceCtx, P, T)) ||
+      kinds.map((k2) => k2 !== k && pieces[k2](pieceCtx, P, T, () => r() < 0.5)).find(Boolean);
+    if (!hop) return;
+    P = hop.at;
+  }
+  const vault = cells.get(key(...P));
+  if (vault) vault.vault = { stars };
 }
 function onWake(e) {
+  if (e.vault) {
+    // the vault opens: rarer cubes, more of them the harder it was
+    const pool = ['amp', 'split', 'diffuse', 'amp', 'split', 'prism'];
+    for (let i = 0; i < 1 + e.vault.stars; i++) {
+      const c = nearestFree(e.cx + 0.5 + (Math.random() - 0.5) * 3, e.cz + 0.5 + (Math.random() - 0.5) * 3);
+      if (c) makeGift(...c, pool[Math.floor(Math.random() * pool.length)]).born = t;
+    }
+    e.vault.open = true;
+  }
   if (e.great) {
     terr++;
+    // a great beacon takes the cubes around it into its light: every big step costs something
+    for (const c of [...ents])
+      if (c.kind === 'cube' && !c.fixed && !c.bound && Math.hypot(c.cx - e.cx, c.cz - e.cz) <= 5) dissolve(c);
     setTimeout(() => spawnGreat(e.cx, e.cz), 2600);
   }
   const nx = { L1: 2, L2: 3, L3: 4 }[e.tag];
@@ -1740,7 +1849,7 @@ const overTray = (x, y) => {
   const r = trayEl.getBoundingClientRect();
   return x >= r.left - 6 && x <= r.right + 6 && y >= r.top - 14 && y <= r.bottom + 6;
 };
-const movable = (e) => !e.fixed || e.broken;
+const movable = (e) => (!e.fixed || e.broken) && !e.keep; // keep: a crack that is part of a puzzle
 
 /* ---------- selection ---------- */
 const selEl = document.getElementById('sel'),
@@ -1787,7 +1896,7 @@ function turn(e) {
   dirty = true;
 }
 function takeBack(e) {
-  if (!movable(e)) return;
+  if (!movable(e) || e.bound) return; // puzzle cubes belong to their puzzle
   if (selE === e) select(null);
   if (e.broken) {
     for (let i = 0; i < 8; i++)
@@ -2113,11 +2222,18 @@ function endDrag(ev) {
   if (!e) return;
   e.dragging = false;
   hov.visible = false;
-  if (ev && overTray(ev.clientX, ev.clientY)) {
+  if (ev && overTray(ev.clientX, ev.clientY) && !e.bound) {
     cells.set(key(e.cx, e.cz), e);
     takeBack(e);
     return;
   }
+  // a puzzle cube stays inside its puzzle's ring
+  if (
+    dragCell &&
+    e.bound &&
+    Math.hypot(dragCell[0] - e.bound.cell[0], dragCell[1] - e.bound.cell[1]) > e.bound.r
+  )
+    dragCell = null;
   if (dragCell) {
     e.cx = dragCell[0];
     e.cz = dragCell[1];
@@ -2635,6 +2751,40 @@ function hintTick() {
 }
 
 const goalEl = document.getElementById('goal');
+const challengeEl = document.getElementById('challenge');
+function challengeTick() {
+  let best = null,
+    bd = 26;
+  if (intro.state === 'play')
+    for (const e of active)
+      if (e.vault && !e.woken) {
+        const d = Math.hypot(e.cx - camT.x, e.cz - camT.z);
+        if (d < bd) [best, bd] = [e, d];
+      }
+  if (!best) return challengeEl.classList.remove('on');
+  const [sx, sy] = toScreen(best.cx + 0.5, 1.2, best.cz + 0.5),
+    m = 40,
+    top = 70,
+    bot = (trayEl.getBoundingClientRect().top || innerHeight - 90) - 20;
+  challengeEl.querySelector('.stars').textContent = '✦'.repeat(best.vault.stars);
+  if (sx > m && sx < innerWidth - m && sy > top && sy < bot) {
+    // in view: the marker sits just above the vault, pointing down at it
+    challengeEl.style.left = sx + 'px';
+    challengeEl.style.top = sy - 46 + 'px';
+    challengeEl.style.transform = 'rotate(0rad)';
+    challengeEl.querySelector('svg').style.transform = 'rotate(1.5708rad)';
+  } else {
+    const cx = innerWidth / 2,
+      cy = (top + bot) / 2,
+      dx = sx - cx,
+      dy = sy - cy,
+      k = Math.min((innerWidth / 2 - m) / Math.abs(dx || 1e-6), (bot - top) / 2 / Math.abs(dy || 1e-6));
+    challengeEl.style.left = cx + dx * k + 'px';
+    challengeEl.style.top = cy + dy * k + 'px';
+    challengeEl.querySelector('svg').style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
+  }
+  challengeEl.classList.add('on');
+}
 function goalTick() {
   if (!great || great.woken || intro.state !== 'play') {
     goalEl.classList.remove('on');
@@ -2665,7 +2815,19 @@ function ser(e) {
     case 'source':
       return { k: 's', x: e.cx, z: e.cz, r: e.rot, s: e.s };
     case 'cube':
-      return { k: 'c', x: e.cx, z: e.cz, r: e.rot, ty: e.type, f: e.fixed, b: e.broken };
+      return {
+        k: 'c',
+        x: e.cx,
+        z: e.cz,
+        r: e.rot,
+        ty: e.type,
+        f: e.fixed,
+        b: e.broken,
+        kp: e.keep,
+        w: e.wear || 0,
+        bd: e.bound || null,
+        rt: !!e.route,
+      };
     case 'rock':
       return { k: 'r', x: e.cx, z: e.cz };
     case 'beacon':
@@ -2681,6 +2843,7 @@ function ser(e) {
         rv: e.revealed,
         r: e.rot,
         re: e.reach || 0,
+        vt: e.vault ? e.vault.stars : 0,
       };
     case 'house':
       return { k: 'h', x: e.cx, z: e.cz, h: e.hidden, w: e.woken, rv: e.revealed };
@@ -2721,11 +2884,15 @@ function restore(S) {
   for (const o of S.E) {
     let e;
     if (o.k === 's') e = makeLantern(o.x, o.z, o.r, o.s);
-    if (o.k === 'c') ((e = makeCube(o.ty, o.x, o.z, o.r, o.f, o.b)), (e.ap = 1));
+    if (o.k === 'c') {
+      e = makeCube(o.ty, o.x, o.z, o.r, o.f, o.b);
+      Object.assign(e, { ap: 1, keep: !!o.kp, wear: o.w || 0, bound: o.bd || undefined, route: !!o.rt });
+    }
     if (o.k === 'r') e = makeRock(o.x, o.z);
     if (o.k === 'g') e = makeGift(o.x, o.z, o.ty);
     if (o.k === 'b') {
       e = makeBeacon(o.x, o.z, o.h, o.n, o.tag, o.g);
+      if (o.vt) e.vault = { stars: o.vt };
       if (o.re) {
         e.reach = o.re;
         e.route = true;
@@ -2833,7 +3000,6 @@ function loop(now) {
       ensureChunks();
       if (ents.length !== n) dirty = true;
     }
-    breakTick();
     valveTick();
   }
   if (frame % 15 === 0) {
@@ -2853,6 +3019,7 @@ function loop(now) {
   updateEnts(dt);
   hintTick();
   goalTick();
+  challengeTick();
   previewTick();
   updateMotes();
   placeSel();
@@ -2891,8 +3058,18 @@ if (flags.has('bot')) {
       e.ang = (-rot * Math.PI) / 2;
       dirty = true;
     },
-    pickUp: (e) => takeBack(e),
-    spareCubes: () => ents.filter((e) => e.kind === 'cube' && !e.fixed && !e.broken),
+    pickUp: (e) => (e && e.broken ? (removeEnt(e), (dirty = true)) : takeBack(e)),
+    move(e, cell, rot) {
+      cells.delete(key(e.cx, e.cz));
+      e.cx = cell[0];
+      e.cz = cell[1];
+      e.g.position.set(e.cx + 0.5, 0, e.cz + 0.5);
+      cells.set(key(e.cx, e.cz), e);
+      e.rot = rot;
+      e.ang = (-rot * Math.PI) / 2;
+      dirty = true;
+    },
+    spareCubes: () => ents.filter((e) => e.kind === 'cube' && !e.fixed && !e.broken && !e.bound),
   };
   import('./bot.js').then(({ runBot }) => runBot(api, { greats: Number(flags.get('bot')) || 3 }));
 }
