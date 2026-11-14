@@ -21,8 +21,11 @@ const box = new BoxGeometry(1, 1, 1);
 const edges = new EdgesGeometry(box);
 
 // strength > 1 makes a more solid cube (used for selected works).
-export function createGlassCube(color, edgeColor, strength = 1) {
-  const tint = Math.min(0.9, SURFACE * strength);
+// Options (used by the Light game): tint overrides the surface strength; geometry swaps the box
+// for another shape (its edges are derived). The materials are returned so callers can light them.
+export function createGlassCube(color, edgeColor, strength = 1, { tint: tintOverride, geometry = box } = {}) {
+  const tint = tintOverride ?? Math.min(0.9, SURFACE * strength);
+  const lines = geometry === box ? edges : new EdgesGeometry(geometry);
   // 1. depth only (pushed back a hair so the cube's own front edges still pass in front of it)
   const depthOnly = new MeshBasicMaterial({
     colorWrite: false, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1,
@@ -38,10 +41,10 @@ export function createGlassCube(color, edgeColor, strength = 1) {
     color, transparent: true, opacity: tint, roughness: 0.45, metalness: 0, depthWrite: false,
   });
 
-  const depthMesh = new Mesh(box, depthOnly);
-  const hiddenLines = new LineSegments(edges, hidden);
-  const frontLines = new LineSegments(edges, front);
-  const glass = new Mesh(box, surface);
+  const depthMesh = new Mesh(geometry, depthOnly);
+  const hiddenLines = new LineSegments(lines, hidden);
+  const frontLines = new LineSegments(lines, front);
+  const glass = new Mesh(geometry, surface);
   depthMesh.renderOrder = 0;
   hiddenLines.renderOrder = 1;
   frontLines.renderOrder = 2;
@@ -52,6 +55,7 @@ export function createGlassCube(color, edgeColor, strength = 1) {
 
   return {
     group,
+    materials: { front, hidden, surface },
     pick: glass, // the surface the pointer can hit
     // Set color and visibility together, so a fading cube fades evenly.
     set(colorValue, visibility) {

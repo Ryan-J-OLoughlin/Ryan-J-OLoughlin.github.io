@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Light — Ryan O'Loughlin</title>
+    <meta name="description" content="A small, quiet game about guiding light with glass cubes." />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="./light.css" />
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <canvas id="c"></canvas>
+
+    <div class="hud mono fade off" id="hud"></div>
+    <div class="top fade off" id="top">
+      <button class="btn" id="restartBtn" aria-label="Start over" title="Start over">
+        <svg
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="display: block"
+        >
+          <path d="M4 12a8 8 0 1 0 2.4-5.7" />
+          <path d="M4 4v4h4" />
+        </svg>
+      </button>
+      <button class="btn mono" id="sysBtn">System</button>
+    </div>
+    <div id="confirm">
+      <p>Start over?</p>
+      <p class="sub">Your lit map will be cleared from this browser.</p>
+      <div>
+        <button class="btn mono" id="keepBtn">Keep playing</button
+        ><button class="btn mono" id="clearBtn">Clear</button>
+      </div>
+    </div>
+    <div id="sel">
+      <button id="selRot" aria-label="Turn">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 12a7 7 0 1 1-2.05-4.95" />
+          <path d="M19 4.5v4h-4" />
+        </svg>
+      </button>
+      <button id="selBack" aria-label="Return to tray">
+        <svg viewBox="0 0 24 24"><path d="M12 5v11M7.5 11.5 12 16l4.5-4.5M6 20h12" /></svg>
+      </button>
+    </div>
+    <nav class="tray fade off" id="tray">
+      <button class="tool" data-t="prism">
+        <svg viewBox="0 0 30 30">
+          <rect class="bx" x="4" y="4" width="22" height="22" rx="1" />
+          <path d="M8 15h14M18 11l4 4-4 4" /></svg
+        ><span class="dots"></span>
+      </button>
+      <button class="tool" data-t="amp">
+        <svg viewBox="0 0 30 30">
+          <rect class="bx" x="4" y="4" width="22" height="22" rx="1" />
+          <path d="M8 20c5 0 9-2 13-9M17 10.5l4 .5.5 4" /></svg
+        ><span class="dots"></span>
+      </button>
+      <button class="tool" data-t="split">
+        <svg viewBox="0 0 30 30">
+          <rect class="bx" x="4" y="4" width="22" height="22" rx="1" />
+          <path d="M8 15h14M19 12l3 3-3 3M15 15v8M12 20l3 3 3-3" /></svg
+        ><span class="dots"></span>
+      </button>
+      <button class="tool" data-t="diffuse">
+        <svg viewBox="0 0 30 30">
+          <rect class="bx" x="4" y="4" width="22" height="22" rx="1" />
+          <circle cx="15" cy="15" r="3.5" />
+          <path d="M15 8v2.5M15 19.5V22M8 15h2.5M19.5 15H22" opacity=".7" /></svg
+        ><span class="dots"></span>
+      </button>
+    </nav>
+
+    <aside class="sys" id="sys">
+      <h2>Light: visual system</h2>
+      <p>
+        One endless map at the site's own camera angle. Light is how you travel: wake a beacon, aim it onward,
+        pick up the cubes behind you and carry them forward.
+      </p>
+      <h3>Colour</h3>
+      <div class="sw">
+        <div><i style="background: #2f6482"></i>ocean · prism</div>
+        <div><i style="background: #9a6b45"></i>earth · amplifier</div>
+        <div><i style="background: #7a6a9a"></i>purple · splitter</div>
+        <div><i style="background: #a8925a"></i>sand · diffuser</div>
+        <div><i style="background: #20262d"></i>dusk</div>
+        <div><i style="background: #ffe9b8"></i>flame-core</div>
+        <div><i style="background: #f2b35e"></i>flame</div>
+        <div><i style="background: #5f8a5b"></i>green · broken</div>
+      </div>
+      <p style="margin-top: 10px">
+        <button class="btn mono" id="resetBtn" style="background: #1c2024; color: #eef0ea">Start over</button>
+      </p>
+      <h3>Rules</h3>
+      <div class="row">
+        <span class="k">Pillars</span
+        ><span class="v"
+          >One pillar per beam a beacon needs. Each lights as its beam arrives; the one still waiting
+          pulses.</span
+        >
+      </div>
+      <div class="row">
+        <span class="k">Great beacons</span
+        ><span class="v"
+          >One far-off goal at a time: a faint column of light, three beams to wake, gifts on the way. Waking
+          it reveals the next. A chevron at the screen edge points to it.</span
+        >
+      </div>
+      <div class="row">
+        <span class="k">Beacons</span
+        ><span class="v"
+          >Once awake, a beacon stays lit and sends its own beam. Tap it to aim. Its beam is
+          lantern-strength.</span
+        >
+      </div>
+      <div class="row">
+        <span class="k">Reach</span
+        ><span class="v"
+          >Lanterns ~12 cells, small beacons ~8, great beacons ~14; an amplifier adds 5. While you carry a
+          cube, a dotted line shows where its light would go.</span
+        >
+      </div>
+      <div class="row">
+        <span class="k">Territories</span
+        ><span class="v"
+          >Each great beacon you wake moves you into new land: its tint is a blend of ocean, green and earth,
+          and so are its features (more pillars, more breaks, more hidden things). Each land is sparser and
+          its next great beacon further away.</span
+        >
+      </div>
+      <div class="row">
+        <span class="k">Saving</span
+        ><span class="v">Progress after the first stretch is kept in this browser.</span>
+      </div>
+      <div class="row">
+        <span class="k">Gifts</span
+        ><span class="v">Small floating cubes. Touch one with light to collect it.</span>
+      </div>
+      <div class="row">
+        <span class="k">Broken</span
+        ><span class="v"
+          >Cracked cubes pass weak, stuttering light. They can't be mended: pick one up to discard it and use
+          another. A broken cube also leaks stray light sideways, which sometimes finds something
+          hidden.</span
+        >
+      </div>
+      <div class="row">
+        <span class="k">Hidden</span
+        ><span class="v">Earth-tinted beacons and houses no one can see until light touches them.</span>
+      </div>
+      <h3>Hands</h3>
+      <div class="row">
+        <span class="k">One finger</span
+        ><span class="v"
+          >Always cubes. Tap places or turns. Drag from anywhere carries a cube: near a cube picks it up; on
+          empty ground pulls a new one from the tray. Drops land on the nearest free cell.</span
+        >
+      </div>
+      <div class="row">
+        <span class="k">Map</span
+        ><span class="v"
+          >The first stretch frames itself. Then: carry a cube to the screen edge and the view follows; tap
+          near an edge to look that way; drag with nothing to carry; two fingers; edge arrows;
+          right-drag.</span
+        >
+      </div>
+      <div class="row">
+        <span class="k">Tilt</span
+        ><span class="v"
+          >Scroll wheel, or phone tilt (on the real site). The view also lifts while a cube is carried.</span
+        >
+      </div>
+      <div class="row">
+        <span class="k">Place</span
+        ><span class="v">Tap a cell for a ghost, tap again. Or drag from the tray.</span>
+      </div>
+      <div class="row">
+        <span class="k">Cube</span
+        ><span class="v"
+          >Tap to select (rises, like on the site); tap again to turn; drag to move; return button or drop on
+          the tray. Keys: R or space turns, Delete returns, arrows/WASD move the view, Esc deselects.</span
+        >
+      </div>
+      <h3>First stretch (no words)</h3>
+      <div class="row">
+        <span class="k">1</span><span class="v">Lantern, beacon, one prism. Turn it.</span>
+      </div>
+      <div class="row">
+        <span class="k">2</span
+        ><span class="v"
+          >The beacon carries on north and finds a gift. A stone blocks the way: go around.</span
+        >
+      </div>
+      <div class="row">
+        <span class="k">3</span
+        ><span class="v">A beacon that needs two beams. A splitter waits on the way.</span>
+      </div>
+      <div class="row">
+        <span class="k">4</span
+        ><span class="v">An old chain with one cracked prism. Find it, take it out, put yours in.</span>
+      </div>
+    </aside>
+    <div id="goal">
+      <svg viewBox="0 0 24 24"><path d="M8 5l8 7-8 7" /></svg>
+    </div>
+    <div id="edges">
+      <button data-d="up" aria-label="Explore">
+        <svg viewBox="0 0 24 24"><path d="M6 14l6-6 6 6" /></svg>
+      </button>
+      <button data-d="down" aria-label="Explore">
+        <svg viewBox="0 0 24 24"><path d="M6 10l6 6 6-6" /></svg>
+      </button>
+      <button data-d="left" aria-label="Explore">
+        <svg viewBox="0 0 24 24"><path d="M14 6l-6 6 6 6" /></svg>
+      </button>
+      <button data-d="right" aria-label="Explore">
+        <svg viewBox="0 0 24 24"><path d="M10 6l6 6-6 6" /></svg>
+      </button>
+    </div>
+  </body>
+</html>
