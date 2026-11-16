@@ -3,6 +3,11 @@
 
 name: Ryan O'Loughlin
 role: Philosophy of science · Queens College, CUNY
+# A small link shown after the role line on the opening screen (delete to remove).
+role_link:
+  label: Productive error
+  url: https://productive-error.org
+  title: "The productive role of error in AI-driven modeling (Sloan Foundation project)"
 
 tagline: Trust without truth.   # Stage 0D headline
 tagline_sub: How do idealized, imperfect models give us knowledge we can rely on?

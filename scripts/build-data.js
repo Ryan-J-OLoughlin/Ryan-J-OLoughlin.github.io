@@ -158,7 +158,10 @@ const profiles = Object.entries(site.contact.links ?? {})
 
 const fill = {
   name: esc(site.name),
-  role: esc(site.role),
+  role_plain: esc(site.role),
+  role: esc(site.role) + (site.role_link?.url
+    ? ` <span class="role-extra">· <a class="role-link" href="${esc(site.role_link.url)}" title="${esc(site.role_link.title ?? '')}" target="_blank" rel="noopener">${esc(site.role_link.label)}<span aria-hidden="true">&nbsp;↗</span></a></span>`
+    : ''),
   tagline: esc(site.tagline),
   tagline_sub: esc(site.tagline_sub ?? ''),
   stage_buttons: site.stages
