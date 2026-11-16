@@ -109,6 +109,9 @@ a:hover { color: var(--ocean); }
 
 .stage-0 { padding-top: clamp(4rem, 16vh, 10rem); }
 .role { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--ink-soft); margin: 0 0 1.25rem; }
+.role-extra { white-space: nowrap; }
+.role-link { color: inherit; text-decoration: none; }
+.role-link:hover, .role-link:focus-visible { color: var(--ink); text-decoration: underline; }
 .tagline {
   font-family: var(--font-display);
   font-weight: var(--fw-regular);
