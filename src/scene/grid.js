@@ -129,6 +129,15 @@ export function createGrid({ data, layerY, colors }) {
 
   const scratch = new Color();
 
+  // Ongoing work beats like a heart: two quick thumps, then a rest (one beat every ~1.8 s).
+  // `seconds` stays 0 for reduced-motion visitors, so their cubes hold still.
+  const BEAT = 1.8;
+  function heartbeat(seconds) {
+    const t = (seconds % BEAT) / BEAT;
+    const thump = (at, width) => Math.exp(-(((t - at) / width) ** 2));
+    return thump(0.05, 0.035) + 0.6 * thump(0.2, 0.035); // 0 at rest, ~1 at the first thump
+  }
+
   return {
     object: root,
     width,
@@ -139,10 +148,12 @@ export function createGrid({ data, layerY, colors }) {
     cellZ,
     layers,
     pickTargets: cubes.map((c) => c.cube.pick),
+    hasOngoing: cubes.some((c) => c.work.ongoing),
 
     // reveal: 0 (no grid) – 1 (fully built); focused: a topic id or null
     // fade: 1 normally; goes to 0 as the grid shrinks away into the ESM stage
-    update(reveal, focusedTopic, fade = 1) {
+    update(reveal, focusedTopic, fade = 1, seconds = 0) {
+      const beat = seconds ? heartbeat(seconds) : 0;
       root.visible = reveal > 0.001 && fade > 0.001;
       if (!root.visible) return;
 
@@ -163,10 +174,12 @@ export function createGrid({ data, layerY, colors }) {
       for (const c of cubes) {
         const rise = ease(clamp((reveal - c.delay) / 0.55));
         const lift = c.hover * CUBE * 0.9;
-        const grow = 1 + 0.45 * c.hover;
+        const pulse = c.work.ongoing ? 0.14 * beat * rise : 0;
+        const grow = 1 + 0.45 * c.hover + pulse;
         c.cube.group.position.set(c.x, (c.baseY * rise) + lift, c.z);
         c.cube.group.scale.set(CUBE * grow, Math.max(0.001, CUBE * rise * grow), CUBE * grow);
         scratch.copy(colors[c.topic]);
+        if (c.work.ongoing) scratch.offsetHSL(0, 0, 0.12 * beat); // brightens a little on each thump
         c.cube.set(scratch, clamp(rise * 1.2) * layers[c.topic].dim * fade);
       }
 

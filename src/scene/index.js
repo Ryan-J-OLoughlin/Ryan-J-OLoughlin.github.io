@@ -354,11 +354,12 @@ export function start() {
 
   function needsLoop() {
     const airMoving = state.progress > 0.55 && state.progress < 1.3 && !reducedMotion;
+    const pulsing = grid.hasOngoing && state.progress > 1.5 && state.progress < 2.5 && !reducedMotion; // ongoing cubes beat
     const focusMoving = Object.entries(grid.layers).some(([id, l]) => {
       const target = focused === null ? 0 : focused === id ? 1 : -1;
       return Math.abs(l.focus - target) > 0.01;
     });
-    return onScreen && !document.hidden && (chasing || tweening || turning || airMoving || hoverMoving || focusMoving);
+    return onScreen && !document.hidden && (chasing || tweening || turning || airMoving || pulsing || hoverMoving || focusMoving);
   }
 
   function loop() {
@@ -388,7 +389,7 @@ export function start() {
     const w = entry.work;
     const meta = [w.venue, w.with.length ? `with ${w.with.join(', ')}` : ''].filter(Boolean).join(' · ');
     const also = w.topics.filter((t) => t !== entry.topic).map((t) => data.topics.find((x) => x.id === t)?.label).filter(Boolean);
-    card.innerHTML = `<span class="card-kicker">${w.year} · ${esc(w.typeLabel)}${w.featured ? ' · Selected work' : ''}</span>
+    card.innerHTML = `<span class="card-kicker">${w.year} · ${esc(w.typeLabel)}${w.ongoing ? ' · Ongoing' : ''}${w.featured ? ' · Selected work' : ''}</span>
       <span class="card-title">${esc(w.title)}</span>
       ${meta ? `<span class="card-meta">${esc(meta)}</span>` : ''}
       ${also.length ? `<span class="card-also">Also in ${esc(also.join(', ').toLowerCase())}</span>` : ''}

@@ -77,7 +77,7 @@ export function createStages({ cubes, air, grid, landscape, modelSpot, modelSize
       lerp(0, modelSpot.y, shrink),
       lerp(0, modelSpot.z, shrink),
     );
-    grid.update(reveal, focusedTopic, 1 - clamp((p3 - 0.3) / 0.08));
+    grid.update(reveal, focusedTopic, 1 - clamp((p3 - 0.3) / 0.08), seconds);
     const me = clamp((p3 - 0.28) / 0.1);
     const ground = clamp((p3 - 0.5) / 0.3);
     const people = clamp((p3 - 0.72) / 0.28);
