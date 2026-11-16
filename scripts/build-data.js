@@ -36,6 +36,7 @@ for (const w of allWorks) {
   if (!categoryIds.includes(w.type)) problems.push(`${where}: type "${w.type}" is not one of ${categoryIds.join(', ')}`);
   if (w.show !== undefined && typeof w.show !== 'boolean') problems.push(`${where}: show must be true or false`);
   if (w.featured !== undefined && typeof w.featured !== 'boolean') problems.push(`${where}: featured must be true or false`);
+  if (w.ongoing !== undefined && typeof w.ongoing !== 'boolean') problems.push(`${where}: ongoing must be true or false`);
   if (!Array.isArray(w.topics) || w.topics.length === 0) problems.push(`${where}: needs at least one topic`);
   for (const t of w.topics ?? []) {
     if (!topicIds.includes(t)) problems.push(`${where}: topic "${t}" is not one of ${topicIds.join(', ')}`);
@@ -99,7 +100,8 @@ function workItem(w, topicId) {
     others.length ? `also ${others.join(', ').toLowerCase()}` : '',
   ].filter(Boolean);
   const links = workLinks(w.links);
-  const selected = w.featured ? '\n    <span class="work-selected">Selected work</span>' : '';
+  const tags = [w.ongoing ? 'Ongoing' : '', w.featured ? 'Selected work' : ''].filter(Boolean).join(' · ');
+  const selected = tags ? `\n    <span class="work-selected">${tags}</span>` : '';
   return `<li class="work${w.featured ? ' is-featured' : ''}" data-id="${esc(w.id)}" data-type="${esc(w.type)}" data-year="${w.year}" data-topics="${esc(w.topics.join(' '))}">
   <span class="work-year">${w.year}</span>
   <div class="work-body">
@@ -211,6 +213,7 @@ const sceneData = {
     with: (w.with ?? []).map((id) => personName[id]),
     link: firstLink(w.links),
     featured: Boolean(w.featured),
+    ongoing: Boolean(w.ongoing),
   })),
 };
 sceneData.fields = site.fields;

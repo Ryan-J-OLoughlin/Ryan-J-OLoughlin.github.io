@@ -6,6 +6,7 @@
 # review:  true means the topic was a judgment call. Ryan should confirm, then delete the line.
 # note:    why that topic was chosen, for Ryan. Delete after review.
 # featured: true marks a selected work: its cube is drawn in full color. Keep it to a handful.
+# ongoing: true marks work still in progress: its cube pulses and it is labelled "Ongoing".
 # show:    false keeps a work here for the record but leaves it off the site.
 # links:   fill in pdf / slides / doi / url as files are added. Empty is fine.
 
@@ -427,8 +428,9 @@
   type: grant
   topics: [errors, antifragility]
   venue: Alfred P. Sloan Foundation, 2026–2028 (PI)
+  ongoing: true
   with: []
-  links: {}
+  links: { url: https://productive-error.org }
 
 - id: psc-cuny-2023
   title: PSC-CUNY Research Grant, Cycle 54
