@@ -14,6 +14,7 @@ import { createLife, createRealTree } from "./life.js";
 import { studySave, studyTree, studyFlush } from "./study.js";
 const flags0 = new URLSearchParams(location.search),
   REC = flags0.has("rec"); // ?rec: frames are stepped by hand (recording a study)
+const LIFE = flags0.has('life') || flags0.has('study'); // growth and life are still a study: off in normal play
 const STUDY = Number(new URLSearchParams(location.search).get("study")) || 0; // ?study=N: a staged visual study
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1408,7 +1409,7 @@ function drawLight() {
   lightTex.needsUpdate = true;
   const sc = RS / RW;
   rctx.globalCompositeOperation = "lighten";
-  if (frame % 6 === 0) {
+  if (LIFE && frame % 6 === 0) {
     // Land: ground under steady light grows (beams already reached, diffuser gardens)
     const lit = new Set();
     for (const b of beams) growth.beamCells(b, (t - b.t0) * SPEED, lit);
