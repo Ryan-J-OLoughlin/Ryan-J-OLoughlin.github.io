@@ -15,7 +15,8 @@ export const DIRS = [
   [0, -1],
 ];
 // direction index from a to b along one axis: 0 east, 1 south, 2 west, 3 north
-export const dirTo = (a, b) => (b[0] > a[0] ? 0 : b[1] > a[1] ? 1 : b[0] < a[0] ? 2 : 3);
+export const dirTo = (a, b) =>
+  b[0] > a[0] ? 0 : b[1] > a[1] ? 1 : b[0] < a[0] ? 2 : 3;
 const add = (a, d, n = 1) => [a[0] + DIRS[d][0] * n, a[1] + DIRS[d][1] * n];
 const same = (a, b) => a[0] === b[0] && a[1] === b[1];
 
@@ -29,11 +30,14 @@ export function turn(ctx, P, T, last) {
   // candidates nearest the ideal spot first, widening when it's crowded (a hop may reach 5 each way:
   // 5 + 5 = 10, a stepping stone's reach)
   const offsets = [[0, 0]];
-  if (!last) for (let x = -3; x <= 3; x++) for (let z = -3; z <= 3; z++) if (x || z) offsets.push([x, z]);
+  if (!last)
+    for (let x = -3; x <= 3; x++)
+      for (let z = -3; z <= 3; z++) if (x || z) offsets.push([x, z]);
   offsets.sort((u, v) => Math.hypot(...u) - Math.hypot(...v));
   for (const [ox, oz] of offsets) {
     const N = [base[0] + ox, base[1] + oz];
-    if (Math.abs(N[0] - P[0]) > 5 || Math.abs(N[1] - P[1]) > 5 || same(N, P)) continue;
+    if (Math.abs(N[0] - P[0]) > 5 || Math.abs(N[1] - P[1]) > 5 || same(N, P))
+      continue;
     if (!last && !ctx.free(...N)) continue;
     for (const C of [
       [N[0], P[1]],
@@ -44,12 +48,12 @@ export function turn(ctx, P, T, last) {
       ctx.stone(N, 1);
       const straight = same(C, P) || same(C, N);
       const plan = straight
-        ? [{ op: 'aim', at: P, rot: dirTo(P, N) }]
+        ? [{ op: "aim", at: P, rot: dirTo(P, N) }]
         : [
-            { op: 'aim', at: P, rot: dirTo(P, C) },
-            { op: 'put', type: 'prism', cell: C, rot: dirTo(C, N) },
+            { op: "aim", at: P, rot: dirTo(P, C) },
+            { op: "put", type: "prism", cell: C, rot: dirTo(C, N) },
           ];
-      return { kind: 'turn', at: N, plan };
+      return { kind: "turn", at: N, plan };
     }
   }
   return null;
@@ -94,15 +98,15 @@ export function fork(ctx, P, T) {
     const r = (f + 1) % 4 === s ? f : s; // a splitter at rotation r sends light along r and r+1
     const home = ctx.spot(add(Sp, (s + 2) % 4, 1));
     if (!home) continue;
-    ctx.cube('split', home, 0, { bound: { cell: Sp, r: 6, until: N } });
+    ctx.cube("split", home, 0, { bound: { cell: Sp, r: 6, until: N } });
     return {
-      kind: 'fork',
+      kind: "fork",
       at: N,
       plan: [
-        { op: 'aim', at: P, rot: f },
-        { op: 'move', from: home, to: Sp, rot: r },
-        { op: 'put', type: 'prism', cell: C2, rot: s },
-        { op: 'put', type: 'prism', cell: C3, rot: (f + 2) % 4 },
+        { op: "aim", at: P, rot: f },
+        { op: "move", from: home, to: Sp, rot: r },
+        { op: "put", type: "prism", cell: C2, rot: s },
+        { op: "put", type: "prism", cell: C3, rot: (f + 2) % 4 },
       ],
     };
   }
@@ -115,12 +119,14 @@ export function fault(ctx, P, T, pickBad) {
   const dx = T[0] - P[0],
     dz = T[1] - P[1];
   const f = Math.abs(dx) >= Math.abs(dz) ? (dx >= 0 ? 0 : 2) : dz >= 0 ? 1 : 3;
-  const s = (Math.abs(dx) >= Math.abs(dz) ? (dz >= 0 ? 1 : 3) : dx >= 0 ? 0 : 2) % 4;
+  const s =
+    (Math.abs(dx) >= Math.abs(dz) ? (dz >= 0 ? 1 : 3) : dx >= 0 ? 0 : 2) % 4;
   const A = add(P, f, 2),
     B = add(A, s, 3),
     N = add(B, f, 2);
   if (![A, B, N].every((c) => ctx.free(...c))) return null;
-  if (!(ctx.lane(P, P, A) && ctx.lane(A, A, B) && ctx.lane(B, B, N))) return null;
+  if (!(ctx.lane(P, P, A) && ctx.lane(A, A, B) && ctx.lane(B, B, N)))
+    return null;
   for (const [a, b] of [
     [P, A],
     [A, B],
@@ -129,16 +135,16 @@ export function fault(ctx, P, T, pickBad) {
     ctx.claim(a, a, b);
   ctx.stone(N, 1);
   const badA = pickBad();
-  ctx.cube('prism', A, s, { fixed: true, broken: badA });
-  ctx.cube('prism', B, f, { fixed: true, broken: !badA });
+  ctx.cube("prism", A, s, { fixed: true, broken: badA });
+  ctx.cube("prism", B, f, { fixed: true, broken: !badA });
   const bad = badA ? A : B;
   return {
-    kind: 'fault',
+    kind: "fault",
     at: N,
     plan: [
-      { op: 'aim', at: P, rot: f },
-      { op: 'discard', cell: bad },
-      { op: 'put', type: 'prism', cell: bad, rot: badA ? s : f },
+      { op: "aim", at: P, rot: f },
+      { op: "discard", cell: bad },
+      { op: "put", type: "prism", cell: bad, rot: badA ? s : f },
     ],
   };
 }
@@ -164,9 +170,9 @@ export function spill(ctx, P, T) {
       ctx.claim(a, a, b);
     ctx.claim(X, X, W);
     ctx.stone(N, 1);
-    ctx.cube('prism', X, r, { fixed: true, broken: true, keep: true });
+    ctx.cube("prism", X, r, { fixed: true, broken: true, keep: true });
     ctx.rock(W);
-    return { kind: 'spill', at: N, plan: [{ op: 'aim', at: P, rot: f }] };
+    return { kind: "spill", at: N, plan: [{ op: "aim", at: P, rot: f }] };
   }
   return null;
 }

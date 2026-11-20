@@ -1,20 +1,26 @@
 // Soft glow and candle-flame sprites, drawn once on small canvases.
-import * as THREE from 'three';
+import * as THREE from "three";
 
-export const glowCv = Object.assign(document.createElement('canvas'), { width: 64, height: 64 });
+export const glowCv = Object.assign(document.createElement("canvas"), {
+  width: 64,
+  height: 64,
+});
 {
-  const g = glowCv.getContext('2d'),
+  const g = glowCv.getContext("2d"),
     gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
-  gr.addColorStop(0, 'rgba(255,255,255,1)');
-  gr.addColorStop(0.35, 'rgba(255,255,255,.42)');
-  gr.addColorStop(1, 'rgba(255,255,255,0)');
+  gr.addColorStop(0, "rgba(255,255,255,1)");
+  gr.addColorStop(0.35, "rgba(255,255,255,.42)");
+  gr.addColorStop(1, "rgba(255,255,255,0)");
   g.fillStyle = gr;
   g.fillRect(0, 0, 64, 64);
 }
 export const glowTex = new THREE.CanvasTexture(glowCv);
-const flameCv = Object.assign(document.createElement('canvas'), { width: 64, height: 128 });
+const flameCv = Object.assign(document.createElement("canvas"), {
+  width: 64,
+  height: 128,
+});
 {
-  const g = flameCv.getContext('2d');
+  const g = flameCv.getContext("2d");
   const draw = (sc, col) => {
     g.save();
     g.translate(32, 118);
@@ -31,8 +37,16 @@ const flameCv = Object.assign(document.createElement('canvas'), { width: 64, hei
     g.fill();
     g.restore();
   };
-  draw(1, ['rgba(255,236,190,.9)', 'rgba(242,170,80,.55)', 'rgba(200,110,50,0)']);
-  draw(0.62, ['rgba(255,255,245,1)', 'rgba(255,226,160,.8)', 'rgba(255,200,120,0)']);
+  draw(1, [
+    "rgba(255,236,190,.9)",
+    "rgba(242,170,80,.55)",
+    "rgba(200,110,50,0)",
+  ]);
+  draw(0.62, [
+    "rgba(255,255,245,1)",
+    "rgba(255,226,160,.8)",
+    "rgba(255,200,120,0)",
+  ]);
 }
 export const flameTex = new THREE.CanvasTexture(flameCv);
 export function sprite(color, size, map = glowTex) {

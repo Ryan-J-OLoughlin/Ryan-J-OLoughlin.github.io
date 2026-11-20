@@ -1,7 +1,7 @@
 // The site's glass cube (../scene/cubes.js), kept in a list so the light layer can relight edges at dusk.
-import * as THREE from 'three';
-import { createGlassCube } from '../scene/cubes.js';
-import { C } from './palette.js';
+import * as THREE from "three";
+import { createGlassCube } from "../scene/cubes.js";
+import { C } from "./palette.js";
 
 export const box = new THREE.BoxGeometry(1, 1, 1);
 export const boxEdges = new THREE.EdgesGeometry(box);

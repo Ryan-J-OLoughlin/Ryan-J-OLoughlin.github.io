@@ -13,4 +13,5 @@ export const C = {
   flame: 0xf2b35e,
   ember: 0xc77a3a,
   fault: 0xb9d3b2,
+  sage: 0x93a77c, // grown land
 };

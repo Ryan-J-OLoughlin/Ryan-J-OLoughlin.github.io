@@ -1,22 +1,29 @@
 // Light — a quiet game about guiding light with glass cubes.
 // Entry point: camera, world, light transport, entities, input, the first stretch, saving.
-import * as THREE from 'three';
-import { C } from './palette.js';
-import { createGround, toVec3 } from './ground.js';
-import { glowCv, glowTex, flameTex, sprite } from './textures.js';
-import { box, boxEdges, allGlass, glass, forgetGlass } from './glass.js';
-import { segs, TYPES, crackGeo } from './marks.js';
-import { createAmbient } from './ambient.js';
-import * as pieces from './pieces.js';
+import * as THREE from "three";
+import { C } from "./palette.js";
+import { createGround, toVec3 } from "./ground.js";
+import { glowCv, glowTex, flameTex, sprite } from "./textures.js";
+import { box, boxEdges, allGlass, glass, forgetGlass } from "./glass.js";
+import { segs, TYPES, crackGeo } from "./marks.js";
+import { createAmbient } from "./ambient.js";
+import * as pieces from "./pieces.js";
+import { createGrowth } from "./grow.js";
+import { chime } from "./sound.js";
+import { createLife, createRealTree } from "./life.js";
+import { studySave, studyTree, studyFlush } from "./study.js";
+const flags0 = new URLSearchParams(location.search),
+  REC = flags0.has("rec"); // ?rec: frames are stepped by hand (recording a study)
+const STUDY = Number(new URLSearchParams(location.search).get("study")) || 0; // ?study=N: a staged visual study
 
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const DIR = [
   [1, 0],
   [0, 1],
   [-1, 0],
   [0, -1],
 ]; // 0 east, 1 south, 2 west, 3 north
-const key = (x, z) => x + ',' + z;
+const key = (x, z) => x + "," + z;
 const STEP = 0.05,
   THRESH = 0.3,
   HOUSE_T = 0.3,
@@ -33,7 +40,7 @@ let t = 0;
 const EL_SITE = Math.atan2(8.2, Math.hypot(10, 10)),
   EL_MAX = deg(84);
 let EL = EL_SITE;
-const canvas = document.getElementById('c');
+const canvas = document.getElementById("c");
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 const scene = new THREE.Scene();
@@ -58,7 +65,9 @@ function applyCam() {
   camera.position.set(camT.x + c, camT.y + Math.sin(EL) * 40, camT.z + c);
   camera.lookAt(camT);
 }
-addEventListener('resize', () => renderer.setSize(innerWidth, innerHeight, false));
+addEventListener("resize", () =>
+  renderer.setSize(innerWidth, innerHeight, false),
+);
 renderer.setSize(innerWidth, innerHeight, false);
 const SCR_UP = new THREE.Vector3(-1, 0, -1).normalize(),
   SCR_RIGHT = new THREE.Vector3(1, 0, -1).normalize();
@@ -69,16 +78,23 @@ const LW = 46,
   RS = 640, // memory window: 160 cells around the camera, 4 px per cell
   RW = 160;
 let RO = [-80, -80]; // the memory window's corner in world cells; it follows the camera
-const lightCv = Object.assign(document.createElement('canvas'), { width: LS, height: LS }),
-  lctx = lightCv.getContext('2d');
-const revCv = Object.assign(document.createElement('canvas'), { width: RS, height: RS }),
-  rctx = revCv.getContext('2d');
-rctx.fillStyle = '#000';
+const lightCv = Object.assign(document.createElement("canvas"), {
+    width: LS,
+    height: LS,
+  }),
+  lctx = lightCv.getContext("2d");
+const revCv = Object.assign(document.createElement("canvas"), {
+    width: RS,
+    height: RS,
+  }),
+  rctx = revCv.getContext("2d");
+rctx.fillStyle = "#000";
 rctx.fillRect(0, 0, RS, RS);
 const lightTex = new THREE.CanvasTexture(lightCv),
   revTex = new THREE.CanvasTexture(revCv);
 lightTex.flipY = revTex.flipY = false;
 let tintTex = null;
+const growth = createGrowth(RS, RW); // Land: lit ground grows
 let lox = 0,
   loz = 0;
 
@@ -86,6 +102,8 @@ let lox = 0,
 const U = {
   styleT: { value: null },
   tintT: { value: null },
+  growT: { value: growth.tex },
+  sageC: { value: toVec3(C.sage) },
   light: { value: lightTex },
   reveal: { value: revTex },
   lO: { value: new THREE.Vector2() },
@@ -100,6 +118,8 @@ const U = {
   ember: { value: toVec3(C.ember) },
 };
 const ground = createGround(U, RW);
+const life = createLife(scene, U),
+  gardens = new Set();
 scene.add(ground);
 
 // Lanterns, beacons and houses glow through sprites and painted light; this keeps their 'intensity' handle
@@ -142,7 +162,11 @@ function updateMotes() {
       m.s.visible = false;
       continue;
     }
-    m.s.position.set(m.x + m.vx * a * m.life, m.y + m.vy * a * m.life, m.z + m.vz * a * m.life);
+    m.s.position.set(
+      m.x + m.vx * a * m.life,
+      m.y + m.vy * a * m.life,
+      m.z + m.vz * a * m.life,
+    );
     m.s.material.opacity = Math.sin(a * Math.PI) * 0.85;
     m.s.scale.setScalar(0.1 + 0.06 * Math.sin(a * 9));
   }
@@ -172,7 +196,12 @@ function ringMeshes(g, need, color) {
       gap = need > 1 ? 0.16 : 0;
     const m = new THREE.Mesh(
       new THREE.RingGeometry(0.6, 0.665, 48, 1, i * seg + gap, seg - 2 * gap),
-      new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.5, depthWrite: false }),
+      new THREE.MeshBasicMaterial({
+        color,
+        transparent: true,
+        opacity: 0.5,
+        depthWrite: false,
+      }),
     );
     m.rotation.x = -Math.PI / 2;
     m.position.y = 0.015;
@@ -186,20 +215,32 @@ function makeCube(type, cx, cz, rot = 0, fixed = false, broken = false) {
     c = glass(T.color, T.tint);
   if (T.rough) c.surface.roughness = 1;
   c.own = true;
-  const markMat = new THREE.LineBasicMaterial({ color: T.lift, transparent: true, opacity: 0.9 });
+  const markMat = new THREE.LineBasicMaterial({
+    color: T.lift,
+    transparent: true,
+    opacity: 0.9,
+  });
   const mark = new THREE.LineSegments(T.mark, markMat);
   mark.renderOrder = 5;
   c.g.add(mark);
   if (fixed) {
     const pin = new THREE.Mesh(
       new THREE.CircleGeometry(0.055, 14),
-      new THREE.MeshBasicMaterial({ color: C.chalk, transparent: true, opacity: 0.75 }),
+      new THREE.MeshBasicMaterial({
+        color: C.chalk,
+        transparent: true,
+        opacity: 0.75,
+      }),
     );
     pin.rotation.x = -Math.PI / 2;
     pin.position.set(-0.36, 0.503, -0.36);
     c.g.add(pin);
   }
-  const crackMat = new THREE.LineBasicMaterial({ color: C.fault, transparent: true, opacity: 0 });
+  const crackMat = new THREE.LineBasicMaterial({
+    color: C.fault,
+    transparent: true,
+    opacity: 0,
+  });
   const crack = new THREE.LineSegments(crackGeo, crackMat);
   crack.renderOrder = 5;
   c.g.add(crack);
@@ -218,12 +259,16 @@ function makeCube(type, cx, cz, rot = 0, fixed = false, broken = false) {
         [-0.5, 0.5],
       ].map(([x, z]) => new THREE.Vector3(x, 0.03, z)),
     ),
-    new THREE.LineBasicMaterial({ color: T.lift, transparent: true, opacity: 0 }),
+    new THREE.LineBasicMaterial({
+      color: T.lift,
+      transparent: true,
+      opacity: 0,
+    }),
   );
   sel.renderOrder = 8;
   wrap.add(sel);
   return add({
-    kind: 'cube',
+    kind: "cube",
     type,
     cx,
     cz,
@@ -252,7 +297,7 @@ function makeRock(cx, cz) {
   const g = new THREE.Group();
   g.position.set(cx + 0.5, 0, cz + 0.5);
   g.add(c.g);
-  return add({ kind: 'rock', cx, cz, g, h: 0.5 });
+  return add({ kind: "rock", cx, cz, g, h: 0.5 });
 }
 function makeLantern(cx, cz, rot, s = 1) {
   const g = new THREE.Group();
@@ -293,7 +338,7 @@ function makeLantern(cx, cz, rot, s = 1) {
   sp.lookAt(dx * 5, sz * 0.3, dz * 5);
   g.add(sp);
   return add({
-    kind: 'source',
+    kind: "source",
     cx,
     cz,
     rot,
@@ -380,7 +425,7 @@ function makeBeacon(cx, cz, hidden = false, need, tag, great = false) {
   g.add(pl);
   if (hidden) g.visible = false;
   return add({
-    kind: 'beacon',
+    kind: "beacon",
     cx,
     cz,
     hidden,
@@ -446,7 +491,7 @@ function makeHouse(cx, cz, hidden = false) {
   g.add(pl);
   if (hidden) g.visible = false;
   return add({
-    kind: 'house',
+    kind: "house",
     cx,
     cz,
     hidden,
@@ -487,7 +532,7 @@ function makeGift(cx, cz, type) {
   const rings = ringMeshes(g, 1, T.lift);
   rings[0].scale.setScalar(0.6);
   return add({
-    kind: 'gift',
+    kind: "gift",
     cx,
     cz,
     type,
@@ -503,22 +548,22 @@ function makeGift(cx, cz, type) {
 }
 
 /* ---------- the first stretch (wordless), then the open map ---------- */
-const SAVE = 'light-save-v1';
+const SAVE = "light-save-v1";
 let saved = null;
 try {
-  saved = JSON.parse(localStorage.getItem(SAVE));
+  saved = STUDY ? studySave(STUDY) : JSON.parse(localStorage.getItem(SAVE));
 } catch (_) {}
 let inv = { prism: 1, amp: 0, split: 0, diffuse: 0 },
-  seen = new Set(['prism']);
+  seen = new Set(["prism"]);
 let lantern0 = null,
   L1 = null;
 let step = 1,
   stepT = 0,
-  hints = [{ cell: [0, -1], type: 'prism', rot: 0 }],
+  hints = [{ cell: [0, -1], type: "prism", rot: 0 }],
   firstDone = false;
 if (!saved) {
   lantern0 = makeLantern(0, 3, 3);
-  L1 = makeBeacon(2, -1, false, 1, 'L1');
+  L1 = makeBeacon(2, -1, false, 1, "L1");
 }
 const born = (e) => {
   e.born = t;
@@ -529,32 +574,41 @@ const born = (e) => {
 //   5 a twin beacon needs two beams (reuse again) · 6 find the cracked cube and replace it
 const yourPrism = () =>
   ents
-    .filter((e) => e.kind === 'cube' && e.type === 'prism' && !e.fixed && !e.broken)
+    .filter(
+      (e) => e.kind === "cube" && e.type === "prism" && !e.fixed && !e.broken,
+    )
     .sort((a, b) => Math.hypot(a.cx, a.cz + 1) - Math.hypot(b.cx, b.cz + 1))[0];
 const STEPS = {
   2: () => {
-    born(makeBeacon(2, -6, false, 1, 'L2')); // the first beacon's light reaches it by itself
+    born(makeBeacon(2, -6, false, 1, "L2")); // the first beacon's light reaches it by itself
     return [];
   },
   3: () => {
-    born(makeBeacon(6, -6, false, 1, 'L3')); // to the side: tap the lit beacon to turn its beam
-    const L2 = ents.find((e) => e.tag === 'L2');
+    born(makeBeacon(6, -6, false, 1, "L3")); // to the side: tap the lit beacon to turn its beam
+    const L2 = ents.find((e) => e.tag === "L2");
     return [{ tap: L2, rot: 0 }];
   },
   4: () => {
-    born(makeBeacon(3, -9, false, 1, 'L4')); // the tray is empty: pick up your first prism and use it again
-    return [{ move: yourPrism(), cell: [6, -9], type: 'prism', rot: 2 }];
+    born(makeBeacon(3, -9, false, 1, "L4")); // the tray is empty: pick up your first prism and use it again
+    return [{ move: yourPrism(), cell: [6, -9], type: "prism", rot: 2 }];
   },
   5: () => {
-    born(makeBeacon(3, -13, false, 2, 'L5')); // one beam arrives by itself; move the prism once more for the second
-    return [{ move: cells.get(key(6, -9)) || yourPrism(), cell: [6, -13], type: 'prism', rot: 2 }];
+    born(makeBeacon(3, -13, false, 2, "L5")); // one beam arrives by itself; move the prism once more for the second
+    return [
+      {
+        move: cells.get(key(6, -9)) || yourPrism(),
+        cell: [6, -13],
+        type: "prism",
+        rot: 2,
+      },
+    ];
   },
   6: () => {
-    born(makeGift(3, -15, 'prism')); // collected on the way, for the repair
-    born(makeCube('prism', 3, -16, 0, true));
-    const b = born(makeCube('prism', 5, -16, 3, true, true));
-    born(makeBeacon(5, -19, false, 1, 'L6'));
-    return [{ discard: b }, { cell: [5, -16], type: 'prism', rot: 3 }];
+    born(makeGift(3, -15, "prism")); // collected on the way, for the repair
+    born(makeCube("prism", 3, -16, 0, true));
+    const b = born(makeCube("prism", 5, -16, 3, true, true));
+    born(makeBeacon(5, -19, false, 1, "L6"));
+    return [{ discard: b }, { cell: [5, -16], type: "prism", rot: 3 }];
   },
 };
 const FRAME = {
@@ -609,10 +663,10 @@ function frameStep(n, dur = 2.4) {
   glideTo(c, dur);
 }
 function advance(n) {
-  logPT('done');
+  logPT("done");
   step = n;
   stepT = t;
-  logPT('start');
+  logPT("start");
   hints = STEPS[n]();
   dirty = true;
   frameStep(n);
@@ -623,10 +677,16 @@ const inFirst = (x, z) => x >= -6 && x <= 10 && z >= -22 && z <= 6;
 let terr = 0;
 const chunkTerr = new Map();
 const TS = 512,
-  tintCv = Object.assign(document.createElement('canvas'), { width: TS, height: TS }),
-  tctx = tintCv.getContext('2d');
-const styleCv = Object.assign(document.createElement('canvas'), { width: TS, height: TS }),
-  sctx = styleCv.getContext('2d'),
+  tintCv = Object.assign(document.createElement("canvas"), {
+    width: TS,
+    height: TS,
+  }),
+  tctx = tintCv.getContext("2d");
+const styleCv = Object.assign(document.createElement("canvas"), {
+    width: TS,
+    height: TS,
+  }),
+  sctx = styleCv.getContext("2d"),
   styleTex = new THREE.CanvasTexture(styleCv);
 styleTex.flipY = false;
 U.styleT.value = styleTex;
@@ -635,7 +695,8 @@ tintTex.flipY = false;
 U.tintT.value = tintTex;
 // the land under the camera, for the ambient motion
 const landCache = new Map();
-const landAt = (x, z) => chunkTerr.get(key(Math.floor(x / CH), Math.floor(z / CH)));
+const landAt = (x, z) =>
+  chunkTerr.get(key(Math.floor(x / CH), Math.floor(z / CH)));
 function landParams(k) {
   if (!landCache.has(k)) landCache.set(k, terrParams(k));
   return landCache.get(k);
@@ -645,7 +706,8 @@ function ambientTick(dt) {
   ambient ??= createAmbient(scene);
   const k = landAt(camT.x, camT.z),
     w = k == null ? [0.34, 0.33, 0.33] : landParams(k).w,
-    strength = intro.state === 'play' ? (1 - U.day.value) * (k == null ? 0.25 : 1) : 0;
+    strength =
+      intro.state === "play" ? (1 - U.day.value) * (k == null ? 0.25 : 1) : 0;
   ambient(dt, t, camT, w, strength, reduce);
 }
 
@@ -654,7 +716,9 @@ const dominantMemo = [0];
 function dominant(k) {
   while (dominantMemo.length <= k) {
     const j = dominantMemo.length;
-    dominantMemo.push((dominantMemo[j - 1] + 1 + Math.floor(rng(j * 31 + 5)() * 2)) % 3);
+    dominantMemo.push(
+      (dominantMemo[j - 1] + 1 + Math.floor(rng(j * 31 + 5)() * 2)) % 3,
+    );
   }
   return dominantMemo[k];
 }
@@ -705,7 +769,10 @@ const TILE = 32,
 function tileCanvas(i, j, create) {
   let c = tiles.get(key(i, j));
   if (!c && create) {
-    c = Object.assign(document.createElement('canvas'), { width: TPX, height: TPX });
+    c = Object.assign(document.createElement("canvas"), {
+      width: TPX,
+      height: TPX,
+    });
     tiles.set(key(i, j), c);
   }
   return c;
@@ -714,21 +781,36 @@ function stashWindow() {
   const sc = RS / RW;
   for (let x = RO[0]; x < RO[0] + RW; x += TILE)
     for (let z = RO[1]; z < RO[1] + RW; z += TILE) {
-      const g = tileCanvas(x / TILE, z / TILE, true).getContext('2d');
-      g.globalCompositeOperation = 'copy';
-      g.drawImage(revCv, (x - RO[0]) * sc, (z - RO[1]) * sc, TPX, TPX, 0, 0, TPX, TPX);
+      const g = tileCanvas(x / TILE, z / TILE, true).getContext("2d");
+      g.globalCompositeOperation = "copy";
+      g.drawImage(
+        revCv,
+        (x - RO[0]) * sc,
+        (z - RO[1]) * sc,
+        TPX,
+        TPX,
+        0,
+        0,
+        TPX,
+        TPX,
+      );
     }
 }
 function recenter(force = false) {
   const ox = Math.floor((camT.x - RW / 2) / TILE) * TILE,
     oz = Math.floor((camT.z - RW / 2) / TILE) * TILE;
-  if (!force && Math.abs(ox - RO[0]) < TILE * 1.5 && Math.abs(oz - RO[1]) < TILE * 1.5) return;
+  if (
+    !force &&
+    Math.abs(ox - RO[0]) < TILE * 1.5 &&
+    Math.abs(oz - RO[1]) < TILE * 1.5
+  )
+    return;
   if (!force) stashWindow();
   RO = [ox, oz];
   U.rO.value.set(ox, oz);
   const sc = RS / RW;
-  rctx.globalCompositeOperation = 'source-over';
-  rctx.fillStyle = '#000';
+  rctx.globalCompositeOperation = "source-over";
+  rctx.fillStyle = "#000";
   rctx.fillRect(0, 0, RS, RS);
   for (let x = ox; x < ox + RW; x += TILE)
     for (let z = oz; z < oz + RW; z += TILE) {
@@ -736,11 +818,17 @@ function recenter(force = false) {
       if (c) rctx.drawImage(c, (x - ox) * sc, (z - oz) * sc);
     }
   revTex.needsUpdate = true;
+  growth.repaint(RO);
   sctx.clearRect(0, 0, TS, TS);
   tctx.clearRect(0, 0, TS, TS); // territory tint is recomputed from the chunks, so it needs no tiles
   for (const [k, terrK] of chunkTerr) {
-    const [i, j] = k.split(',').map(Number);
-    if ((i + 1) * CH >= ox && i * CH <= ox + RW && (j + 1) * CH >= oz && j * CH <= oz + RW)
+    const [i, j] = k.split(",").map(Number);
+    if (
+      (i + 1) * CH >= ox &&
+      i * CH <= ox + RW &&
+      (j + 1) * CH >= oz &&
+      j * CH <= oz + RW
+    )
       paintTint(i, j, terrK);
   }
 }
@@ -753,16 +841,16 @@ function paintTint(i, j, k) {
   const gr = tctx.createRadialGradient(x, z, 0, x, z, R);
   const c = P.col.getStyle();
   gr.addColorStop(0, c);
-  gr.addColorStop(1, c.replace('rgb(', 'rgba(').replace(')', ',0)'));
+  gr.addColorStop(1, c.replace("rgb(", "rgba(").replace(")", ",0)"));
   tctx.globalAlpha = 0.85;
   tctx.fillStyle = gr;
   tctx.fillRect(x - R, z - R, 2 * R, 2 * R);
   tintTex.needsUpdate = true;
-  const st = `rgb(${P.style.join(',')})`,
+  const st = `rgb(${P.style.join(",")})`,
     g2 = sctx.createRadialGradient(x, z, 0, x, z, R);
   g2.addColorStop(0, st);
   g2.addColorStop(0.55, st);
-  g2.addColorStop(1, st.replace('rgb(', 'rgba(').replace(')', ',0)'));
+  g2.addColorStop(1, st.replace("rgb(", "rgba(").replace(")", ",0)"));
   sctx.fillStyle = g2;
   sctx.fillRect(x - R, z - R, 2 * R, 2 * R);
   styleTex.needsUpdate = true;
@@ -788,9 +876,15 @@ function genChunk(i, j) {
     for (let k = 0; k < 20; k++) {
       const x = i * CH + Math.floor(r() * CH),
         z = j * CH + Math.floor(r() * CH);
-      if (inFirst(x, z) || reserved.has(key(x, z)) || !free(x, z) || (!free(x + 1, z) && !free(x - 1, z)))
+      if (
+        inFirst(x, z) ||
+        reserved.has(key(x, z)) ||
+        !free(x, z) ||
+        (!free(x + 1, z) && !free(x - 1, z))
+      )
         continue;
-      if (cells0.some(([a, b]) => Math.abs(a - x) + Math.abs(b - z) < 3)) continue;
+      if (cells0.some(([a, b]) => Math.abs(a - x) + Math.abs(b - z) < 3))
+        continue;
       cells0.push([x, z]);
       return [x, z];
     }
@@ -801,14 +895,18 @@ function genChunk(i, j) {
   chunkTerr.set(key(i, j), terr);
   paintTint(i, j, terr);
   let p;
-  if (r() < 0.3 * D && (p = pick())) makeBeacon(...p, false, r() < P.multi ? 2 : 1);
+  if (r() < 0.3 * D && (p = pick()))
+    makeBeacon(...p, false, r() < P.multi ? 2 : 1);
   if (r() < 0.22 * D && (p = pick())) makeHouse(...p);
   if (r() < 0.5 && (p = pick())) makeRock(...p);
   if (r() < 0.35 * D && (p = pick())) {
-    const ty = ['prism', 'prism', 'amp', 'split', 'diffuse'][Math.floor(r() * 5)];
+    const ty = ["prism", "prism", "amp", "split", "diffuse"][
+      Math.floor(r() * 5)
+    ];
     makeGift(...p, ty);
   }
-  if (r() < P.hidden && (p = pick())) (r() < 0.5 ? makeBeacon : makeHouse)(...p, true);
+  if (r() < P.hidden && (p = pick()))
+    (r() < 0.5 ? makeBeacon : makeHouse)(...p, true);
 }
 function ensureChunks() {
   const ci = Math.floor(camT.x / CH),
@@ -830,7 +928,17 @@ let beams = [],
   found = 0;
 function trace(PV = false) {
   const snap = PV
-    ? ents.map((e) => [e, e.inS, e.inF, e.visits, e.inputs, e.hit, e.arr, e.active, e.fed])
+    ? ents.map((e) => [
+        e,
+        e.inS,
+        e.inF,
+        e.visits,
+        e.inputs,
+        e.hit,
+        e.arr,
+        e.active,
+        e.fed,
+      ])
     : null;
   const nextT0 = new Map(),
     B = [],
@@ -846,7 +954,7 @@ function trace(PV = false) {
   const q = [];
   for (const e of ents) {
     if (!near(e, 45)) continue; // light far from the camera can't be seen; it is traced again when you come near
-    if (e.kind === 'source' && e.on >= 0) {
+    if (e.kind === "source" && e.on >= 0) {
       const [dx, dz] = DIR[e.rot];
       q.push({
         x: e.cx + 0.5,
@@ -861,7 +969,7 @@ function trace(PV = false) {
         max: 12,
       });
     }
-    if (e.kind === 'beacon' && e.woken) {
+    if (e.kind === "beacon" && e.woken) {
       const [dx, dz] = DIR[e.rot];
       q.push({
         x: e.cx + 0.5,
@@ -911,7 +1019,12 @@ function trace(PV = false) {
       if (k !== last) {
         last = k;
         const e = cells.get(k);
-        if (e && e.kind !== 'source' && !e.dragging && !(e.kind === 'gift' && (e.taken || trayFull()))) {
+        if (
+          e &&
+          e.kind !== "source" &&
+          !e.dragging &&
+          !(e.kind === "gift" && (e.taken || trayFull()))
+        ) {
           hit = e;
           break;
         }
@@ -924,7 +1037,14 @@ function trace(PV = false) {
     }
     pts.push([x, z, len]);
     const bk =
-      r.from + '|' + r.dx.toFixed(2) + ',' + r.dz.toFixed(2) + '|' + r.s.toFixed(3) + (r.f ? 'f' : '');
+      r.from +
+      "|" +
+      r.dx.toFixed(2) +
+      "," +
+      r.dz.toFixed(2) +
+      "|" +
+      r.s.toFixed(3) +
+      (r.f ? "f" : "");
     const t0 = PV ? t : prevT0.has(bk) ? prevT0.get(bk) : Math.max(t, r.t0);
     nextT0.set(bk, t0);
     const at = t0 + len / SPEED;
@@ -935,14 +1055,14 @@ function trace(PV = false) {
       t0,
       len,
       fade: !hit,
-      end: hit && hit.kind === 'cube' && r.s < THRESH,
+      end: hit && hit.kind === "cube" && r.s < THRESH,
       pv: !!r.pv,
     });
     if (!hit) continue;
     const e = hit,
       s = r.s;
     e.arr = Math.min(e.arr, at);
-    if (e.kind === 'cube') {
+    if (e.kind === "cube") {
       e.inS = Math.max(e.inS, s);
       if (r.f) e.inF = true;
       if (s < THRESH || e.visits++ > 3) continue;
@@ -951,35 +1071,65 @@ function trace(PV = false) {
         from = key(e.cx, e.cz),
         D = (a) => DIR[(e.rot + a) & 3],
         rem = Math.max(2, max - len),
-        base = { x, z, f, from, t0: at, curve: 0, max: rem, pv: r.pv || e.preview };
-      if (e.type === 'prism') {
+        base = {
+          x,
+          z,
+          f,
+          from,
+          t0: at,
+          curve: 0,
+          max: rem,
+          pv: r.pv || e.preview,
+        };
+      if (e.type === "prism") {
         const [a, b] = D(0);
         q.push({ ...base, dx: a, dz: b, s: out * 0.78 });
       }
-      if (e.type === 'amp') {
+      if (e.type === "amp") {
         const [a, b] = D(0);
-        q.push({ ...base, dx: a, dz: b, s: Math.min(1.6, out * 1.4), curve: 0.17, max: rem + 5 });
+        q.push({
+          ...base,
+          dx: a,
+          dz: b,
+          s: Math.min(1.6, out * 1.4),
+          curve: 0.17,
+          max: rem + 5,
+        });
       }
-      if (e.type === 'split')
+      if (e.type === "split")
         for (const i of [0, 1]) {
           const [a, b] = D(i);
           q.push({ ...base, dx: a, dz: b, s: out * 0.5 });
         }
-      if (e.type === 'diffuse') Po.push({ x, z, r: 1.2 + 1.4 * out, s: out * 0.6, f, t0: at, diff: true });
+      if (e.type === "diffuse")
+        Po.push({
+          x,
+          z,
+          r: 1.2 + 1.4 * out,
+          s: out * 0.6,
+          f,
+          t0: at,
+          diff: true,
+        });
       if (e.broken && s * 0.3 >= 0.2) {
         const [a, b] = D(1);
         q.push({ ...base, dx: a, dz: b, s: s * 0.3, f: true });
       } // a crack leaks stray light sideways
-    } else if (e.kind === 'gift') {
+    } else if (e.kind === "gift") {
       if (!PV && s >= 0.2 && !e.taken) {
         e.taken = true;
         e.takeAt = at;
       }
-    } else if (e.kind === 'beacon' || e.kind === 'house') {
+    } else if (e.kind === "beacon" || e.kind === "house") {
       if (e.hidden && !e.revealed) {
         if (!PV && s >= 0.2) reveal(e, at);
       } else {
-        e.inputs.push({ s, f: r.f, at, from: [Math.round(dx), Math.round(dz)] });
+        e.inputs.push({
+          s,
+          f: r.f,
+          at,
+          from: [Math.round(dx), Math.round(dz)],
+        });
         e.hit = Math.max(e.hit, s);
         if (r.f) e.inF = true;
       }
@@ -987,16 +1137,26 @@ function trace(PV = false) {
   }
   if (PV) {
     for (const [e, a, b, c, d, f, g2, h, i] of snap)
-      Object.assign(e, { inS: a, inF: b, visits: c, inputs: d, hit: f, arr: g2, active: h, fed: i });
+      Object.assign(e, {
+        inS: a,
+        inF: b,
+        visits: c,
+        inputs: d,
+        hit: f,
+        arr: g2,
+        active: h,
+        fed: i,
+      });
     return B.filter((b) => b.pv);
   }
   prevT0 = nextT0;
   beams = B;
   for (const e of ents) {
-    if (e.kind === 'cube') e.active = e.inS >= THRESH;
-    if (e.kind === 'beacon' && !e.hidden) {
+    if (e.kind === "cube") e.active = e.inS >= THRESH;
+    if (e.kind === "beacon" && !e.hidden) {
       const sum = e.inputs.reduce((a, b) => a + b.s, 0);
-      e.fed = e.inputs.length >= e.need && sum >= (e.need > 1 ? 0.35 * e.need : 0.3);
+      e.fed =
+        e.inputs.length >= e.need && sum >= (e.need > 1 ? 0.35 * e.need : 0.3);
       if (e.fed && !e.woken) {
         e.woken = true;
         e.wakeAt = Math.max(...e.inputs.map((i) => i.at));
@@ -1004,13 +1164,13 @@ function trace(PV = false) {
         // so it never solves the next puzzle by accident; tap it to aim it onward
         if (e.route && !e.tag && !PV) {
           const [ix, iz] = e.inputs[0].from;
-          e.rot = ix > 0 ? 2 : ix < 0 ? 0 : iz > 0 ? 3 : 1;
+          e.rot = e.relayRot ?? (ix > 0 ? 2 : ix < 0 ? 0 : iz > 0 ? 3 : 1); // a relay passes the light on by itself
           e.ang = (-e.rot * Math.PI) / 2;
         }
         dirty = true;
       }
     }
-    if (e.kind === 'house' && !e.hidden && !e.woken && e.hit >= HOUSE_T) {
+    if (e.kind === "house" && !e.hidden && !e.woken && e.hit >= HOUSE_T) {
       e.woken = true;
       e.wakeAt = e.arr;
     }
@@ -1018,7 +1178,7 @@ function trace(PV = false) {
   for (let pass = 0; pass < 3; pass++) {
     const P = [...Po];
     for (const e of ents) {
-      if (e.kind === 'beacon' && e.woken)
+      if (e.kind === "beacon" && e.woken)
         P.push({
           x: e.cx + 0.5,
           z: e.cz + 0.5,
@@ -1028,11 +1188,19 @@ function trace(PV = false) {
           e,
           t0: e.wakeAt,
         });
-      if (e.kind === 'house' && e.woken)
-        P.push({ x: e.cx + 0.5, z: e.cz + 0.5, r: 1.6, s: 0.5, f: e.inF, e, t0: e.wakeAt });
+      if (e.kind === "house" && e.woken)
+        P.push({
+          x: e.cx + 0.5,
+          z: e.cz + 0.5,
+          r: 1.6,
+          s: 0.5,
+          f: e.inF,
+          e,
+          t0: e.wakeAt,
+        });
     }
     for (const e of ents) {
-      if (e.kind !== 'house' && e.kind !== 'beacon') continue;
+      if (e.kind !== "house" && e.kind !== "beacon") continue;
       const ex = e.cx + 0.5,
         ez = e.cz + 0.5;
       if (e.hidden && !e.revealed) {
@@ -1044,7 +1212,7 @@ function trace(PV = false) {
             break;
           }
         }
-      } else if (e.kind === 'house' && !e.woken) {
+      } else if (e.kind === "house" && !e.woken) {
         let sum = 0,
           tt = 0;
         for (const p of P) {
@@ -1090,15 +1258,16 @@ function stutter(t) {
   const v = noise(t * 7);
   return v < 0.32 ? 0.3 + v * 0.8 : 0.72 + 0.28 * v;
 }
-const breath = (t) => (reduce ? 1 : 1 + 0.035 * Math.sin(t * Math.PI * 2 * 0.3));
+const breath = (t) =>
+  reduce ? 1 : 1 + 0.035 * Math.sin(t * Math.PI * 2 * 0.3);
 
 /* ---------- drawing light ---------- */
 const MAXV = 30000,
   corePos = new Float32Array(MAXV * 3),
   coreCol = new Float32Array(MAXV * 3);
 const coreGeo = new THREE.BufferGeometry();
-coreGeo.setAttribute('position', new THREE.BufferAttribute(corePos, 3));
-coreGeo.setAttribute('color', new THREE.BufferAttribute(coreCol, 3));
+coreGeo.setAttribute("position", new THREE.BufferAttribute(corePos, 3));
+coreGeo.setAttribute("color", new THREE.BufferAttribute(coreCol, 3));
 const core = new THREE.LineSegments(
   coreGeo,
   new THREE.LineBasicMaterial({
@@ -1135,7 +1304,7 @@ function ripple(x, z, rad, a, w) {
   const px = ((x - lox) / LW) * LS,
     pz = ((z - loz) / LW) * LS,
     R = (rad * LS) / LW;
-  lctx.strokeStyle = '#fff';
+  lctx.strokeStyle = "#fff";
   for (const [k, ww] of [
     [0.35, w * 2.4],
     [0.6, w * 1.4],
@@ -1173,13 +1342,17 @@ function drawPath(b, m) {
         z2 = z + (z2 - z) * f;
       }
       corePos.set([x, 0.07, z, x2, 0.07, z2], nv * 3);
-      coreCol.set([col.r * k, col.g * k, col.b * k, col.r * k, col.g * k, col.b * k], nv * 3);
+      coreCol.set(
+        [col.r * k, col.g * k, col.b * k, col.r * k, col.g * k, col.b * k],
+        nv * 3,
+      );
       nv += 2;
     }
   }
   if (reach < b.len) blob(hx, hz, 0.95, a0 * 0.5);
 }
 const cels = [];
+let growAt = 0;
 function drawLight() {
   const br = breath(t),
     st = stutter(t);
@@ -1187,22 +1360,32 @@ function drawLight() {
   loz = camT.z - LW / 2;
   U.lO.value.set(lox, loz);
   U.center.value.set(camT.x, camT.z);
-  lctx.globalCompositeOperation = 'source-over';
+  lctx.globalCompositeOperation = "source-over";
   lctx.globalAlpha = 1;
-  lctx.fillStyle = '#000';
+  lctx.fillStyle = "#000";
   lctx.fillRect(0, 0, LS, LS);
-  lctx.globalCompositeOperation = 'lighter';
+  lctx.globalCompositeOperation = "lighter";
   nv = 0;
   for (const b of beams) drawPath(b, (b.f ? st : 1) * br);
   for (const p of pools) {
     const age = t - p.t0;
     if (age <= 0) continue;
     const bl = p.e && p.e.revealed ? p.e.bloom : clamp01(age * 1.5);
-    blob(p.x, p.z, p.r * (0.4 + 0.6 * bl), p.s * (p.f ? st : 1) * br * 0.9 * clamp01(age * 2));
+    blob(
+      p.x,
+      p.z,
+      p.r * (0.4 + 0.6 * bl),
+      p.s * (p.f ? st : 1) * br * 0.9 * clamp01(age * 2),
+    );
   }
   for (const e of active)
-    if (e.kind === 'source' && e.on >= 0)
-      blob(e.cx + 0.5, e.cz + 0.5, 0.9 + 0.8 * e.s, (0.5 + 0.45 * e.s) * br * ignite(e) * (e.flick || 1));
+    if (e.kind === "source" && e.on >= 0)
+      blob(
+        e.cx + 0.5,
+        e.cz + 0.5,
+        0.9 + 0.8 * e.s,
+        (0.5 + 0.45 * e.s) * br * ignite(e) * (e.flick || 1),
+      );
   for (let i = cels.length - 1; i >= 0; i--) {
     const c = cels[i],
       a = (t - c.t0) / c.dur;
@@ -1211,16 +1394,40 @@ function drawLight() {
       continue;
     }
     if (a < 0) continue;
-    ripple(c.x, c.z, 0.5 + c.r * easeOut(a), (1 - a) * (1 - a) * 0.55, 0.18 + 0.1 * c.big);
+    ripple(
+      c.x,
+      c.z,
+      0.5 + c.r * easeOut(a),
+      (1 - a) * (1 - a) * 0.55,
+      0.18 + 0.1 * c.big,
+    );
   }
   coreGeo.setDrawRange(0, nv);
   coreGeo.attributes.position.needsUpdate = true;
   coreGeo.attributes.color.needsUpdate = true;
   lightTex.needsUpdate = true;
   const sc = RS / RW;
-  rctx.globalCompositeOperation = 'lighten';
+  rctx.globalCompositeOperation = "lighten";
+  if (frame % 6 === 0) {
+    // Land: ground under steady light grows (beams already reached, diffuser gardens)
+    const lit = new Set();
+    for (const b of beams) growth.beamCells(b, (t - b.t0) * SPEED, lit);
+    for (const p of pools)
+      if (t > p.t0) (growth.poolCells(p, lit), growth.poolCells(p, gardens));
+    growth.feed(lit, t - growAt, t);
+    growAt = t;
+    life.sync(growth.grown, gardens);
+  }
+  life.update(t);
+  growth.tick(t);
   if (frame % 5 === 0) {
-    rctx.drawImage(lightCv, (lox - RO[0]) * sc, (loz - RO[1]) * sc, LW * sc, LW * sc);
+    rctx.drawImage(
+      lightCv,
+      (lox - RO[0]) * sc,
+      (loz - RO[1]) * sc,
+      LW * sc,
+      LW * sc,
+    );
     revTex.needsUpdate = true;
   }
 }
@@ -1229,19 +1436,52 @@ const ignite = (e) => {
   const a = t - e.on;
   if (a > 1.2) return 1;
   if (a < 0) return 0;
-  return clamp01(a / 1.2) * (reduce ? 1 : 0.5 + 0.5 * hash(Math.floor(a * 10) + e.cx * 7));
+  return (
+    clamp01(a / 1.2) *
+    (reduce ? 1 : 0.5 + 0.5 * hash(Math.floor(a * 10) + e.cx * 7))
+  );
 };
+// A cascade: beacons that wake in quick succession form a chain. Each link rings a higher note
+// and celebrates a little bigger, so one cube that sets off many beacons is heard and seen as a phrase.
+const CHAIN_GAP = 1.8;
+let chainN = 0,
+  chainT = -9;
 function celebrate(e, big = e.hidden || e.great ? 1 : 0) {
   const x = e.cx + 0.5,
     z = e.cz + 0.5;
+  chainN = t - chainT < CHAIN_GAP ? chainN + 1 : 0;
+  chainT = t;
+  const grow = Math.min(chainN, 6) * 0.45; // later links ring wider
+  chime(chainN, !!e.great);
+  if (flags0.has("bot")) console.log("[light-bot] chain", chainN, e.tag || "");
   e.flare = t;
-  cels.push({ x, z, t0: t, dur: big ? 2.8 : 1.8, r: big ? 5 : 3, big });
-  cels.push({ x, z, t0: t + 0.35, dur: big ? 2.6 : 1.6, r: big ? 3.4 : 2, big });
-  const y = e.kind === 'beacon' ? 1.4 : 0.5,
-    n = big ? 22 : 12;
+  cels.push({
+    x,
+    z,
+    t0: t,
+    dur: (big ? 2.8 : 1.8) + grow * 0.3,
+    r: (big ? 5 : 3) + grow,
+    big,
+  });
+  cels.push({
+    x,
+    z,
+    t0: t + 0.35,
+    dur: big ? 2.6 : 1.6,
+    r: (big ? 3.4 : 2) + grow * 0.6,
+    big,
+  });
+  const y = e.kind === "beacon" ? 1.4 : 0.5,
+    n = (big ? 22 : 12) + chainN * 4;
   for (let i = 0; i < n; i++)
     setTimeout(
-      () => mote(x + (Math.random() - 0.5) * 0.5, y * Math.random(), z + (Math.random() - 0.5) * 0.5, big),
+      () =>
+        mote(
+          x + (Math.random() - 0.5) * 0.5,
+          y * Math.random(),
+          z + (Math.random() - 0.5) * 0.5,
+          big,
+        ),
       i * 55,
     );
 }
@@ -1250,20 +1490,22 @@ function celebrate(e, big = e.hidden || e.great ? 1 : 0) {
 let selE = null;
 function wiggle(e) {
   const a = t - (e.wigT ?? -9);
-  e.g.rotation.z = a < 0.6 && !reduce ? 0.07 * Math.sin(a * 38) * (1 - a / 0.6) : 0;
+  e.g.rotation.z =
+    a < 0.6 && !reduce ? 0.07 * Math.sin(a * 38) * (1 - a / 0.6) : 0;
 }
 // The active set: things within reach of the camera. Everything else is hidden and skipped each frame.
 const NEAR = 30;
 let active = [],
   lastDay = -1,
   traceAt = new THREE.Vector3(1e9, 0, 0);
-const near = (e, r = NEAR) => Math.abs(e.cx + 0.5 - camT.x) + Math.abs(e.cz + 0.5 - camT.z) < r * 1.4;
+const near = (e, r = NEAR) =>
+  Math.abs(e.cx + 0.5 - camT.x) + Math.abs(e.cz + 0.5 - camT.z) < r * 1.4;
 function refreshActive() {
   active = [];
   for (const e of ents) {
-    const n = intro.state !== 'play' || near(e) || e.dragging;
+    const n = intro.state !== "play" || near(e) || e.dragging;
     if (n) active.push(e);
-    if (intro.state === 'play' && e.far !== !n) {
+    if (intro.state === "play" && e.far !== !n) {
       e.far = !n;
       if (!n) e.g.visible = false;
       else e.g.visible = !(e.hidden && !e.revealed);
@@ -1286,7 +1528,10 @@ function shatter(e) {
 }
 function dissolve(e) {
   for (let i = 0; i < 12; i++)
-    setTimeout(() => mote(e.cx + 0.5, 0.3 + Math.random() * 0.5, e.cz + 0.5, 0), i * 50);
+    setTimeout(
+      () => mote(e.cx + 0.5, 0.3 + Math.random() * 0.5, e.cz + 0.5, 0),
+      i * 50,
+    );
   if (selE === e) select(null);
   removeEnt(e);
   dirty = true;
@@ -1308,17 +1553,22 @@ function updateEnts(dt) {
     const e = active[i];
     if (!ents.includes(e)) continue;
     if (e.wigT != null) wiggle(e);
-    if (e.kind === 'cube') {
+    if (e.kind === "cube") {
       e.ap = Math.min(1, e.ap + dt * 3.2);
       // site-like selection: rise and grow
-      e.lifted += ((e.dragging ? 1 : e === selE ? 0.45 : 0) - e.lifted) * Math.min(1, dt * 12);
+      e.lifted +=
+        ((e.dragging ? 1 : e === selE ? 0.45 : 0) - e.lifted) *
+        Math.min(1, dt * 12);
       const s = 0.8 * easeOut(e.ap) * (1 + 0.12 * e.lifted);
       e.c.g.scale.setScalar(Math.max(0.001, s));
       e.c.g.position.y = s / 2 + (1 - easeOut(e.ap)) * 0.25 + e.lifted * 0.4;
       const spin = reduce
         ? 0
-        : Math.PI * 2 * easeOut(clamp01((t - e.spinT) / 0.9)) - (t - e.spinT < 0.9 ? Math.PI * 2 : 0); // place: one gentle spin
-      e.c.g.rotation.y += (e.ang + (t - e.spinT < 0.9 ? spin : 0) - e.c.g.rotation.y) * Math.min(1, dt * 12);
+        : Math.PI * 2 * easeOut(clamp01((t - e.spinT) / 0.9)) -
+          (t - e.spinT < 0.9 ? Math.PI * 2 : 0); // place: one gentle spin
+      e.c.g.rotation.y +=
+        (e.ang + (t - e.spinT < 0.9 ? spin : 0) - e.c.g.rotation.y) *
+        Math.min(1, dt * 12);
       // wear: a cube carries only so much light; near the end a crack grows, then it shatters
       if (!e.fixed && !e.bound && e.active && t >= e.arr && !e.dragging) {
         e.wear = (e.wear || 0) + (dt / WEAR_LIFE) * Math.min(1, e.inS);
@@ -1335,12 +1585,17 @@ function updateEnts(dt) {
         }
       }
       const arrived = t >= e.arr;
-      e.glow += ((e.active && arrived && !e.dragging ? Math.min(1, e.inS) : 0) - e.glow) * k;
+      e.glow +=
+        ((e.active && arrived && !e.dragging ? Math.min(1, e.inS) : 0) -
+          e.glow) *
+        k;
       const m = (e.broken || e.inF ? st : 1) * br,
         gl = e.glow * m;
       e.c.surface.color.copy(e.c.base).lerp(greenC, e.broken ? 0.7 : 0);
       const bf = clamp01(1 - (t - (e.breakT ?? -9)) / 1.2);
-      e.c.surface.emissive.copy(e.broken ? greenC : e.lift).multiplyScalar(0.16 + gl * 0.2 + bf * 0.9); // a little of its own colour, so it reads at duske.c.surface.opacity=e.c.tint+e.glow*.08;
+      e.c.surface.emissive
+        .copy(e.broken ? greenC : e.lift)
+        .multiplyScalar(0.16 + gl * 0.2 + bf * 0.9); // a little of its own colour, so it reads at duske.c.surface.opacity=e.c.tint+e.glow*.08;
       e.coreSp.material.opacity = Math.min(1, gl * 0.75);
       e.coreSp.scale.setScalar(0.55 + 0.25 * gl);
       const sub = !e.active && e.inS > 0 && arrived ? 0.5 : 0;
@@ -1357,22 +1612,32 @@ function updateEnts(dt) {
         ? Math.min(1, 0.95 * (0.55 + 0.45 * st) + bf)
         : clamp01(((e.wear || 0) - 0.6) / 0.4) * 0.8;
       e.sel.material.opacity +=
-        ((e === selE || e.dragging ? 0.9 : 0) - e.sel.material.opacity) * Math.min(1, dt * 10);
-    } else if (e.kind === 'source') {
+        ((e === selE || e.dragging ? 0.9 : 0) - e.sel.material.opacity) *
+        Math.min(1, dt * 10);
+    } else if (e.kind === "source") {
       const ig = ignite(e),
         fl = reduce ? 1 : 0.88 + 0.24 * noise(t * 3.1 + e.cx);
       e.flick = fl;
       e.flame.material.opacity = ig * 0.95;
-      e.flame.scale.set(0.2 * (0.9 + 0.1 * fl) * (0.7 + 0.3 * e.s), 0.42 * fl * (0.7 + 0.3 * e.s), 1);
+      e.flame.scale.set(
+        0.2 * (0.9 + 0.1 * fl) * (0.7 + 0.3 * e.s),
+        0.42 * fl * (0.7 + 0.3 * e.s),
+        1,
+      );
       e.flame.position.x = reduce ? 0 : (noise(t * 1.3 + e.cz) - 0.5) * 0.05;
       e.haze.material.opacity = 0.55 * br * ig * fl;
       e.pl.intensity = 2.4 * br * ig * e.s * fl;
       e.spout.material.opacity = 0.7 * ig;
       if (ig > 0.9 && !reduce && t > e.moteT) {
         e.moteT = t + 1.4 + Math.random() * 1.8;
-        mote(e.cx + 0.5 + (Math.random() - 0.5) * 0.1, e.sz * 0.8, e.cz + 0.5, 0);
+        mote(
+          e.cx + 0.5 + (Math.random() - 0.5) * 0.1,
+          e.sz * 0.8,
+          e.cz + 0.5,
+          0,
+        );
       }
-    } else if (e.kind === 'gift') {
+    } else if (e.kind === "gift") {
       if (e.taken && t >= e.takeAt) {
         collect(e);
         continue;
@@ -1386,9 +1651,12 @@ function updateEnts(dt) {
       e.c.g.rotation.x = 0.4;
       e.sp.material.opacity = 0.35 + 0.15 * Math.sin(t * 1.6 + e.ph);
       e.rings[0].material.opacity = 0.25 + 0.15 * Math.sin(t * 1.6 + e.ph);
-    } else if (e.kind === 'beacon' || e.kind === 'house') {
+    } else if (e.kind === "beacon" || e.kind === "house") {
       if (e.born != null && !e.hidden) {
-        e.g.scale.setScalar(Math.max(0.001, easeOut(clamp01((t - e.born) / 0.9))) * (e.great ? 1.3 : 1));
+        e.g.scale.setScalar(
+          Math.max(0.001, easeOut(clamp01((t - e.born) / 0.9))) *
+            (e.great ? 1.3 : 1),
+        );
       }
       if (e.revealed) {
         e.g.visible = t >= e.bloomT;
@@ -1401,7 +1669,7 @@ function updateEnts(dt) {
         celebrate(e);
         onWake(e);
       }
-      const goal = !firstDone && e.tag === 'L' + step && !e.woken; // the current step's goal: unmistakable
+      const goal = !firstDone && e.tag === "L" + step && !e.woken; // the current step's goal: unmistakable
       const call = reduce
         ? goal
           ? 0.7
@@ -1419,7 +1687,7 @@ function updateEnts(dt) {
       const fa = clamp01(1 - (t - e.flare) / 1.4),
         flare = fa * fa,
         m = (e.inF ? st : 1) * br;
-      if (e.kind === 'beacon') {
+      if (e.kind === "beacon") {
         e.glow += ((awake ? 1 : 0) - e.glow) * Math.min(1, dt * 1.5);
         e.sp.material.opacity = Math.min(1, e.glow * m + flare);
         e.sp.scale.setScalar(2.3 * (1 + 1.6 * flare));
@@ -1430,14 +1698,24 @@ function updateEnts(dt) {
             lit = awake || (inp && t >= inp.at);
           if (lit && !e.pilSeen[i] && !awake) {
             e.pilSeen[i] = true;
-            const [wx, wz] = [e.cx + 0.5 + p.g.position.x, e.cz + 0.5 + p.g.position.z]; // each beam gets its own small moment
-            for (let k = 0; k < 6; k++) setTimeout(() => mote(wx, 1.2 * Math.random() + 0.3, wz, 0), k * 60);
+            const [wx, wz] = [
+              e.cx + 0.5 + p.g.position.x,
+              e.cz + 0.5 + p.g.position.z,
+            ]; // each beam gets its own small moment
+            for (let k = 0; k < 6; k++)
+              setTimeout(
+                () => mote(wx, 1.2 * Math.random() + 0.3, wz, 0),
+                k * 60,
+              );
             cels.push({ x: wx, z: wz, t0: t, dur: 1, r: 1.1, big: 0 });
           }
           e.pilGlow[i] += ((lit ? 1 : 0) - e.pilGlow[i]) * Math.min(1, dt * 3);
           const pg = e.pilGlow[i];
-          const wait = !lit && anyIn && !reduce ? 0.5 + 0.5 * Math.sin(t * 3.4) : 0; // the one still waiting pulses
-          p.surface.emissive.copy(flameC).multiplyScalar(pg * m * 0.55 + flare * 0.5 + wait * 0.12);
+          const wait =
+            !lit && anyIn && !reduce ? 0.5 + 0.5 * Math.sin(t * 3.4) : 0; // the one still waiting pulses
+          p.surface.emissive
+            .copy(flameC)
+            .multiplyScalar(pg * m * 0.55 + flare * 0.5 + wait * 0.12);
           p.front.color
             .copy(edgeNow)
             .lerp(flameC, wait * 0.6)
@@ -1446,7 +1724,9 @@ function updateEnts(dt) {
         });
         if (e.column) {
           e.column.material.color.set(awake ? C.flame : C.chalk);
-          e.column.material.opacity = awake ? 0.38 * br : 0.1 + 0.04 * Math.sin(t * 0.8);
+          e.column.material.opacity = awake
+            ? 0.38 * br
+            : 0.1 + 0.04 * Math.sin(t * 0.8);
         }
         e.aimG.rotation.y += (e.ang - e.aimG.rotation.y) * Math.min(1, dt * 10);
         e.aim.material.opacity = e.glow * 0.85;
@@ -1504,7 +1784,8 @@ function spawnGreat(fx, fz) {
       for (let j = -r; j <= r && !site; j++) {
         const x = tx + i,
           z = tz + j;
-        if (helperCells(x, z).every(([u, v]) => !permanent(u, v))) site = [x, z];
+        if (helperCells(x, z).every(([u, v]) => !permanent(u, v)))
+          site = [x, z];
       }
   site ??= [tx, tz];
   for (let u = -1; u <= 1; u++)
@@ -1525,7 +1806,10 @@ function spawnGreat(fx, fz) {
    permanent (lit beacons, placed cubes, lanterns, other routes) and are reserved so scatter can't block them. */
 const permanent = (x, z) => {
   const o = cells.get(key(x, z));
-  return !!o && (o.kind === 'cube' || o.kind === 'source' || o.woken || o.great || o.route);
+  return (
+    !!o &&
+    (o.kind === "cube" || o.kind === "source" || o.woken || o.great || o.route)
+  );
 };
 function runCells(x1, z1, x2, z2) {
   const out = [[x1, z1]];
@@ -1539,8 +1823,12 @@ function runCells(x1, z1, x2, z2) {
   return out;
 }
 // cells of an L-shaped lane P → corner → N, without its two ends
-const laneCells = (P, C, N) => [...runCells(...P, ...C).slice(1), ...runCells(...C, ...N).slice(1, -1)];
-const laneClear = (P, C, N) => laneCells(P, C, N).every(([x, z]) => !permanent(x, z));
+const laneCells = (P, C, N) => [
+  ...runCells(...P, ...C).slice(1),
+  ...runCells(...C, ...N).slice(1, -1),
+];
+const laneClear = (P, C, N) =>
+  laneCells(P, C, N).every(([x, z]) => !permanent(x, z));
 function helperLayout(gx, gz) {
   const S1 = [gx, gz + 4],
     S2 = [gx - 4, gz],
@@ -1570,7 +1858,8 @@ function keepClear(x, z) {
     if (o) removeEnt(o);
   }
 }
-const clearLane = (P, C, N) => [P, ...laneCells(P, C, N), N].forEach(([x, z]) => keepClear(x, z));
+const clearLane = (P, C, N) =>
+  [P, ...laneCells(P, C, N), N].forEach(([x, z]) => keepClear(x, z));
 function stone(x, z) {
   keepClear(x, z);
   const o = cells.get(key(x, z));
@@ -1598,7 +1887,8 @@ const pieceCtx = {
     keepClear(...cell);
     const e = makeCube(type, cell[0], cell[1], rot, !!o.fixed, !!o.broken);
     Object.assign(e, { ap: 1, keep: !!o.keep, route: true });
-    if (o.bound) e.bound = { cell: o.bound.cell, r: o.bound.r, until: o.bound.until };
+    if (o.bound)
+      e.bound = { cell: o.bound.cell, r: o.bound.r, until: o.bound.until };
     return e;
   },
   rock(cell) {
@@ -1615,14 +1905,14 @@ const pieceCtx = {
 // Each land favours its own pieces: ocean → fork, green → fault, earth → spill; turns everywhere.
 function pickPiece(w, r) {
   const weights = [
-    ['turn', 0.35],
-    ['fork', 0.65 * w[0]],
-    ['fault', 0.65 * w[1]],
-    ['spill', 0.65 * w[2]],
+    ["turn", 0.35],
+    ["fork", 0.65 * w[0]],
+    ["fault", 0.65 * w[1]],
+    ["spill", 0.65 * w[2]],
   ];
   let x = r * weights.reduce((a, b) => a + b[1], 0);
   for (const [k, v] of weights) if ((x -= v) <= 0) return k;
-  return 'turn';
+  return "turn";
 }
 function routeTo(fx, fz, G) {
   const { S1, S2, S3, lanes } = helperLayout(G.cx, G.cz);
@@ -1634,20 +1924,22 @@ function routeTo(fx, fz, G) {
   let P = [fx, fz];
   for (let guard = 0; guard < 40; guard++) {
     const last = Math.abs(S1[0] - P[0]) <= 4 && Math.abs(S1[1] - P[1]) <= 4;
-    const kind = last ? 'turn' : pickPiece(w, r());
+    const kind = last ? "turn" : pickPiece(w, r());
     const hop =
-      (kind === 'fork' && pieces.fork(pieceCtx, P, S1)) ||
-      (kind === 'fault' && pieces.fault(pieceCtx, P, S1, () => r() < 0.5)) ||
-      (kind === 'spill' && pieces.spill(pieceCtx, P, S1)) ||
+      (kind === "fork" && pieces.fork(pieceCtx, P, S1)) ||
+      (kind === "fault" && pieces.fault(pieceCtx, P, S1, () => r() < 0.5)) ||
+      (kind === "spill" && pieces.spill(pieceCtx, P, S1)) ||
       pieces.turn(pieceCtx, P, S1, last) ||
       (last && pieces.turn(pieceCtx, P, S1, false));
     if (!hop) break; // should not happen; the safety valve covers it
     route.push(hop);
+    const run = !last && relay(hop.at, S1, r);
+    if (run) route.push(run);
     if (route.length % 3 === 0) {
       const c = nearestFree(P[0] + 0.5, P[1] + 1.7);
-      if (c && !reserved.has(key(...c))) makeGift(...c, 'prism').born = t;
+      if (c && !reserved.has(key(...c))) makeGift(...c, "prism").born = t;
     }
-    P = hop.at;
+    P = (run || hop).at;
     if (P[0] === S1[0] && P[1] === S1[1]) break;
   }
   G.route = route;
@@ -1655,26 +1947,71 @@ function routeTo(fx, fz, G) {
   G.routed = true;
   buildChallenge(route, r);
 }
+// A relay: after a solved piece, the light runs on through 2–4 stepping stones by itself, toward the
+// great beacon. That is the cascade: the last cube of a puzzle rings a chain of beacons, each a note higher.
+const RELAY_GAP = 4;
+function relay(at, S1, r) {
+  const dx = S1[0] - at[0],
+    dz = S1[1] - at[1];
+  if (Math.abs(dx) + Math.abs(dz) < 16) return null; // near the end, leave room for the last pieces
+  const rot = Math.abs(dx) >= Math.abs(dz) ? (dx > 0 ? 0 : 2) : dz > 0 ? 1 : 3,
+    [ux, uz] = DIR[rot],
+    room = Math.floor((Math.abs(rot & 1 ? dz : dx) - 8) / RELAY_GAP),
+    n = Math.min(2 + Math.floor(r() * 3), room);
+  if (n < 2) return null;
+  const cellsOf = (k) => [
+    at[0] + ux * RELAY_GAP * k,
+    at[1] + uz * RELAY_GAP * k,
+  ];
+  for (let k = 1; k <= n; k++) {
+    const c = cellsOf(k);
+    if (
+      permanent(...c) ||
+      reserved.has(key(...c)) ||
+      !laneClear(cellsOf(k - 1), c, c)
+    )
+      return null;
+  }
+  const start = cells.get(key(...at));
+  if (!start || start.kind !== "beacon") return null;
+  start.relayRot = rot;
+  let b = null;
+  for (let k = 1; k <= n; k++) {
+    const c = cellsOf(k);
+    clearLane(cellsOf(k - 1), c, c);
+    b = stone(...c);
+    if (k < n) b.relayRot = rot;
+  }
+  return { kind: "relay", at: cellsOf(n), plan: [] };
+}
 // An optional side puzzle: from a stepping stone, one or two harder pieces lead sideways to a vault
 // that releases rarer cubes when lit. Off the main way, so nobody is ever blocked by it.
 function buildChallenge(route, r) {
   if (route.length < 3 || r() > 0.6) return;
   const from = route[1 + Math.floor(r() * (route.length - 2))].at,
-    toMain = [route[route.length - 1].at[0] - from[0], route[route.length - 1].at[1] - from[1]],
+    toMain = [
+      route[route.length - 1].at[0] - from[0],
+      route[route.length - 1].at[1] - from[1],
+    ],
     side = r() < 0.5 ? [-toMain[1], toMain[0]] : [toMain[1], -toMain[0]],
     len = Math.hypot(...side) || 1,
-    T = [Math.round(from[0] + (side[0] / len) * 14), Math.round(from[1] + (side[1] / len) * 14)];
+    T = [
+      Math.round(from[0] + (side[0] / len) * 14),
+      Math.round(from[1] + (side[1] / len) * 14),
+    ];
   const stars = r() < 0.5 ? 1 : 2,
-    kinds = ['fork', 'fault', 'spill'];
+    kinds = ["fork", "fault", "spill"];
   let P = from,
     hop = null;
   for (let i = 0; i < stars; i++) {
     const k = kinds[Math.floor(r() * 3)];
     hop =
-      (k === 'fork' && pieces.fork(pieceCtx, P, T)) ||
-      (k === 'fault' && pieces.fault(pieceCtx, P, T, () => r() < 0.5)) ||
-      (k === 'spill' && pieces.spill(pieceCtx, P, T)) ||
-      kinds.map((k2) => k2 !== k && pieces[k2](pieceCtx, P, T, () => r() < 0.5)).find(Boolean);
+      (k === "fork" && pieces.fork(pieceCtx, P, T)) ||
+      (k === "fault" && pieces.fault(pieceCtx, P, T, () => r() < 0.5)) ||
+      (k === "spill" && pieces.spill(pieceCtx, P, T)) ||
+      kinds
+        .map((k2) => k2 !== k && pieces[k2](pieceCtx, P, T, () => r() < 0.5))
+        .find(Boolean);
     if (!hop) return;
     P = hop.at;
   }
@@ -1684,10 +2021,14 @@ function buildChallenge(route, r) {
 function onWake(e) {
   if (e.vault) {
     // the vault opens: rarer cubes, more of them the harder it was
-    const pool = ['amp', 'split', 'diffuse', 'amp', 'split', 'prism'];
+    const pool = ["amp", "split", "diffuse", "amp", "split", "prism"];
     for (let i = 0; i < 1 + e.vault.stars; i++) {
-      const c = nearestFree(e.cx + 0.5 + (Math.random() - 0.5) * 3, e.cz + 0.5 + (Math.random() - 0.5) * 3);
-      if (c) makeGift(...c, pool[Math.floor(Math.random() * pool.length)]).born = t;
+      const c = nearestFree(
+        e.cx + 0.5 + (Math.random() - 0.5) * 3,
+        e.cz + 0.5 + (Math.random() - 0.5) * 3,
+      );
+      if (c)
+        makeGift(...c, pool[Math.floor(Math.random() * pool.length)]).born = t;
     }
     e.vault.open = true;
   }
@@ -1695,20 +2036,26 @@ function onWake(e) {
     terr++;
     // a great beacon takes the cubes around it into its light: every big step costs something
     for (const c of [...ents])
-      if (c.kind === 'cube' && !c.fixed && !c.bound && Math.hypot(c.cx - e.cx, c.cz - e.cz) <= 5) dissolve(c);
+      if (
+        c.kind === "cube" &&
+        !c.fixed &&
+        !c.bound &&
+        Math.hypot(c.cx - e.cx, c.cz - e.cz) <= 5
+      )
+        dissolve(c);
     setTimeout(() => spawnGreat(e.cx, e.cz), 2600);
   }
   const nx = { L1: 2, L2: 3, L3: 4, L4: 5, L5: 6 }[e.tag];
   if (nx) setTimeout(() => advance(nx), 1500);
-  if (e.tag === 'L6') {
-    logPT('done');
+  if (e.tag === "L6") {
+    logPT("done");
     setTimeout(showPlaytest, 4000);
     firstDone = true;
     hints = [];
     setTimeout(() => spawnGreat(e.cx, e.cz), 1800);
     setTimeout(() => {
-      edgesEl.classList.add('on');
-      ui.forEach((el) => el.classList.remove('off'));
+      edgesEl.classList.add("on");
+      ui.forEach((el) => el.classList.remove("off"));
     }, 2500);
   }
 }
@@ -1727,8 +2074,13 @@ function breakTick() {
   if (nextBreak > 1e8) nextBreak = t + iv();
   if (t < nextBreak) return;
   nextBreak = t + iv();
-  const placed = ents.filter((e) => e.kind === 'cube' && !e.broken && !e.fixed && e.active);
-  const c = placed.filter((e) => placed.filter((o) => o.type === e.type).length + (inv[e.type] || 0) > 1);
+  const placed = ents.filter(
+    (e) => e.kind === "cube" && !e.broken && !e.fixed && e.active,
+  );
+  const c = placed.filter(
+    (e) =>
+      placed.filter((o) => o.type === e.type).length + (inv[e.type] || 0) > 1,
+  );
   if (c.length) {
     const e = c[Math.floor(Math.random() * c.length)];
     e.broken = true;
@@ -1753,50 +2105,69 @@ function valveTick() {
   nextValve = t + 20;
   const own =
     Object.values(inv).reduce((a, b) => a + b, 0) +
-    ents.filter((e) => e.kind === 'cube' && !e.fixed && !e.broken).length;
-  if (own >= 2 || ents.some((e) => e.kind === 'gift' && Math.hypot(e.cx - camT.x, e.cz - camT.z) < 9)) return;
-  const c = nearestFree(camT.x + (Math.random() - 0.5) * 4, camT.z + (Math.random() - 0.5) * 4);
+    ents.filter((e) => e.kind === "cube" && !e.fixed && !e.broken).length;
+  if (
+    own >= 2 ||
+    ents.some(
+      (e) => e.kind === "gift" && Math.hypot(e.cx - camT.x, e.cz - camT.z) < 9,
+    )
+  )
+    return;
+  const c = nearestFree(
+    camT.x + (Math.random() - 0.5) * 4,
+    camT.z + (Math.random() - 0.5) * 4,
+  );
   if (c) {
-    const g2 = makeGift(...c, 'prism');
+    const g2 = makeGift(...c, "prism");
     g2.born = t;
     dirty = true;
   }
 }
 
 /* ---------- tray ---------- */
-let tool = 'prism';
-const toolBtns = [...document.querySelectorAll('.tool')],
-  trayEl = document.getElementById('tray');
+let tool = "prism";
+const toolBtns = [...document.querySelectorAll(".tool")],
+  trayEl = document.getElementById("tray");
 function refreshTray() {
   for (const b of toolBtns) {
     const ty = b.dataset.t,
       n = inv[ty] || 0;
     b.hidden = !seen.has(ty);
-    b.querySelector('.dots').innerHTML = '<i></i>'.repeat(Math.min(n, 8));
-    b.classList.toggle('empty', n === 0);
+    b.querySelector(".dots").innerHTML = "<i></i>".repeat(Math.min(n, 8));
+    b.classList.toggle("empty", n === 0);
   }
   if (!(inv[tool] > 0)) tool = Object.keys(inv).find((k) => inv[k] > 0) || tool;
-  for (const b of toolBtns) b.setAttribute('aria-pressed', b.dataset.t === tool && inv[tool] > 0);
+  for (const b of toolBtns)
+    b.setAttribute("aria-pressed", b.dataset.t === tool && inv[tool] > 0);
   updateGhost();
 }
 function landPulse(type) {
   const b = toolBtns.find((b) => b.dataset.t === type);
   if (!b) return;
-  b.classList.remove('land');
+  b.classList.remove("land");
   void b.offsetWidth;
-  b.classList.add('land');
+  b.classList.add("land");
 }
 
 /* ---------- picking ---------- */
 const ghost = new THREE.Group();
 const ghostEdges = new THREE.LineSegments(
   boxEdges,
-  new THREE.LineBasicMaterial({ color: C.flame, transparent: true, opacity: 0.75, depthWrite: false }),
+  new THREE.LineBasicMaterial({
+    color: C.flame,
+    transparent: true,
+    opacity: 0.75,
+    depthWrite: false,
+  }),
 );
 ghostEdges.renderOrder = 8;
 const ghostMark = new THREE.LineSegments(
   TYPES.prism.mark,
-  new THREE.LineBasicMaterial({ color: C.flame, transparent: true, opacity: 0.75 }),
+  new THREE.LineBasicMaterial({
+    color: C.flame,
+    transparent: true,
+    opacity: 0.75,
+  }),
 );
 ghostMark.renderOrder = 8;
 ghost.add(ghostEdges, ghostMark);
@@ -1812,7 +2183,11 @@ const hov = new THREE.LineLoop(
       [0, 1],
     ].map(([x, z]) => new THREE.Vector3(x, 0.025, z)),
   ),
-  new THREE.LineBasicMaterial({ color: C.flame, transparent: true, opacity: 0.8 }),
+  new THREE.LineBasicMaterial({
+    color: C.flame,
+    transparent: true,
+    opacity: 0.8,
+  }),
 );
 hov.visible = false;
 scene.add(hov);
@@ -1872,34 +2247,37 @@ function thingAt(x, y, kinds, reach = 34) {
   }
   return best;
 }
-const isCube = (e) => e.kind === 'cube',
-  isAimable = (e) => e.kind === 'beacon' && e.woken && e.g.visible;
+const isCube = (e) => e.kind === "cube",
+  isAimable = (e) => e.kind === "beacon" && e.woken && e.g.visible;
 const overTray = (x, y) => {
   const r = trayEl.getBoundingClientRect();
-  return x >= r.left - 6 && x <= r.right + 6 && y >= r.top - 14 && y <= r.bottom + 6;
+  return (
+    x >= r.left - 6 && x <= r.right + 6 && y >= r.top - 14 && y <= r.bottom + 6
+  );
 };
 const movable = (e) => (!e.fixed || e.broken) && !e.keep; // keep: a crack that is part of a puzzle
 
 /* ---------- selection ---------- */
-const selEl = document.getElementById('sel'),
-  selRot = document.getElementById('selRot'),
-  selBack = document.getElementById('selBack');
+const selEl = document.getElementById("sel"),
+  selRot = document.getElementById("selRot"),
+  selBack = document.getElementById("selBack");
 const ICON_BACK = selBack.innerHTML,
-  ICON_DISCARD = '<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  ICON_DISCARD =
+    '<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 function select(e) {
   selE = e;
-  selEl.classList.toggle('on', !!e);
+  selEl.classList.toggle("on", !!e);
   if (!e) return;
-  selRot.style.display = e.fixed ? 'none' : '';
-  selBack.style.display = movable(e) ? '' : 'none';
+  selRot.style.display = e.fixed ? "none" : "";
+  selBack.style.display = movable(e) ? "" : "none";
   selBack.innerHTML = e.broken ? ICON_DISCARD : ICON_BACK;
 }
 function placeSel() {
   if (!selE || selE.dragging || !ents.includes(selE)) {
-    selEl.classList.remove('on');
+    selEl.classList.remove("on");
     return;
   }
-  selEl.classList.add('on');
+  selEl.classList.add("on");
   const [sx, sy] = toScreen(selE.cx + 0.5, 1.1, selE.cz + 0.5);
   const off = Math.min(52, innerWidth * 0.13);
   let lx = sx - off,
@@ -1912,11 +2290,12 @@ function placeSel() {
     lx -= rx - (innerWidth - 30);
     rx = innerWidth - 30;
   }
-  const one = selRot.style.display === 'none' || selBack.style.display === 'none';
-  selRot.style.left = (one ? sx : lx) + 'px';
-  selRot.style.top = sy - 24 + 'px';
-  selBack.style.left = (one ? sx : rx) + 'px';
-  selBack.style.top = sy - 24 + 'px';
+  const one =
+    selRot.style.display === "none" || selBack.style.display === "none";
+  selRot.style.left = (one ? sx : lx) + "px";
+  selRot.style.top = sy - 24 + "px";
+  selBack.style.left = (one ? sx : rx) + "px";
+  selBack.style.top = sy - 24 + "px";
 }
 function turn(e) {
   noteBusy();
@@ -1947,16 +2326,23 @@ function takeBack(e) {
   refreshTray();
   landPulse(e.type);
 }
-selRot.addEventListener('click', () => {
+selRot.addEventListener("click", () => {
   if (selE) turn(selE);
 });
-selBack.addEventListener('click', () => {
+selBack.addEventListener("click", () => {
   if (selE) takeBack(selE);
 });
 function place(type, cell) {
   if (!(inv[type] > 0) || !free(...cell)) return;
   const h = curHint();
-  const r = h && h.cell && h.cell[0] === cell[0] && h.cell[1] === cell[1] && h.type === type ? h.rot : 0;
+  const r =
+    h &&
+    h.cell &&
+    h.cell[0] === cell[0] &&
+    h.cell[1] === cell[1] &&
+    h.type === type
+      ? h.rot
+      : 0;
   const e = makeCube(type, ...cell, r);
   e.spinT = t;
   lastCube = e;
@@ -1972,26 +2358,29 @@ let g = null,
   manualEl = 0,
   sensorEl = null,
   beta0 = null;
-const lift = (pt) => (pt === 'mouse' ? 0 : 44);
-canvas.addEventListener('contextmenu', (ev) => ev.preventDefault());
+const lift = (pt) => (pt === "mouse" ? 0 : 44);
+canvas.addEventListener("contextmenu", (ev) => ev.preventDefault());
 const centroid = () => {
   const p = [...pts.values()];
   return [(p[0][0] + p[1][0]) / 2, (p[0][1] + p[1][1]) / 2];
 };
 canvas.addEventListener(
-  'wheel',
+  "wheel",
   (ev) => {
     ev.preventDefault();
-    manualEl = Math.max(0, Math.min(EL_MAX - EL_SITE, manualEl + ev.deltaY * 0.0018));
+    manualEl = Math.max(
+      0,
+      Math.min(EL_MAX - EL_SITE, manualEl + ev.deltaY * 0.0018),
+    );
   },
   { passive: false },
 );
-canvas.addEventListener('pointerdown', (ev) => {
-  if (intro.state === 'transit') {
+canvas.addEventListener("pointerdown", (ev) => {
+  if (intro.state === "transit") {
     skipIntro();
     return;
   }
-  if (intro.state !== 'play') return;
+  if (intro.state !== "play") return;
   canvas.setPointerCapture(ev.pointerId);
   pts.set(ev.pointerId, [ev.clientX, ev.clientY]);
   glide = null;
@@ -2009,21 +2398,24 @@ canvas.addEventListener('pointerdown', (ev) => {
     ev.clientX,
     ev.clientY,
     (e) => isCube(e) && movable(e),
-    ev.pointerType === 'mouse' ? 30 : 50,
+    ev.pointerType === "mouse" ? 30 : 50,
   ); // generous: near a cube = holding the cube
   const stuck = grab
     ? null
     : thingAt(
         ev.clientX,
         ev.clientY,
-        (e) => e.kind !== 'gift' && e.g.visible && (e.kind !== 'cube' || !movable(e)),
+        (e) =>
+          e.kind !== "gift" &&
+          e.g.visible &&
+          (e.kind !== "cube" || !movable(e)),
         36,
       );
   g = {
     x: ev.clientX,
     y: ev.clientY,
     pt: ev.pointerType,
-    mouseRight: ev.pointerType === 'mouse' && ev.button === 2,
+    mouseRight: ev.pointerType === "mouse" && ev.button === 2,
     grab,
     stuck,
     cube: grab || thingAt(ev.clientX, ev.clientY, isCube),
@@ -2033,7 +2425,7 @@ canvas.addEventListener('pointerdown', (ev) => {
     gz: gr && gr.z,
   };
 });
-canvas.addEventListener('pointermove', (ev) => {
+canvas.addEventListener("pointermove", (ev) => {
   if (pts.has(ev.pointerId)) pts.set(ev.pointerId, [ev.clientX, ev.clientY]);
   if (g && g.two) {
     if (pts.size < 2 || g.gx == null) return;
@@ -2046,10 +2438,15 @@ canvas.addEventListener('pointermove', (ev) => {
     return;
   }
   if (!g) {
-    if (ev.pointerType === 'mouse' && intro.state === 'play' && !trayDrag) {
+    if (ev.pointerType === "mouse" && intro.state === "play" && !trayDrag) {
       const h = groundAt(ev.clientX, ev.clientY);
       ghostCell =
-        h && free(...h.cell) && !thingAt(ev.clientX, ev.clientY, isCube, 0) && inv[tool] > 0 ? h.cell : null;
+        h &&
+        free(...h.cell) &&
+        !thingAt(ev.clientX, ev.clientY, isCube, 0) &&
+        inv[tool] > 0
+          ? h.cell
+          : null;
       ghostType = null;
       updateGhost();
     }
@@ -2089,7 +2486,7 @@ canvas.addEventListener('pointermove', (ev) => {
     }
   }
 });
-canvas.addEventListener('pointerup', (ev) => {
+canvas.addEventListener("pointerup", (ev) => {
   pts.delete(ev.pointerId);
   if (!g) return;
   if (g.two) {
@@ -2104,7 +2501,7 @@ canvas.addEventListener('pointerup', (ev) => {
   }
   if (G.moved) return;
   noteTap();
-  logPT('tap');
+  logPT("tap");
   const x = ev.clientX,
     y = ev.clientY,
     h = groundAt(x, y);
@@ -2138,10 +2535,14 @@ canvas.addEventListener('pointerup', (ev) => {
   {
     const m = Math.min(70, innerWidth * 0.15),
       hh0 = curHint(),
-      nearHint = hh0 && hh0.cell && Math.hypot(h.x - hh0.cell[0] - 0.5, h.z - hh0.cell[1] - 0.5) < 2.6;
+      nearHint =
+        hh0 &&
+        hh0.cell &&
+        Math.hypot(h.x - hh0.cell[0] - 0.5, h.z - hh0.cell[1] - 0.5) < 2.6;
     const ex = x < m ? -1 : x > innerWidth - m ? 1 : 0,
-      ey = y < m + 40 ? 1 : y > trayEl.getBoundingClientRect().top - 50 ? -1 : 0;
-    if ((ex || ey) && !nearHint && G.pt !== 'mouse') {
+      ey =
+        y < m + 40 ? 1 : y > trayEl.getBoundingClientRect().top - 50 ? -1 : 0;
+    if ((ex || ey) && !nearHint && G.pt !== "mouse") {
       const v = camT
         .clone()
         .addScaledVector(SCR_RIGHT, ex * 2.6)
@@ -2154,7 +2555,10 @@ canvas.addEventListener('pointerup', (ev) => {
   const hh = curHint();
   if (hh && hh.cell) {
     // first stretch: any tap near the glowing spot puts the cube there
-    if (inv[hh.type] > 0 && Math.hypot(h.x - hh.cell[0] - 0.5, h.z - hh.cell[1] - 0.5) < 2.6)
+    if (
+      inv[hh.type] > 0 &&
+      Math.hypot(h.x - hh.cell[0] - 0.5, h.z - hh.cell[1] - 0.5) < 2.6
+    )
       place(hh.type, hh.cell);
     else nudge(h.x, h.z);
     return;
@@ -2169,7 +2573,7 @@ canvas.addEventListener('pointerup', (ev) => {
   } // one tap places, everywhere
   nudge(h.x, h.z);
 });
-canvas.addEventListener('pointercancel', (ev) => {
+canvas.addEventListener("pointercancel", (ev) => {
   pts.delete(ev.pointerId);
   if (g && g.drag) endDrag(null);
   g = null;
@@ -2222,13 +2626,16 @@ function edgeScroll(dt) {
   const m = 56,
     x = g.lx,
     y = g.ly;
-  let ex = x < m ? -(1 - x / m) : x > innerWidth - m ? 1 - (innerWidth - x) / m : 0,
+  let ex =
+      x < m ? -(1 - x / m) : x > innerWidth - m ? 1 - (innerWidth - x) / m : 0,
     ey = y < m + 30 ? -(1 - (y - 30) / m) : 0;
   ex = Math.max(-1, Math.min(1, ex));
   ey = Math.max(-1, Math.min(1, ey));
   if (!ex && !ey) return;
   const sp = 6 * dt;
-  camT.addScaledVector(SCR_RIGHT, ex * sp).addScaledVector(SCR_UP, (-ey * sp) / Math.sin(EL));
+  camT
+    .addScaledVector(SCR_RIGHT, ex * sp)
+    .addScaledVector(SCR_UP, (-ey * sp) / Math.sin(EL));
   applyCam();
   moveDrag(x, y - lift(g.pt));
 }
@@ -2250,7 +2657,7 @@ function moveDrag(x, y) {
 }
 function endDrag(ev) {
   noteBusy();
-  logPT('move');
+  logPT("move");
   const e = dragE;
   dragE = null;
   if (!e) return;
@@ -2265,7 +2672,8 @@ function endDrag(ev) {
   if (
     dragCell &&
     e.bound &&
-    Math.hypot(dragCell[0] - e.bound.cell[0], dragCell[1] - e.bound.cell[1]) > e.bound.r
+    Math.hypot(dragCell[0] - e.bound.cell[0], dragCell[1] - e.bound.cell[1]) >
+      e.bound.r
   )
     dragCell = null;
   if (dragCell) {
@@ -2273,7 +2681,14 @@ function endDrag(ev) {
     e.cz = dragCell[1];
   }
   const hh = curHint();
-  if (hh && hh.cell && hh.type === e.type && hh.cell[0] === e.cx && hh.cell[1] === e.cz && e.rot !== hh.rot) {
+  if (
+    hh &&
+    hh.cell &&
+    hh.type === e.type &&
+    hh.cell[0] === e.cx &&
+    hh.cell[1] === e.cz &&
+    e.rot !== hh.rot
+  ) {
     e.ang -= (((hh.rot - e.rot + 4) & 3) * Math.PI) / 2;
     e.rot = hh.rot;
   }
@@ -2286,25 +2701,37 @@ function endDrag(ev) {
 
 let trayDrag = null;
 for (const b of toolBtns) {
-  b.addEventListener('pointerdown', (ev) => {
-    if (intro.state !== 'play' || !(inv[b.dataset.t] > 0)) return;
-    trayDrag = { type: b.dataset.t, x: ev.clientX, y: ev.clientY, pt: ev.pointerType, started: false };
+  b.addEventListener("pointerdown", (ev) => {
+    if (intro.state !== "play" || !(inv[b.dataset.t] > 0)) return;
+    trayDrag = {
+      type: b.dataset.t,
+      x: ev.clientX,
+      y: ev.clientY,
+      pt: ev.pointerType,
+      started: false,
+    };
     b.setPointerCapture(ev.pointerId);
   });
-  b.addEventListener('pointermove', (ev) => {
+  b.addEventListener("pointermove", (ev) => {
     if (!trayDrag) return;
-    if (!trayDrag.started && Math.hypot(ev.clientX - trayDrag.x, ev.clientY - trayDrag.y) > 10) {
+    if (
+      !trayDrag.started &&
+      Math.hypot(ev.clientX - trayDrag.x, ev.clientY - trayDrag.y) > 10
+    ) {
       trayDrag.started = true;
       select(null);
     }
     if (trayDrag.started) {
       const h = groundAt(ev.clientX, ev.clientY - lift(trayDrag.pt));
       ghostType = trayDrag.type;
-      ghostCell = h && !overTray(ev.clientX, ev.clientY) ? snapCell(h.x, h.z, trayDrag.type) : null;
+      ghostCell =
+        h && !overTray(ev.clientX, ev.clientY)
+          ? snapCell(h.x, h.z, trayDrag.type)
+          : null;
       updateGhost();
     }
   });
-  b.addEventListener('pointerup', (ev) => {
+  b.addEventListener("pointerup", (ev) => {
     const d = trayDrag;
     trayDrag = null;
     if (!d) {
@@ -2322,15 +2749,15 @@ for (const b of toolBtns) {
     tool = d.type;
     refreshTray();
   });
-  b.addEventListener('pointercancel', () => {
+  b.addEventListener("pointercancel", () => {
     trayDrag = null;
     ghostCell = null;
     ghostType = null;
     updateGhost();
   });
 }
-const sys = document.getElementById('sys');
-document.getElementById('sysBtn').onclick = () => sys.classList.toggle('on');
+const sys = document.getElementById("sys");
+document.getElementById("sysBtn").onclick = () => sys.classList.toggle("on");
 const wipe = () => {
   wiping = true;
   try {
@@ -2340,30 +2767,31 @@ const wipe = () => {
   lastSave = 1e9;
   location.reload();
 };
-document.getElementById('resetBtn').onclick = wipe;
-const confirmEl = document.getElementById('confirm');
-document.getElementById('restartBtn').onclick = () => {
-  confirmEl.classList.toggle('on');
-  sys.classList.remove('on');
+document.getElementById("resetBtn").onclick = wipe;
+const confirmEl = document.getElementById("confirm");
+document.getElementById("restartBtn").onclick = () => {
+  confirmEl.classList.toggle("on");
+  sys.classList.remove("on");
 };
-document.getElementById('keepBtn').onclick = () => confirmEl.classList.remove('on');
-document.getElementById('clearBtn').onclick = wipe;
+document.getElementById("keepBtn").onclick = () =>
+  confirmEl.classList.remove("on");
+document.getElementById("clearBtn").onclick = wipe;
 
 /* desktop: keys and cursor */
-addEventListener('keydown', (ev) => {
-  if (intro.state !== 'play') return;
+addEventListener("keydown", (ev) => {
+  if (intro.state !== "play") return;
   const k = ev.key;
-  if (selE && (k === 'r' || k === 'R' || k === ' ')) {
+  if (selE && (k === "r" || k === "R" || k === " ")) {
     turn(selE);
     ev.preventDefault();
     return;
   }
-  if (selE && (k === 'Backspace' || k === 'Delete')) {
+  if (selE && (k === "Backspace" || k === "Delete")) {
     takeBack(selE);
     ev.preventDefault();
     return;
   }
-  if (k === 'Escape') {
+  if (k === "Escape") {
     select(null);
     return;
   }
@@ -2379,25 +2807,27 @@ addEventListener('keydown', (ev) => {
   }[k];
   if (m) {
     glide = null;
-    camT.addScaledVector(SCR_RIGHT, m[0] * 1.4).addScaledVector(SCR_UP, m[1] * 1.8);
+    camT
+      .addScaledVector(SCR_RIGHT, m[0] * 1.4)
+      .addScaledVector(SCR_UP, m[1] * 1.8);
     ev.preventDefault();
   }
 });
-canvas.addEventListener('pointermove', (ev) => {
-  if (ev.pointerType !== 'mouse') return;
+canvas.addEventListener("pointermove", (ev) => {
+  if (ev.pointerType !== "mouse") return;
   canvas.style.cursor = dragE
-    ? 'grabbing'
+    ? "grabbing"
     : thingAt(ev.clientX, ev.clientY, (e) => isCube(e) && movable(e), 0)
-      ? 'grab'
+      ? "grab"
       : thingAt(ev.clientX, ev.clientY, isAimable, 0)
-        ? 'pointer'
-        : 'default';
+        ? "pointer"
+        : "default";
 });
 
 /* edge arrows: the map is open */
-const edgesEl = document.getElementById('edges');
+const edgesEl = document.getElementById("edges");
 function placeEdges() {
-  const b = edgesEl.querySelectorAll('button'),
+  const b = edgesEl.querySelectorAll("button"),
     trayTop = trayEl.getBoundingClientRect().top || innerHeight - 80;
   const pos = {
     up: [innerWidth / 2, 64],
@@ -2407,20 +2837,20 @@ function placeEdges() {
   };
   b.forEach((el) => {
     const [x, y] = pos[el.dataset.d];
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
+    el.style.left = x + "px";
+    el.style.top = y + "px";
   });
 }
-edgesEl.addEventListener('click', (ev) => {
-  const b = ev.target.closest('button');
+edgesEl.addEventListener("click", (ev) => {
+  const b = ev.target.closest("button");
   if (!b) return;
   const d = b.dataset.d,
     s = half * 0.9;
   const v = camT.clone();
-  if (d === 'up') v.addScaledVector(SCR_UP, s * 1.6);
-  if (d === 'down') v.addScaledVector(SCR_UP, -s * 1.6);
-  if (d === 'right') v.addScaledVector(SCR_RIGHT, s);
-  if (d === 'left') v.addScaledVector(SCR_RIGHT, -s);
+  if (d === "up") v.addScaledVector(SCR_UP, s * 1.6);
+  if (d === "down") v.addScaledVector(SCR_UP, -s * 1.6);
+  if (d === "right") v.addScaledVector(SCR_RIGHT, s);
+  if (d === "left") v.addScaledVector(SCR_RIGHT, -s);
   glideTo(v, 1.6);
 });
 
@@ -2435,13 +2865,13 @@ function enableTilt() {
   const D = window.DeviceOrientationEvent;
   if (!D) return;
   try {
-    if (typeof D.requestPermission === 'function')
+    if (typeof D.requestPermission === "function")
       D.requestPermission()
         .then((s) => {
-          if (s === 'granted') addEventListener('deviceorientation', onOrient);
+          if (s === "granted") addEventListener("deviceorientation", onOrient);
         })
         .catch(() => {});
-    else addEventListener('deviceorientation', onOrient);
+    else addEventListener("deviceorientation", onOrient);
   } catch (_) {}
 }
 let elHeld = EL_SITE;
@@ -2455,8 +2885,8 @@ function tiltTick(dt) {
 }
 
 /* ---------- entrance: the homepage cube becomes the first lantern ---------- */
-const intro = { state: 'home', t0: 0 };
-const ui = ['hud', 'top'].map((id) => document.getElementById(id));
+const intro = { state: "home", t0: 0 };
+const ui = ["hud", "top"].map((id) => document.getElementById(id));
 const dayHemiC = new THREE.Color(0xffffff),
   nightHemiC = new THREE.Color(0xb8c4d6),
   dayGC = new THREE.Color(0xc9d0c4),
@@ -2473,13 +2903,14 @@ function setDay(d) {
   sun.color.lerpColors(nightSunC, daySunC, d);
   tmp.lerpColors(duskC, groundC, d);
   renderer.setClearColor(tmp);
-  document.body.style.background = fromHome && intro.state !== 'play' ? '#20262D' : '#' + tmp.getHexString();
+  document.body.style.background =
+    fromHome && intro.state !== "play" ? "#20262D" : "#" + tmp.getHexString();
 }
 /* ---------- entrance: the homepage's cube becomes your first lantern (or, with a save, your last cube) ----------
    Arriving from the homepage (?from=home&x&y&s), the page is already at dusk and the cube starts exactly where
    and how big it was on the homepage. Visiting /light/ directly, the entrance starts on the site's paper. */
 const arrival = new URLSearchParams(location.search);
-const fromHome = arrival.get('from') === 'home';
+const fromHome = arrival.get("from") === "home";
 const homeCube = glass(C.ocean, 0.46);
 homeCube.own = true;
 scene.add(homeCube.g);
@@ -2503,7 +2934,7 @@ function latestCube() {
   if (lastCube && ents.includes(lastCube)) return lastCube;
   return (
     ents
-      .filter((e) => e.kind === 'cube' && !e.fixed)
+      .filter((e) => e.kind === "cube" && !e.fixed)
       .sort((a, b) => (b.placedT ?? -1) - (a.placedT ?? -1))[0] || null
   );
 }
@@ -2518,18 +2949,28 @@ function landing() {
     };
   if (!saved && lantern0)
     return {
-      at: new THREE.Vector3(lantern0.cx + 0.5, lantern0.sz / 2, lantern0.cz + 0.5),
+      at: new THREE.Vector3(
+        lantern0.cx + 0.5,
+        lantern0.sz / 2,
+        lantern0.cz + 0.5,
+      ),
       size: lantern0.sz,
       color: C.ground,
       tint: 0.16,
       ent: lantern0,
     };
-  return { at: new THREE.Vector3(camT.x, 0.3, camT.z), size: 0.05, color: C.ocean, tint: 0.46, ent: null };
+  return {
+    at: new THREE.Vector3(camT.x, 0.3, camT.z),
+    size: 0.05,
+    color: C.ocean,
+    tint: 0.46,
+    ent: null,
+  };
 }
 function beginEntrance() {
-  if (intro.state !== 'home') return;
+  if (intro.state !== "home") return;
   enableTilt();
-  intro.state = 'transit';
+  intro.state = "transit";
   intro.t0 = t;
   flyFrom = homeCube.g.position.clone();
   flySize = homeCube.g.scale.x;
@@ -2538,24 +2979,27 @@ function beginEntrance() {
 if (fromHome) {
   // reproduce the homepage's last frame exactly: same camera angle (both use the site's), same scale
   // (world units per pixel), and the cube at the same point on screen and the same size
-  const perPixel = Number(arrival.get('u')) || 0.02;
+  const perPixel = Number(arrival.get("u")) || 0.02;
   startHalf = half = (perPixel * innerHeight) / 2;
   U.veil.value = 1; // flat dusk, as the homepage left it; the cube still in the homepage's daylight
   applyCam();
   camera.updateMatrixWorld(); // the camera hasn't been drawn yet; make its position current before aiming at the screen point
   setDay(1);
-  const size = Number(arrival.get('w')) || homeSize;
-  rayAt(Number(arrival.get('x')) * innerWidth, Number(arrival.get('y')) * innerHeight);
+  const size = Number(arrival.get("w")) || homeSize;
+  rayAt(
+    Number(arrival.get("x")) * innerWidth,
+    Number(arrival.get("y")) * innerHeight,
+  );
   ray.ray.intersectPlane(PL(size / 2), hp);
   homeCube.g.position.copy(hp);
   homeCube.g.scale.setScalar(size);
-  intro.state = 'home';
+  intro.state = "home";
   setTimeout(beginEntrance, 50);
 } else setTimeout(beginEntrance, 500);
 
 const hideAtHome = [];
 function introTick() {
-  if (intro.state === 'home') {
+  if (intro.state === "home") {
     if (fromHome) return;
     half = homeHalf();
     homeCube.g.position.copy(homeSpot());
@@ -2563,7 +3007,7 @@ function introTick() {
     homeCube.g.rotation.y = 0.05 * Math.sin(t * 0.4);
     return;
   }
-  if (intro.state !== 'transit') return;
+  if (intro.state !== "transit") return;
   const a = t - intro.t0,
     c = easeIO(clamp01((a - (fromHome ? 1.0 : 0.3)) / 2.6)), // from the homepage the zoom starts from its exact frame
     L = landing();
@@ -2579,40 +3023,45 @@ function introTick() {
   homeCube.g.rotation.y = reduce ? 0 : Math.PI * 2 * easeOut(f); // one spin, like the site
   homeCube.surface.color.copy(oceanC).lerp(new THREE.Color(L.color), k);
   homeCube.surface.opacity = lerp(0.46, L.tint, k);
-  homeCube.surface.emissive.copy(flameC).multiplyScalar(0.3 * clamp01((f - 0.75) / 0.25));
+  homeCube.surface.emissive
+    .copy(flameC)
+    .multiplyScalar(0.3 * clamp01((f - 0.75) / 0.25));
   if (a > 2.4) for (const e of hideAtHome) if (e !== L.ent) e.g.visible = true;
   if (a >= 3.25 && homeCube.g.visible) {
     homeCube.g.visible = false;
     if (L.ent) L.ent.g.visible = true;
     if (L.ent === lantern0 && !saved) lantern0.on = t;
     dirty = true;
-    for (let i = 0; i < 8; i++) setTimeout(() => mote(L.at.x, L.at.y + 0.2, L.at.z, 0), i * 80);
+    for (let i = 0; i < 8; i++)
+      setTimeout(() => mote(L.at.x, L.at.y + 0.2, L.at.z, 0), i * 80);
   }
   if (a >= 3.9) startPlay();
 }
 function startPlay() {
-  if (!firstDone) logPT('start');
-  if (intro.state === 'play') return;
-  intro.state = 'play';
+  if (!firstDone) logPT("start");
+  if (intro.state === "play") return;
+  intro.state = "play";
   if (!firstDone) frameStep(1, 1.2);
-  setDay(0);
+  setDay(
+    STUDY ? Number(new URLSearchParams(location.search).get("day")) || 0 : 0,
+  );
   homeCube.g.visible = false;
   forgetGlass(homeCube.g);
   for (const e of hideAtHome) e.g.visible = true;
   for (const e of ents)
-    if (e.kind === 'source') {
+    if (e.kind === "source") {
       e.g.visible = true;
       if (e.on < 0) e.on = t;
     }
   dirty = true;
   if (firstDone) {
-    edgesEl.classList.add('on');
-    ui.forEach((el) => el.classList.remove('off'));
-    if (!great) spawnGreat(Math.round(camT.x), Math.round(camT.z));
+    edgesEl.classList.add("on");
+    ui.forEach((el) => el.classList.remove("off"));
+    if (!great && !STUDY) spawnGreat(Math.round(camT.x), Math.round(camT.z));
   }
-  trayEl.classList.remove('off');
+  trayEl.classList.remove("off");
   refreshTray();
-  setTimeout(() => landPulse('prism'), 300);
+  setTimeout(() => landPulse("prism"), 300);
 }
 function skipIntro() {
   intro.t0 = t - 3.9;
@@ -2632,9 +3081,9 @@ const pvLines = new THREE.LineSegments(new THREE.BufferGeometry(), pvMat);
 pvLines.renderOrder = 8;
 pvLines.frustumCulled = false;
 scene.add(pvLines);
-let pvKey = '';
+let pvKey = "";
 function preview(type, cell, rot) {
-  const k = type + '|' + cell + '|' + rot;
+  const k = type + "|" + cell + "|" + rot;
   if (k === pvKey) return;
   pvKey = k;
   const ck = key(...cell),
@@ -2644,7 +3093,7 @@ function preview(type, cell, rot) {
     return;
   }
   const fake = {
-    kind: 'cube',
+    kind: "cube",
     type,
     rot,
     cx: cell[0],
@@ -2671,7 +3120,7 @@ function preview(type, cell, rot) {
       a.push(x1, 0.09, z1, x2, 0.09, z2);
     }
   const g = new THREE.BufferGeometry();
-  g.setAttribute('position', new THREE.Float32BufferAttribute(a, 3));
+  g.setAttribute("position", new THREE.Float32BufferAttribute(a, 3));
   pvLines.geometry.dispose();
   pvLines.geometry = g;
   pvLines.computeLineDistances();
@@ -2682,7 +3131,13 @@ function previewTick() {
   if (dragE && dragCell) {
     const hh = curHint();
     let rot = dragE.rot;
-    if (hh && hh.cell && hh.type === dragE.type && hh.cell[0] === dragCell[0] && hh.cell[1] === dragCell[1])
+    if (
+      hh &&
+      hh.cell &&
+      hh.type === dragE.type &&
+      hh.cell[0] === dragCell[0] &&
+      hh.cell[1] === dragCell[1]
+    )
       rot = hh.rot;
     preview(dragE.type, dragCell, rot);
     pvMat.opacity = 0.65;
@@ -2690,20 +3145,31 @@ function previewTick() {
   }
   if (trayDrag && trayDrag.started && ghostCell) {
     const hh = curHint();
-    const rot = hh && hh.cell && hh.cell[0] === ghostCell[0] && hh.cell[1] === ghostCell[1] ? hh.rot : 0;
+    const rot =
+      hh &&
+      hh.cell &&
+      hh.cell[0] === ghostCell[0] &&
+      hh.cell[1] === ghostCell[1]
+        ? hh.rot
+        : 0;
     preview(trayDrag.type, ghostCell, rot);
     pvMat.opacity = 0.65;
     return;
   }
   // stuck in the first stretch for a while: show where the light would go from the glowing spot
-  const hh = intro.state === 'play' ? curHint() : null;
-  if (hh && hh.cell && ((t - lastAct > 12 && t - stepT > 12) || (step === 5 && t - stepT > 4)) && !glide) {
+  const hh = intro.state === "play" ? curHint() : null;
+  if (
+    hh &&
+    hh.cell &&
+    ((t - lastAct > 12 && t - stepT > 12) || (step === 5 && t - stepT > 4)) &&
+    !glide
+  ) {
     preview(hh.type, hh.cell, hh.rot);
     pvMat.opacity = 0.25 + 0.3 * (0.5 + 0.5 * Math.sin(t * 2.4));
     return;
   }
   pvLines.visible = false;
-  pvKey = '';
+  pvKey = "";
 }
 
 /* ---------- wordless hints ---------- */
@@ -2715,7 +3181,13 @@ function nudge(x, z) {
 function done(h) {
   if (h.cell) {
     const c = cells.get(key(...h.cell));
-    return c && c.kind === 'cube' && c.type === h.type && c.rot === h.rot && !c.broken;
+    return (
+      c &&
+      c.kind === "cube" &&
+      c.type === h.type &&
+      c.rot === h.rot &&
+      !c.broken
+    );
   }
   if (h.tap) return h.tap.rot === h.rot;
   if (h.discard) return !ents.includes(h.discard);
@@ -2723,7 +3195,9 @@ function done(h) {
 }
 function curHint() {
   if (firstDone) return null;
-  const targets = ents.filter((e) => e.kind === 'beacon' && e.tag === 'L' + step);
+  const targets = ents.filter(
+    (e) => e.kind === "beacon" && e.tag === "L" + step,
+  );
   if (targets.length && targets.every((e) => e.woken)) return null;
   const h = hints.find((x) => !done(x)) || null;
   // reuse: point at the old cube while it's on the map; once it's back in the tray, point at the spot
@@ -2736,7 +3210,12 @@ const hintG = new THREE.Group();
 scene.add(hintG);
 const hintEdges = new THREE.LineSegments(
   boxEdges,
-  new THREE.LineBasicMaterial({ color: C.flame, transparent: true, opacity: 0, depthWrite: false }),
+  new THREE.LineBasicMaterial({
+    color: C.flame,
+    transparent: true,
+    opacity: 0,
+    depthWrite: false,
+  }),
 );
 hintEdges.renderOrder = 8;
 hintEdges.scale.setScalar(0.8);
@@ -2770,22 +3249,32 @@ const pickRing = new THREE.Mesh(hintRing.geometry, hintRing.material.clone()); /
 pickRing.rotation.x = -Math.PI / 2;
 scene.add(pickRing);
 function hintTick() {
-  const h = intro.state === 'play' ? curHint() : null,
+  const h = intro.state === "play" ? curHint() : null,
     boost = t - hintBoost < 2.2,
     show = h && (t > stepT + 0.6 || boost) && !dragE && (!glide || boost),
-    p = boost ? 0.75 + 0.25 * Math.sin(t * 9) : reduce ? 0.7 : 0.5 + 0.5 * Math.sin(t * 3.6);
+    p = boost
+      ? 0.75 + 0.25 * Math.sin(t * 9)
+      : reduce
+        ? 0.7
+        : 0.5 + 0.5 * Math.sin(t * 3.6);
   for (const b of toolBtns)
-    b.classList.toggle('hint', !!(show && h.cell && b.dataset.t === h.type && inv[h.type] > 0 && !selE));
+    b.classList.toggle(
+      "hint",
+      !!(show && h.cell && b.dataset.t === h.type && inv[h.type] > 0 && !selE),
+    );
   selBack.classList.toggle(
-    'hint',
-    !!(show && ((h.discard && selE === h.discard) || (h.pick && selE === h.pick))),
+    "hint",
+    !!(
+      show &&
+      ((h.discard && selE === h.discard) || (h.pick && selE === h.pick))
+    ),
   );
   hintEdges.material.opacity =
     hintSq.material.opacity =
     hintRing.material.opacity =
     pickRing.material.opacity =
       0;
-  demoTick(intro.state === 'play' ? h : null);
+  demoTick(intro.state === "play" ? h : null);
   if (!show) return;
   if (h.pick) {
     pickRing.position.set(h.pick.cx + 0.5, 0.03, h.pick.cz + 0.5);
@@ -2811,7 +3300,12 @@ function hintTick() {
 const ghostDemo = new THREE.Group();
 const demoEdges = new THREE.LineSegments(
   boxEdges,
-  new THREE.LineBasicMaterial({ color: C.core, transparent: true, opacity: 0, depthWrite: false }),
+  new THREE.LineBasicMaterial({
+    color: C.core,
+    transparent: true,
+    opacity: 0,
+    depthWrite: false,
+  }),
 );
 demoEdges.renderOrder = 8;
 demoEdges.scale.setScalar(0.8);
@@ -2821,18 +3315,19 @@ ghostDemo.add(demoEdges, demoGlow);
 scene.add(ghostDemo, finger);
 let demo = null,
   lastDemoT = -99,
-  progressKey = '',
+  progressKey = "",
   progressT = 0,
   taps = [],
   busy = 0;
 const noteTap = () => taps.push(t);
 const noteBusy = () => busy++;
 function lostReason(h) {
-  const k = step + ':' + JSON.stringify([h.cell, !!h.tap, !!h.discard, !!h.pick]);
+  const k =
+    step + ":" + JSON.stringify([h.cell, !!h.tap, !!h.discard, !!h.pick]);
   if (k !== progressKey) [progressKey, progressT, taps, busy] = [k, t, [], 0];
-  if (taps.filter((x) => t - x < 6).length >= 4) return 'taps';
-  if (busy >= 3 && t - progressT > 12) return 'busy';
-  if (t - progressT > 14 && t - lastAct > 6) return 'quiet';
+  if (taps.filter((x) => t - x < 6).length >= 4) return "taps";
+  if (busy >= 3 && t - progressT > 12) return "busy";
+  if (t - progressT > 14 && t - lastAct > 6) return "quiet";
   return null;
 }
 function trayGround() {
@@ -2845,22 +3340,40 @@ function demoTick(h) {
     const why = lostReason(h);
     if (why) {
       const at = (x, z, y = 0.4) => new THREE.Vector3(x + 0.5, y, z + 0.5);
-      if (h.tap) demo = { kind: 'tap', to: at(h.tap.cx, h.tap.cz, 1.6) };
-      else if (h.discard) demo = { kind: 'discard', from: at(h.discard.cx, h.discard.cz), to: trayGround() };
+      if (h.tap) demo = { kind: "tap", to: at(h.tap.cx, h.tap.cz, 1.6) };
+      else if (h.discard)
+        demo = {
+          kind: "discard",
+          from: at(h.discard.cx, h.discard.cz),
+          to: trayGround(),
+        };
       else if (h.pick)
-        demo = { kind: 'move', from: at(h.pick.cx, h.pick.cz), to: at(...h.cell), type: h.type };
+        demo = {
+          kind: "move",
+          from: at(h.pick.cx, h.pick.cz),
+          to: at(...h.cell),
+          type: h.type,
+        };
       else if (h.cell)
-        demo = { kind: 'place', from: h.from ? trayGround() : trayGround(), to: at(...h.cell), type: h.type };
+        demo = {
+          kind: "place",
+          from: h.from ? trayGround() : trayGround(),
+          to: at(...h.cell),
+          type: h.type,
+        };
       if (demo) [demo.t0, lastDemoT, taps, busy] = [t, t, [], 0];
-      logPT('demo', why);
+      logPT("demo", why);
     }
   }
   if (!demo)
-    return void (demoEdges.material.opacity = demoGlow.material.opacity = finger.material.opacity = 0);
+    return void (demoEdges.material.opacity =
+      demoGlow.material.opacity =
+      finger.material.opacity =
+        0);
   const a = (t - demo.t0) / 2.2,
     fade = Math.min(clamp01(a / 0.15), clamp01((1 - a) / 0.15));
   if (a >= 1) return void (demo = null);
-  if (demo.kind === 'tap') {
+  if (demo.kind === "tap") {
     // a fingertip comes down on the beacon twice
     const press = Math.abs(Math.sin(a * Math.PI * 2));
     finger.position.copy(demo.to).add(new THREE.Vector3(0, 0.6 * press, 0));
@@ -2868,7 +3381,14 @@ function demoTick(h) {
     demoEdges.material.opacity = demoGlow.material.opacity = 0;
     if (press < 0.08 && !demo.rippled) {
       demo.rippled = true;
-      cels.push({ x: demo.to.x, z: demo.to.z, t0: t, dur: 0.8, r: 0.9, big: 0 });
+      cels.push({
+        x: demo.to.x,
+        z: demo.to.z,
+        t0: t,
+        dur: 0.8,
+        r: 0.9,
+        big: 0,
+      });
     }
     if (press > 0.5) demo.rippled = false;
     return;
@@ -2879,76 +3399,86 @@ function demoTick(h) {
     .lerpVectors(demo.from, demo.to, k)
     .add(new THREE.Vector3(0, Math.sin(k * Math.PI) * 0.9, 0));
   if (demo.type) demoEdges.material.color.set(TYPES[demo.type].lift);
-  demoEdges.material.opacity = 0.75 * fade * (demo.kind === 'discard' ? 1 - k : 1);
+  demoEdges.material.opacity =
+    0.75 * fade * (demo.kind === "discard" ? 1 - k : 1);
   demoGlow.material.opacity = 0.35 * fade;
   finger.position.copy(ghostDemo.position).add(new THREE.Vector3(0, 0.7, 0));
   finger.material.opacity = 0.6 * fade;
 }
 
 /* ---------- ?playtest: a quiet record of each step (time, taps, moves, demos), kept in this browser ---------- */
-const PT = new URLSearchParams(location.search).has('playtest') ? { steps: {}, t0: 0 } : null;
+const PT = new URLSearchParams(location.search).has("playtest")
+  ? { steps: {}, t0: 0 }
+  : null;
 function logPT(what, detail) {
   if (!PT) return;
-  if (what === 'start') PT.steps[step] = { start: t, taps: 0, moves: 0, demos: [] };
+  if (what === "start")
+    PT.steps[step] = { start: t, taps: 0, moves: 0, demos: [] };
   const st = (PT.steps[step] ??= { start: t, taps: 0, moves: 0, demos: [] });
-  if (what === 'tap') st.taps++;
-  if (what === 'move') st.moves++;
-  if (what === 'demo') st.demos.push(detail);
-  if (what === 'done') st.end = t;
+  if (what === "tap") st.taps++;
+  if (what === "move") st.moves++;
+  if (what === "demo") st.demos.push(detail);
+  if (what === "done") st.end = t;
 }
 function showPlaytest() {
   if (!PT) return;
   const rows = Object.entries(PT.steps)
     .map(
       ([n, v]) =>
-        `<tr><td>${n}</td><td>${Math.round((v.end ?? t) - v.start)} s</td><td>${v.taps}</td><td>${v.moves}</td><td>${v.demos.join(', ') || '—'}</td></tr>`,
+        `<tr><td>${n}</td><td>${Math.round((v.end ?? t) - v.start)} s</td><td>${v.taps}</td><td>${v.moves}</td><td>${v.demos.join(", ") || "—"}</td></tr>`,
     )
-    .join('');
-  const el = document.createElement('div');
-  el.className = 'pt-summary';
+    .join("");
+  const el = document.createElement("div");
+  el.className = "pt-summary";
   el.innerHTML = `<b>Playtest</b><table><tr><th>step</th><th>time</th><th>taps</th><th>moves</th><th>show-me</th></tr>${rows}</table><button class="btn mono">Close</button>`;
-  el.querySelector('button').onclick = () => el.remove();
+  el.querySelector("button").onclick = () => el.remove();
   document.body.append(el);
 }
 
-const goalEl = document.getElementById('goal');
-const challengeEl = document.getElementById('challenge');
+const goalEl = document.getElementById("goal");
+const challengeEl = document.getElementById("challenge");
 function challengeTick() {
   let best = null,
     bd = 26;
-  if (intro.state === 'play')
+  if (intro.state === "play")
     for (const e of active)
       if (e.vault && !e.woken) {
         const d = Math.hypot(e.cx - camT.x, e.cz - camT.z);
         if (d < bd) [best, bd] = [e, d];
       }
-  if (!best) return challengeEl.classList.remove('on');
+  if (!best) return challengeEl.classList.remove("on");
   const [sx, sy] = toScreen(best.cx + 0.5, 1.2, best.cz + 0.5),
     m = 40,
     top = 70,
     bot = (trayEl.getBoundingClientRect().top || innerHeight - 90) - 20;
-  challengeEl.querySelector('.stars').textContent = '✦'.repeat(best.vault.stars);
+  challengeEl.querySelector(".stars").textContent = "✦".repeat(
+    best.vault.stars,
+  );
   if (sx > m && sx < innerWidth - m && sy > top && sy < bot) {
     // in view: the marker sits just above the vault, pointing down at it
-    challengeEl.style.left = sx + 'px';
-    challengeEl.style.top = sy - 46 + 'px';
-    challengeEl.style.transform = 'rotate(0rad)';
-    challengeEl.querySelector('svg').style.transform = 'rotate(1.5708rad)';
+    challengeEl.style.left = sx + "px";
+    challengeEl.style.top = sy - 46 + "px";
+    challengeEl.style.transform = "rotate(0rad)";
+    challengeEl.querySelector("svg").style.transform = "rotate(1.5708rad)";
   } else {
     const cx = innerWidth / 2,
       cy = (top + bot) / 2,
       dx = sx - cx,
       dy = sy - cy,
-      k = Math.min((innerWidth / 2 - m) / Math.abs(dx || 1e-6), (bot - top) / 2 / Math.abs(dy || 1e-6));
-    challengeEl.style.left = cx + dx * k + 'px';
-    challengeEl.style.top = cy + dy * k + 'px';
-    challengeEl.querySelector('svg').style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
+      k = Math.min(
+        (innerWidth / 2 - m) / Math.abs(dx || 1e-6),
+        (bot - top) / 2 / Math.abs(dy || 1e-6),
+      );
+    challengeEl.style.left = cx + dx * k + "px";
+    challengeEl.style.top = cy + dy * k + "px";
+    challengeEl.querySelector("svg").style.transform =
+      `rotate(${Math.atan2(dy, dx)}rad)`;
   }
-  challengeEl.classList.add('on');
+  challengeEl.classList.add("on");
 }
 function goalTick() {
-  if (!great || great.woken || intro.state !== 'play') {
-    goalEl.classList.remove('on');
+  if (!great || great.woken || intro.state !== "play") {
+    goalEl.classList.remove("on");
     return;
   }
   const [sx, sy] = toScreen(great.cx + 0.5, 1.5, great.cz + 0.5),
@@ -2956,28 +3486,31 @@ function goalTick() {
     top = 70,
     bot = (trayEl.getBoundingClientRect().top || innerHeight - 90) - 20;
   if (sx > m && sx < innerWidth - m && sy > top && sy < bot) {
-    goalEl.classList.remove('on');
+    goalEl.classList.remove("on");
     return;
   }
   const cx = innerWidth / 2,
     cy = (top + bot) / 2,
     dx = sx - cx,
     dy = sy - cy,
-    k = Math.min((innerWidth / 2 - m) / Math.abs(dx || 1e-6), (bot - top) / 2 / Math.abs(dy || 1e-6));
-  goalEl.style.left = cx + dx * k + 'px';
-  goalEl.style.top = cy + dy * k + 'px';
+    k = Math.min(
+      (innerWidth / 2 - m) / Math.abs(dx || 1e-6),
+      (bot - top) / 2 / Math.abs(dy || 1e-6),
+    );
+  goalEl.style.left = cx + dx * k + "px";
+  goalEl.style.top = cy + dy * k + "px";
   goalEl.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
-  goalEl.classList.add('on');
+  goalEl.classList.add("on");
 }
 
 /* ---------- saving (this browser only) ---------- */
 function ser(e) {
   switch (e.kind) {
-    case 'source':
-      return { k: 's', x: e.cx, z: e.cz, r: e.rot, s: e.s };
-    case 'cube':
+    case "source":
+      return { k: "s", x: e.cx, z: e.cz, r: e.rot, s: e.s };
+    case "cube":
       return {
-        k: 'c',
+        k: "c",
         x: e.cx,
         z: e.cz,
         r: e.rot,
@@ -2989,11 +3522,11 @@ function ser(e) {
         bd: e.bound || null,
         rt: !!e.route,
       };
-    case 'rock':
-      return { k: 'r', x: e.cx, z: e.cz };
-    case 'beacon':
+    case "rock":
+      return { k: "r", x: e.cx, z: e.cz };
+    case "beacon":
       return {
-        k: 'b',
+        k: "b",
         x: e.cx,
         z: e.cz,
         h: e.hidden,
@@ -3004,18 +3537,26 @@ function ser(e) {
         rv: e.revealed,
         r: e.rot,
         re: e.reach || 0,
+        rr: e.relayRot ?? null,
         vt: e.vault ? e.vault.stars : 0,
       };
-    case 'house':
-      return { k: 'h', x: e.cx, z: e.cz, h: e.hidden, w: e.woken, rv: e.revealed };
-    case 'gift':
-      return e.taken ? null : { k: 'g', x: e.cx, z: e.cz, ty: e.type };
+    case "house":
+      return {
+        k: "h",
+        x: e.cx,
+        z: e.cz,
+        h: e.hidden,
+        w: e.woken,
+        rv: e.revealed,
+      };
+    case "gift":
+      return e.taken ? null : { k: "g", x: e.cx, z: e.cz, ty: e.type };
   }
 }
 let lastSave = 0,
   wiping = false;
 function save() {
-  if (wiping || !firstDone || dragE || intro.state !== 'play') return;
+  if (STUDY || wiping || !firstDone || dragE || intro.state !== "play") return;
   lastSave = t;
   try {
     localStorage.setItem(
@@ -3028,32 +3569,45 @@ function save() {
         terr,
         found,
         chunks: [...chunkTerr],
-        great: great && !great.woken ? [great.cx, great.cz, !!great.routed] : null,
+        great:
+          great && !great.woken ? [great.cx, great.cz, !!great.routed] : null,
         last: latestCube() && [latestCube().cx, latestCube().cz],
         res: [...reserved],
         cam: [camT.x, camT.z],
-        mem: (stashWindow(), Object.fromEntries([...tiles].map(([k, c]) => [k, c.toDataURL('image/png')]))),
+        grown: growth.save(),
+        mem:
+          (stashWindow(),
+          Object.fromEntries(
+            [...tiles].map(([k, c]) => [k, c.toDataURL("image/png")]),
+          )),
       }),
     );
   } catch (_) {}
 }
-addEventListener('pagehide', save);
-document.addEventListener('visibilitychange', () => {
+addEventListener("pagehide", save);
+document.addEventListener("visibilitychange", () => {
   if (document.hidden) save();
 });
 function restore(S) {
   for (const o of S.E) {
     let e;
-    if (o.k === 's') e = makeLantern(o.x, o.z, o.r, o.s);
-    if (o.k === 'c') {
+    if (o.k === "s") e = makeLantern(o.x, o.z, o.r, o.s);
+    if (o.k === "c") {
       e = makeCube(o.ty, o.x, o.z, o.r, o.f, o.b);
-      Object.assign(e, { ap: 1, keep: !!o.kp, wear: o.w || 0, bound: o.bd || undefined, route: !!o.rt });
+      Object.assign(e, {
+        ap: 1,
+        keep: !!o.kp,
+        wear: o.w || 0,
+        bound: o.bd || undefined,
+        route: !!o.rt,
+      });
     }
-    if (o.k === 'r') e = makeRock(o.x, o.z);
-    if (o.k === 'g') e = makeGift(o.x, o.z, o.ty);
-    if (o.k === 'b') {
+    if (o.k === "r") e = makeRock(o.x, o.z);
+    if (o.k === "g") e = makeGift(o.x, o.z, o.ty);
+    if (o.k === "b") {
       e = makeBeacon(o.x, o.z, o.h, o.n, o.tag, o.g);
       if (o.vt) e.vault = { stars: o.vt };
+      if (o.rr != null) e.relayRot = o.rr;
       if (o.re) {
         e.reach = o.re;
         e.route = true;
@@ -3062,14 +3616,14 @@ function restore(S) {
       e.ang = (-o.r * Math.PI) / 2;
       e.aimG.rotation.y = e.ang;
     }
-    if (o.k === 'h') e = makeHouse(o.x, o.z, o.h);
-    if ((o.k === 'b' || o.k === 'h') && o.w) {
+    if (o.k === "h") e = makeHouse(o.x, o.z, o.h);
+    if ((o.k === "b" || o.k === "h") && o.w) {
       e.woken = true;
       e.wakeAt = -10;
       e.cel = true;
       if (e.pilSeen) e.pilSeen.fill(true);
     }
-    if ((o.k === 'b' || o.k === 'h') && o.rv) {
+    if ((o.k === "b" || o.k === "h") && o.rv) {
       e.revealed = true;
       e.bloomT = -10;
     }
@@ -3083,13 +3637,17 @@ function restore(S) {
     chunkTerr.set(k, v);
   }
   for (const k of S.res || []) reserved.add(k);
-  if (S.great) great = ents.find((e) => e.great && e.cx === S.great[0] && e.cz === S.great[1]) || null;
+  growth.restore(S.grown);
+  if (S.great)
+    great =
+      ents.find((e) => e.great && e.cx === S.great[0] && e.cz === S.great[1]) ||
+      null;
   if (great && !S.great[2]) {
     // an older save with a stranded great beacon: build its route from the nearest lit beacon
     let best = null,
       bd = 1e9;
     for (const e of ents)
-      if (e.kind === 'beacon' && e.woken && !e.hidden) {
+      if (e.kind === "beacon" && e.woken && !e.hidden) {
         const d = Math.hypot(e.cx - great.cx, e.cz - great.cz);
         if (d < bd) {
           bd = d;
@@ -3104,13 +3662,13 @@ function restore(S) {
   firstDone = true;
   step = 5;
   hints = [];
-  lantern0 = ents.find((e) => e.kind === 'source') || null;
+  lantern0 = ents.find((e) => e.kind === "source") || null;
   // memory of lit ground, tile by tile (older saves kept one image; that memory is simply not restored)
   for (const [k, src] of Object.entries(S.mem || {})) {
-    const [i, j] = k.split(',').map(Number),
+    const [i, j] = k.split(",").map(Number),
       im = new Image();
     im.onload = () => {
-      tileCanvas(i, j, true).getContext('2d').drawImage(im, 0, 0);
+      tileCanvas(i, j, true).getContext("2d").drawImage(im, 0, 0);
       recenter(true);
     };
     im.src = src;
@@ -3125,20 +3683,65 @@ if (saved) {
   }
 }
 
+if (STUDY)
+  window.__study = {
+    growth,
+    get beams() {
+      return beams;
+    },
+    get intro() {
+      return intro;
+    },
+    get t() {
+      return t;
+    },
+  };
+const studyTreeG =
+  STUDY && studyTree(STUDY)
+    ? createRealTree(...studyTree(STUDY).map((v) => v + 0.5))
+    : null;
+if (studyTreeG) scene.add(studyTreeG);
+// ?study=5: the equilibrium moment, timed from the start of play
+const flushS = STUDY && studyFlush(STUDY);
+let playAt = null;
+function studyTick() {
+  if (!flushS || intro.state !== "play") return;
+  if (playAt == null) {
+    playAt = t;
+    const T = playAt + flushS.at,
+      [gx, gz] = flushS.center;
+    for (const k of flushS.cells) {
+      const [x, z] = k.split(",").map(Number);
+      growth.growAt(k, T + 0.32 * Math.hypot(x - gx, z - gz));
+    }
+  }
+  const a = t - playAt - flushS.at;
+  const e = (v) => v * v * (3 - 2 * v),
+    tg = e(Math.min(1, Math.max(0, (a - 1) / 2.6)));
+  studyTreeG.scale.set(
+    Math.max(0.001, tg),
+    Math.max(0.001, tg * (0.7 + 0.3 * tg)),
+    Math.max(0.001, tg),
+  );
+  setDay(0.6 * e(Math.min(1, Math.max(0, (a - 0.5) / 4))));
+}
+
 /* ---------- HUD ---------- */
-const hud = document.getElementById('hud');
+const hud = document.getElementById("hud");
 let frame = 0;
 function updateHud() {
   if (frame % 30) return;
-  const lit = ents.filter((e) => (e.kind === 'beacon' || e.kind === 'house') && e.woken && !e.hidden).length;
-  hud.innerHTML = `lights <b>${lit}</b>${found ? ` · ✦ <b>${found}</b>` : ''}`;
+  const lit = ents.filter(
+    (e) => (e.kind === "beacon" || e.kind === "house") && e.woken && !e.hidden,
+  ).length;
+  hud.innerHTML = `lights <b>${lit}</b>${found ? ` · ✦ <b>${found}</b>` : ""}`;
 }
 
 /* ---------- loop ---------- */
 for (const e of ents)
   if (!e.hidden || e.revealed) {
     e.g.visible = false;
-    if (e.kind !== 'source') hideAtHome.push(e);
+    if (e.kind !== "source") hideAtHome.push(e);
   }
 setDay(1); // daylight on the cubes to start; from the homepage the veil keeps the ground at dusk
 recenter(true);
@@ -3151,12 +3754,12 @@ function loop(now) {
   frame++;
   introTick();
   glideTick();
-  if (intro.state === 'play') {
+  if (intro.state === "play") {
     tiltTick(dt);
     edgeScroll(dt);
     half += ((firstDone ? gameHalf() : tutHalf) - half) * Math.min(1, dt * 2);
     if (t - lastSave > 20) save();
-    if (firstDone && frame % 20 === 0) {
+    if (firstDone && !STUDY && frame % 20 === 0) {
       const n = ents.length;
       ensureChunks();
       if (ents.length !== n) dirty = true;
@@ -3182,19 +3785,22 @@ function loop(now) {
   goalTick();
   challengeTick();
   previewTick();
+  if (STUDY) studyTick();
   updateMotes();
   placeSel();
   if (frame % 30 === 0) placeEdges();
   updateHud();
   renderer.render(scene, camera);
-  requestAnimationFrame(loop);
+  if (!REC) requestAnimationFrame(loop);
 }
-requestAnimationFrame(loop);
+if (!flags0.has("rec")) requestAnimationFrame(loop);
+else window.__frame = (dt) => loop(last + dt * 1000);
 
 /* ---------- flags: ?design shows the design-system panel; ?bot=N runs the test bot (bot.js) ---------- */
 const flags = new URLSearchParams(location.search);
-if (!flags.has('design')) document.getElementById('sysBtn').style.display = 'none';
-if (flags.has('bot')) {
+if (!flags.has("design"))
+  document.getElementById("sysBtn").style.display = "none";
+if (flags.has("bot")) {
   // Test hook: the bot plays through the real game with only the cubes it owns.
   const api = {
     get state() {
@@ -3219,7 +3825,8 @@ if (flags.has('bot')) {
       e.ang = (-rot * Math.PI) / 2;
       dirty = true;
     },
-    pickUp: (e) => (e && e.broken ? (removeEnt(e), (dirty = true)) : takeBack(e)),
+    pickUp: (e) =>
+      e && e.broken ? (removeEnt(e), (dirty = true)) : takeBack(e),
     move(e, cell, rot) {
       cells.delete(key(e.cx, e.cz));
       e.cx = cell[0];
@@ -3230,7 +3837,12 @@ if (flags.has('bot')) {
       e.ang = (-rot * Math.PI) / 2;
       dirty = true;
     },
-    spareCubes: () => ents.filter((e) => e.kind === 'cube' && !e.fixed && !e.broken && !e.bound),
+    spareCubes: () =>
+      ents.filter(
+        (e) => e.kind === "cube" && !e.fixed && !e.broken && !e.bound,
+      ),
   };
-  import('./bot.js').then(({ runBot }) => runBot(api, { greats: Number(flags.get('bot')) || 3 }));
+  import("./bot.js").then(({ runBot }) =>
+    runBot(api, { greats: Number(flags.get("bot")) || 3 }),
+  );
 }

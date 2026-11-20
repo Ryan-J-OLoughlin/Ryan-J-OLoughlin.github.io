@@ -1,12 +1,13 @@
 // The four cube types: colour, tint and the small mark drawn on each top face.
-import * as THREE from 'three';
-import { C } from './palette.js';
+import * as THREE from "three";
+import { C } from "./palette.js";
 
 export function segs(pairs) {
   const a = [];
-  for (const [[x1, z1], [x2, z2]] of pairs) a.push(x1, 0.502, z1, x2, 0.502, z2);
+  for (const [[x1, z1], [x2, z2]] of pairs)
+    a.push(x1, 0.502, z1, x2, 0.502, z2);
   const g = new THREE.BufferGeometry();
-  g.setAttribute('position', new THREE.Float32BufferAttribute(a, 3));
+  g.setAttribute("position", new THREE.Float32BufferAttribute(a, 3));
   return g;
 }
 function arrow(dx, dz) {
@@ -69,10 +70,26 @@ for (const [a, b] of [
     [a * 0.37, b * 0.37],
   ]);
 export const TYPES = {
-  prism: { color: C.ocean, tint: 0.46, mark: segs(arrow(1, 0)), lift: 0x7fa9c4 },
+  prism: {
+    color: C.ocean,
+    tint: 0.46,
+    mark: segs(arrow(1, 0)),
+    lift: 0x7fa9c4,
+  },
   amp: { color: C.earth, tint: 0.5, mark: segs(arc), lift: 0xc99b72 },
-  split: { color: C.purple, tint: 0.48, mark: segs([...arrow(1, 0), ...arrow(0, 1)]), lift: 0xae9fcb },
-  diffuse: { color: C.sand, tint: 0.58, mark: segs(circ), rough: 1, lift: 0xd2c08e },
+  split: {
+    color: C.purple,
+    tint: 0.48,
+    mark: segs([...arrow(1, 0), ...arrow(0, 1)]),
+    lift: 0xae9fcb,
+  },
+  diffuse: {
+    color: C.sand,
+    tint: 0.58,
+    mark: segs(circ),
+    rough: 1,
+    lift: 0xd2c08e,
+  },
 };
 export const crackGeo = new THREE.BufferGeometry();
 {
@@ -102,5 +119,5 @@ export const crackGeo = new THREE.BufferGeometry();
       pts[i + 1][0],
     );
   }
-  crackGeo.setAttribute('position', new THREE.Float32BufferAttribute(a, 3));
+  crackGeo.setAttribute("position", new THREE.Float32BufferAttribute(a, 3));
 }
